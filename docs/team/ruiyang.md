@@ -3,9 +3,9 @@
   title: "Zhao Ruiyang's Project Portfolio Page"
 ---
 
-### Project: RealtorTrackerProPlusMax
+### Project: RealtorTrackerPlusMax
 
-RealtorTrackerProPlusMax is a desktop application made for usage by real estate agents to keep track of their
+RealtorTrackerPlusMax is a desktop application made for usage by real estate agents to keep track of their
 contacts, such as buyers and sellers.
 The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java,
 and has about 10 kLoC.
