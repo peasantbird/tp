@@ -200,7 +200,6 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete Buyer** | `delete-b INDEX`<br> e.g., `delete-b 3`
 **Delete Seller** | `delete-s INDEX`<br> e.g., `delete-s 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
