@@ -323,12 +323,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 *{More to be added}*
 
 ### Non-Functional Requirements
+*NFRs taken from the given constraints found **[here](https://nus-cs2103-ay2324s1.github.io/website/schedule/week4/project.html)**:*
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The product should be optimized for keyboard users who can type fast and prefer typing over other means of input.
+2. The data should be stored locally in a human editable text file, instead of in a database.
+3. The software should primarily follow OOP.
+4. The software should work on the Windows, Linux, and OS-X platforms (hence shouldn’t depend on OS-specific libraries).
+5. The software should work on a computer that has version 11 of Java i.e., no other Java version installed.
+6. The software should work without requiring an installer.
+7. The use of third-party frameworks/libraries/services is allowed but only if they are free, open-source (this doesn't apply to services), and have permissive license terms.
+8. The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for 
+* standard screen resolutions 1920x1080 and higher, and 
+* for screen scales 100% and 125%.
 
-*{More to be added}*
+In addition, the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for 
+* resolutions 1280x720 and higher, and 
+* for screen scales 150%.
+9. The software should be able to be packaged into a single JAR file.
+10. The DG and UG should be PDF-friendly (Don't use expandable panels, embedded videos, animated GIFs etc.).
+
+Additional NFRs
+11. The internal implementation should be readable and adhere to the coding quality guidelines found here, for maintainability and for peer evaluation.
+12. The deliverable deadlines should be met with a fully functioning product (hence, most important features should be prioritized and tested to eliminate bugs) to allow for usage as promised.
+13. The software should be resistant to crashes while running to prevent losing important contact details that realtors need to do business with.
+14. The software should work fast even on old / low-end laptop so that realtors on the go with their busy days can use our app quickly and efficiently without getting frustrated with lag.
+15. The software should be free and easy to use as an open source product.
+
 
 ### Glossary
 
