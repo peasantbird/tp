@@ -89,18 +89,18 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-### Add a buyer: _buyer_
+### Add a buyer: `buyer`
 
 Adds a buyer with their info to the list.
 
 Format: buyer n/NAME p/PHONE\_NUMBER e/EMAIL ah/HOME\_ADDRESS i/BUY\_HOUSE\_INFO \[t/TAG]
 
-- n/NAME: String
-- p/PHONE\_NUMBER: int
-- e/EMAIL: String contains ‘@’
-- ah/ADDRESS: String
-- i/BUY\_HOUSE\_INFO: String
-- \[t/TAG]: Alphanumeric string
+- `n/NAME`: String
+- `p/PHONE\_NUMBER`: int
+- `e/EMAIL`: String contains ‘@’
+- `ah/ADDRESS`: String
+- `i/BUY\_HOUSE\_INFO`: String
+- `\[t/TAG]`: Alphanumeric string
 
 Example: 
 
@@ -117,7 +117,7 @@ Precise outputs when the command fails:
 `Invalid command format! Missing buyer address`
 
 
-### Listing all buyers: _list-b_
+### Listing all buyers: `list-b`
 
 Lists only all buyers that the user has added. Buyers and sellers are stored in separate lists for easier differentiation and handling of contacts.
 
@@ -130,7 +130,7 @@ Precise outputs when the command succeeds:
 2. `Ian Tsai 91234567 <iantsai@gmail.com> 1 College Ave East Central Area 5 Room Condominium`
 
 
-### Listing all sellers: _list-s_
+### Listing all sellers: `list-s`
 
 Lists only all sellers that the user has added.
 
