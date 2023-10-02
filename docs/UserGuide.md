@@ -89,6 +89,58 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+### Add a buyer: _buyer_
+
+Adds a buyer with their info to the list.
+
+Format: buyer n/NAME p/PHONE\_NUMBER e/EMAIL ah/HOME\_ADDRESS i/BUY\_HOUSE\_INFO \[t/TAG]
+
+- n/NAME: String
+- p/PHONE\_NUMBER: int
+- e/EMAIL: String contains ‘@’
+- ah/ADDRESS: String
+- i/BUY\_HOUSE\_INFO: String
+- \[t/TAG]: Alphanumeric string
+
+Example: 
+
+- `buyer n/Jane Doe p/91234567 e/[janedoe@gmail.com](mailto:johndoe@gmail.com) ah/1 College Ave East i/Central Area 5 Room Condominium`
+
+Precise outputs when the command succeeds:
+
+- `Got it. I've added a buyer contact:`  
+`Jane Doe 91234567 [janedoe@gmail.com](mailto:johndoe@gmail.com) 1 College Ave East Central Area 5 Room Condominium`
+
+Precise outputs when the command fails:
+
+- `Jane Doe 91234567 [janedoe@gmail.com](mailto:johndoe@gmail.com) Central Area 5 Room Condominium`  
+`Invalid command format! Missing buyer address`
+
+
+### Listing all buyers: _list-b_
+
+Lists only all buyers that the user has added. Buyers and sellers are stored in separate lists for easier differentiation and handling of contacts.
+
+Format: `list-b`
+
+Precise outputs when the command succeeds:
+
+- `Here are all your buyers:`
+1. `Ryan 91234567 <ryan@gmail.com> 47D Lor Sarhad, Singapore 119164 4 Room Flat in Sarhad Ville`
+2. `Ian Tsai 91234567 <iantsai@gmail.com> 1 College Ave East Central Area 5 Room Condominium`
+
+
+### Listing all sellers: _list-s_
+
+Lists only all sellers that the user has added.
+
+Format: `list-s`
+
+Precise outputs when the command succeeds:
+
+- `Here are all your sellers`:
+1. `Albert 91234567 albert[@gmail.com](mailto:ryan@gmail.com) My Secret Home 47D Lor Sarhad, Singapore 119164 4 Room Flat in Sarhad Ville`
+2. `Bob 91234567 bob[@gmail.com](mailto:iantsai@gmail.com) Secret Home 2 1 College Ave East Central Area 5 Room Condominium`
 
 ### Listing all persons : `list`
 
