@@ -309,32 +309,56 @@ Priority level is based on current iteration
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `RTPM (RealtorTrackerPlusMax)` and the **Actor** is the `user`, 
+unless specified otherwise)
 
-**Use case: Delete a person**
+
+**Use case: UC4 - View sellers**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User enters the list-s command.
+2. System displays list of sellers. 
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User makes a typo leading to an invalid command.
+  * 1a1. System indicates to user that command is invalid, prompting the user for a new input.<br>
+    Use case resumes at step 1.
 
-  Use case ends.
+<br>
 
-* 3a. The given index is invalid.
+**Use case: UC5 - Delete a buyer/seller**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
+1. User enters command to delete a buyer or a seller.
+2. System deletes item.
+3. System updates savefile.
+4. System returns an indicator of execution success. 
 
-      Use case resumes at step 2.
+    Use case ends.
+
+**Extensions**
+
+* 3a. Failure to update savefile. 
+  * 3a1. System indicates failure to update. 
+  * 3a2. System undoes deletion (to prevent desync of storage and application).<br>
+    Use case restarts from step 1.
+
+<br>
+
+**Use case: UC6 - Enter an invalid command**
+
+**MSS:**
+1. User enters misspelled command.
+2. System displays invalid command error and refers user to help page.
 
 *{More to be added}*
+
+
+
 
 ### Non-Functional Requirements
 *NFRs taken from the given constraints found **[here](https://nus-cs2103-ay2324s1.github.io/website/schedule/week4/project.html)**:*
