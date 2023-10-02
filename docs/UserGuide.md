@@ -201,6 +201,8 @@ Action     | Format, Examples
 **Delete Buyer** | `delete-b INDEX`<br> e.g., `delete-b 3`
 **Delete Seller** | `delete-s INDEX`<br> e.g., `delete-s 3`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
+**List Sellers**   | `list-s`
+**List Buyers**   | `list-b`
+**Exit**   | `exit`
 **Help**   | `help`
 
