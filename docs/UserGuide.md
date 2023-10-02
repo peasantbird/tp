@@ -158,7 +158,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AddressBook data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -167,7 +167,8 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file are in an invalid format, AddressBook will discard all data and start with an empty data file at the next run.
+Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
@@ -193,10 +194,14 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Seller**    | `seller n/NAME p/PHONE_NUMBER e/EMAIL ah/HOME_ADDRESS as/SELLING_ADDRESS i/SELLING_HOUSE_INFO [t/TAG]​` <br> e.g., `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville`
+**Add Buyer**    | `sbuyer n/NAME p/PHONE_NUMBER e/EMAIL ah/HOME_ADDRESS i/BUY_HOUSE_INFO [t/TAG]` <br> e.g., `buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete Buyer** | `delete-b INDEX`<br> e.g., `delete-b 3`
+**Delete Seller** | `delete-s INDEX`<br> e.g., `delete-s 3`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
+**List Sellers**   | `list-s`
+**List Buyers**   | `list-b`
+**Exit**   | `exit`
 **Help**   | `help`
+
