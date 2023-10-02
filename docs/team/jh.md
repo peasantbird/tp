@@ -9,9 +9,9 @@ title: "Jia Hao's Project Portfolio Page"
 
 Given below are my contributions to the project.
 
-* **New Feature**: 
+* **New Feature**:
 
-* **Code contributed**: 
+* **Code contributed**:
 
 * **Project management**:
 
