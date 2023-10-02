@@ -269,18 +269,21 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+This product is for realtors in their 20s who have many clients and houses to keep track of. They are relatively tech savvy and prefer the keyboard over the mouse, prefer concise commands as opposed to full sentences, and would like to customise the software to suit their preferences.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**:
+
+Our free and open-source app helps realtors to keep track of their clients’ preferences and house viewings in one place. Unlike apps like Google Sheets, our app is more optimized for large databases. In addition, we help auto-match appropriate houses to a client with matching budget, needs and location.
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Format taken from the AB3 Developer Guide
+
+Priorities: High (must have) - * * *, Medium (nice to have) - * *, Low (unlikely to have) - *
+
+Priority level is based on current iteration
 
 | Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
 |----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
