@@ -108,13 +108,13 @@ Example: 
 
 Precise outputs when the command succeeds:
 
-- ```Got it. I've added a buyer contact:
+```Got it. I've added a buyer contact:  
 Jane Doe 91234567 [janedoe@gmail.com](mailto:johndoe@gmail.com) 1 College Ave East Central Area 5 Room Condominium```
 
 Precise outputs when the command fails:
 
-- ```Jane Doe 91234567 [janedoe@gmail.com](mailto:johndoe@gmail.com) Central Area 5 Room Condominium  
-`Invalid command format! Missing buyer address```
+```Jane Doe 91234567 [janedoe@gmail.com](mailto:johndoe@gmail.com) Central Area 5 Room Condominium
+Invalid command format! Missing buyer address```
 
 
 ### Listing all buyers: `list-b`
@@ -125,7 +125,7 @@ Format: `list-b`
 
 Precise outputs when the command succeeds:
 
-- ```Here are all your buyers:
+```Here are all your buyers:
 1. Ryan 91234567 <ryan@gmail.com> 47D Lor Sarhad, Singapore 119164 4 Room Flat in Sarhad Ville
 2. Ian Tsai 91234567 <iantsai@gmail.com> 1 College Ave East Central Area 5 Room Condominium```
 
@@ -138,7 +138,7 @@ Format: `list-s`
 
 Precise outputs when the command succeeds:
 
-- ```Here are all your sellers:
+```Here are all your sellers:
 1. Albert 91234567 albert[@gmail.com](mailto:ryan@gmail.com) My Secret Home 47D Lor Sarhad, Singapore 119164 4 Room Flat in Sarhad Ville
 2. Bob 91234567 bob[@gmail.com](mailto:iantsai@gmail.com) Secret Home 2 1 College Ave East Central Area 5 Room Condominium```
 
