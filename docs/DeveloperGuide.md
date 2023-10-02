@@ -282,16 +282,27 @@ _{Explain here how the data archiving feature will be implemented}_
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …​                                            | I want to …​                                                                | So that I can…​                                                                        |
+|----------|----------------------------------------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| `* * *`  | realtor                                            | add home-buyer clients into the app                                         | keep track of them and their requirements                                              |
+| `* * *`  | realtor                                            | add home owners and their houses into the app                               | keep track of them and relevant details (such as the price they are looking for, etc.) |
+| `* * *`  | realtor                                            | view my contacts                                                            | easily find contacts I want to talk to                                                 |
+| `* * *`  | user who has been using the app for a long time    | delete/archive old contacts                                                 | declutter my list from outdated information                                            |
+| `* * *`  | realtor                                            | save contact data to my computer                                            | refer to it when I reopen my app                                                       |
+| `* * *`  | realtor                                            | add houses into the app together with their price, furnishings, etc.        | quickly list the features to my clients                                                | 
+| `* * *`  | realtor who wants to pack light on the move        | solely use the keyboard and not need to carry a mouse around to use the app | quickly access and update information without the fuss of using a mouse                |
+| `* *`    | realtor with many contacts                         | view personal contacts separately from work contacts                        | I can focus on work when I need to                                                     |
+| `* *`    | realtor with many client contacts                  | sort my client contacts based on priority (time, importance, etc.)          | I can focus on the most important clients first                                        |
+| `* *`    | realtor                                            | add prospective rental clients into the app                                 | keep track of them and their requirements                                              |
+| `* *`    | realtor who spends a lot of time at house viewings | I want the app to start up and respond quickly                              | use the app to note down any of my client’s preferences while talking to them          |
+| `* *`    | realtor who is flexible with scheduling            | reschedule or postpone my meetings easily in the app                        | so I can avoid the hassle of constantly deleting and making new meetings               |
+| `* *`    | realtor                                            | add time to tasks related to each of my clients                             | remember to do them                                                                    |
+| `* *`    | busy realtor with other activities in my life      | enter my schedule                                                           | account for overlaps with any meetings                                                 |
+| `*`      | forgetful user                                     | be reminded if I have any upcoming or late meetings                         | follow up on my clients                                                                |
+| `*`      | realtor                                            | track tasks related to each of my clients                                   | remember what I need to do to follow up on each of them                                |
+| `*`      | realtor                                            | be reminded of upcoming tasks or late tasks                                 | do them before meeting clients                                                         |
+| `*`      | power user                                         | modify the syntax of (at least some) commands                               | enter them faster                                                                      |
+| `*`      | lazy user                                          | be able to automatically match appropriate houses to prospective buyers     | avoid doing it manually                                                                |
 
 ### Use cases
 
