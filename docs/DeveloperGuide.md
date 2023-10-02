@@ -296,6 +296,61 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Use cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+  
+**Use case: UC1 - Add homeowner and house**  
+System: RTPM  
+Actor: User  
+  
+**MSS**
+
+1. User enters command to add homeowner and house details.
+2. System adds the entry to the list.
+3. System saves file. 
+
+   Use case ends.
+
+Extensions:
+* 1a. User enters invalid parameters.
+  * 1a1. System indicates to user that the parameters are invalid.
+    Use case restarts from step 1.
+
+* 3a. Failure to update savefile.
+  * 3a1. System indicates failure to update.
+    Use case restarts from step 1.  
+
+ 
+**Use case: UC2 - Add homebuyer and preferences**  
+System: RTPM   
+Actor: User  
+**MSS**
+1. User enters command to add homebuyer and preferences.
+2. System adds the entry to the list.
+3. System saves file. 
+   Use case ends.
+
+Extensions:
+* 1a. User enters invalid parameters.
+  * 1a1. System indicates to user that the parameters are invalid.
+  Use case restarts from step 1.
+
+* 3a. Failure to update savefile.
+  * 3a1. System indicates failure to update.
+  Use case restarts from step 1.
+
+**Use case: UC3 - View buyers**  
+System: RTPM   
+Actor: User  
+**MSS**
+1. User enters the list-b command.
+2. System displays list of buyers.
+
+Use case ends.
+
+Extensions:
+* 1a. User makes a typo leading to an invalid command.
+  * 1a1. System indicates to user that command is invalid, prompting the user for a new input.
+  Use case restarts from step 1.
+
 
 **Use case: Delete a person**
 
