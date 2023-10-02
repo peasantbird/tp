@@ -66,14 +66,32 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+### Add a seller : `seller`
 
-Shows a message explaning how to access the help page.
+Adds a seller with their info to the list.
 
-![help message](images/helpMessage.png)
+Format: `seller n/NAME p/PHONE_NUMBER e/EMAIL ah/HOME_ADDRESS as/SELLING_ADDRESS i/SELLING_HOUSE_INFO [t/TAG]`
+- `n/NAME`: String 
+- `p/PHONE_NUMBER`: int 
+- `e/EMAIL`: String contains ‘@’ 
+- `ah/HOME_ADDRESS`: String 
+- `as/SELLING_ADDRESS`: String 
+- `i/SELLING_HOUSE_INFO`: String
+- `[t/TAG]`: Alphanumeric String
 
-Format: `help`
+Example: `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville`
 
+Precise outputs when the command succeeds:
+```
+Got it. I've added a seller contact:
+Ryan 91234567 ryan@gmail.com My Secret Home 47D Lor Sarhad, Singapore 119164 4 Room Flat in Sarhad Ville
+```
+
+Precise outputs when the command fails:
+```
+Ryan 91234567 ryan@gmail.com My Secret Home 4 Room Flat in Sarhad Ville
+Invalid command format! Missing selling address
+```
 
 ### Adding a person: `add`
 
