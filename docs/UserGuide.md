@@ -103,8 +103,7 @@ Format: `buyer n/NAME p/PHONE\_NUMBER e/EMAIL ah/HOME\_ADDRESS i/BUY\_HOUSE\_INF
 - `\[t/TAG]`: Alphanumeric string
 
 Example: 
-
-- `buyer n/Jane Doe p/91234567 e/[janedoe@gmail.com](mailto:johndoe@gmail.com) ah/1 College Ave East i/Central Area 5 Room Condominium`
+`buyer n/Jane Doe p/91234567 e/[janedoe@gmail.com](mailto:johndoe@gmail.com) ah/1 College Ave East i/Central Area 5 Room Condominium`
 
 Precise outputs when the command succeeds:
 
