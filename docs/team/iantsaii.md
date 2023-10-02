@@ -22,6 +22,9 @@ Given below are my contributions to the project.
     * User Guide:
     * Developer Guide:
 
+* **Contributions to team-based tasks**:
+* **Review/mentoring contributions**:
+
 * **Community**:
 * **Tools**:
 
