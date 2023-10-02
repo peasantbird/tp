@@ -269,33 +269,48 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+This product is for realtors in their 20s who have many clients and houses to keep track of. They are relatively tech savvy and prefer the keyboard over the mouse, prefer concise commands as opposed to full sentences, and would like to customise the software to suit their preferences.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**:
+
+Our free and open-source app helps realtors to keep track of their clients’ preferences and house viewings in one place. Unlike apps like Google Sheets, our app is more optimized for large databases. In addition, we help auto-match appropriate houses to a client with matching budget, needs and location.
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Format taken from the AB3 Developer Guide
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+Priorities: High (must have) - * * *, Medium (nice to have) - * *, Low (unlikely to have) - *
 
-*{More to be added}*
+Priority level is based on current iteration
+
+| Priority | As a …​                                            | I want to …​                                                                | So that I can…​                                                                        |
+|----------|----------------------------------------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| `* * *`  | realtor                                            | add home-buyer clients into the app                                         | keep track of them and their requirements                                              |
+| `* * *`  | realtor                                            | add home owners and their houses into the app                               | keep track of them and relevant details (such as the price they are looking for, etc.) |
+| `* * *`  | realtor                                            | view my contacts                                                            | easily find contacts I want to talk to                                                 |
+| `* * *`  | user who has been using the app for a long time    | delete/archive old contacts                                                 | declutter my list from outdated information                                            |
+| `* * *`  | realtor                                            | save contact data to my computer                                            | refer to it when I reopen my app                                                       |
+| `* * *`  | realtor                                            | add houses into the app together with their price, furnishings, etc.        | quickly list the features to my clients                                                | 
+| `* * *`  | realtor who wants to pack light on the move        | solely use the keyboard and not need to carry a mouse around to use the app | quickly access and update information without the fuss of using a mouse                |
+| `* *`    | realtor with many contacts                         | view personal contacts separately from work contacts                        | I can focus on work when I need to                                                     |
+| `* *`    | realtor with many client contacts                  | sort my client contacts based on priority (time, importance, etc.)          | I can focus on the most important clients first                                        |
+| `* *`    | realtor                                            | add prospective rental clients into the app                                 | keep track of them and their requirements                                              |
+| `* *`    | realtor who spends a lot of time at house viewings | I want the app to start up and respond quickly                              | use the app to note down any of my client’s preferences while talking to them          |
+| `* *`    | realtor who is flexible with scheduling            | reschedule or postpone my meetings easily in the app                        | so I can avoid the hassle of constantly deleting and making new meetings               |
+| `* *`    | realtor                                            | add time to tasks related to each of my clients                             | remember to do them                                                                    |
+| `* *`    | busy realtor with other activities in my life      | enter my schedule                                                           | account for overlaps with any meetings                                                 |
+| `*`      | forgetful user                                     | be reminded if I have any upcoming or late meetings                         | follow up on my clients                                                                |
+| `*`      | realtor                                            | track tasks related to each of my clients                                   | remember what I need to do to follow up on each of them                                |
+| `*`      | realtor                                            | be reminded of upcoming tasks or late tasks                                 | do them before meeting clients                                                         |
+| `*`      | power user                                         | modify the syntax of (at least some) commands                               | enter them faster                                                                      |
+| `*`      | lazy user                                          | be able to automatically match appropriate houses to prospective buyers     | avoid doing it manually                                                                |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `RTPM (RealtorTrackerPlusMax)` and the **Actor** is the `user`, 
+unless specified otherwise)
   
 **Use case: UC1 - Add homeowner and house**  
 System: RTPM  
@@ -351,39 +366,80 @@ Extensions:
   * 1a1. System indicates to user that command is invalid, prompting the user for a new input.
   Use case restarts from step 1.
 
-
-**Use case: Delete a person**
+**Use case: UC4 - View sellers**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User enters the list-s command.
+2. System displays list of sellers. 
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User makes a typo leading to an invalid command.
+  * 1a1. System indicates to user that command is invalid, prompting the user for a new input.<br>
+    Use case resumes at step 1.
 
-  Use case ends.
+<br>
 
-* 3a. The given index is invalid.
+**Use case: UC5 - Delete a buyer/seller**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
+1. User enters command to delete a buyer or a seller.
+2. System deletes item.
+3. System updates savefile.
+4. System returns an indicator of execution success. 
 
-      Use case resumes at step 2.
+    Use case ends.
+
+**Extensions**
+
+* 3a. Failure to update savefile. 
+  * 3a1. System indicates failure to update. 
+  * 3a2. System undoes deletion (to prevent desync of storage and application).<br>
+    Use case restarts from step 1.
+
+<br>
+
+**Use case: UC6 - Enter an invalid command**
+
+**MSS:**
+1. User enters misspelled command.
+2. System displays invalid command error and refers user to help page.
 
 *{More to be added}*
+
+
+
 
 ### Non-Functional Requirements
+*NFRs taken from the given constraints found **[here](https://nus-cs2103-ay2324s1.github.io/website/schedule/week4/project.html)**:*
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The product should be optimized for keyboard users who can type fast and prefer typing over other means of input.
+2. The data should be stored locally in a human editable text file, instead of in a database.
+3. The software should primarily follow OOP.
+4. The software should work on the Windows, Linux, and OS-X platforms (hence shouldn’t depend on OS-specific libraries).
+5. The software should work on a computer that has version 11 of Java i.e., no other Java version installed.
+6. The software should work without requiring an installer.
+7. The use of third-party frameworks/libraries/services is allowed but only if they are free, open-source (this doesn't apply to services), and have permissive license terms.
+8. The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for 
+* standard screen resolutions 1920x1080 and higher, and 
+* for screen scales 100% and 125%.
 
-*{More to be added}*
+In addition, the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for 
+* resolutions 1280x720 and higher, and 
+* for screen scales 150%.
+9. The software should be able to be packaged into a single JAR file.
+10. The DG and UG should be PDF-friendly (Don't use expandable panels, embedded videos, animated GIFs etc.).
+
+Additional NFRs
+11. The internal implementation should be readable and adhere to the coding quality guidelines found here, for maintainability and for peer evaluation.
+12. The deliverable deadlines should be met with a fully functioning product (hence, most important features should be prioritized and tested to eliminate bugs) to allow for usage as promised.
+13. The software should be resistant to crashes while running to prevent losing important contact details that realtors need to do business with.
+14. The software should work fast even on old / low-end laptop so that realtors on the go with their busy days can use our app quickly and efficiently without getting frustrated with lag.
+15. The software should be free and easy to use as an open source product.
+
 
 ### Glossary
 
