@@ -13,10 +13,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Jia Hao
 
-<img src="images/jh.png" width="200px">
+<img src="images/j-hta-n.png" width="200px">
 
 [[github](https://github.com/j-hta-n)]
-[[portfolio](team/johndoe.md)]
+[[portfolio](team/j-hta-n.md)]
 
 * Role: Developer
 * Responsibilities: Code Quality

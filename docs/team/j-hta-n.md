@@ -5,7 +5,7 @@ title: "Jia Hao's Project Portfolio Page"
 
 ### Project: RealtorTrackerPlusMax
 
-{work in progress}
+{work in progress, to be added}
 
 Given below are my contributions to the project.
 
