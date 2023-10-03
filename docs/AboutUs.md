@@ -52,10 +52,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Ruiyang Zhao
 
-<img src="images/ruiyang.png" width="200px">
+<img src="images/ruiyangzh.png" width="200px">
 
 [[github](http://github.com/ruiyangzh)]
-[[portfolio](team/ruiyang.md)]
+[[portfolio](team/ruiyangzh.md)]
 
 * Role: Developer
 * Responsibilities: Developer Testing
