@@ -29,7 +29,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[portfolio](team/andytoh1.md)]
 
 * Role: Developer
-* Responsibilities: Development, Documentation
+* Responsibilities: Documentation
 
 ### Johnny Doe
 
