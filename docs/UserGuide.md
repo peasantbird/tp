@@ -4,10 +4,9 @@
   pageNav: 3
 ---
 
-# AB-3 User Guide
+# RTPM User Guide
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
-
+RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage contacts, optimized for use via a Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, RTPM can get your contact management tasks done faster than traditional GUI apps.
 <!-- * Table of Contents -->
 <page-nav-print />
 
@@ -28,15 +27,15 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+    * `list-b` : Lists all buyers.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+    * `buyer n/John Doe p/91234567 e/johndoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium` : Adds a buyer named John Doe to the Address Book.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * `delete-b 2` : Deletes the 2nd buyer shown in the current list.
 
-   * `clear` : Deletes all contacts.
+    * `save` : Saves all contacts.
 
-   * `exit` : Exits the app.
+    * `exit` : Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -66,29 +65,37 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+### Add a seller : `seller`
 
-Shows a message explaning how to access the help page.
+Adds a seller with their info to the list.
 
-![help message](images/helpMessage.png)
+Format: `seller n/NAME p/PHONE_NUMBER e/EMAIL ah/HOME_ADDRESS as/SELLING_ADDRESS i/SELLING_HOUSE_INFO [t/TAG]`
+- `n/NAME`: String 
+- `p/PHONE_NUMBER`: int 
+- `e/EMAIL`: String contains ‘@’ 
+- `ah/HOME_ADDRESS`: String 
+- `as/SELLING_ADDRESS`: String 
+- `i/SELLING_HOUSE_INFO`: String
+- `[t/TAG]`: Alphanumeric String
 
-Format: `help`
+Example: `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville`
+
+Precise outputs when the command succeeds:
+```
+Got it. I've added a seller contact:
+Ryan 91234567 ryan@gmail.com My Secret Home 47D Lor Sarhad, Singapore 119164 4 Room Flat in Sarhad Ville
+```
+
+Precise outputs when the command fails:
+```
+Ryan 91234567 ryan@gmail.com My Secret Home 4 Room Flat in Sarhad Ville
+Invalid command format! Missing selling address
+```
 
 
-### Adding a person: `add`
 
-Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
-<box type="tip" seamless>
-
-**Tip:** A person can have any number of tags (including 0)
-</box>
-
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 ### Add a buyer: `buyer`
 
 Adds a buyer with their info to the list.
@@ -148,60 +155,53 @@ Here are all your sellers:
 2. Bob 91234567 bob[@gmail.com](mailto:iantsai@gmail.com) Secret Home 2 1 College Ave East Central Area 5 Room Condominium
 ```
 
-### Listing all persons : `list`
+### Deleting a buyer: `delete-b`
 
-Shows a list of all persons in the address book.
+Deletes a buyer based on their index number in the buyers’ list.
 
-Format: `list`
+Format: `delete-b INDEX`
+* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyers' list
 
-### Editing a person : `edit`
+Example:
+* `delete-b 3`
 
-Edits an existing person in the address book.
+Precise outputs when the command succeeds:
+* `Got it. I’ve deleted a buyer contact:`<br>
+`Ian Tsai 91234567 iantsai@gmail.com 1 College Ave East Central Area 5 Room Condominium`
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Precise outputs when the command fails:
+* `Invalid command format! INDEX is not greater than 0`, OR
+* `Invalid command format! INDEX is higher than the last number in the list`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+<br>
 
-Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+### Deleting a buyer: `delete-s`
 
-### Locating persons by name: `find`
+Deletes a seller based on their index number in the sellers’ list.
 
-Finds persons whose names contain any of the given keywords.
+Format: `delete-s INDEX`
+* `INDEX`: A positive integer (1,2,3 …), which must not exceed last index in the sellers’ list
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Example:
+* `delete-s 3`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+Precise outputs when the command succeeds:
+* `Got it. I’ve deleted a seller contact:`<br>
+`Ian Tsai 91234567 iantsai@gmail.com 1 College Ave East Central Area 5 Room Condominium`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+Precise outputs when the command fails:
+* `Invalid command format! INDEX is not greater than 0`, OR
+* `Invalid command format! INDEX is higher than the last number in the list`
 
-### Deleting a person : `delete`
+<br>
 
-Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+### Exiting the program: `exit`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+Exits the program.
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+Format: `exit`
+
 
 ### Clearing all entries : `clear`
 
@@ -217,7 +217,7 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+AddressBook data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
@@ -226,10 +226,13 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.
+If your changes to the data file are in an invalid format, AddressBook will discard all data and start with an empty data file at the next run.
+Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
 ### Archiving data files `[coming in v2.0]`
+
+
 
 _Details coming soon ..._
 
@@ -252,10 +255,14 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add Seller**    | `seller n/NAME p/PHONE_NUMBER e/EMAIL ah/HOME_ADDRESS as/SELLING_ADDRESS i/SELLING_HOUSE_INFO [t/TAG]​` <br> e.g., `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville`
+**Add Buyer**    | `sbuyer n/NAME p/PHONE_NUMBER e/EMAIL ah/HOME_ADDRESS i/BUY_HOUSE_INFO [t/TAG]` <br> e.g., `buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium`
 **Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete Buyer** | `delete-b INDEX`<br> e.g., `delete-b 3`
+**Delete Seller** | `delete-s INDEX`<br> e.g., `delete-s 3`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
+**List Sellers**   | `list-s`
+**List Buyers**   | `list-b`
+**Exit**   | `exit`
 **Help**   | `help`
+
