@@ -16,24 +16,22 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `rtpm.jar` {not available yet, coming soon}.
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your RTPM.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar rtpm.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
+    * `buyer n/John Doe p/91234567 e/johndoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium` : Adds a buyer named John Doe to the RTPM. 
+
     * `list-b` : Lists all buyers.
 
-    * `buyer n/John Doe p/91234567 e/johndoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium` : Adds a buyer named John Doe to the Address Book.
-
     * `delete-b 2` : Deletes the 2nd buyer shown in the current list.
-
-    * `save` : Saves all contacts.
 
     * `exit` : Exits the app.
 
@@ -217,16 +215,16 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+RTPM data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+RTPM data are saved automatically as a JSON file `[JAR file location]/data/rtpm.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file are in an invalid format, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file are in an invalid format, RTPM will discard all data and start with an empty data file at the next run.
 Hence, it is recommended to take a backup of the file before editing it.
 </box>
 
@@ -241,7 +239,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RTPM home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
