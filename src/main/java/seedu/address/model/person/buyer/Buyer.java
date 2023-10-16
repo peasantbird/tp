@@ -33,4 +33,12 @@ public class Buyer extends Person {
         requireAllNonNull(buyHouseInfo);
         this.buyHouseInfo = buyHouseInfo;
     }
+
+    public Buyer(Person person, BuyHouseInfo buyHouseInfo) {
+        this(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(),
+                buyHouseInfo, person.getTags());
+    }
+    public BuyHouseInfo getBuyHouseInfo() {
+        return buyHouseInfo;
+    }
 }
