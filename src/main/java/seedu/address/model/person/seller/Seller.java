@@ -18,15 +18,15 @@ import seedu.address.model.tag.Tag;
  */
 public class Seller extends Person {
     private final Address sellingAddress;
-    private final HouseInfo houseInfo;
+    private final SellHouseInfo houseInfo;
     /**
      * Every field must be present and not null (super class does these checks too)
      */
     public Seller(Name name, Phone phone, Email email, Address address, Address sellingAddress,
-                  HouseInfo houseInfo, Set<Tag> tags) {
+                  SellHouseInfo sellHouseInfo, Set<Tag> tags) {
         super(name, phone, email, address, tags);
-        requireAllNonNull(sellingAddress, houseInfo);
+        requireAllNonNull(sellingAddress, sellHouseInfo);
         this.sellingAddress = sellingAddress;
-        this.houseInfo = houseInfo;
+        this.houseInfo = sellHouseInfo;
     }
 }
