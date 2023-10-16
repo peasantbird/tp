@@ -15,12 +15,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  * Represents a client looking to buy a house in the address book.
  */
 public class Buyer extends Person {
-    private final HouseInfo houseInfo;
+    private final BuyHouseInfo buyHouseInfo;
 
     public Buyer(Name name, Phone phone, Email email, Address address,
-                 HouseInfo houseInfo, Set<Tag> tags) {
+                 BuyHouseInfo buyHouseInfo, Set<Tag> tags) {
         super(name, phone, email, address, tags);
-        requireAllNonNull(houseInfo);
-        this.houseInfo = houseInfo;
+        requireAllNonNull(buyHouseInfo);
+        this.buyHouseInfo = buyHouseInfo;
     }
 }
