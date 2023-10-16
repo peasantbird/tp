@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.seller.SellHouseInfo;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -78,6 +79,15 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         return new Address(trimmedAddress);
+    }
+
+    public static SellHouseInfo parseSellHouseInfo(String sellHouseInfo) throws ParseException {
+        requireNonNull(sellHouseInfo);
+        String trimmedAddress = sellHouseInfo.trim();
+        if (!SellHouseInfo.isValidHouseInfo(sellHouseInfo)) {
+            throw new ParseException(SellHouseInfo.MESSAGE_CONSTRAINTS);
+        }
+        return new SellHouseInfo(sellHouseInfo);
     }
 
     /**
