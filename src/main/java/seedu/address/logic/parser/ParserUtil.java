@@ -81,6 +81,12 @@ public class ParserUtil {
         return new Address(trimmedAddress);
     }
 
+    /**
+     * Parses a {@code String sellHouseInfo} into a {@code SellHouseInfo}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sellHouseInfo} is invalid.
+     */
     public static SellHouseInfo parseSellHouseInfo(String sellHouseInfo) throws ParseException {
         requireNonNull(sellHouseInfo);
         String trimmedAddress = sellHouseInfo.trim();
