@@ -4,8 +4,10 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.seller.Seller;
 
 /**
  * The API of the Model component.
@@ -13,6 +15,9 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that evaluates to true only for sellers */
+    Predicate<Person> PREDICATE_SHOW_SELLERS = person -> person instanceof Seller;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
