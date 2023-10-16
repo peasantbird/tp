@@ -17,6 +17,16 @@ import seedu.address.model.tag.Tag;
 public class Buyer extends Person {
     private final BuyHouseInfo buyHouseInfo;
 
+    /**
+     * Constructs a Buyer instance.
+     *
+     * @param name Name of the buyer.
+     * @param phone Phone number of the buyer.
+     * @param email Email of the buyer.
+     * @param address Home address of the buyer.
+     * @param buyHouseInfo Information on the house that the buyer is interested in.
+     * @param tags Optional tags.
+     */
     public Buyer(Name name, Phone phone, Email email, Address address,
                  BuyHouseInfo buyHouseInfo, Set<Tag> tags) {
         super(name, phone, email, address, tags);
