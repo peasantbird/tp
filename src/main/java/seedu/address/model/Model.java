@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.buyer.Buyer;
 import seedu.address.model.person.seller.Seller;
 
 /**
@@ -17,6 +18,9 @@ public interface Model {
 
     /** {@code Predicate} that evaluates to true only for sellers */
     Predicate<Person> PREDICATE_SHOW_SELLERS = person -> person instanceof Seller;
+
+    /** {@code Predicate} that evaluates to true only for buyers */
+    Predicate<Person> PREDICATE_SHOW_BUYERS = person -> person instanceof Buyer;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
