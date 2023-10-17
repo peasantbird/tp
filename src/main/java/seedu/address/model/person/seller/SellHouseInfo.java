@@ -5,7 +5,8 @@ package seedu.address.model.person.seller;
  */
 public class SellHouseInfo {
 
-    public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS =
+            "House information can take any values, and it should not be blank";
     /*
      * The first character of the info must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
