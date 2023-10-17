@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -7,7 +9,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.buyer.BuyHouseInfo;
 import seedu.address.model.person.buyer.Buyer;
-import java.util.List;
+
+/**
+ * Jackson-friendly version of {@link Buyer}.
+ */
 public class JsonAdaptedBuyer extends JsonAdaptedPerson {
     private final String buyerInfo;
     /**
