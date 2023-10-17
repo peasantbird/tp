@@ -7,24 +7,21 @@ public class BuyHouseInfo {
 
     public static final String MESSAGE_CONSTRAINTS =
             "House information can take any values, and it should not be blank";
-
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
+    * The first character of the info must not be a whitespace,
+    * otherwise " " (a blank string) becomes a valid input.
+    */
     public static final String VALIDATION_REGEX = "[^\\s].*";
+    private final String buyHouseInfo;
 
-    private final String houseInfo;
-
-    public BuyHouseInfo(String houseInfo) {
-        this.houseInfo = houseInfo;
+    public BuyHouseInfo(String buyHouseInfo) {
+        this.buyHouseInfo = buyHouseInfo;
     }
 
-    /**
-     * Returns true if a given string is a valid house information.
-     */
-    public static boolean isValidHouseInfo(String test) {
+    public String toString() {
+        return buyHouseInfo;
+    }
+    public static boolean isValidBuyHouseInfo(String test) {
         return test.matches(VALIDATION_REGEX);
     }
-
 }

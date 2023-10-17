@@ -90,11 +90,11 @@ public class ParserUtil {
      */
     public static SellHouseInfo parseSellHouseInfo(String sellHouseInfo) throws ParseException {
         requireNonNull(sellHouseInfo);
-        String trimmedAddress = sellHouseInfo.trim();
-        if (!SellHouseInfo.isValidHouseInfo(sellHouseInfo)) {
+        String trimmedInfo = sellHouseInfo.trim();
+        if (!SellHouseInfo.isValidSellHouseInfo(trimmedInfo)) {
             throw new ParseException(SellHouseInfo.MESSAGE_CONSTRAINTS);
         }
-        return new SellHouseInfo(sellHouseInfo);
+        return new SellHouseInfo(trimmedInfo);
     }
 
     /**
@@ -121,7 +121,7 @@ public class ParserUtil {
     public static BuyHouseInfo parseBuyHouseInfo(String buyHouseInfo) throws ParseException {
         requireNonNull(buyHouseInfo);
         String trimmedInfo = buyHouseInfo.trim();
-        if (!BuyHouseInfo.isValidHouseInfo(trimmedInfo)) {
+        if (!BuyHouseInfo.isValidBuyHouseInfo(trimmedInfo)) {
             throw new ParseException(BuyHouseInfo.MESSAGE_CONSTRAINTS);
         }
         return new BuyHouseInfo(trimmedInfo);

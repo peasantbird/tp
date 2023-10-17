@@ -33,4 +33,19 @@ public class Buyer extends Person {
         requireAllNonNull(buyHouseInfo);
         this.buyHouseInfo = buyHouseInfo;
     }
+
+    /**
+     * Constructs a Buyer instance from a person (for convenience).
+     *
+     * @param person The person that we want to extend into a buyer.
+     * @param buyHouseInfo Information on the house that the buyer is interested in.
+     */
+    public Buyer(Person person, BuyHouseInfo buyHouseInfo) {
+        this(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(),
+                buyHouseInfo, person.getTags());
+    }
+
+    public BuyHouseInfo getBuyHouseInfo() {
+        return buyHouseInfo;
+    }
 }
