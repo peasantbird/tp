@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.buyer.BuyHouseInfo;
 import seedu.address.model.person.seller.SellHouseInfo;
 import seedu.address.model.tag.Tag;
 
@@ -109,6 +110,21 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String buyHouseInfo} into an {@code BuyHouseInfo}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code buyHouseInfo} is invalid.
+     */
+    public static BuyHouseInfo parseBuyHouseInfo(String buyHouseInfo) throws ParseException {
+        requireNonNull(buyHouseInfo);
+        String trimmedInfo = buyHouseInfo.trim();
+        if (!BuyHouseInfo.isValidHouseInfo(trimmedInfo)) {
+            throw new ParseException(BuyHouseInfo.MESSAGE_CONSTRAINTS);
+        }
+        return new BuyHouseInfo(trimmedInfo);
     }
 
     /**
