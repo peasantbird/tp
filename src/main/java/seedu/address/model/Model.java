@@ -8,7 +8,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.buyer.Buyer;
 import seedu.address.model.person.seller.Seller;
-import seedu.address.model.util.Displayable;
 
 /**
  * The API of the Model component.
@@ -18,10 +17,10 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** {@code Predicate} that evaluates to true only for sellers */
-    Predicate<Displayable> PREDICATE_SHOW_SELLERS = i -> i instanceof Seller;
+    Predicate<Seller> PREDICATE_SHOW_SELLERS = unused -> true;
 
     /** {@code Predicate} that evaluates to true only for buyers */
-    Predicate<Displayable> PREDICATE_SHOW_BUYERS = i -> i instanceof Buyer;
+    Predicate<Buyer> PREDICATE_SHOW_BUYERS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -64,66 +63,66 @@ public interface Model {
     /**
      * Returns true if a buyer with the same identity as {@code buyer} exists in the address book's buyer list.
      */
-    boolean hasBuyer(Person buyer);
+    boolean hasBuyer(Buyer buyer);
 
     /**
      * Returns true if a seller with the same identity as {@code seller} exists in the address book's seller list.
      */
-    boolean hasSeller(Person seller);
+    boolean hasSeller(Seller seller);
 
     /**
      * Deletes the given buyer.
      * The buyer must exist in the address book's buyer list.
      */
-    void deleteBuyer(Person targetBuyer);
+    void deleteBuyer(Buyer targetBuyer);
 
     /**
      * Deletes the given seller.
      * The seller must exist in the address book's seller list.
      */
-    void deleteSeller(Person targetSeller);
+    void deleteSeller(Seller targetSeller);
 
     /**
      * Adds the given buyer.
      * {@code buyer} must not already exist in the address book's buyer list.
      */
-    void addBuyer(Person buyer);
+    void addBuyer(Buyer buyer);
 
     /**
      * Adds the given seller.
      * {@code seller} must not already exist in the address book's seller list.
      */
-    void addSeller(Person seller);
+    void addSeller(Seller seller);
 
     /**
      * Replaces the given buyer {@code targetBuyer} with {@code editedBuyer}.
      * {@code targetBuyer} must exist in the address book's buyer list.
      * The person identity of {@code editedBuyer} must not be the same as another existing buyer in the buyer list.
      */
-    void setBuyer(Person targetBuyer, Person editedBuyer);
+    void setBuyer(Buyer targetBuyer, Buyer editedBuyer);
 
     /**
      * Replaces the given seller {@code targetSeller} with {@code editedSeller}.
      * {@code targetSeller} must exist in the address book's seller list.
      * The person identity of {@code editedSeller} must not be the same as another existing seller in the seller list.
      */
-    void setSeller(Person targetSeller, Person editedSeller);
+    void setSeller(Seller targetSeller, Seller editedSeller);
 
     /** Returns an unmodifiable view of the filtered buyer list */
-    ObservableList<Displayable> getFilteredBuyerList();
+    ObservableList<Buyer> getFilteredBuyerList();
 
     /** Returns an unmodifiable view of the filtered seller list */
-    ObservableList<Displayable> getFilteredSellerList();
+    ObservableList<Seller> getFilteredSellerList();
 
     /**
      * Updates the filter of the filtered buyer list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredBuyerList(Predicate<Displayable> predicate);
+    void updateFilteredBuyerList(Predicate<Buyer> predicate);
 
     /**
      * Updates the filter of the filtered seller list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredSellerList(Predicate<Displayable> predicate);
+    void updateFilteredSellerList(Predicate<Seller> predicate);
 }

@@ -6,17 +6,17 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.UniqueDisplayableList;
-import seedu.address.model.util.Displayable;
+import seedu.address.model.person.buyer.Buyer;
+import seedu.address.model.person.seller.Seller;
 
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
-    private final UniqueDisplayableList buyers;
-    private final UniqueDisplayableList sellers;
+    private final UniqueDisplayableList<Buyer> buyers;
+    private final UniqueDisplayableList<Seller> sellers;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -26,8 +26,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        buyers = new UniqueDisplayableList();
-        sellers = new UniqueDisplayableList();
+        buyers = new UniqueDisplayableList<>();
+        sellers = new UniqueDisplayableList<>();
     }
 
     public AddressBook() {}
@@ -46,7 +46,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the buyer list with {@code buyers}.
      * {@code buyers} must not contain duplicate buyers.
      */
-    public void setBuyers(List<Displayable> buyers) {
+    public void setBuyers(List<Buyer> buyers) {
         this.buyers.setDisplayables(buyers);
     }
 
@@ -54,7 +54,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setSellers(List<Displayable> sellers) {
+    public void setSellers(List<Seller> sellers) {
         this.sellers.setDisplayables(sellers);
     }
 
@@ -73,7 +73,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a buyer with the same identity as {@code buyer} exists in the address book's buyer list.
      */
-    public boolean hasBuyer(Person buyer) {
+    public boolean hasBuyer(Buyer buyer) {
         requireNonNull(buyer);
         return buyers.contains(buyer);
     }
@@ -81,7 +81,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a seller with the same identity as {@code seller} exists in the address book's seller list.
      */
-    public boolean hasSeller(Person seller) {
+    public boolean hasSeller(Seller seller) {
         requireNonNull(seller);
         return sellers.contains(seller);
     }
@@ -90,7 +90,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a buyer to the address book's buyer list.
      * The buyer must not already exist in the buyer list.
      */
-    public void addBuyer(Person buyer) {
+    public void addBuyer(Buyer buyer) {
         buyers.add(buyer);
     }
 
@@ -98,7 +98,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a seller to the address book's seller list.
      * The seller must not already exist in the seller list.
      */
-    public void addSeller(Person seller) {
+    public void addSeller(Seller seller) {
         sellers.add(seller);
     }
 
@@ -108,7 +108,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code targetBuyer} must exist in the address book's buyer list.
      * The buyer identity of {@code editedBuyer} must not be the same as another existing buyer in the buyer list.
      */
-    public void setBuyer(Person targetBuyer, Person editedBuyer) {
+    public void setBuyer(Buyer targetBuyer, Buyer editedBuyer) {
         requireNonNull(editedBuyer);
 
         buyers.setDisplayable(targetBuyer, editedBuyer);
@@ -119,7 +119,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code targetSeller} must exist in the address book's seller list.
      * The seller identity of {@code editedSeller} must not be the same as another existing seller in the seller list.
      */
-    public void setSeller(Person targetSeller, Person editedSeller) {
+    public void setSeller(Seller targetSeller, Seller editedSeller) {
         requireNonNull(editedSeller);
 
         sellers.setDisplayable(targetSeller, editedSeller);
@@ -129,7 +129,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code buyerKey} from this {@code AddressBook's buyer list}.
      * {@code buyerKey} must exist in the address book's buyer list.
      */
-    public void removeBuyer(Person buyerKey) {
+    public void removeBuyer(Buyer buyerKey) {
         buyers.remove(buyerKey);
     }
 
@@ -137,8 +137,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code sellerKey} from this {@code AddressBook's seller list}.
      * {@code sellerKey} must exist in the address book's seller list.
      */
-    public void removeSeller(Person sellerKey) {
-        buyers.remove(sellerKey);
+    public void removeSeller(Seller sellerKey) {
+        sellers.remove(sellerKey);
     }
 
     //// util methods
@@ -152,12 +152,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Displayable> getBuyerList() {
+    public ObservableList<Buyer> getBuyerList() {
         return buyers.asUnmodifiableObservableList();
     }
 
     @Override
-    public ObservableList<Displayable> getSellerList() {
+    public ObservableList<Seller> getSellerList() {
         return sellers.asUnmodifiableObservableList();
     }
 

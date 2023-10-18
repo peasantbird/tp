@@ -11,8 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
-import seedu.address.model.util.Displayable;
+import seedu.address.model.person.buyer.Buyer;
+import seedu.address.model.person.seller.Seller;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,9 +22,9 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Displayable> filteredBuyers;
+    private final FilteredList<Buyer> filteredBuyers;
 
-    private final FilteredList<Displayable> filteredSellers;
+    private final FilteredList<Seller> filteredSellers;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -92,48 +92,48 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasBuyer(Person buyer) {
+    public boolean hasBuyer(Buyer buyer) {
         requireNonNull(buyer);
         return addressBook.hasBuyer(buyer);
     }
 
     @Override
-    public boolean hasSeller(Person seller) {
+    public boolean hasSeller(Seller seller) {
         requireNonNull(seller);
         return addressBook.hasSeller(seller);
     }
 
     @Override
-    public void deleteBuyer(Person targetBuyer) {
+    public void deleteBuyer(Buyer targetBuyer) {
         addressBook.removeBuyer(targetBuyer);
     }
 
     @Override
-    public void deleteSeller(Person targetSeller) {
+    public void deleteSeller(Seller targetSeller) {
         addressBook.removeSeller(targetSeller);
     }
 
     @Override
-    public void addBuyer(Person buyer) {
+    public void addBuyer(Buyer buyer) {
         addressBook.addBuyer(buyer);
         updateFilteredBuyerList(PREDICATE_SHOW_BUYERS);
     }
 
     @Override
-    public void addSeller(Person seller) {
+    public void addSeller(Seller seller) {
         addressBook.addSeller(seller);
         updateFilteredSellerList(PREDICATE_SHOW_SELLERS);
     }
 
     @Override
-    public void setBuyer(Person targetBuyer, Person editedBuyer) {
+    public void setBuyer(Buyer targetBuyer, Buyer editedBuyer) {
         requireAllNonNull(targetBuyer, editedBuyer);
 
         addressBook.setBuyer(targetBuyer, editedBuyer);
     }
 
     @Override
-    public void setSeller(Person targetSeller, Person editedSeller) {
+    public void setSeller(Seller targetSeller, Seller editedSeller) {
         requireAllNonNull(targetSeller, editedSeller);
 
         addressBook.setSeller(targetSeller, editedSeller);
@@ -146,7 +146,7 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Displayable> getFilteredBuyerList() {
+    public ObservableList<Buyer> getFilteredBuyerList() {
         return filteredBuyers;
     }
 
@@ -155,18 +155,18 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Displayable> getFilteredSellerList() {
+    public ObservableList<Seller> getFilteredSellerList() {
         return filteredSellers;
     }
 
     @Override
-    public void updateFilteredBuyerList(Predicate<Displayable> predicate) {
+    public void updateFilteredBuyerList(Predicate<Buyer> predicate) {
         requireNonNull(predicate);
         filteredBuyers.setPredicate(predicate);
     }
 
     @Override
-    public void updateFilteredSellerList(Predicate<Displayable> predicate) {
+    public void updateFilteredSellerList(Predicate<Seller> predicate) {
         requireNonNull(predicate);
         filteredSellers.setPredicate(predicate);
     }
