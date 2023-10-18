@@ -4,12 +4,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Set;
 
+import javafx.scene.layout.Region;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.UiPart;
 
 /**
  * Represents a client looking to buy a house in the address book.
@@ -47,5 +49,31 @@ public class Buyer extends Person {
 
     public BuyHouseInfo getBuyHouseInfo() {
         return buyHouseInfo;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Buyer)) {
+            return false;
+        }
+
+        Buyer otherBuyer = (Buyer) other;
+        return this.equalsHelper(otherBuyer)
+                && buyHouseInfo.equals(otherBuyer.buyHouseInfo);
+    }
+    @Override
+    public String toString() {
+        return toStringBuild()
+                .add("house info", buyHouseInfo)
+                .toString();
+    }
+    @Override
+    public UiPart<Region> display(int displayIndex) {
+        return new BuyerCard(this, displayIndex);
     }
 }
