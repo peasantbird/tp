@@ -88,6 +88,12 @@ public class AddressBookParser {
         case ListBuyersCommand.COMMAND_WORD:
             return new ListBuyersCommand();
 
+        case DeleteBuyerCommand.COMMAND_WORD:
+            return new DeleteBuyerCommandParser().parse(arguments);
+
+        case DeleteSellersCommand.COMMAND_WORD:
+            return new DeleteSellerCommandParser().parse(arguments);
+            
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
