@@ -12,6 +12,7 @@ import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
+import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 
 /**
@@ -39,20 +40,25 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     /**
      * Similar to {@link #readAddressBook()}.
      *
-     * @param filePath location of the data. Cannot be null.
+     * @param addressBookWithBuyersPath location of the buyer data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException {
-        requireNonNull(filePath);
+    public Optional<ReadOnlyAddressBook> readAddressBook(Path addressBookWithBuyersPath) throws DataLoadingException {
+        requireNonNull(addressBookWithBuyersPath);
+        Path addressBookWithSellersPath = addressBookWithBuyersPath.resolveSibling("sellers.json");
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
-        if (!jsonAddressBook.isPresent()) {
+        Optional<JsonSerializableAddressBook> jsonAddressBookWithBuyers = JsonUtil.readJsonFile(
+                addressBookWithBuyersPath, JsonSerializableAddressBook.class);
+        Optional<JsonSerializableAddressBook> jsonAddressBookWithSellers = JsonUtil.readJsonFile(
+                addressBookWithBuyersPath, JsonSerializableAddressBook.class);
+        if (!jsonAddressBookWithBuyers.isPresent() && !jsonAddressBookWithSellers.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            AddressBook addressBook = jsonAddressBookWithBuyers.get().toModelType();
+            addressBook.setSellers(jsonAddressBookWithSellers.get().toModelType().getSellerList());
+            return Optional.of(addressBook);
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);
@@ -64,17 +70,34 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         saveAddressBook(addressBook, filePath);
     }
 
+    public AddressBook createAddressBookWithBuyers(ReadOnlyAddressBook addressBook) {
+        AddressBook addressBookWithBuyers = new AddressBook();
+        addressBookWithBuyers.setBuyers(addressBook.getBuyerList());
+        return addressBookWithBuyers;
+    }
+
+    public AddressBook createAddressBookWithSellers(ReadOnlyAddressBook addressBook) {
+        AddressBook addressBookWithSellers = new AddressBook();
+        addressBookWithSellers.setSellers(addressBook.getSellerList());
+        return addressBookWithSellers;
+    }
+
     /**
      * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}.
      *
-     * @param filePath location of the data. Cannot be null.
+     * @param addressBookWithBuyersPath location of the buyer data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path addressBookWithBuyersPath) throws IOException {
         requireNonNull(addressBook);
-        requireNonNull(filePath);
+        requireNonNull(addressBookWithBuyersPath);
 
-        FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        Path addressBookWithSellersPath = addressBookWithBuyersPath.resolveSibling("sellers.json");
+        FileUtil.createIfMissing(addressBookWithBuyersPath);
+        FileUtil.createIfMissing(addressBookWithSellersPath);
+
+        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(createAddressBookWithBuyers(addressBook)),
+                addressBookWithBuyersPath);
+        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(createAddressBookWithSellers(addressBook)),
+                addressBookWithSellersPath);
     }
-
 }
