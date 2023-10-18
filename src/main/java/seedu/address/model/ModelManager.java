@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.Displayable;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +22,9 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Displayable> filteredBuyers;
+
+    private final FilteredList<Displayable> filteredSellers;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +36,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredBuyers = new FilteredList<>(this.addressBook.getBuyerList());
+        filteredSellers = new FilteredList<>(this.addressBook.getSellerList());
     }
 
     public ModelManager() {
@@ -88,44 +92,83 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasBuyer(Person buyer) {
+        requireNonNull(buyer);
+        return addressBook.hasBuyer(buyer);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public boolean hasSeller(Person seller) {
+        requireNonNull(seller);
+        return addressBook.hasSeller(seller);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void deleteBuyer(Person targetBuyer) {
+        addressBook.removeBuyer(targetBuyer);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void deleteSeller(Person targetSeller) {
+        addressBook.removeSeller(targetSeller);
+    }
 
-        addressBook.setPerson(target, editedPerson);
+    @Override
+    public void addBuyer(Person buyer) {
+        addressBook.addBuyer(buyer);
+        updateFilteredBuyerList(PREDICATE_SHOW_BUYERS);
+    }
+
+    @Override
+    public void addSeller(Person seller) {
+        addressBook.addSeller(seller);
+        updateFilteredSellerList(PREDICATE_SHOW_SELLERS);
+    }
+
+    @Override
+    public void setBuyer(Person targetBuyer, Person editedBuyer) {
+        requireAllNonNull(targetBuyer, editedBuyer);
+
+        addressBook.setBuyer(targetBuyer, editedBuyer);
+    }
+
+    @Override
+    public void setSeller(Person targetSeller, Person editedSeller) {
+        requireAllNonNull(targetSeller, editedSeller);
+
+        addressBook.setSeller(targetSeller, editedSeller);
     }
 
     //=========== Filtered Person List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Buyer} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<Displayable> getFilteredBuyerList() {
+        return filteredBuyers;
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Buyer} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Displayable> getFilteredSellerList() {
+        return filteredSellers;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredBuyerList(Predicate<Displayable> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredBuyers.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredSellerList(Predicate<Displayable> predicate) {
+        requireNonNull(predicate);
+        filteredSellers.setPredicate(predicate);
     }
 
     @Override
@@ -142,7 +185,8 @@ public class ModelManager implements Model {
         ModelManager otherModelManager = (ModelManager) other;
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
-                && filteredPersons.equals(otherModelManager.filteredPersons);
+                && filteredBuyers.equals(otherModelManager.filteredBuyers)
+                && filteredSellers.equals(otherModelManager.filteredSellers);
     }
 
 }
