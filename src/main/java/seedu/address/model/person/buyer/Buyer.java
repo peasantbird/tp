@@ -11,6 +11,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.BuyerCard;
 import seedu.address.ui.UiPart;
 
 /**
@@ -34,17 +35,6 @@ public class Buyer extends Person {
         super(name, phone, email, address, tags);
         requireAllNonNull(buyHouseInfo);
         this.buyHouseInfo = buyHouseInfo;
-    }
-
-    /**
-     * Constructs a Buyer instance from a person (for convenience).
-     *
-     * @param person The person that we want to extend into a buyer.
-     * @param buyHouseInfo Information on the house that the buyer is interested in.
-     */
-    public Buyer(Person person, BuyHouseInfo buyHouseInfo) {
-        this(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(),
-                buyHouseInfo, person.getTags());
     }
 
     public BuyHouseInfo getBuyHouseInfo() {

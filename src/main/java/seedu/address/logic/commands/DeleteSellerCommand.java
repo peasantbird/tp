@@ -6,6 +6,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.seller.Seller;
+import seedu.address.model.util.Displayable;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import static java.util.Objects.requireNonNull;
 /**
  * Deletes a seller identified using it's displayed index from the address book.
  */
-public class DeleteSellersCommand extends Command {
+public class DeleteSellerCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-s";
 
@@ -27,21 +28,20 @@ public class DeleteSellersCommand extends Command {
 
     private final Index targetIndex;
 
-    public DeleteSellersCommand(Index targetIndex) {
+    public DeleteSellerCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Seller> lastShownList = model.getFilteredSellerList();
-        //TODO add these methods to model.
+        List<Displayable> lastShownList = model.getFilteredSellerList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Seller sellerToDelete = lastShownList.get(targetIndex.getZeroBased());
+        Seller sellerToDelete = (Seller) lastShownList.get(targetIndex.getZeroBased());
         model.deleteSeller(sellerToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_SELLER_SUCCESS, Messages.format(sellerToDelete)));
     }
@@ -53,12 +53,12 @@ public class DeleteSellersCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof DeleteSellersCommand)) {
+        if (!(other instanceof DeleteSellerCommand)) {
             return false;
         }
 
-        DeleteSellersCommand otherDeleteSellersCommand = (DeleteSellersCommand) other;
-        return targetIndex.equals(otherDeleteSellersCommand.targetIndex);
+        DeleteSellerCommand otherDeleteSellerCommand = (DeleteSellerCommand) other;
+        return targetIndex.equals(otherDeleteSellerCommand.targetIndex);
     }
 
     @Override

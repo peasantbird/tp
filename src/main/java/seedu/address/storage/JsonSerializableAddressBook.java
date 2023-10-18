@@ -11,7 +11,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.buyer.Buyer;
+import seedu.address.model.person.seller.Seller;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -21,14 +22,17 @@ class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedBuyer> buyers = new ArrayList<>();
+    private final List<JsonAdaptedSeller> sellers = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("persons") List<? extends JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableAddressBook(@JsonProperty("buyers") List<? extends JsonAdaptedBuyer> buyers,
+                                       @JsonProperty("sellers") List<? extends JsonAdaptedSeller> sellers) {
+        this.buyers.addAll(buyers);
+        this.sellers.addAll(sellers);
     }
 
     /**
@@ -36,9 +40,9 @@ class JsonSerializableAddressBook {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
-    //TODO fix this to work when we have two lists. it's broken for now because we can't map two types.
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        sellers.addAll(source.getSellerList().stream().map(JsonAdaptedSeller::new).collect(Collectors.toList()));
+        sellers.addAll(source.getSellerList().stream().map(JsonAdaptedBuyer::new).collect(Collectors.toList()));
     }
 
     /**
@@ -46,15 +50,21 @@ class JsonSerializableAddressBook {
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    //TODO fix this to work when we have two lists. it's broken for now because we can't map two types.
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person = jsonAdaptedPerson.toModelType();
-            if (addressBook.hasPerson(person)) {
+        for (JsonAdaptedBuyer jsonAdaptedBuyer : buyers) {
+            Buyer buyer = jsonAdaptedBuyer.toModelType();
+            if (addressBook.hasBuyer(buyer)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            addressBook.addBuyer(buyer);
+        }
+        for (JsonAdaptedSeller jsonAdaptedSeller : sellers) {
+            Seller seller = jsonAdaptedSeller.toModelType();
+            if (addressBook.hasSeller(seller)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            }
+            addressBook.addSeller(seller);
         }
         return addressBook;
     }
