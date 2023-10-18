@@ -58,11 +58,11 @@ public class AddSellerCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasSeller(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_SELLER);
         }
 
-        model.addPerson(toAdd);
+        model.addSeller(toAdd);
         return new CommandResult(String.format(MESSAGE_SELLER_SUCCESS, Messages.format(toAdd)));
     }
 

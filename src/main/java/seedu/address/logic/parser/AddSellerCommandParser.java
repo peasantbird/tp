@@ -23,7 +23,7 @@ import seedu.address.model.person.seller.Seller;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new AddSellerCommand object
  */
 public class AddSellerCommandParser implements Parser<AddSellerCommand> {
 
