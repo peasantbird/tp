@@ -6,7 +6,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.seller.Seller;
-import seedu.address.model.util.Displayable;
 
 import java.util.List;
 
@@ -35,13 +34,13 @@ public class DeleteSellerCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Displayable> lastShownList = model.getFilteredSellerList();
+        List<Seller> lastShownList = model.getFilteredSellerList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Seller sellerToDelete = (Seller) lastShownList.get(targetIndex.getZeroBased());
+        Seller sellerToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteSeller(sellerToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_SELLER_SUCCESS, Messages.format(sellerToDelete)));
     }

@@ -25,14 +25,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  */
 public class UniqueDisplayableList<T extends Displayable> implements Iterable<T> {
 
-    private final ObservableList<Displayable> internalList = FXCollections.observableArrayList();
-    private final ObservableList<Displayable> internalUnmodifiableList =
+    private final ObservableList<T> internalList = FXCollections.observableArrayList();
+    private final ObservableList<T> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent displayable as the given argument.
      */
-    public boolean contains(Displayable toCheck) {
+    public boolean contains(T toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameDisplayable);
     }
@@ -41,7 +41,7 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
      * Adds a displayable to the list.
      * The displayable must not already exist in the list.
      */
-    public void add(Displayable toAdd) {
+    public void add(T toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             //TODO change this when we add a more general exception.
@@ -55,7 +55,7 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
      * {@code target} must exist in the list.
      * The person identity of {@code editedDisplayable} must not be the same as another existing person in the list.
      */
-    public void setDisplayable(Displayable target, Displayable editedDisplayable) {
+    public void setDisplayable(T target, T editedDisplayable) {
         requireAllNonNull(target, editedDisplayable);
 
         int index = internalList.indexOf(target);
@@ -75,7 +75,7 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
      * Removes the equivalent displayable from the list.
      * The displayable must exist in the list.
      */
-    public void remove(Displayable toRemove) {
+    public void remove(T toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             //TODO replace exception
@@ -84,7 +84,7 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
     }
 
     // TODO: Ascertain whether this is necessary, if not, remove this method and its JUnit tests
-    public void setDisplayables(UniqueDisplayableList replacement) {
+    public void setDisplayables(UniqueDisplayableList<T> replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -93,7 +93,7 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
      * Replaces the contents of this list with {@code displayables}.
      * {@code displayables} must not contain duplicate displayables.
      */
-    public void setDisplayables(List<Displayable> displayables) {
+    public void setDisplayables(List<? extends T> displayables) {
         requireAllNonNull(displayables);
         if (!displayablesAreUnique(displayables)) {
             //TODO change exception
@@ -106,12 +106,12 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
-    public ObservableList<Displayable> asUnmodifiableObservableList() {
+    public ObservableList<T> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
     }
 
     @Override
-    public Iterator<Displayable> iterator() {
+    public Iterator<T> iterator() {
         return internalList.iterator();
     }
 
@@ -126,7 +126,7 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
             return false;
         }
 
-        UniqueDisplayableList otherUniqueDisplayableList = (UniqueDisplayableList) other;
+        UniqueDisplayableList<?> otherUniqueDisplayableList = (UniqueDisplayableList<?>) other;
         return internalList.equals(otherUniqueDisplayableList.internalList);
     }
 
@@ -141,9 +141,9 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code displayables} contains only unique displayables.
      */
-    private boolean displayablesAreUnique(List<Displayable> displayables) {
+    private boolean displayablesAreUnique(List<? extends Displayable> displayables) {
         for (int i = 0; i < displayables.size() - 1; i++) {
             for (int j = i + 1; j < displayables.size(); j++) {
                 if (displayables.get(i).isSameDisplayable(displayables.get(j))) {
