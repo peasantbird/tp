@@ -58,11 +58,12 @@ public class StorageManager implements Storage {
     }
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
-        return readAddressBook(addressBookStorage.getBuyersPath(),addressBookStorage.getSellersPath());
+        return readAddressBook(addressBookStorage.getBuyersPath(), addressBookStorage.getSellersPath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path buyersPath, Path sellersPath) throws DataLoadingException {
+    public Optional<ReadOnlyAddressBook> readAddressBook(Path buyersPath, Path sellersPath)
+            throws DataLoadingException {
         logger.fine("Attempting to read data from files: " + buyersPath + ", " + sellersPath);
         return addressBookStorage.readAddressBook(buyersPath, sellersPath);
     }
