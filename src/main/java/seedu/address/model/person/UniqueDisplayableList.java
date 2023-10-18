@@ -23,7 +23,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  *
  * @see Displayable#isSameDisplayable(Displayable)
  */
-public class UniqueDisplayableList implements Iterable<Displayable> {
+public class UniqueDisplayableList<T extends Displayable> implements Iterable<T> {
 
     private final ObservableList<Displayable> internalList = FXCollections.observableArrayList();
     private final ObservableList<Displayable> internalUnmodifiableList =
