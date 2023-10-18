@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -13,7 +16,7 @@ import seedu.address.model.person.Person;
  * An abstract UI component that when implemented, displays information of a {@code Person} according to a provided
  * FXML scheme.
  */
-abstract public class PersonCard extends UiPart<Region> {
+abstract class PersonCard extends UiPart<Region> {
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -45,6 +48,7 @@ abstract public class PersonCard extends UiPart<Region> {
      */
     public PersonCard(Person person, int displayedIndex, String fxml) {
         super(fxml);
+        requireAllNonNull(displayedIndex, person);
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);

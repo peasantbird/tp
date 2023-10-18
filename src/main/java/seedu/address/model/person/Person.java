@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import javafx.scene.layout.Region;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.Displayable;
@@ -79,6 +78,11 @@ public abstract class Person implements Displayable {
         return ((displayable instanceof Person) && isSamePerson((Person) displayable));
     }
 
+    /**
+     * A partial equalsHelper for subclasses.
+     * @param otherPerson the other person to compare against.
+     * @return whether these fields are equal.
+     */
     public boolean equalsHelper(Person otherPerson) {
         return name.equals(otherPerson.name)
                 && phone.equals(otherPerson.phone)
@@ -87,6 +91,10 @@ public abstract class Person implements Displayable {
                 && tags.equals(otherPerson.tags);
     }
 
+    /**
+     * A partial string builder for subclasses.
+     * @return a ToStringBuilder with loaded values, for subclasses to add onto.
+     */
     public ToStringBuilder toStringBuild() {
         return new ToStringBuilder(this)
                 .add("name", name)
