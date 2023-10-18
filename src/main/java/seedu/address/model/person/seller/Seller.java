@@ -11,6 +11,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.SellerCard;
 import seedu.address.ui.UiPart;
 
 
@@ -39,18 +40,6 @@ public class Seller extends Person {
         requireAllNonNull(sellingAddress, sellHouseInfo);
         this.sellingAddress = sellingAddress;
         this.sellHouseInfo = sellHouseInfo;
-    }
-
-    /**
-     * Constructs a seller from a person (for convenience).
-     *
-     * @param person         the person to build from.
-     * @param sellingAddress the selling address of the listing.
-     * @param sellHouseInfo  info about the listing.
-     */
-    public Seller(Person person, Address sellingAddress, SellHouseInfo sellHouseInfo) {
-        this(person.getName(), person.getPhone(), person.getEmail(), person.getAddress(),
-                sellingAddress, sellHouseInfo, person.getTags());
     }
 
     public Address getSellingAddress() {
