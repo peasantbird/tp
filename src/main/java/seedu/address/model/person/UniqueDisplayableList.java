@@ -83,6 +83,7 @@ public class UniqueDisplayableList implements Iterable<Displayable> {
         }
     }
 
+    // TODO: Ascertain whether this is necessary, if not, remove this method and its JUnit tests
     public void setDisplayables(UniqueDisplayableList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -92,7 +93,7 @@ public class UniqueDisplayableList implements Iterable<Displayable> {
      * Replaces the contents of this list with {@code displayables}.
      * {@code displayables} must not contain duplicate displayables.
      */
-    public void setPersons(List<Displayable> displayables) {
+    public void setDisplayables(List<Displayable> displayables) {
         requireAllNonNull(displayables);
         if (!displayablesAreUnique(displayables)) {
             //TODO change exception

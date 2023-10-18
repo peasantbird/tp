@@ -7,14 +7,17 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.scene.layout.Region;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.Displayable;
+import seedu.address.ui.UiPart;
 
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements Displayable {
 
     // Identity fields
     private final Name name;
@@ -114,4 +117,13 @@ public class Person {
                 .toString();
     }
 
+    @Override
+    public UiPart<Region> display(int index) {
+        return null;
+    };
+
+    @Override
+    public boolean isSameDisplayable(Object obj) {
+        return false;
+    };
 }
