@@ -6,5 +6,4 @@ import seedu.address.ui.UiPart;
 public interface Displayable {
     UiPart<Region> display(int index);
 
-    boolean isSameDisplayable(Object obj);
 }
