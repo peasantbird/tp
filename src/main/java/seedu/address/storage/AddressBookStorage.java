@@ -15,7 +15,9 @@ public interface AddressBookStorage {
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getBuyersPath();
+
+    Path getSellersPath();
 
     /**
      * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
@@ -25,10 +27,8 @@ public interface AddressBookStorage {
      */
     Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException;
 
-    /**
-     * @see #getAddressBookFilePath()
-     */
-    Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataLoadingException;
+
+    Optional<ReadOnlyAddressBook> readAddressBook(Path buyersPath, Path sellersPath) throws DataLoadingException;
 
     /**
      * Saves the given {@link ReadOnlyAddressBook} to the storage.
@@ -40,6 +40,6 @@ public interface AddressBookStorage {
     /**
      * @see #saveAddressBook(ReadOnlyAddressBook)
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
+    void saveAddressBook(ReadOnlyAddressBook addressBook, Path buyersPath, Path sellersPath) throws IOException;
 
 }
