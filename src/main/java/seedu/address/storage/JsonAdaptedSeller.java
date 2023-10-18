@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.seller.SellHouseInfo;
 import seedu.address.model.person.seller.Seller;
 /**
@@ -44,7 +43,6 @@ public class JsonAdaptedSeller extends JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted seller.
      */
     public Seller toModelType() throws IllegalValueException {
-        Person p = super.toModelType();
         if (sellerInfo == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     SellHouseInfo.class.getSimpleName()));
@@ -61,6 +59,7 @@ public class JsonAdaptedSeller extends JsonAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
         Address sellerAddressModel = new Address(sellingAddress);
-        return new Seller(p, sellerAddressModel, sellerInfoModel);
+        return new Seller(getName(), getPhone(), getEmail(), getAddress(), sellerAddressModel,
+                sellerInfoModel, getTags());
     }
 }
