@@ -75,7 +75,7 @@ public abstract class Person implements Displayable {
     }
 
     public boolean isSameDisplayable(Displayable displayable) {
-        return (!(displayable instanceof Person) && isSamePerson((Person) displayable));
+        return ((displayable instanceof Person) && isSamePerson((Person) displayable));
     }
 
     public boolean equalsHelper(Person otherPerson) {
