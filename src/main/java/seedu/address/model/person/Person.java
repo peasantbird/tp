@@ -6,14 +6,15 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.scene.layout.Region;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.Displayable;
-
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
+
 public abstract class Person implements Displayable {
 
     // Identity fields
@@ -94,5 +95,4 @@ public abstract class Person implements Displayable {
                 .add("address", address)
                 .add("tags", tags);
     }
-
 }
