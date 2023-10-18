@@ -16,7 +16,7 @@ public class ListSellersCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_SELLERS);
+        model.updateFilteredSellerList(PREDICATE_SHOW_SELLERS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
