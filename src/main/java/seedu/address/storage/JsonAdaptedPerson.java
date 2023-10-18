@@ -59,7 +59,7 @@ abstract class JsonAdaptedPerson {
                 .collect(Collectors.toList()));
     }
     public Set<Tag> getTags() throws IllegalValueException {
-    final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }

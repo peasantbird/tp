@@ -25,5 +25,4 @@ public class DeleteBuyerCommandParser implements Parser<DeleteBuyerCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteBuyerCommand.MESSAGE_USAGE), pe);
         }
     }
-
 }
