@@ -23,9 +23,9 @@ public class DisplayableListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public DisplayableListPanel(ObservableList<Displayable> displayableList) {
+    public DisplayableListPanel(ObservableList<? extends Displayable> displayableList) {
         super(FXML);
-        displayableListView.setItems(displayableList);
+        displayableListView.setItems((ObservableList<Displayable>) displayableList);
         displayableListView.setCellFactory(listView -> new DisplayableListViewCell());
     }
 
