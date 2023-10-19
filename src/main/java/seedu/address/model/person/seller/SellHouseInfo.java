@@ -1,5 +1,7 @@
 package seedu.address.model.person.seller;
 
+import seedu.address.model.person.buyer.BuyHouseInfo;
+
 /**
  * Represents the information associated with a house.
  */
@@ -16,6 +18,21 @@ public class SellHouseInfo {
     public SellHouseInfo(String houseInfo) {
         this.sellHouseInfo = houseInfo;
     }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof BuyHouseInfo)) {
+            return false;
+        }
+
+        SellHouseInfo otherSellHouseInfo = (SellHouseInfo) other;
+        return this.sellHouseInfo.equals(otherSellHouseInfo.sellHouseInfo);
+    }
+
     public String toString() {
         return sellHouseInfo;
     }
