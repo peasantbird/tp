@@ -1,6 +1,7 @@
 package seedu.address.model.person.seller;
 
-import seedu.address.model.person.buyer.BuyHouseInfo;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents the information associated with a house.
@@ -16,6 +17,8 @@ public class SellHouseInfo {
     public static final String VALIDATION_REGEX = "[^\\s].*";
     private final String sellHouseInfo;
     public SellHouseInfo(String houseInfo) {
+        requireNonNull(houseInfo);
+        checkArgument(isValidSellHouseInfo(houseInfo), MESSAGE_CONSTRAINTS);
         this.sellHouseInfo = houseInfo;
     }
     @Override
