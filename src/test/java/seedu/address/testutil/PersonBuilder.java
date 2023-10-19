@@ -14,18 +14,19 @@ import seedu.address.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Person objects.
  */
-public class PersonBuilder {
+public abstract class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
-    private Name name;
-    private Phone phone;
-    private Email email;
-    private Address address;
-    private Set<Tag> tags;
+    // Set to package private
+    Name name;
+    Phone phone;
+    Email email;
+    Address address;
+    Set<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -89,8 +90,9 @@ public class PersonBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, tags);
+    // Factory method to be implemented by subclasses
+    public Person build(){
+        return null;
     }
 
 }
