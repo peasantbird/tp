@@ -207,11 +207,6 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
 
 ### Saving the data
 
