@@ -9,9 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.AddBuyerCommand;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddSellerCommand;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.buyer.Buyer;
 import seedu.address.model.person.seller.Seller;
 
