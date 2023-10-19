@@ -22,7 +22,7 @@ public class JsonAdaptedSeller extends JsonAdaptedPerson {
     public JsonAdaptedSeller(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                             @JsonProperty("email") String email, @JsonProperty("address") String address,
                             @JsonProperty("sellingAddress") String sellingAddress,
-                            @JsonProperty("buyerInfo") String sellerInfo,
+                            @JsonProperty("sellerInfo") String sellerInfo,
                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         super(name, phone, email, address, tags);
         this.sellerInfo = sellerInfo;

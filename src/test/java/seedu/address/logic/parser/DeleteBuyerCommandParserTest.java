@@ -26,10 +26,10 @@ public class DeleteBuyerCommandParserTest {
 
     @Test
     public void parse_nonZeroUnsignedInteger_success() {
-        assertParseSuccess(parser, "1", new DeleteBuyerCommand(Index.fromZeroBased(1)));
+        assertParseSuccess(parser, "2", new DeleteBuyerCommand(Index.fromZeroBased(1)));
 
-        assertParseSuccess(parser, "10", new DeleteBuyerCommand(Index.fromZeroBased(10)));
+        assertParseSuccess(parser, "11", new DeleteBuyerCommand(Index.fromZeroBased(10)));
 
-        assertParseSuccess(parser, "100", new DeleteBuyerCommand(Index.fromZeroBased(100)));
+        assertParseSuccess(parser, "101", new DeleteBuyerCommand(Index.fromZeroBased(100)));
     }
 }

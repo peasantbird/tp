@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddSellerCommand;
+import seedu.address.model.person.Phone;
 
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -11,9 +12,9 @@ import static seedu.address.testutil.TypicalSellers.SALICE;
 
 public class AddSellerCommandParserTest {
     static final String BROKEN_INPUT = "ALASDKJDL";
-    static final String PARTIAL_INPUT = "n/adam p/3094 e/email@com ah/homeaddress";
-    static final String BAD_FIELDS_INPUT = "n/adam p/badnumber e/email@com ah/homeaddress as/selladdress i/info";
-    static final String VALID_INPUT ="n/Alice Pauline p/94351253 e/alice@example.com " +
+    static final String PARTIAL_INPUT = " n/adam p/3094 e/email@com ah/homeaddress";
+    static final String BAD_FIELDS_INPUT = " n/adam p/badnumber e/email@com ah/homeaddress as/selladdress i/info";
+    static final String VALID_INPUT =" n/Alice Pauline p/94351253 e/alice@example.com " +
             "ah/123, Jurong West Ave 6, #08-111 as/Selling address example i/Has Good Views t/friends";
     AddSellerCommandParser parser = new AddSellerCommandParser();
 
@@ -30,7 +31,7 @@ public class AddSellerCommandParserTest {
     @Test
     public void assertFails_Parse_BadFieldsInput() {
         assertParseFailure(parser, BAD_FIELDS_INPUT,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSellerCommand.MESSAGE_USAGE));
+                String.format(Phone.MESSAGE_CONSTRAINTS, AddSellerCommand.MESSAGE_USAGE));
     }
     @Test
     public void assertPasses_Parse_BrokenInput() {

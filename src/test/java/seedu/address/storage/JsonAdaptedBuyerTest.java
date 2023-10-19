@@ -116,7 +116,7 @@ public class JsonAdaptedBuyerTest {
     @Test
     public void toModelType_nullInfo_throwsIllegalValueException() {
         JsonAdaptedBuyer buyer = new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                VALID_INFO, VALID_TAGS);
+                null, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, BuyHouseInfo.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
     }
