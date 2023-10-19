@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -16,7 +15,7 @@
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
          title="RealtorTrackerPlusMax" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/RTPM_32.png" />
   </icons>
   <scene>
     <Scene>
@@ -54,11 +53,11 @@
           </padding>
           <VBox HBox.hgrow="ALWAYS" alignment="CENTER" style="-fx-border-color: #8FFFA1;">
             <Label fx:id="buyers" text="Buyers" style="-fx-text-fill: #8FFFA1; -fx-font-weight: bold; -fx-font-style: italic;"/>
-            <StackPane fx:id="buyerListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            <StackPane fx:id="buyerListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
           <VBox HBox.hgrow="ALWAYS" alignment="CENTER" style="-fx-border-color: yellow;">
             <Label fx:id="sellers" text="Sellers" style="-fx-text-fill: yellow; -fx-font-weight: bold; -fx-font-style: italic;"/>
-            <StackPane fx:id="sellerListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            <StackPane fx:id="sellerListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
         </HBox>
 
