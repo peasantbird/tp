@@ -117,11 +117,11 @@ public interface Model {
      * Updates the filter of the filtered buyer list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredBuyerList(Predicate<Buyer> predicate);
+    void updateFilteredBuyerList(Predicate<? super Buyer> predicate);
 
     /**
      * Updates the filter of the filtered seller list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredSellerList(Predicate<Seller> predicate);
+    void updateFilteredSellerList(Predicate<? super Seller> predicate);
 }

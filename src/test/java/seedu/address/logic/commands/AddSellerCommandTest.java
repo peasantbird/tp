@@ -178,12 +178,12 @@ public class AddSellerCommandTest {
         }
 
         @Override
-        public void updateFilteredBuyerList(Predicate<Buyer> predicate) {
+        public void updateFilteredBuyerList(Predicate<? super Buyer> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredSellerList(Predicate<Seller> predicate) {
+        public void updateFilteredSellerList(Predicate<? super Seller> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
