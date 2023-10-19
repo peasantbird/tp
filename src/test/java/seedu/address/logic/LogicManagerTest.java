@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
@@ -32,6 +31,7 @@ import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.SellerBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -165,10 +165,10 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
-        //TODO: Make this a default seller.
         String addSellerCommand = AddSellerCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        Seller expectedSeller = new SellerBuilder(AMY).withTags().build();
+        Seller expectedSeller = new SellerBuilder().withName(NAME_DESC_AMY).withPhone(PHONE_DESC_AMY)
+                .withEmail(EMAIL_DESC_AMY).withAddress(ADDRESS_DESC_AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addSeller(expectedSeller);
         assertCommandFailure(addSellerCommand, CommandException.class, expectedMessage, expectedModel);
