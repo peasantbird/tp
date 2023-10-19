@@ -18,6 +18,21 @@ public class BuyHouseInfo {
         this.buyHouseInfo = buyHouseInfo;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof BuyHouseInfo)) {
+            return false;
+        }
+
+        BuyHouseInfo otherBuyHouseInfo = (BuyHouseInfo) other;
+        return this.buyHouseInfo.equals(otherBuyHouseInfo.buyHouseInfo);
+    }
+
     public String toString() {
         return buyHouseInfo;
     }
