@@ -162,13 +162,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredBuyerList(Predicate<Buyer> predicate) {
+    public void updateFilteredBuyerList(Predicate<? super Buyer> predicate) {
         requireNonNull(predicate);
         filteredBuyers.setPredicate(predicate);
     }
 
     @Override
-    public void updateFilteredSellerList(Predicate<Seller> predicate) {
+    public void updateFilteredSellerList(Predicate<? super Seller> predicate) {
         requireNonNull(predicate);
         filteredSellers.setPredicate(predicate);
     }
