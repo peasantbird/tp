@@ -94,7 +94,8 @@ public class SellerTest {
     @Test
     public void toStringMethod() {
         String expected = Seller.class.getCanonicalName() + "{name=" + SALICE.getName() + ", phone=" + SALICE.getPhone()
-                + ", email=" + SALICE.getEmail() + ", address=" + SALICE.getAddress() + ", tags=" + SALICE.getTags() + "}";
+                + ", email=" + SALICE.getEmail() + ", address=" + SALICE.getAddress() + ", tags=" + SALICE.getTags()
+                + ", house info=" + SALICE.getSellHouseInfo() + "}";
         assertEquals(expected, SALICE.toString());
     }
 }
