@@ -81,13 +81,13 @@ public class MainApp extends Application {
         try {
             addressBookOptional = storage.readAddressBook();
             if (addressBookOptional.isEmpty()) {
-                logger.info("Creating new data file " + storage.getFilePath() +
-                        " populated with a sample AddressBook.");
+                logger.info("Creating new data file " + storage.getFilePath()
+                        + " populated with a sample AddressBook.");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataLoadingException e) {
-            logger.warning("Data file at " + storage.getFilePath() +
-                    " could not be loaded." + " Will be starting with an empty AddressBook.");
+            logger.warning("Data file at " + storage.getFilePath()
+                    + " could not be loaded." + " Will be starting with an empty AddressBook.");
             initialData = new AddressBook();
         }
 
