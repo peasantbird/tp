@@ -21,7 +21,7 @@ import java.util.function.Predicate;
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalSellers.SALICE;
 
 public class AddSellerCommandTest {
 
@@ -79,8 +79,8 @@ public class AddSellerCommandTest {
 
     @Test
     public void toStringMethod() {
-        AddSellerCommand addSellerCommand = new AddSellerCommand(ALICE);
-        String expected = AddSellerCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        AddSellerCommand addSellerCommand = new AddSellerCommand(SALICE);
+        String expected = AddSellerCommand.class.getCanonicalName() + "{toAdd=" + SALICE + "}";
         assertEquals(expected, addSellerCommand.toString());
     }
 

@@ -1,0 +1,133 @@
+package seedu.address.storage;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalBuyers.ALICE;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.buyer.BuyHouseInfo;
+
+public class JsonAdaptedBuyerTest {
+    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_ADDRESS = " ";
+    private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_INFO = " ";
+
+    private static final String VALID_NAME = ALICE.getName().toString();
+    private static final String VALID_PHONE = ALICE.getPhone().toString();
+    private static final String VALID_EMAIL = ALICE.getEmail().toString();
+    private static final String VALID_ADDRESS = ALICE.getAddress().toString();
+    private static final String VALID_INFO = ALICE.getBuyHouseInfo().toString();
+    private static final List<JsonAdaptedTag> VALID_TAGS = ALICE.getTags().stream()
+            .map(JsonAdaptedTag::new)
+            .collect(Collectors.toList());
+
+    @Test
+    public void toModelType_validBuyerDetails_returnsSeller() throws Exception {
+        JsonAdaptedBuyer buyer = new JsonAdaptedBuyer(ALICE);
+        assertEquals(ALICE, buyer.toModelType());
+    }
+
+    @Test
+    public void toModelType_invalidName_throwsIllegalValueException() {
+        JsonAdaptedBuyer buyer = new JsonAdaptedBuyer(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_INFO, VALID_TAGS);
+        String expectedMessage = Name.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullName_throwsIllegalValueException() {
+        JsonAdaptedBuyer buyer =  new JsonAdaptedBuyer(null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_INFO, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidPhone_throwsIllegalValueException() {
+        JsonAdaptedBuyer buyer =  new JsonAdaptedBuyer(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_INFO, VALID_TAGS);
+        String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullPhone_throwsIllegalValueException() {
+        JsonAdaptedBuyer buyer =  new JsonAdaptedBuyer(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS,
+                VALID_INFO, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidEmail_throwsIllegalValueException() {
+        JsonAdaptedBuyer buyer =  new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS,
+                VALID_INFO, VALID_TAGS);
+        String expectedMessage = Email.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullEmail_throwsIllegalValueException() {
+        JsonAdaptedBuyer buyer =  new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, null, VALID_ADDRESS,
+                VALID_INFO, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidAddress_throwsIllegalValueException() {
+        JsonAdaptedBuyer buyer =  new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS,
+                VALID_INFO, VALID_TAGS);
+        String expectedMessage = Address.MESSAGE_CONSTRAINTS;
+        assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullAddress_throwsIllegalValueException() {
+        JsonAdaptedBuyer buyer =  new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
+                VALID_INFO, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidInfo_throwsIllegalValueException() {
+        JsonAdaptedBuyer buyer =  new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                INVALID_INFO, VALID_TAGS);
+        String expectedMessage = String.format(BuyHouseInfo.MESSAGE_CONSTRAINTS);
+        assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullInfo_throwsIllegalValueException() {
+        JsonAdaptedBuyer buyer = new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_INFO, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, BuyHouseInfo.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidTags_throwsIllegalValueException() {
+        List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
+        invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
+        JsonAdaptedBuyer buyer =  new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                VALID_INFO, invalidTags);
+        assertThrows(IllegalValueException.class, buyer::toModelType);
+    }
+
+}
