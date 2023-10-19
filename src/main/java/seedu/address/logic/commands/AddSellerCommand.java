@@ -41,7 +41,7 @@ public class AddSellerCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SELLER_SUCCESS = "Got it. I've added a seller contact:\n%1$s";
+    public static final String MESSAGE_SUCCESS = "Got it. I've added a seller contact:\n%1$s";
     public static final String MESSAGE_DUPLICATE_SELLER = "This seller already exists in the address book";
 
     private final Seller toAdd;
@@ -63,7 +63,7 @@ public class AddSellerCommand extends Command {
         }
 
         model.addSeller(toAdd);
-        return new CommandResult(String.format(MESSAGE_SELLER_SUCCESS, Messages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override
