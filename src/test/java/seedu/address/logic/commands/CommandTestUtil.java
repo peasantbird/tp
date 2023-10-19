@@ -10,17 +10,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.buyer.Buyer;
 import seedu.address.model.person.seller.Seller;
 
@@ -113,7 +109,6 @@ public class CommandTestUtil {
 
         Buyer buyer = model.getFilteredBuyerList().get(targetIndex.getZeroBased());
         final String[] splitName = buyer.getName().fullName.split("\\s+");
-//        model.updateFilteredBuyerList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
         model.updateFilteredBuyerList(buyer1 ->
                 StringUtil.containsWordIgnoreCase(buyer1.getName().fullName, splitName[0]));
 
@@ -129,7 +124,6 @@ public class CommandTestUtil {
 
         Seller seller = model.getFilteredSellerList().get(targetIndex.getZeroBased());
         final String[] splitName = seller.getName().fullName.split("\\s+");
-//        model.updateFilteredSellerList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
         model.updateFilteredSellerList(seller1 ->
                 StringUtil.containsWordIgnoreCase(seller1.getName().fullName, splitName[0]));
 

@@ -67,11 +67,11 @@ public class AddressBookTest {
         assertThrows(NullPointerException.class, () -> addressBook.hasBuyer(null));
     }
     @Test
-    public void hasSeller_SellerNotInAddressBook_returnsFalse() {
+    public void hasSellerNotInAddressBook_returnsFalse() {
         assertFalse(addressBook.hasSeller(SALICE));
     }
     @Test
-    public void hasBuyer_BuyerNotInAddressBook_returnsFalse() {
+    public void hasBuyerNotInAddressBook_returnsFalse() {
         assertFalse(addressBook.hasBuyer(ALICE));
     }
 

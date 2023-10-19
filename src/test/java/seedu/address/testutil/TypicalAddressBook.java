@@ -1,12 +1,15 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalBuyers.getTypicalBuyers;
+import static seedu.address.testutil.TypicalSellers.getTypicalSellers;
+
 import seedu.address.model.AddressBook;
 import seedu.address.model.person.buyer.Buyer;
 import seedu.address.model.person.seller.Seller;
 
-import static seedu.address.testutil.TypicalBuyers.getTypicalBuyers;
-import static seedu.address.testutil.TypicalSellers.getTypicalSellers;
-
+/**
+ * Represents a typical addressbook.
+ */
 public class TypicalAddressBook {
     /**
      * Returns an {@code AddressBook} with all the typical persons.

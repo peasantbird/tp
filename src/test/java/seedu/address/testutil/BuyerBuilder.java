@@ -8,6 +8,9 @@ import seedu.address.model.person.buyer.BuyHouseInfo;
 import seedu.address.model.person.buyer.Buyer;
 import seedu.address.model.util.SampleDataUtil;
 
+/**
+ * Builds a buyer.
+ */
 public class BuyerBuilder extends PersonBuilder {
     public static final String DEFAULT_BUY_HOUSE_INFO = "Central Area 5 Room Condominium";
 

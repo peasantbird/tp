@@ -52,8 +52,7 @@ public class AddBuyerCommandTest {
         ModelStub modelStub = new ModelStubWithBuyer(validBuyer);
 
         assertThrows(CommandException.class,
-                AddBuyerCommand.MESSAGE_DUPLICATE_BUYER,
-                () -> addBuyerCommand.execute(modelStub));
+                AddBuyerCommand.MESSAGE_DUPLICATE_BUYER, () -> addBuyerCommand.execute(modelStub));
     }
 
     @Test

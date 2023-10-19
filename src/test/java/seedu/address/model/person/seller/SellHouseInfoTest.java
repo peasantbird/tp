@@ -1,10 +1,10 @@
 package seedu.address.model.person.seller;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class SellHouseInfoTest {
     @Test
@@ -30,9 +30,9 @@ public class SellHouseInfoTest {
         // valid info
         assertTrue(SellHouseInfo.isValidSellHouseInfo("Nice view"));
         assertTrue(SellHouseInfo.isValidSellHouseInfo("-")); // one character
-        assertTrue(SellHouseInfo.
-                isValidSellHouseInfo("Leng Inc; 1234 Market St, San Francisco CA " +
-                        "2349879; USA, very nice view")); // long address
+        assertTrue(SellHouseInfo
+                .isValidSellHouseInfo("Leng Inc; 1234 Market St, San Francisco CA "
+                        + "2349879; USA, very nice view")); // long address
     }
 
     @Test

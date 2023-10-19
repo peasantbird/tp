@@ -114,3 +114,4 @@ public class JsonAddressBookStorageTest {
         assertThrows(NullPointerException.class, () -> saveAddressBook(new AddressBook(), null));
     }
 }
+
