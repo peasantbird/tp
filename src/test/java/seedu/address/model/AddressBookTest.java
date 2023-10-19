@@ -101,8 +101,8 @@ public class AddressBookTest {
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{buyers=" + addressBook.getBuyerList() + "}" +
-                "{sellers=" + addressBook.getSellerList() + "}";
+        String expected = AddressBook.class.getCanonicalName() + "{buyers=" + addressBook.getBuyerList()
+                + ", sellers=" + addressBook.getSellerList() + "}";
         assertEquals(expected, addressBook.toString());
     }
 
