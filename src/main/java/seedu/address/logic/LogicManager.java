@@ -78,12 +78,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public Path getBuyersFilePath() {
-        return model.getBuyersFilePath();
-    }
-    @Override
-    public Path getSellersFilePath() {
-        return model.getSellersFilePath();
+    public Path getFilePath() {
+        return model.getFilePath();
     }
 
     @Override

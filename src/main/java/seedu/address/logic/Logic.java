@@ -39,13 +39,9 @@ public interface Logic {
     ObservableList<Seller> getFilteredSellerList();
 
     /**
-     * Returns the user prefs' buyer file path.
+     * Returns the user prefs'  file path.
      */
-    Path getBuyersFilePath();
-    /**
-     * Returns the user prefs' seller file path.
-     */
-    Path getSellersFilePath();
+    Path getFilePath();
     /**
      * Returns the user prefs' GUI settings.
      */

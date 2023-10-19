@@ -25,7 +25,7 @@ public class DeleteSellerCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_SELLER_SUCCESS = "Deleted Seller: %1$s";
+    public static final String MESSAGE_DELETE_SELLER_SUCCESS = "Got it. I’ve deleted a seller contact:\n%1$s";
 
     private final Index targetIndex;
 
@@ -39,7 +39,7 @@ public class DeleteSellerCommand extends Command {
         List<Seller> lastShownList = model.getFilteredSellerList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_SELLER_DISPLAYED_INDEX);
         }
 
         Seller sellerToDelete = lastShownList.get(targetIndex.getZeroBased());
