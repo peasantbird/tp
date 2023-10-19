@@ -108,19 +108,19 @@ Format: `buyer n/NAME p/PHONE\_NUMBER e/EMAIL ah/HOME\_ADDRESS i/BUY\_HOUSE\_INF
 - `\[t/TAG]`: Alphanumeric string
 
 Example: 
-`buyer n/Jane Doe p/91234567 e/[janedoe@gmail.com](mailto:johndoe@gmail.com) ah/1 College Ave East i/Central Area 5 Room Condominium`
+`buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium`
 
 Precise outputs when the command succeeds:
 
 ```
 Got it. I've added a buyer contact:
-Jane Doe 91234567 [janedoe@gmail.com](mailto:johndoe@gmail.com) 1 College Ave East Central Area 5 Room Condominium
+Jane Doe 91234567 janedoe@gmail.com 1 College Ave East Central Area 5 Room Condominium
 ```
 
 Precise outputs when the command fails:
 
 ```
-Jane Doe 91234567 [janedoe@gmail.com](mailto:johndoe@gmail.com) Central Area 5 Room Condominium
+Jane Doe 91234567 janedoe@gmail.com Central Area 5 Room Condominium
 Invalid command format! Missing buyer address
 ```
 
