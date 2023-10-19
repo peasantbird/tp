@@ -69,19 +69,15 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getBuyersFilePath() {
-        return userPrefs.getBuyersFilePath();
+    public Path getFilePath() {
+        return userPrefs.getFilePath();
     }
 
-    @Override
-    public Path getSellersFilePath() {
-        return userPrefs.getSellersFilePath();
-    }
 
     @Override
-    public void setAddressBookFilePaths(Path buyersFilePath, Path sellersFilePath) {
-        requireAllNonNull(buyersFilePath, sellersFilePath);
-        userPrefs.setAddressBookFilePaths(buyersFilePath, sellersFilePath);
+    public void setAddressBookFilePath(Path filePath) {
+        requireAllNonNull(filePath);
+        userPrefs.setAddressBookFilePath(filePath);
     }
 
     //=========== AddressBook ================================================================================
