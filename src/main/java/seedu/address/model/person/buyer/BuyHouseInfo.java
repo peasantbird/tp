@@ -17,6 +17,10 @@ public class BuyHouseInfo {
     public static final String VALIDATION_REGEX = "[^\\s].*";
     private final String buyHouseInfo;
 
+    /**
+     * Constructs a BuyHouseInfo.
+     * @param buyHouseInfo info about a house.
+     */
     public BuyHouseInfo(String buyHouseInfo) {
         requireNonNull(buyHouseInfo);
         checkArgument(isValidBuyHouseInfo(buyHouseInfo), MESSAGE_CONSTRAINTS);
