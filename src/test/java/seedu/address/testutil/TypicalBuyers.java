@@ -56,16 +56,6 @@ public class TypicalBuyers {
 
     private TypicalBuyers() {} // prevents instantiation
 
-    /**
-     * Returns an {@code AddressBook} with all the typical persons.
-     */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Buyer buyer : getTypicalBuyers()) {
-            ab.addBuyer(buyer);
-        }
-        return ab;
-    }
     public static List<Buyer> getTypicalBuyers() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }

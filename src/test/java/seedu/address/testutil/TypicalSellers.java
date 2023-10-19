@@ -1,6 +1,12 @@
 package seedu.address.testutil;
 
+import seedu.address.model.AddressBook;
+import seedu.address.model.person.buyer.Buyer;
 import seedu.address.model.person.seller.Seller;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static seedu.address.logic.commands.CommandTestUtil.*;
 
@@ -36,4 +42,13 @@ public class TypicalSellers {
     public static final Seller SBOB = new SellerBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .withSellingAddress("Selling address example").withSellHouseInfo("Has Good Views").build();
+
+    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+
+    private TypicalSellers() {} // prevents instantiation
+
+
+    public static List<Seller> getTypicalSellers() {
+        return new ArrayList<>(Arrays.asList(SALICE, SBENSON, SCARL, SDANIEL, SELLE, SFIONA, SGEORGE));
+    }
 }
