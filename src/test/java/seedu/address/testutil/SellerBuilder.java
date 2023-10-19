@@ -2,8 +2,12 @@ package seedu.address.testutil;
 
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.seller.SellHouseInfo;
 import seedu.address.model.person.seller.Seller;
+import seedu.address.model.util.SampleDataUtil;
 
 public class SellerBuilder extends PersonBuilder {
 
@@ -32,9 +36,62 @@ public class SellerBuilder extends PersonBuilder {
     }
 
     /**
+     * Sets the {@code Name} of the {@code Seller} that we are building.
+     */
+    @Override
+    public SellerBuilder withName(String name) {
+        this.name = new Name(name);
+        return this;
+    }
+
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     */
+    @Override
+    public SellerBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Address} of the {@code Seller} that we are building.
+     */
+    @Override
+    public SellerBuilder withAddress(String address) {
+        this.address = new Address(address);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Phone} of the {@code Seller} that we are building.
+     */
+    @Override
+    public SellerBuilder withPhone(String phone) {
+        this.phone = new Phone(phone);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Email} of the {@code Seller} that we are building.
+     */
+    @Override
+    public SellerBuilder withEmail(String email) {
+        this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code SellingAddress} of the {@code Seller} that we are building.
+     */
+    public SellerBuilder withSellingAddress(String sellingAddress) {
+        this.sellingAddress = new Address(sellingAddress);
+        return this;
+    }
+
+    /**
      * Sets the {@code SellHouseInfo()} of the {@code Seller} that we are building.
      */
-    public PersonBuilder withSellHouseInfo(String sellHouseInfo) {
+    public SellerBuilder withSellHouseInfo(String sellHouseInfo) {
         this.sellHouseInfo = new SellHouseInfo(sellHouseInfo);
         return this;
     }

@@ -91,8 +91,6 @@ public abstract class PersonBuilder {
     }
 
     // Factory method to be implemented by subclasses
-    public Person build(){
-        return null;
-    }
+    public abstract Person build();
 
 }
