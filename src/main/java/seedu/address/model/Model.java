@@ -45,14 +45,12 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getSellersFilePath();
-
-    Path getBuyersFilePath();
+    Path getFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePaths(Path buyersFilePath, Path sellersFilePath);
+    void setAddressBookFilePath(Path filePath);
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
