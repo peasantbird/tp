@@ -120,7 +120,8 @@ public class UniqueDisplayableListTest {
     }
     @Test
     public void setBuyers_nullUniqueBuyerList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueBuyerList.setDisplayables((UniqueDisplayableList<Buyer>) null));
+        assertThrows(NullPointerException.class, () -> uniqueBuyerList
+                .setDisplayables((UniqueDisplayableList<Buyer>) null));
     }
     @Test
     public void setBuyers_uniqueBuyerList_replacesOwnListWithProvidedUniqueBuyerList() {
@@ -249,7 +250,8 @@ public class UniqueDisplayableListTest {
     }
     @Test
     public void setSellers_nullUniqueSellerList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueSellerList.setDisplayables((UniqueDisplayableList<Seller>) null));
+        assertThrows(NullPointerException.class, () -> uniqueSellerList
+                .setDisplayables((UniqueDisplayableList<Seller>) null));
     }
     @Test
     public void setSellers_uniqueSellerList_replacesOwnListWithProvidedUniqueSellerList() {

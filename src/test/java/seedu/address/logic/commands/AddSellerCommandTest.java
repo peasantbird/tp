@@ -1,7 +1,21 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
+
+import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalSellers.SALICE;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
+
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -12,17 +26,6 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.buyer.Buyer;
 import seedu.address.model.person.seller.Seller;
 import seedu.address.testutil.SellerBuilder;
-
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
-import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalSellers.SALICE;
-
 public class AddSellerCommandTest {
 
     @Test
@@ -49,8 +52,7 @@ public class AddSellerCommandTest {
         ModelStub modelStub = new ModelStubWithSeller(validSeller);
 
         assertThrows(CommandException.class,
-                AddSellerCommand.MESSAGE_DUPLICATE_SELLER,
-                () -> addSellerCommand.execute(modelStub));
+                AddSellerCommand.MESSAGE_DUPLICATE_SELLER, () -> addSellerCommand.execute(modelStub));
     }
 
     @Test

@@ -22,11 +22,11 @@ public abstract class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     // Set to package private
-    Name name;
-    Phone phone;
-    Email email;
-    Address address;
-    Set<Tag> tags;
+    protected Name name;
+    protected Phone phone;
+    protected Email email;
+    protected Address address;
+    protected Set<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.

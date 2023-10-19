@@ -9,6 +9,9 @@ import seedu.address.model.person.seller.SellHouseInfo;
 import seedu.address.model.person.seller.Seller;
 import seedu.address.model.util.SampleDataUtil;
 
+/**
+ * Builds a seller.
+ */
 public class SellerBuilder extends PersonBuilder {
 
     public static final String DEFAULT_SELLING_ADDRESS = "47D Lor Sarhad, Singapore 119164";
