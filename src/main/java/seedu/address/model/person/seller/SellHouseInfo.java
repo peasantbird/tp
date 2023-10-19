@@ -25,7 +25,7 @@ public class SellHouseInfo {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof BuyHouseInfo)) {
+        if (!(other instanceof SellHouseInfo)) {
             return false;
         }
 
