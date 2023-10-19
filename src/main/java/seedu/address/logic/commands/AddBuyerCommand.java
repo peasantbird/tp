@@ -38,7 +38,7 @@ public class AddBuyerCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New buyer added: %1$s";
+    public static final String MESSAGE_SUCCESS = "Got it. I've added a buyer contact:\n%1$s";
     public static final String MESSAGE_DUPLICATE_BUYER = "This buyer already exists in the address book";
 
     private final Buyer toAdd;

@@ -81,13 +81,28 @@ Example: `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor
 Precise outputs when the command succeeds:
 ```
 Got it. I've added a seller contact:
-Ryan 91234567 ryan@gmail.com My Secret Home 47D Lor Sarhad, Singapore 119164 4 Room Flat in Sarhad Ville
+Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; Sell House Info: 4 Room Flat in Sarhad Ville; Tags: 
 ```
 
-Precise outputs when the command fails:
+Precise outputs when the command fails due to missing parameters:
 ```
-Ryan 91234567 ryan@gmail.com My Secret Home 4 Room Flat in Sarhad Ville
-Invalid command format! Missing selling address
+Invalid command format! 
+seller: Adds a seller to the address book. Parameters: n/NAME p/PHONE e/EMAIL ah/ADDRESS as/SELLING_ADDRESS i/HOUSE_INFO [t/TAG]...
+Example: seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville t/friends t/owesMoney
+```
+
+Precise outputs when the command fails due to invalid parameters:
+```
+Phone numbers should only contain numbers, and it should be at least 3 digits long
+```
+```
+Emails should be of the format local-part@domain and adhere to the following constraints:
+1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 ```
 
 
@@ -114,14 +129,28 @@ Precise outputs when the command succeeds:
 
 ```
 Got it. I've added a buyer contact:
-Jane Doe 91234567 janedoe@gmail.com 1 College Ave East Central Area 5 Room Condominium
+Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; Buying Info: Central Area 5 Room Condominium; Tags: 
 ```
 
-Precise outputs when the command fails:
-
+Precise outputs when the command fails due to missing parameters:
 ```
-Jane Doe 91234567 janedoe@gmail.com Central Area 5 Room Condominium
-Invalid command format! Missing buyer address
+Invalid command format! 
+buyer: Adds a buyer to the address book. Parameters: n/NAME p/PHONE e/EMAIL ah/ADDRESS i/INFO [t/TAG]...
+Example: buyer n/John Doe p/98765432 e/johnd@example.com ah/311, Clementi Ave 2, #02-25 i/Central Area 5 Room Condominium t/friends t/owesMoney
+```
+
+Precise outputs when the command fails due to invalid parameters:
+```
+Phone numbers should only contain numbers, and it should be at least 3 digits long
+```
+```
+Emails should be of the format local-part@domain and adhere to the following constraints:
+1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
 ```
 
 
@@ -160,18 +189,25 @@ Deletes a buyer based on their index number in the buyers’ list.
 Format: `delete-b INDEX`
 * `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyers' list
 
-Example:
-* `delete-b 3`
+Example: `delete-b 3`
 
 Precise outputs when the command succeeds:
-* `Got it. I’ve deleted a buyer contact:`<br>
-`Ian Tsai 91234567 iantsai@gmail.com 1 College Ave East Central Area 5 Room Condominium`
+```
+Got it. I’ve deleted a buyer contact:
+Ian Tsai; Phone: 91234567; Email: iantsai@gmail.com; Address: 1 College Ave East Central Area; Buying Info: 5 Room Condominium; Tags: 
+```
 
 Precise outputs when the command fails:
-* `Invalid command format! INDEX is not greater than 0`, OR
-* `Invalid command format! INDEX is higher than the last number in the list`
+```
+Invalid command format! 
+delete-b: Deletes the buyer identified by the index number used in the displayed buyer list.
+Parameters: INDEX (must be a positive integer)
+Example: delete-b 1
+```
+```
+The buyer index provided is higher than the last number in the list!
+```
 
-<br>
 
 ### Deleting a buyer: `delete-s`
 
@@ -180,18 +216,23 @@ Deletes a seller based on their index number in the sellers’ list.
 Format: `delete-s INDEX`
 * `INDEX`: A positive integer (1,2,3 …), which must not exceed last index in the sellers’ list
 
-Example:
-* `delete-s 3`
+Example: `delete-s 3`
 
 Precise outputs when the command succeeds:
-* `Got it. I’ve deleted a seller contact:`<br>
-`Ian Tsai 91234567 iantsai@gmail.com 1 College Ave East Central Area 5 Room Condominium`
-
+```
+Got it. I’ve deleted a seller contact:
+Ian Tsai; Phone: 91234567; Email: iantsai@gmail.com; Address: 1 College Ave East Central Area; Selling Address: 311, Clementi Ave 2, #02-25; Selling Info: 5 Room Condominium; Tags: 
+```
 Precise outputs when the command fails:
-* `Invalid command format! INDEX is not greater than 0`, OR
-* `Invalid command format! INDEX is higher than the last number in the list`
-
-<br>
+```
+Invalid command format! 
+delete-b: Deletes the buyer identified by the index number used in the displayed buyer list.
+Parameters: INDEX (must be a positive integer)
+Example: delete-b 1
+```
+```
+The buyer index provided is higher than the last number in the list!
+```
 
 
 ### Exiting the program: `exit`
