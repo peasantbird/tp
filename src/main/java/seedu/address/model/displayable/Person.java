@@ -36,6 +36,7 @@ public abstract class Person implements Displayable {
         this.tags.addAll(tags);
     }
 
+    @Override
     public Name getName() {
         return name;
     }
