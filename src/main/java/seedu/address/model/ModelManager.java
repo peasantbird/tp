@@ -140,7 +140,7 @@ public class ModelManager implements Model {
         addressBook.setSeller(targetSeller, editedSeller);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Displayable List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Buyer} backed by the internal list of

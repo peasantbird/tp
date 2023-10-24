@@ -96,14 +96,14 @@ public interface Model {
     /**
      * Replaces the given buyer {@code targetBuyer} with {@code editedBuyer}.
      * {@code targetBuyer} must exist in the address book's buyer list.
-     * The person identity of {@code editedBuyer} must not be the same as another existing buyer in the buyer list.
+     * The displayable identity of {@code editedBuyer} must not be the same as another existing buyer in the buyer list.
      */
     void setBuyer(Buyer targetBuyer, Buyer editedBuyer);
 
     /**
      * Replaces the given seller {@code targetSeller} with {@code editedSeller}.
      * {@code targetSeller} must exist in the address book's seller list.
-     * The person identity of {@code editedSeller} must not be the same as another existing seller in the seller list.
+     * The displayable identity of {@code editedSeller} must not be the same as another existing seller in the seller list.
      */
     void setSeller(Seller targetSeller, Seller editedSeller);
 

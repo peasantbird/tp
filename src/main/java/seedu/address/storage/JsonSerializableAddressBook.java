@@ -20,13 +20,13 @@ import seedu.address.model.displayable.seller.Seller;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate displayable(s).";
+    public static final String MESSAGE_DUPLICATE = "list contains duplicate(s).";
 
     private final List<JsonAdaptedBuyer> buyers = new ArrayList<>();
     private final List<JsonAdaptedSeller> sellers = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given buyers and sellers.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("buyers") List<? extends JsonAdaptedBuyer> buyers,
@@ -55,7 +55,7 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedBuyer jsonAdaptedBuyer : buyers) {
             Buyer buyer = jsonAdaptedBuyer.toModelType();
             if (addressBook.hasBuyer(buyer)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE);
             }
             addressBook.addBuyer(buyer);
         }
