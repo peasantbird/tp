@@ -103,7 +103,8 @@ public interface Model {
     /**
      * Replaces the given seller {@code targetSeller} with {@code editedSeller}.
      * {@code targetSeller} must exist in the address book's seller list.
-     * The displayable identity of {@code editedSeller} must not be the same as another existing seller in the seller list.
+     * The displayable identity of {@code editedSeller} must not be the same
+     * as another existing seller in the seller list.
      */
     void setSeller(Seller targetSeller, Seller editedSeller);
 

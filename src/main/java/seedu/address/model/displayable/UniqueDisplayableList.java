@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.displayable.exceptions.DuplicateException;
 import seedu.address.model.displayable.exceptions.DisplayableNotFoundException;
+import seedu.address.model.displayable.exceptions.DuplicateException;
 
 /**
  * A list of displayables that enforces uniqueness between its elements and does not allow nulls.
