@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.displayable.exceptions.DuplicatePersonException;
-import seedu.address.model.displayable.exceptions.PersonNotFoundException;
+import seedu.address.model.displayable.exceptions.DuplicateException;
+import seedu.address.model.displayable.exceptions.DisplayableNotFoundException;
 
 /**
  * A list of displayables that enforces uniqueness between its elements and does not allow nulls.
@@ -44,7 +44,7 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             //TODO change this when we add a more general exception.
-            throw new DuplicatePersonException();
+            throw new DuplicateException();
         }
         internalList.add(toAdd);
     }
@@ -60,11 +60,11 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
         int index = internalList.indexOf(target);
         if (index == -1) {
             //TODO replace this exception
-            throw new PersonNotFoundException();
+            throw new DisplayableNotFoundException();
         }
 
         if (!target.isSameDisplayable(editedDisplayable) && contains(editedDisplayable)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateException();
         }
 
         internalList.set(index, editedDisplayable);
@@ -78,7 +78,7 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             //TODO replace exception
-            throw new PersonNotFoundException();
+            throw new DisplayableNotFoundException();
         }
     }
 
@@ -96,7 +96,7 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
         requireAllNonNull(displayables);
         if (!displayablesAreUnique(displayables)) {
             //TODO change exception
-            throw new DuplicatePersonException();
+            throw new DuplicateException();
         }
 
         internalList.setAll(displayables);
