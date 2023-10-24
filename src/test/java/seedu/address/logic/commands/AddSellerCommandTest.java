@@ -23,8 +23,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.person.buyer.Buyer;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.seller.Seller;
 import seedu.address.testutil.SellerBuilder;
 public class AddSellerCommandTest {
 

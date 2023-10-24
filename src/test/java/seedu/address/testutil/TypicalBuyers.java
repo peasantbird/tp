@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.person.buyer.Buyer;
+import seedu.address.model.displayable.buyer.Buyer;
 
 /**
  * A utility class containing a list of {@code Buyer} objects to be used in tests.

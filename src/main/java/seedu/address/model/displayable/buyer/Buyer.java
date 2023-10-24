@@ -1,15 +1,15 @@
-package seedu.address.model.person.buyer;
+package seedu.address.model.displayable.buyer;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Set;
 
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.displayable.Address;
+import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.Name;
+import seedu.address.model.displayable.Person;
+import seedu.address.model.displayable.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.BuyerCard;
 import seedu.address.ui.UiPart;

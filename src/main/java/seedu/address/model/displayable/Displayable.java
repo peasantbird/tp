@@ -1,4 +1,4 @@
-package seedu.address.model.util;
+package seedu.address.model.displayable;
 
 import javafx.scene.layout.Region;
 import seedu.address.ui.UiPart;

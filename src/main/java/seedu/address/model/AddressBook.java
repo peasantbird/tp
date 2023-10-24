@@ -6,9 +6,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.UniqueDisplayableList;
-import seedu.address.model.person.buyer.Buyer;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.UniqueDisplayableList;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.seller.Seller;
 
 /**
  * Wraps all data at the address-book level

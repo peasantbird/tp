@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.displayable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -17,10 +17,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.buyer.Buyer;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.exceptions.DuplicatePersonException;
+import seedu.address.model.displayable.exceptions.PersonNotFoundException;
+import seedu.address.model.displayable.seller.Seller;
 import seedu.address.testutil.BuyerBuilder;
 import seedu.address.testutil.SellerBuilder;
 

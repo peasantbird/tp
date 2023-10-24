@@ -4,8 +4,8 @@ import static seedu.address.testutil.TypicalBuyers.getTypicalBuyers;
 import static seedu.address.testutil.TypicalSellers.getTypicalSellers;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.buyer.Buyer;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.seller.Seller;
 
 /**
  * Represents a typical addressbook.

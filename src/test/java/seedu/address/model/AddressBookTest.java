@@ -19,9 +19,9 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.buyer.Buyer;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.exceptions.DuplicatePersonException;
+import seedu.address.model.displayable.seller.Seller;
 import seedu.address.testutil.BuyerBuilder;
 import seedu.address.testutil.SellerBuilder;
 

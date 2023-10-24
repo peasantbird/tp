@@ -13,7 +13,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.seller.Seller;
 
 /**
  * Adds a seller to the address book.

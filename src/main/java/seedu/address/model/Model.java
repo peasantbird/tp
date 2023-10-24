@@ -5,9 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.buyer.Buyer;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.Person;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.seller.Seller;
 
 /**
  * The API of the Model component.

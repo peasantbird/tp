@@ -17,7 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.seller.Seller;
 
 
 
@@ -99,7 +99,7 @@ public class DeleteSellerCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different displayable -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
