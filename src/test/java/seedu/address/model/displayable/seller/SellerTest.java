@@ -14,7 +14,6 @@ import static seedu.address.testutil.TypicalSellers.SBOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.displayable.seller.Seller;
 import seedu.address.testutil.SellerBuilder;
 
 public class SellerTest {
