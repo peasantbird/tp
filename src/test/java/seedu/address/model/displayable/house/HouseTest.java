@@ -1,17 +1,19 @@
 package seedu.address.model.displayable.house;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
+
 import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Info;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Price;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
 
 public class HouseTest {
     private final House dummyHouse =
@@ -45,7 +47,7 @@ public class HouseTest {
     }
 
     @Test
-    public void isSameHouse_and_Equals() {
+    public void isSameHouse_and_equals() {
         assertTrue(dummyHouse.isSameHouse(dummyHouse));
         assertFalse(dummyHouse.isSameHouse(null));
 
@@ -61,8 +63,8 @@ public class HouseTest {
 
     @Test
     public void toStringMethod() {
-        String expected = House.class.getCanonicalName() +
-                "{name=" + dummyHouse.getName()
+        String expected = House.class.getCanonicalName()
+                + "{name=" + dummyHouse.getName()
                 + ", price=" + dummyHouse.getPrice()
                 + ", address=" + dummyHouse.getAddress()
                 + ", info=" + dummyHouse.getInfo()
