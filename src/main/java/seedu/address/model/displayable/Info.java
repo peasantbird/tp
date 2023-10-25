@@ -10,7 +10,27 @@ public class Info {
         this.info = info;
     }
 
+    @Override
     public String toString() {
         return info;
+    }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof Info)) {
+            return false;
+        }
+
+        Info otherInfo = (Info) other;
+        return info.equals(otherInfo.info);
+    }
+
+    @Override
+    public int hashCode() {
+        return info.hashCode();
     }
 }
