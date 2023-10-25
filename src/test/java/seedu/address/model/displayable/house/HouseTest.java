@@ -10,7 +10,6 @@ import seedu.address.model.displayable.Price;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -54,10 +53,10 @@ public class HouseTest {
         assertTrue(dummyHouse.equals(dummyHouseDifferentObject));
 
         assertFalse(dummyHouse.isSameHouse(differentHouse));
-        assertNotEquals(dummyHouse, differentHouse);
+        assertFalse(dummyHouse.equals(differentHouse));
 
         assertTrue(dummyHouse.isSameHouse(dummyHouseDifferentName));
-        assertNotEquals(dummyHouse, dummyHouseDifferentName);
+        assertFalse(dummyHouse.equals(dummyHouseDifferentName));
     }
 
     @Test
