@@ -8,7 +8,7 @@ import static seedu.address.testutil.TypicalSellers.SALICE;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddSellerCommand;
-import seedu.address.model.person.Phone;
+import seedu.address.model.displayable.Phone;
 
 public class AddSellerCommandParserTest {
     static final String BROKEN_INPUT = "ALASDKJDL";

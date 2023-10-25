@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.displayable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -17,10 +17,10 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.buyer.Buyer;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.exceptions.DisplayableNotFoundException;
+import seedu.address.model.displayable.exceptions.DuplicateException;
+import seedu.address.model.displayable.seller.Seller;
 import seedu.address.testutil.BuyerBuilder;
 import seedu.address.testutil.SellerBuilder;
 
@@ -57,7 +57,7 @@ public class UniqueDisplayableListTest {
     @Test
     public void add_duplicateBuyer_throwsDuplicatePersonException() {
         uniqueBuyerList.add(ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniqueBuyerList.add(ALICE));
+        assertThrows(DuplicateException.class, () -> uniqueBuyerList.add(ALICE));
     }
     @Test
     public void setBuyer_nullTargetBuyer_throwsNullPointerException() {
@@ -69,7 +69,7 @@ public class UniqueDisplayableListTest {
     }
     @Test
     public void setBuyer_targetBuyerNotInList_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueBuyerList.setDisplayable(ALICE, ALICE));
+        assertThrows(DisplayableNotFoundException.class, () -> uniqueBuyerList.setDisplayable(ALICE, ALICE));
     }
     @Test
     public void setBuyer_editedBuyerIsSameBuyer_success() {
@@ -101,7 +101,7 @@ public class UniqueDisplayableListTest {
     public void setBuyer_editedBuyerHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniqueBuyerList.add(ALICE);
         uniqueBuyerList.add(BOB);
-        assertThrows(DuplicatePersonException.class, () -> uniqueBuyerList.setDisplayable(ALICE, BOB));
+        assertThrows(DuplicateException.class, () -> uniqueBuyerList.setDisplayable(ALICE, BOB));
     }
     @Test
     public void remove_nullBuyer_throwsNullPointerException() {
@@ -109,7 +109,7 @@ public class UniqueDisplayableListTest {
     }
     @Test
     public void remove_buyerDoesNotExist_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueBuyerList.remove(ALICE));
+        assertThrows(DisplayableNotFoundException.class, () -> uniqueBuyerList.remove(ALICE));
     }
     @Test
     public void remove_existingBuyer_removesBuyer() {
@@ -147,7 +147,7 @@ public class UniqueDisplayableListTest {
     @Test
     public void setBuyers_listWithDuplicateBuyers_throwsDuplicatePersonException() {
         List<Buyer> listWithDuplicateBuyers = Arrays.asList(ALICE, ALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniqueBuyerList.setDisplayables(listWithDuplicateBuyers));
+        assertThrows(DuplicateException.class, () -> uniqueBuyerList.setDisplayables(listWithDuplicateBuyers));
     }
     @Test
     public void asUnmodifiableObservableList_modifyBuyerList_throwsUnsupportedOperationException() {
@@ -187,7 +187,7 @@ public class UniqueDisplayableListTest {
     @Test
     public void add_duplicateSeller_throwsDuplicatePersonException() {
         uniqueSellerList.add(SALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniqueSellerList.add(SALICE));
+        assertThrows(DuplicateException.class, () -> uniqueSellerList.add(SALICE));
     }
     @Test
     public void setSeller_nullEditedSeller_throwsNullPointerException() {
@@ -199,7 +199,7 @@ public class UniqueDisplayableListTest {
     }
     @Test
     public void setSeller_targetSellerNotInList_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueSellerList.setDisplayable(SALICE, SALICE));
+        assertThrows(DisplayableNotFoundException.class, () -> uniqueSellerList.setDisplayable(SALICE, SALICE));
     }
     @Test
     public void setSeller_editedSellerIsSameSeller_success() {
@@ -231,7 +231,7 @@ public class UniqueDisplayableListTest {
     public void setSeller_editedSellerHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniqueSellerList.add(SALICE);
         uniqueSellerList.add(SBOB);
-        assertThrows(DuplicatePersonException.class, () -> uniqueSellerList.setDisplayable(SALICE, SBOB));
+        assertThrows(DuplicateException.class, () -> uniqueSellerList.setDisplayable(SALICE, SBOB));
     }
     @Test
     public void remove_nullSeller_throwsNullPointerException() {
@@ -239,7 +239,7 @@ public class UniqueDisplayableListTest {
     }
     @Test
     public void remove_sellerDoesNotExist_throwsPersonNotFoundException() {
-        assertThrows(PersonNotFoundException.class, () -> uniqueSellerList.remove(SALICE));
+        assertThrows(DisplayableNotFoundException.class, () -> uniqueSellerList.remove(SALICE));
     }
     @Test
     public void remove_existingSeller_removesSeller() {
@@ -277,7 +277,7 @@ public class UniqueDisplayableListTest {
     @Test
     public void setSellers_listWithDuplicateSellers_throwsDuplicatePersonException() {
         List<Seller> listWithDuplicateSellers = Arrays.asList(SALICE, SALICE);
-        assertThrows(DuplicatePersonException.class, () -> uniqueSellerList.setDisplayables(listWithDuplicateSellers));
+        assertThrows(DuplicateException.class, () -> uniqueSellerList.setDisplayables(listWithDuplicateSellers));
     }
     @Test
     public void asUnmodifiableObservableList_modifySellerList_throwsUnsupportedOperationException() {

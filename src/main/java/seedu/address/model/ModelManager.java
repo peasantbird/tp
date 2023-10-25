@@ -11,8 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.buyer.Buyer;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.seller.Seller;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -140,7 +140,7 @@ public class ModelManager implements Model {
         addressBook.setSeller(targetSeller, editedSeller);
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Displayable List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Buyer} backed by the internal list of

@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.displayable;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -8,7 +8,6 @@ import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.Displayable;
 /**
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -37,6 +36,7 @@ public abstract class Person implements Displayable {
         this.tags.addAll(tags);
     }
 
+    @Override
     public Name getName() {
         return name;
     }
@@ -80,7 +80,7 @@ public abstract class Person implements Displayable {
 
     /**
      * A partial equalsHelper for subclasses.
-     * @param otherPerson the other person to compare against.
+     * @param otherPerson the other displayable to compare against.
      * @return whether these fields are equal.
      */
     public boolean equalsHelper(Person otherPerson) {

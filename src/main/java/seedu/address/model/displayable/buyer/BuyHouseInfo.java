@@ -1,4 +1,4 @@
-package seedu.address.model.person.buyer;
+package seedu.address.model.displayable.buyer;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;

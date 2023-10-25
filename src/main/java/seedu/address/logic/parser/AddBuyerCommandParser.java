@@ -13,12 +13,12 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.buyer.BuyHouseInfo;
-import seedu.address.model.person.buyer.Buyer;
+import seedu.address.model.displayable.Address;
+import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.Name;
+import seedu.address.model.displayable.Phone;
+import seedu.address.model.displayable.buyer.BuyHouseInfo;
+import seedu.address.model.displayable.buyer.Buyer;
 import seedu.address.model.tag.Tag;
 
 /**

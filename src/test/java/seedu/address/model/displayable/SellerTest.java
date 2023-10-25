@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.displayable;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,7 +14,7 @@ import static seedu.address.testutil.TypicalSellers.SBOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.seller.Seller;
 import seedu.address.testutil.SellerBuilder;
 
 public class SellerTest {
@@ -67,7 +67,7 @@ public class SellerTest {
         // different type -> returns false
         assertFalse(SALICE.equals(5));
 
-        // different person -> returns false
+        // different displayable -> returns false
         assertFalse(SALICE.equals(SBOB));
 
         // different name -> returns false
