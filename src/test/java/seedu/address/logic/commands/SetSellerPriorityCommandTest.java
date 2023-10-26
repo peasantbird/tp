@@ -27,8 +27,8 @@ import seedu.address.model.displayable.seller.Seller;
  */
 public class SetSellerPriorityCommandTest {
 
+    private static final Priority DEFAULT_PRIORITY = new Priority("nil");
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private static Priority DEFAULT_PRIORITY = new Priority("nil");
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
