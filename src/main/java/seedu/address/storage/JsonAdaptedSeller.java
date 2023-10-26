@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.displayable.Address;
-import seedu.address.model.displayable.Priority;
 import seedu.address.model.displayable.seller.SellHouseInfo;
 import seedu.address.model.displayable.seller.Seller;
 /**

@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -10,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.displayable.Priority;
 import seedu.address.model.displayable.seller.Seller;
 
-import java.util.List;
+
 
 /**
  * Sets a seller's priority based on displayed index in the address book.
@@ -31,11 +33,15 @@ public class SetSellerPriorityCommand extends Command {
     private final Index targetIndex;
     private final Priority priority;
 
+    /**
+     * Constructs a SetSellerPriorityCommand to set the priority level of a specified seller.
+     * @param targetIndex
+     * @param priority
+     */
     public SetSellerPriorityCommand(Index targetIndex, Priority priority) {
         this.targetIndex = targetIndex;
         this.priority = priority;
     }
-
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

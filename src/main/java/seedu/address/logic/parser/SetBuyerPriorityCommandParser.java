@@ -7,8 +7,6 @@ import seedu.address.logic.commands.SetBuyerPriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.Priority;
 
-import java.util.Arrays;
-
 /**
  * Parses input arguments and creates a new SetBuyerPriorityCommand object
  */
@@ -22,7 +20,6 @@ public class SetBuyerPriorityCommandParser implements Parser<SetBuyerPriorityCom
     public SetBuyerPriorityCommand parse(String args) throws ParseException {
         try {
             String[] splitArgs = args.trim().split("\\s+");
-            System.out.println(Arrays.toString(splitArgs));
             Index index = ParserUtil.parseIndex(splitArgs[0]);
             Priority priority = ParserUtil.parsePriority(splitArgs[1]);
             return new SetBuyerPriorityCommand(index, priority);

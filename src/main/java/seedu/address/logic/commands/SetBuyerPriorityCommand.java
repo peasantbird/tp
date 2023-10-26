@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -9,8 +11,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.displayable.Priority;
 import seedu.address.model.displayable.buyer.Buyer;
-
-import java.util.List;
 
 /**
  * Sets a buyer's priority based on displayed index in the address book.
@@ -31,11 +31,15 @@ public class SetBuyerPriorityCommand extends Command {
     private final Index targetIndex;
     private final Priority priority;
 
+    /**
+     * Constructs a SetBuyerPriorityCommand to set the priority level of a specified buyer.
+     * @param targetIndex
+     * @param priority
+     */
     public SetBuyerPriorityCommand(Index targetIndex, Priority priority) {
         this.targetIndex = targetIndex;
         this.priority = priority;
     }
-
 
     @Override
     public CommandResult execute(Model model) throws CommandException {

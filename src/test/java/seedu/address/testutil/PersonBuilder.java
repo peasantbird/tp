@@ -8,6 +8,7 @@ import seedu.address.model.displayable.Email;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Person;
 import seedu.address.model.displayable.Phone;
+import seedu.address.model.displayable.Priority;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,6 +21,7 @@ public abstract class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_PRIORITY = "nil";
 
     // Set to package private
     protected Name name;
@@ -27,6 +29,7 @@ public abstract class PersonBuilder {
     protected Email email;
     protected Address address;
     protected Set<Tag> tags;
+    protected Priority priority;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -37,6 +40,7 @@ public abstract class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        priority = new Priority(DEFAULT_PRIORITY);
     }
 
     /**
@@ -87,6 +91,14 @@ public abstract class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Priority} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPriority(String priority) {
+        this.priority = new Priority(priority);
         return this;
     }
 

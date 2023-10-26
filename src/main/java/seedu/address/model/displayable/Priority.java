@@ -59,7 +59,7 @@ public class Priority {
             return PrioLvl.MEDIUM;
         } else if (firstLetter == 'l') {
             return PrioLvl.LOW;
-        } else if (priority.equals("nil")){
+        } else if (priority.equals("nil")) {
             return PrioLvl.NIL;
         }
         return null;
@@ -73,7 +73,7 @@ public class Priority {
             return "med";
         } else if (value == PrioLvl.LOW) {
             return "low";
-        } else if (value == PrioLvl.NIL){
+        } else if (value == PrioLvl.NIL) {
             return "nil";
         }
         return null;
