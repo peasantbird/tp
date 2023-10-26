@@ -11,8 +11,9 @@ public class Priority {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Priority inputs are either 'high', 'medium', or 'low', and shouldn't be empty.";
-    // Inputs are either 'high', 'medium', or 'low', with allowance for typos after the first letter
-    public static final String VALIDATION_REGEX = "^(h[igh]{3}|m[edium]{2,5}|l[ow]{2}|nil)$";
+    // Inputs are either 'high', 'medium', or 'low', with some allowance for typos after the first letter, and
+    // are case-insensitive
+    public static final String VALIDATION_REGEX = "(?i)^(h[igh]{3}|m[edium]{2,5}|l[ow]{2}|nil|NIL)$";
 
 
     public final PrioLvl value;
@@ -49,9 +50,8 @@ public class Priority {
      * Returns a PrioLvl based on the user input
      */
     public static PrioLvl getPrioLvl(String priority) {
-        if (priority == null) {
-            return null;
-        }
+        requireNonNull(priority);
+        checkArgument(isValidPriority(priority), MESSAGE_CONSTRAINTS);
         char firstLetter = priority.charAt(0);
         if (firstLetter == 'h') {
             return PrioLvl.HIGH;
@@ -59,10 +59,9 @@ public class Priority {
             return PrioLvl.MEDIUM;
         } else if (firstLetter == 'l') {
             return PrioLvl.LOW;
-        } else if (priority.equals("nil")) {
+        } else {
             return PrioLvl.NIL;
         }
-        return null;
     }
 
     @Override
@@ -73,10 +72,9 @@ public class Priority {
             return "med";
         } else if (value == PrioLvl.LOW) {
             return "low";
-        } else if (value == PrioLvl.NIL) {
+        } else {
             return "nil";
         }
-        return null;
     }
 
     public String getBackgroundColor() {
