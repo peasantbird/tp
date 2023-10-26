@@ -5,9 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.parser.Prefix;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.buyer.Buyer;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.seller.Seller;
 
 /**
  * Container for user visible messages.
@@ -16,10 +15,10 @@ public class Messages {
 
     public static final String MESSAGE_UNKNOWN_COMMAND = "Unknown command";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
-    public static final String MESSAGE_INVALID_BUYER_DISPLAYED_INDEX = "The buyer index provided is higher than " +
-            "the last number in the list!";
-    public static final String MESSAGE_INVALID_SELLER_DISPLAYED_INDEX = "The seller index provided is higher than " +
-            "the last number in the list!";
+    public static final String MESSAGE_INVALID_BUYER_DISPLAYED_INDEX = "The buyer index provided is higher than "
+            + "the last number in the list!";
+    public static final String MESSAGE_INVALID_SELLER_DISPLAYED_INDEX = "The seller index provided is higher than "
+            + "the last number in the list!";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
@@ -37,7 +36,7 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code buyer} for display to the user.
+     * Formats the {@code Buyer} for display to the user.
      */
     public static String format(Buyer buyer) {
         final StringBuilder builder = new StringBuilder();
@@ -56,7 +55,7 @@ public class Messages {
     }
 
     /**
-     * Formats the {@code person} for display to the user.
+     * Formats the {@code Seller} for display to the user.
      */
     public static String format(Seller seller) {
         final StringBuilder builder = new StringBuilder();

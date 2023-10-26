@@ -5,9 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.buyer.Buyer;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.Person;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.seller.Seller;
 
 /**
  * The API of the Model component.
@@ -96,14 +96,15 @@ public interface Model {
     /**
      * Replaces the given buyer {@code targetBuyer} with {@code editedBuyer}.
      * {@code targetBuyer} must exist in the address book's buyer list.
-     * The person identity of {@code editedBuyer} must not be the same as another existing buyer in the buyer list.
+     * The displayable identity of {@code editedBuyer} must not be the same as another existing buyer in the buyer list.
      */
     void setBuyer(Buyer targetBuyer, Buyer editedBuyer);
 
     /**
      * Replaces the given seller {@code targetSeller} with {@code editedSeller}.
      * {@code targetSeller} must exist in the address book's seller list.
-     * The person identity of {@code editedSeller} must not be the same as another existing seller in the seller list.
+     * The displayable identity of {@code editedSeller} must not be the same
+     * as another existing seller in the seller list.
      */
     void setSeller(Seller targetSeller, Seller editedSeller);
 
@@ -117,11 +118,11 @@ public interface Model {
      * Updates the filter of the filtered buyer list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredBuyerList(Predicate<Buyer> predicate);
+    void updateFilteredBuyerList(Predicate<? super Buyer> predicate);
 
     /**
      * Updates the filter of the filtered seller list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredSellerList(Predicate<Seller> predicate);
+    void updateFilteredSellerList(Predicate<? super Seller> predicate);
 }

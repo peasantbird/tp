@@ -5,10 +5,10 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showSellerAtIndex;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +17,7 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.seller.Seller;
 
 
 
@@ -48,12 +48,12 @@ public class DeleteSellerCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredSellerList().size() + 1);
         DeleteSellerCommand deleteCommand = new DeleteSellerCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_SELLER_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showSellerAtIndex(model, INDEX_FIRST_PERSON);
 
         Seller sellerToDelete = model.getFilteredSellerList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteSellerCommand deleteCommand = new DeleteSellerCommand(INDEX_FIRST_PERSON);
@@ -70,7 +70,7 @@ public class DeleteSellerCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showSellerAtIndex(model, INDEX_FIRST_PERSON);
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
@@ -78,7 +78,7 @@ public class DeleteSellerCommandTest {
 
         DeleteSellerCommand deleteCommand = new DeleteSellerCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_SELLER_DISPLAYED_INDEX);
     }
 
     @Test
@@ -99,7 +99,7 @@ public class DeleteSellerCommandTest {
         // null -> returns false
         assertFalse(deleteFirstCommand.equals(null));
 
-        // different person -> returns false
+        // different displayable -> returns false
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
     }
 
