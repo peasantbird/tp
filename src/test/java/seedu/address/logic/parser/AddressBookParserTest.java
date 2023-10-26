@@ -78,10 +78,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_filter() throws Exception {
-        assertTrue(parser.parseCommand(FilterCommand.COMMAND_WORD + " ABC") instanceof FilterCommand);
-        FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + " ABC");
+        assertTrue(parser.parseCommand(FilterCommand.COMMAND_WORD + " ABCD") instanceof FilterCommand);
+        FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + " ABCD");
         ArrayList<String> arguments = new ArrayList<>();
-        arguments.add("ABC");
+        arguments.add("ABCD");
         assertEquals(new FilterCommand(new NameContainsKeywordsPredicate(arguments)), command);
     }
 
