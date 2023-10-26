@@ -6,6 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPriorities.HIGH_PRIORITY;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +19,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListBuyersCommand;
 import seedu.address.logic.commands.ListSellersCommand;
+import seedu.address.logic.commands.SetBuyerPriorityCommand;
+import seedu.address.logic.commands.SetSellerPriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.buyer.Buyer;
 import seedu.address.model.displayable.seller.Seller;
@@ -85,6 +88,24 @@ public class AddressBookParserTest {
     public void parseCommand_listSellers() throws Exception {
         assertTrue(parser.parseCommand(ListSellersCommand.COMMAND_WORD) instanceof ListSellersCommand);
         assertTrue(parser.parseCommand(ListSellersCommand.COMMAND_WORD + " 3") instanceof ListSellersCommand);
+    }
+
+    @Test
+    public void parseCommand_setBuyerPriority() throws Exception {
+        SetBuyerPriorityCommand command = (SetBuyerPriorityCommand) parser.parseCommand(
+                SetBuyerPriorityCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + HIGH_PRIORITY);
+        assertEquals(new SetBuyerPriorityCommand(INDEX_FIRST_PERSON, HIGH_PRIORITY), command);
+    }
+
+    @Test
+    public void parseCommand_setSellerPriority() throws Exception {
+        SetSellerPriorityCommand command = (SetSellerPriorityCommand) parser.parseCommand(
+                SetSellerPriorityCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_PERSON.getOneBased() + " "
+                        + HIGH_PRIORITY);
+        assertEquals(new SetSellerPriorityCommand(INDEX_FIRST_PERSON, HIGH_PRIORITY), command);
     }
 
     @Test
