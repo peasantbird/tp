@@ -9,10 +9,11 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteBuyerCommand;
 import seedu.address.logic.commands.DeleteSellerCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -28,9 +29,6 @@ import seedu.address.testutil.BuyerBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.SellerBuilder;
 
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.logging.Filter;
 
 public class AddressBookParserTest {
 
