@@ -49,7 +49,7 @@ public class SetSellerPriorityCommand extends Command {
         List<Seller> lastShownList = model.getFilteredSellerList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_SELLER_DISPLAYED_INDEX);
         }
 
         Seller targetSeller = lastShownList.get(targetIndex.getZeroBased());
