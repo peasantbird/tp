@@ -262,7 +262,6 @@ Given below is an example usage scenario and how the edit mechanism behaves at e
 
 Step 1. The user types in the `edit-b` or `edit-s` keyword, followed by the index of the buyer or seller that they want
 to edit. Following that, they type `/field`, where `field` is a name of the field that they want to edit.
-<box type="info" seamless>
 
 The edit command will call the `find` command to find the corresponding buyer or seller, then it will copy that person,
 edit the field that the user wants to edit, delete that buyer or seller, then add the edited buyer or seller back
@@ -300,6 +299,68 @@ buyers and sellers.
 
 _{more aspects and alternatives to be added}_
 
+
+### \[In progress\] Priority feature
+
+#### Implementation
+
+The priority feature is associated with the `edit` and `sort` commands, allowing the user to assign and sort clients by 
+their priority levels in the address book. The priority field is optional when instantiating buyers and sellers, and is
+initially unassigned.
+
+To implement this feature, the `Priority` field is firstly added to `Person`, and its corresponding UI Label is
+rendered by modifying the `PersonCard.java` controller and the respective BuyerCard and SellerCard FXML files. 
+* Since the priority field is 
+optional, the `Buyer`/`Seller` constructor is overloaded, such that the one which does not take in priority as an 
+argument will initialise priority to the default `nil` level. 
+* The priority FXML Label is conditionally rendered 
+in `PersonCard.java` based on the buyer/seller's priority field. For instance, its color is red for `high` priority,
+orange for `medium`, green for `low`, and not rendered for `nil`.
+
+To accommodate saving of buyers and sellers with the new priority fields in storage, `JsonAdaptedBuyer` and other
+relevant files are modified to include these fields in JSON format, and to be readable and loaded back into `Model` in
+subsequent RTPM initialisations.
+
+To make it more convenient for the user to directly assign priorities to clients without having to use the `edit` 
+command, the `SetBuyerPriority` and `SetSellerPriority` commands are implemented as part of this feature.
+
+Given below is an example usage scenario for setting priorities for buyers in the address book's buyer list.
+
+Step 1. The user launches the application and executes the `priority-b 2 high` command, which sets the priority level of the
+2nd person in the buyer list to `high`. The `priority-b` command calls `LogicManager`, which gets `AddressBookParser`
+to parse and obtain a `SetBuyerPriorityCommand`, before executing it. The command execution calls `ModelManager` to
+update the address book's buyer list with the newly assigned buyer priority, which is reflected on the UI too. 
+Finally, `LogicManager` calls `StorageManager` to update the JSON file.
+
+The following sequence diagram shows how the undo operation works:
+<puml src="diagrams/SetBuyerPrioritySequenceDiagram.puml" alt="SetBuyerPrioritySequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `SetBuyerPriorityCommand` should end at the destroy marker (X), but due to a 
+limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+Step 2. To unassign the priority level of the 2nd person, the user can execute the `priority-b 2 nil` command, which 
+runs a similar flow as illustrated in the sequence diagram above.
+
+The same logic can be used for assigning priorities to sellers instead of buyers, by using `priority-s` instead 
+of `priority-b`.
+
+#### Design considerations:
+
+**Aspect: How the optional priority field is implemented**
+
+* **Alternative 1 (current choice):** Overload the `Buyer`/`Seller` constructors.
+    * Pros: Relatively simple to implement and refactor.
+    * Cons: Not feasible for implementing various optional fields.
+
+* **Alternative 2 (proposed):** Assign a default value for all non-compulsory fields in `AddBuyer` and `AddSeller`, 
+only assigning them for arguments available from the parsed user input (in `ArgumentMultimap`).
+    * Pros: Only a single constructor for `Buyer`/`Seller` is needed for multiple optional fields.
+    * Cons: Address book only adds correctly formatted fields and may discard the rest without the user knowing, so
+more robust exception handling is required in parsing the user input which may be tedious to implement.
 
 --------------------------------------------------------------------------------------------------------------------
 
