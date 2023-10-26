@@ -19,7 +19,7 @@ public class Messages {
             + "the last number in the list!";
     public static final String MESSAGE_INVALID_SELLER_DISPLAYED_INDEX = "The seller index provided is higher than "
             + "the last number in the list!";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%d buyer(s) and %d seller(s) listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 

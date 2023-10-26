@@ -182,6 +182,20 @@ Here are all your sellers:
 2. Bob 91234567 bob[@gmail.com](mailto:iantsai@gmail.com) Secret Home 2 1 College Ave East Central Area 5 Room Condominium
 ```
 
+### Filter buyers and sellers: `filter`
+
+Lists only all sellers that the user has added.
+
+Format: `filter KEYWORD [MORE_KEYWORDS]`
+
+- `KEYWORD`: String
+
+Precise outputs when the command succeeds:
+
+```
+1 buyer(s) and 0 seller(s) listed!
+```
+
 ### Deleting a buyer: `delete-b`
 
 Deletes a buyer based on their index number in the buyers’ list.
@@ -294,7 +308,7 @@ Action     | Format, Examples
 **Clear**  | `clear`
 **Delete Buyer** | `delete-b INDEX`<br> e.g., `delete-b 3`
 **Delete Seller** | `delete-s INDEX`<br> e.g., `delete-s 3`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Filter**   | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List Sellers**   | `list-s`
 **List Buyers**   | `list-b`
 **Exit**   | `exit`
