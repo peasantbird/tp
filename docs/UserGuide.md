@@ -27,7 +27,7 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `buyer n/John Doe p/91234567 e/johndoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium` : Adds a buyer named John Doe to the RTPM. 
+    * `buyer n/John Doe p/91234567 e/johndoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium` : Adds a buyer named John Doe to the RTPM.
 
     * `list-b` : Lists all buyers.
 
@@ -68,11 +68,11 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 Adds a seller with their info to the list.
 
 Format: `seller n/NAME p/PHONE_NUMBER e/EMAIL ah/HOME_ADDRESS as/SELLING_ADDRESS i/SELLING_HOUSE_INFO [t/TAG]`
-- `n/NAME`: String 
-- `p/PHONE_NUMBER`: int 
-- `e/EMAIL`: String contains ‘@’ 
-- `ah/HOME_ADDRESS`: String 
-- `as/SELLING_ADDRESS`: String 
+- `n/NAME`: String
+- `p/PHONE_NUMBER`: int
+- `e/EMAIL`: String contains ‘@’
+- `ah/HOME_ADDRESS`: String
+- `as/SELLING_ADDRESS`: String
 - `i/SELLING_HOUSE_INFO`: String
 - `[t/TAG]`: Alphanumeric String
 
@@ -81,12 +81,12 @@ Example: `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor
 Precise outputs when the command succeeds:
 ```
 Got it. I've added a seller contact:
-Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; Sell House Info: 4 Room Flat in Sarhad Ville; Tags: 
+Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; Sell House Info: 4 Room Flat in Sarhad Ville; Tags:
 ```
 
 Precise outputs when the command fails due to missing parameters:
 ```
-Invalid command format! 
+Invalid command format!
 seller: Adds a seller to the address book. Parameters: n/NAME p/PHONE e/EMAIL ah/ADDRESS as/SELLING_ADDRESS i/HOUSE_INFO [t/TAG]...
 Example: seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville t/friends t/owesMoney
 ```
@@ -129,12 +129,12 @@ Precise outputs when the command succeeds:
 
 ```
 Got it. I've added a buyer contact:
-Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; Buying Info: Central Area 5 Room Condominium; Tags: 
+Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; Buying Info: Central Area 5 Room Condominium; Tags:
 ```
 
 Precise outputs when the command fails due to missing parameters:
 ```
-Invalid command format! 
+Invalid command format!
 buyer: Adds a buyer to the address book. Parameters: n/NAME p/PHONE e/EMAIL ah/ADDRESS i/INFO [t/TAG]...
 Example: buyer n/John Doe p/98765432 e/johnd@example.com ah/311, Clementi Ave 2, #02-25 i/Central Area 5 Room Condominium t/friends t/owesMoney
 ```
@@ -208,12 +208,12 @@ Example: `delete-b 3`
 Precise outputs when the command succeeds:
 ```
 Got it. I’ve deleted a buyer contact:
-Ian Tsai; Phone: 91234567; Email: iantsai@gmail.com; Address: 1 College Ave East Central Area; Buying Info: 5 Room Condominium; Tags: 
+Ian Tsai; Phone: 91234567; Email: iantsai@gmail.com; Address: 1 College Ave East Central Area; Buying Info: 5 Room Condominium; Tags:
 ```
 
 Precise outputs when the command fails:
 ```
-Invalid command format! 
+Invalid command format!
 delete-b: Deletes the buyer identified by the index number used in the displayed buyer list.
 Parameters: INDEX (must be a positive integer)
 Example: delete-b 1
@@ -235,11 +235,11 @@ Example: `delete-s 3`
 Precise outputs when the command succeeds:
 ```
 Got it. I’ve deleted a seller contact:
-Ian Tsai; Phone: 91234567; Email: iantsai@gmail.com; Address: 1 College Ave East Central Area; Selling Address: 311, Clementi Ave 2, #02-25; Selling Info: 5 Room Condominium; Tags: 
+Ian Tsai; Phone: 91234567; Email: iantsai@gmail.com; Address: 1 College Ave East Central Area; Selling Address: 311, Clementi Ave 2, #02-25; Selling Info: 5 Room Condominium; Tags:
 ```
 Precise outputs when the command fails:
 ```
-Invalid command format! 
+Invalid command format!
 delete-b: Deletes the buyer identified by the index number used in the displayed buyer list.
 Parameters: INDEX (must be a positive integer)
 Example: delete-b 1

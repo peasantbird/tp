@@ -292,7 +292,7 @@ Priority level is based on current iteration
 | `* * *`  | realtor                                            | view my contacts                                                            | easily find contacts I want to talk to                                                 |
 | `* * *`  | user who has been using the app for a long time    | delete/archive old contacts                                                 | declutter my list from outdated information                                            |
 | `* * *`  | realtor                                            | save contact data to my computer                                            | refer to it when I reopen my app                                                       |
-| `* * *`  | realtor                                            | add houses into the app together with their price, furnishings, etc.        | quickly list the features to my clients                                                | 
+| `* * *`  | realtor                                            | add houses into the app together with their price, furnishings, etc.        | quickly list the features to my clients                                                |
 | `* * *`  | realtor who wants to pack light on the move        | solely use the keyboard and not need to carry a mouse around to use the app | quickly access and update information without the fuss of using a mouse                |
 | `* *`    | realtor with many contacts                         | view personal contacts separately from work contacts                        | I can focus on work when I need to                                                     |
 | `* *`    | realtor with many client contacts                  | sort my client contacts based on priority (time, importance, etc.)          | I can focus on the most important clients first                                        |
@@ -309,18 +309,18 @@ Priority level is based on current iteration
 
 ### Use cases
 
-(For all use cases below, the **System** is the `RTPM (RealtorTrackerPlusMax)` and the **Actor** is the `user`, 
+(For all use cases below, the **System** is the `RTPM (RealtorTrackerPlusMax)` and the **Actor** is the `user`,
 unless specified otherwise)
-  
-**Use case: UC1 - Add homeowner and house**  
-System: RTPM  
-Actor: User  
-  
+
+**Use case: UC1 - Add homeowner and house**
+System: RTPM
+Actor: User
+
 **MSS**
 
 1. User enters command to add homeowner and house details.
 2. System adds the entry to the list.
-3. System saves file. 
+3. System saves file.
 
    Use case ends.
 
@@ -331,16 +331,16 @@ Extensions:
 
 * 3a. Failure to update savefile.
   * 3a1. System indicates failure to update.
-    Use case restarts from step 1.  
+    Use case restarts from step 1.
 
- 
-**Use case: UC2 - Add homebuyer and preferences**  
-System: RTPM   
-Actor: User  
+
+**Use case: UC2 - Add homebuyer and preferences**
+System: RTPM
+Actor: User
 **MSS**
 1. User enters command to add homebuyer and preferences.
 2. System adds the entry to the list.
-3. System saves file. 
+3. System saves file.
    Use case ends.
 
 Extensions:
@@ -352,9 +352,9 @@ Extensions:
   * 3a1. System indicates failure to update.
   Use case restarts from step 1.
 
-**Use case: UC3 - View buyers**  
-System: RTPM   
-Actor: User  
+**Use case: UC3 - View buyers**
+System: RTPM
+Actor: User
 **MSS**
 1. User enters the list-b command.
 2. System displays list of buyers.
@@ -371,7 +371,7 @@ Extensions:
 **MSS**
 
 1. User enters the list-s command.
-2. System displays list of sellers. 
+2. System displays list of sellers.
 
     Use case ends.
 
@@ -389,14 +389,14 @@ Extensions:
 1. User enters command to delete a buyer or a seller.
 2. System deletes item.
 3. System updates savefile.
-4. System returns an indicator of execution success. 
+4. System returns an indicator of execution success.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. Failure to update savefile. 
-  * 3a1. System indicates failure to update. 
+* 3a. Failure to update savefile.
+  * 3a1. System indicates failure to update.
   * 3a2. System undoes deletion (to prevent desync of storage and application).<br>
     Use case restarts from step 1.
 
@@ -423,12 +423,12 @@ Extensions:
 5. The software should work on a computer that has version 11 of Java i.e., no other Java version installed.
 6. The software should work without requiring an installer.
 7. The use of third-party frameworks/libraries/services is allowed but only if they are free, open-source (this doesn't apply to services), and have permissive license terms.
-8. The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for 
-* standard screen resolutions 1920x1080 and higher, and 
+8. The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for
+* standard screen resolutions 1920x1080 and higher, and
 * for screen scales 100% and 125%.
 
-In addition, the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for 
-* resolutions 1280x720 and higher, and 
+In addition, the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for
+* resolutions 1280x720 and higher, and
 * for screen scales 150%.
 9. The software should be able to be packaged into a single JAR file.
 10. The DG and UG should be PDF-friendly (Don't use expandable panels, embedded videos, animated GIFs etc.).
