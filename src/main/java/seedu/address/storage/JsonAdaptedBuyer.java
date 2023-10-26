@@ -21,10 +21,12 @@ public class JsonAdaptedBuyer extends JsonAdaptedPerson {
     public JsonAdaptedBuyer(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("buyerInfo") String buyerInfo,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
-        super(name, phone, email, address, tags);
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("priority") String priority) {
+        super(name, phone, email, address, tags, priority);
         this.buyerInfo = buyerInfo;
     }
+
     /**
      * Converts a given {@code Buyer} into this class for Jackson use.
      */
@@ -47,6 +49,6 @@ public class JsonAdaptedBuyer extends JsonAdaptedPerson {
             throw new IllegalValueException(BuyHouseInfo.MESSAGE_CONSTRAINTS);
         }
         BuyHouseInfo buyerInfoModel = new BuyHouseInfo(buyerInfo);
-        return new Buyer(getName(), getPhone(), getEmail(), getAddress(), buyerInfoModel, getTags());
+        return new Buyer(getName(), getPhone(), getEmail(), getAddress(), buyerInfoModel, getTags(), getPriority());
     }
 }
