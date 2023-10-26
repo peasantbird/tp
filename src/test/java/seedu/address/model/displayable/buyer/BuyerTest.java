@@ -1,4 +1,4 @@
-package seedu.address.model.displayable;
+package seedu.address.model.displayable.buyer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -14,7 +14,6 @@ import static seedu.address.testutil.TypicalBuyers.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.displayable.buyer.Buyer;
 import seedu.address.testutil.BuyerBuilder;
 
 public class BuyerTest {

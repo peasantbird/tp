@@ -1,4 +1,4 @@
-package seedu.address.model.displayable;
+package seedu.address.model.displayable.seller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,7 +15,6 @@ import static seedu.address.testutil.TypicalSellers.SBOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.displayable.seller.Seller;
 import seedu.address.testutil.SellerBuilder;
 
 public class SellerTest {
