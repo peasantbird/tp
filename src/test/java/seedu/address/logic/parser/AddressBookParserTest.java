@@ -7,6 +7,8 @@ import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddBuyerCommand;
@@ -15,10 +17,12 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteBuyerCommand;
 import seedu.address.logic.commands.DeleteSellerCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListBuyersCommand;
 import seedu.address.logic.commands.ListSellersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.displayable.NameContainsKeywordsPredicate;
 import seedu.address.model.displayable.buyer.Buyer;
 import seedu.address.model.displayable.seller.Seller;
 import seedu.address.testutil.BuyerBuilder;
@@ -67,6 +71,15 @@ public class AddressBookParserTest {
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+    }
+
+    @Test
+    public void parseCommand_filter() throws Exception {
+        assertTrue(parser.parseCommand(FilterCommand.COMMAND_WORD + " ABCD") instanceof FilterCommand);
+        FilterCommand command = (FilterCommand) parser.parseCommand(FilterCommand.COMMAND_WORD + " ABCD");
+        ArrayList<String> arguments = new ArrayList<>();
+        arguments.add("ABCD");
+        assertEquals(new FilterCommand(new NameContainsKeywordsPredicate(arguments)), command);
     }
 
     @Test
