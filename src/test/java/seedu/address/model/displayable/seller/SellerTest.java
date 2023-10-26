@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalBuyers.ALICE;
 import static seedu.address.testutil.TypicalSellers.SALICE;
 import static seedu.address.testutil.TypicalSellers.SBOB;
 
@@ -94,7 +95,9 @@ public class SellerTest {
     public void toStringMethod() {
         String expected = Seller.class.getCanonicalName() + "{name=" + SALICE.getName() + ", phone=" + SALICE.getPhone()
                 + ", email=" + SALICE.getEmail() + ", address=" + SALICE.getAddress() + ", tags=" + SALICE.getTags()
-                + ", selling address=" + SALICE.getSellingAddress() + ", house info=" + SALICE.getSellHouseInfo() + "}";
+                + ", priority=" + ALICE.getPriority()
+                + ", selling address=" + SALICE.getSellingAddress()
+                + ", house info=" + SALICE.getSellHouseInfo() + "}";
         assertEquals(expected, SALICE.toString());
     }
 }

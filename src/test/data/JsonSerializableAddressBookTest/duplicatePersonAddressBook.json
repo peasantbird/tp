@@ -5,14 +5,16 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "buyerInfo" : "Loves views",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "priority": "nil"
   }, {
     "name" : "Duplicate Buyer",
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "buyerInfo" : "Loves views",
-    "tags" : [ "friends" ]
+    "tags" : [ "friends" ],
+    "priority": "nil"
   } ],
   "sellers" : [ ]
 }

@@ -13,7 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.displayable.buyer.Buyer;
 
 /**
- * Deletes a buyer identified using it's displayed index from the address book.
+ * Deletes a buyer identified using its displayed index from the address book.
  */
 public class DeleteBuyerCommand extends Command {
 

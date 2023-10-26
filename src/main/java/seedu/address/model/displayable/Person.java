@@ -23,6 +23,7 @@ public abstract class Person implements Displayable {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Priority priority;
 
     /**
      * Every field must be present and not null.
@@ -34,6 +35,28 @@ public abstract class Person implements Displayable {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.priority = new Priority("nil");
+    }
+
+    /**
+     * Overloaded constructor for Person with an optional field for priority.
+     * NOTE: This method is meant for temporal usage; Person is to be refactored to have only 1 constructor
+     * which includes priority as an argument, with all test cases being refactored to match this change, qfter
+     * the SetPriorityCommand has been implemented.
+     * TODO: To implement a Person constructor with optional fields,
+     * we can instead modify the AddBuyerCommandParser / AddSellerCommandParser to check if argMultimap contains
+     * the respective prefixes or not, with only PrefixName being compulsory. Else, if argMultimap does not
+     * contain the prefix for non-compulsory fields (ie phone, email etc.), simply construct Person with the
+     * default null values for these non-compulsory fields.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Priority priority) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.priority = priority;
     }
 
     @Override
@@ -59,6 +82,10 @@ public abstract class Person implements Displayable {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public Priority getPriority() {
+        return priority;
     }
 
     /**
@@ -88,7 +115,8 @@ public abstract class Person implements Displayable {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && priority.equals(otherPerson.priority);
     }
 
     /**
@@ -101,6 +129,7 @@ public abstract class Person implements Displayable {
                 .add("phone", phone)
                 .add("email", email)
                 .add("address", address)
-                .add("tags", tags);
+                .add("tags", tags)
+                .add("priority", priority);
     }
 }

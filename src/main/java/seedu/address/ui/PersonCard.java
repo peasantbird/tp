@@ -33,6 +33,8 @@ abstract class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label priority;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
@@ -55,6 +57,12 @@ abstract class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        priority.setText(person.getPriority().toString());
+        priority.setStyle(String.format(
+                "-fx-background-color: %s;" + priority.getStyle(),
+                person.getPriority().getBackgroundColor())
+        );
+        priority.setVisible(!person.getPriority().isPriorityNil());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

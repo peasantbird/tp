@@ -10,6 +10,7 @@ import seedu.address.model.displayable.Email;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Person;
 import seedu.address.model.displayable.Phone;
+import seedu.address.model.displayable.Priority;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.BuyerCard;
 import seedu.address.ui.UiPart;
@@ -33,6 +34,26 @@ public class Buyer extends Person {
     public Buyer(Name name, Phone phone, Email email, Address address,
                  BuyHouseInfo buyHouseInfo, Set<Tag> tags) {
         super(name, phone, email, address, tags);
+        requireAllNonNull(buyHouseInfo);
+        this.buyHouseInfo = buyHouseInfo;
+    }
+
+    /**
+     * Constructs a Buyer instance with Priority.
+     * NOTE: This is a temporal method, to be refactored soon. Refer to explanation in
+     * Person.java.
+     *
+     * @param name Name of the buyer.
+     * @param phone Phone number of the buyer.
+     * @param email Email of the buyer.
+     * @param address Home address of the buyer.
+     * @param buyHouseInfo Information on the house that the buyer is interested in.
+     * @param tags Optional tags.
+     * @param priority Priority level of the buyer.
+     */
+    public Buyer(Name name, Phone phone, Email email, Address address,
+                 BuyHouseInfo buyHouseInfo, Set<Tag> tags, Priority priority) {
+        super(name, phone, email, address, tags, priority);
         requireAllNonNull(buyHouseInfo);
         this.buyHouseInfo = buyHouseInfo;
     }

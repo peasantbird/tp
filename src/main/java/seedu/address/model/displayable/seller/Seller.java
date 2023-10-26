@@ -10,6 +10,7 @@ import seedu.address.model.displayable.Email;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Person;
 import seedu.address.model.displayable.Phone;
+import seedu.address.model.displayable.Priority;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.SellerCard;
 import seedu.address.ui.UiPart;
@@ -37,6 +38,29 @@ public class Seller extends Person {
     public Seller(Name name, Phone phone, Email email, Address address, Address sellingAddress,
                   SellHouseInfo sellHouseInfo, Set<Tag> tags) {
         super(name, phone, email, address, tags);
+        requireAllNonNull(sellingAddress, sellHouseInfo);
+        this.sellingAddress = sellingAddress;
+        this.sellHouseInfo = sellHouseInfo;
+    }
+
+    /**
+     * Constructs a seller instance.
+     * NOTE: This overloaded constructor is temporal, to be refactored soon. Refer to Person.java
+     * for full explanation.
+     * Every field must be present and not null (super class does these checks too)
+     *
+     * @param name           name of the seller.
+     * @param phone          phone number of the seller.
+     * @param email          email of the seller.
+     * @param address        the home address of the seller.
+     * @param sellingAddress the address that the seller is listing.
+     * @param sellHouseInfo  info about the listing.
+     * @param tags           tags of the seller.
+     * @param priority       priority level of the seller.
+     */
+    public Seller(Name name, Phone phone, Email email, Address address, Address sellingAddress,
+                  SellHouseInfo sellHouseInfo, Set<Tag> tags, Priority priority) {
+        super(name, phone, email, address, tags, priority);
         requireAllNonNull(sellingAddress, sellHouseInfo);
         this.sellingAddress = sellingAddress;
         this.sellHouseInfo = sellHouseInfo;
