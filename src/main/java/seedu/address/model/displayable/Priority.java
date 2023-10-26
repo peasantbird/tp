@@ -12,7 +12,8 @@ public class Priority {
     public static final String MESSAGE_CONSTRAINTS =
             "Priority inputs are either 'high', 'medium', or 'low', and shouldn't be empty.";
     // Inputs are either 'high', 'medium', or 'low', with allowance for typos after the first letter
-    public static final String VALIDATION_REGEX = "^(h[igh]{3}|m[edium]{2,5}?|l[ow]{2})$";
+    public static final String VALIDATION_REGEX = "^(h[igh]{3}|m[edium]{2,5}|l[ow]{2}|nil)$";
+
 
     public final PrioLvl value;
 
@@ -22,7 +23,8 @@ public class Priority {
     public enum PrioLvl {
         HIGH,
         MEDIUM,
-        LOW
+        LOW,
+        NIL
     }
 
     /**
@@ -57,9 +59,10 @@ public class Priority {
             return PrioLvl.MEDIUM;
         } else if (firstLetter == 'l') {
             return PrioLvl.LOW;
-        } else {
-            return null;
+        } else if (priority.equals("nil")){
+            return PrioLvl.NIL;
         }
+        return null;
     }
 
     @Override
@@ -70,9 +73,10 @@ public class Priority {
             return "med";
         } else if (value == PrioLvl.LOW) {
             return "low";
-        } else {
-            return null;
+        } else if (value == PrioLvl.NIL){
+            return "nil";
         }
+        return null;
     }
 
     public String getBackgroundColor() {
@@ -85,6 +89,10 @@ public class Priority {
         } else {
             return "purple";
         }
+    }
+
+    public boolean isPriorityNil() {
+        return value == PrioLvl.NIL;
     }
 
     @Override

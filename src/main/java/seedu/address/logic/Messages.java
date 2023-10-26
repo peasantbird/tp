@@ -49,6 +49,8 @@ public class Messages {
                 .append(buyer.getAddress())
                 .append("; Buying Info: ")
                 .append(buyer.getBuyHouseInfo())
+                .append("; Priority: ")
+                .append(buyer.getPriority())
                 .append("; Tags: ");
         buyer.getTags().forEach(builder::append);
         return builder.toString();
@@ -70,6 +72,8 @@ public class Messages {
                 .append(seller.getSellingAddress())
                 .append("; Selling Info: ")
                 .append(seller.getSellHouseInfo())
+                .append("; Priority: ")
+                .append(seller.getPriority())
                 .append("; Tags: ");
         seller.getTags().forEach(builder::append);
         return builder.toString();

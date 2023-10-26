@@ -62,6 +62,7 @@ abstract class PersonCard extends UiPart<Region> {
                 "-fx-background-color: %s;" + priority.getStyle(),
                 person.getPriority().getBackgroundColor())
         );
+        priority.setVisible(!person.getPriority().isPriorityNil());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

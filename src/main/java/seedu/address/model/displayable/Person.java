@@ -35,7 +35,7 @@ public abstract class Person implements Displayable {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.priority = new Priority("medium");
+        this.priority = new Priority("nil");
     }
 
     /**
