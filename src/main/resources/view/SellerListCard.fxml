@@ -26,6 +26,9 @@
           </minWidth>
         </Label>
         <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Region HBox.hgrow="ALWAYS" /> <!-- Pushes the priority label to the right -->
+        <Label fx:id="priority"
+               style="-fx-border-width: 1; -fx-padding: 3; -fx-background-radius: 5; -fx-font-size: 10"/>
       </HBox>
       <FlowPane fx:id="tags" />
       <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />

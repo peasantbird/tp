@@ -23,6 +23,7 @@ public abstract class Person implements Displayable {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Priority priority;
 
     /**
      * Every field must be present and not null.
@@ -34,6 +35,7 @@ public abstract class Person implements Displayable {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.priority = new Priority("medium");
     }
 
     @Override
@@ -59,6 +61,14 @@ public abstract class Person implements Displayable {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Priority getPriority() {
+        return priority;
     }
 
     /**

@@ -11,6 +11,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.displayable.Person;
+import seedu.address.model.displayable.Priority;
 
 /**
  * An abstract UI component that when implemented, displays information of a {@code Person} according to a provided
@@ -32,6 +33,8 @@ abstract class PersonCard extends UiPart<Region> {
     private HBox cardPane;
     @FXML
     private Label name;
+    @FXML
+    private Label priority;
     @FXML
     private Label id;
     @FXML
@@ -55,6 +58,11 @@ abstract class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        priority.setText(person.getPriority().toString());
+        priority.setStyle(String.format(
+                "-fx-background-color: %s;" + priority.getStyle(),
+                person.getPriority().getBackgroundColor())
+        );
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
