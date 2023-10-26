@@ -11,7 +11,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.displayable.Person;
-import seedu.address.model.displayable.Priority;
 
 /**
  * An abstract UI component that when implemented, displays information of a {@code Person} according to a provided

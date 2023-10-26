@@ -14,7 +14,7 @@ import seedu.address.model.displayable.seller.Seller;
 
 
 /**
- * Deletes a seller identified using it's displayed index from the address book.
+ * Deletes a seller identified using its displayed index from the address book.
  */
 public class DeleteSellerCommand extends Command {
 

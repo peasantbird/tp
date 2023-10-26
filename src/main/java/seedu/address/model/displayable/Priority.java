@@ -12,10 +12,13 @@ public class Priority {
     public static final String MESSAGE_CONSTRAINTS =
             "Priority inputs are either 'high', 'medium', or 'low', and shouldn't be empty.";
     // Inputs are either 'high', 'medium', or 'low', with allowance for typos after the first letter
-    public static final String VALIDATION_REGEX = "^(h(igh)?|m(edium)?|l(ow)?)$";
+    public static final String VALIDATION_REGEX = "^(h[igh]{3}|m[edium]{2,5}?|l[ow]{2})$";
 
     public final PrioLvl value;
 
+    /**
+     * Represents the fixed priority levels tagged to clients in the address book.
+     */
     public enum PrioLvl {
         HIGH,
         MEDIUM,
@@ -30,7 +33,7 @@ public class Priority {
     public Priority(String priority) {
         requireNonNull(priority);
         checkArgument(isValidPriority(priority), MESSAGE_CONSTRAINTS);
-        value = getPrioLvl(priority);
+        this.value = getPrioLvl(priority);
     }
 
     /**
@@ -52,6 +55,8 @@ public class Priority {
             return PrioLvl.HIGH;
         } else if (firstLetter == 'm') {
             return PrioLvl.MEDIUM;
+        } else if (firstLetter == 'l') {
+            return PrioLvl.LOW;
         } else {
             return null;
         }
@@ -62,7 +67,7 @@ public class Priority {
         if (value == PrioLvl.HIGH) {
             return "high";
         } else if (value == PrioLvl.MEDIUM) {
-            return "medium";
+            return "med";
         } else if (value == PrioLvl.LOW) {
             return "low";
         } else {

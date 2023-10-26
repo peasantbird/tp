@@ -13,6 +13,7 @@ import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
+import seedu.address.model.displayable.Priority;
 import seedu.address.model.displayable.buyer.BuyHouseInfo;
 import seedu.address.model.displayable.seller.SellHouseInfo;
 import seedu.address.model.tag.Tag;
@@ -152,5 +153,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String priority} into an {@code Priority}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code priority} is invalid.
+     */
+    public static Priority parsePriority(String priority) throws ParseException {
+        requireNonNull(priority);
+        String trimmedPriority = priority.trim().toLowerCase();
+        if (!Priority.isValidPriority(trimmedPriority)) {
+            throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
+        }
+        return new Priority(trimmedPriority);
     }
 }
