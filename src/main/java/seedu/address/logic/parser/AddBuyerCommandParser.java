@@ -15,9 +15,9 @@ import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.Info;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
-import seedu.address.model.displayable.buyer.BuyHouseInfo;
 import seedu.address.model.displayable.buyer.Buyer;
 import seedu.address.model.tag.Tag;
 
@@ -45,7 +45,7 @@ public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        BuyHouseInfo buyHouseInfo = ParserUtil.parseBuyHouseInfo(argMultimap.getValue(PREFIX_INFO).get());
+        Info buyHouseInfo = ParserUtil.parseInfo(argMultimap.getValue(PREFIX_INFO).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Buyer buyer = new Buyer(name, phone, email, address, buyHouseInfo, tagList);

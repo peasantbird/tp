@@ -7,13 +7,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.displayable.Address;
-import seedu.address.model.displayable.seller.SellHouseInfo;
+import seedu.address.model.displayable.Info;
 import seedu.address.model.displayable.seller.Seller;
 /**
  * Jackson-friendly version of {@link Seller}.
  */
 public class JsonAdaptedSeller extends JsonAdaptedPerson {
-    private final String sellerInfo;
+    private final String info;
     private final String sellingAddress;
     /**
      * Constructs a {@code JsonAdaptedSeller} with the given seller details.
@@ -22,11 +22,11 @@ public class JsonAdaptedSeller extends JsonAdaptedPerson {
     public JsonAdaptedSeller(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                             @JsonProperty("email") String email, @JsonProperty("address") String address,
                             @JsonProperty("sellingAddress") String sellingAddress,
-                            @JsonProperty("sellerInfo") String sellerInfo,
+                            @JsonProperty("info") String info,
                             @JsonProperty("tags") List<JsonAdaptedTag> tags,
                              @JsonProperty("priority") String priority) {
         super(name, phone, email, address, tags, priority);
-        this.sellerInfo = sellerInfo;
+        this.info = info;
         this.sellingAddress = sellingAddress;
     }
     /**
@@ -35,7 +35,7 @@ public class JsonAdaptedSeller extends JsonAdaptedPerson {
     public JsonAdaptedSeller(Seller source) {
         super(source);
         this.sellingAddress = source.getSellingAddress().value;
-        this.sellerInfo = source.getSellHouseInfo().toString();
+        this.info = source.getInfo().toString();
     }
 
     /**
@@ -44,14 +44,14 @@ public class JsonAdaptedSeller extends JsonAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted seller.
      */
     public Seller toModelType() throws IllegalValueException {
-        if (sellerInfo == null) {
+        if (info == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    SellHouseInfo.class.getSimpleName()));
+                    Info.class.getSimpleName()));
         }
-        if (!SellHouseInfo.isValidSellHouseInfo(sellerInfo)) {
-            throw new IllegalValueException(SellHouseInfo.MESSAGE_CONSTRAINTS);
+        if (!Info.isValidInfo(info)) {
+            throw new IllegalValueException(Info.MESSAGE_CONSTRAINTS);
         }
-        SellHouseInfo sellerInfoModel = new SellHouseInfo(sellerInfo);
+        Info sellerInfoModel = new Info(info);
         if (sellingAddress == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Address.class.getSimpleName()));

@@ -11,11 +11,10 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.Info;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
 import seedu.address.model.displayable.Priority;
-import seedu.address.model.displayable.buyer.BuyHouseInfo;
-import seedu.address.model.displayable.seller.SellHouseInfo;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -84,21 +83,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String sellHouseInfo} into a {@code SellHouseInfo}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code sellHouseInfo} is invalid.
-     */
-    public static SellHouseInfo parseSellHouseInfo(String sellHouseInfo) throws ParseException {
-        requireNonNull(sellHouseInfo);
-        String trimmedInfo = sellHouseInfo.trim();
-        if (!SellHouseInfo.isValidSellHouseInfo(trimmedInfo)) {
-            throw new ParseException(SellHouseInfo.MESSAGE_CONSTRAINTS);
-        }
-        return new SellHouseInfo(trimmedInfo);
-    }
-
-    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -119,13 +103,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code buyHouseInfo} is invalid.
      */
-    public static BuyHouseInfo parseBuyHouseInfo(String buyHouseInfo) throws ParseException {
+    public static Info parseInfo(String buyHouseInfo) throws ParseException {
         requireNonNull(buyHouseInfo);
         String trimmedInfo = buyHouseInfo.trim();
-        if (!BuyHouseInfo.isValidBuyHouseInfo(trimmedInfo)) {
-            throw new ParseException(BuyHouseInfo.MESSAGE_CONSTRAINTS);
+        if (!Info.isValidInfo(trimmedInfo)) {
+            throw new ParseException(Info.MESSAGE_CONSTRAINTS);
         }
-        return new BuyHouseInfo(trimmedInfo);
+        return new Info(trimmedInfo);
     }
 
     /**

@@ -16,9 +16,9 @@ import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.Info;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
-import seedu.address.model.displayable.seller.SellHouseInfo;
 import seedu.address.model.displayable.seller.Seller;
 import seedu.address.model.tag.Tag;
 
@@ -49,7 +49,7 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Address sellingAddress = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_SELLING_ADDRESS).get());
-        SellHouseInfo sellHouseInfo = ParserUtil.parseSellHouseInfo(argMultimap.getValue(PREFIX_INFO).get());
+        Info sellHouseInfo = ParserUtil.parseInfo(argMultimap.getValue(PREFIX_INFO).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Seller seller = new Seller(name, phone, email, address, sellingAddress, sellHouseInfo, tagList);

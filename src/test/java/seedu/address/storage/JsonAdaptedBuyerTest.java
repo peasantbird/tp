@@ -14,9 +14,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.Info;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
-import seedu.address.model.displayable.buyer.BuyHouseInfo;
 
 public class JsonAdaptedBuyerTest {
     private static final String INVALID_NAME = "R@chel";
@@ -30,7 +30,7 @@ public class JsonAdaptedBuyerTest {
     private static final String VALID_PHONE = ALICE.getPhone().toString();
     private static final String VALID_EMAIL = ALICE.getEmail().toString();
     private static final String VALID_ADDRESS = ALICE.getAddress().toString();
-    private static final String VALID_INFO = ALICE.getBuyHouseInfo().toString();
+    private static final String VALID_INFO = ALICE.getInfo().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = ALICE.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -110,7 +110,7 @@ public class JsonAdaptedBuyerTest {
     public void toModelType_invalidInfo_throwsIllegalValueException() {
         JsonAdaptedBuyer buyer = new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 INVALID_INFO, VALID_TAGS, VALID_PRIORITY);
-        String expectedMessage = String.format(BuyHouseInfo.MESSAGE_CONSTRAINTS);
+        String expectedMessage = String.format(Info.MESSAGE_CONSTRAINTS);
         assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
     }
 
@@ -118,7 +118,7 @@ public class JsonAdaptedBuyerTest {
     public void toModelType_nullInfo_throwsIllegalValueException() {
         JsonAdaptedBuyer buyer = new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 null, VALID_TAGS, VALID_PRIORITY);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, BuyHouseInfo.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Info.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
     }
 

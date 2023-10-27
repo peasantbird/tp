@@ -2,9 +2,9 @@ package seedu.address.testutil;
 
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.Info;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
-import seedu.address.model.displayable.buyer.BuyHouseInfo;
 import seedu.address.model.displayable.buyer.Buyer;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -12,16 +12,16 @@ import seedu.address.model.util.SampleDataUtil;
  * Builds a buyer.
  */
 public class BuyerBuilder extends PersonBuilder {
-    public static final String DEFAULT_BUY_HOUSE_INFO = "Central Area 5 Room Condominium";
+    public static final String DEFAULT_INFO = "Central Area 5 Room Condominium";
 
-    private BuyHouseInfo buyHouseInfo;
+    private Info info;
 
     /**
      * Creates a {@code BuyerBuilder} with the default details.
      */
     public BuyerBuilder() {
         super();
-        buyHouseInfo = new BuyHouseInfo(DEFAULT_BUY_HOUSE_INFO);
+        info = new Info(DEFAULT_INFO);
     }
 
     /**
@@ -29,7 +29,7 @@ public class BuyerBuilder extends PersonBuilder {
      */
     public BuyerBuilder(Buyer buyerToCopy) {
         super(buyerToCopy);
-        buyHouseInfo = buyerToCopy.getBuyHouseInfo();
+        info = buyerToCopy.getInfo();
     }
 
 
@@ -76,15 +76,15 @@ public class BuyerBuilder extends PersonBuilder {
     }
 
     /**
-     * Sets the {@code BuyHouseInfo} of the {@code Buyer} that we are building.
+     * Sets the {@code Info} of the {@code Buyer} that we are building.
      */
-    public BuyerBuilder withBuyHouseInfo(String buyHouseInfo) {
-        this.buyHouseInfo = new BuyHouseInfo(buyHouseInfo);
+    public BuyerBuilder withInfo(String info) {
+        this.info = new Info(info);
         return this;
     }
 
     @Override
     public Buyer build() {
-        return new Buyer(super.name, super.phone, super.email, super.address, buyHouseInfo, super.tags);
+        return new Buyer(super.name, super.phone, super.email, super.address, info, super.tags);
     }
 }

@@ -22,7 +22,7 @@ public class SellerCard extends PersonCard {
      */
     public SellerCard(Seller seller, int displayedIndex) {
         super(seller, displayedIndex, FXML);
-        houseInfo.setText(seller.getSellHouseInfo().toString());
+        houseInfo.setText(seller.getInfo().toString());
         sellingAddress.setText(seller.getSellingAddress().value);
     }
 }
