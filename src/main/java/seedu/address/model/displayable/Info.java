@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Info about a certain displayable.
+ * Guarantees: immutable; is valid as declared in {@link #isValidInfo(String)}
  */
 public class Info {
     public static final String MESSAGE_CONSTRAINTS =
@@ -15,6 +16,11 @@ public class Info {
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
     private final String info;
+
+    /**
+     * Creates a valid {@code Info}.
+     * @param info a valid info text.
+     */
     public Info(String info) {
         requireNonNull(info);
         checkArgument(isValidInfo(info), MESSAGE_CONSTRAINTS);
