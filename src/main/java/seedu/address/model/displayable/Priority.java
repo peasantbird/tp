@@ -12,11 +12,16 @@ import static seedu.address.commons.util.AppUtil.validateArgument;
  */
 public class Priority {
 
+    public static final String MESSAGE_RECOMMENDATIONS = "Inputs should be 'high', 'medium', 'low' or 'nil'. However,"
+            + "if at least the first letter is valid, we will read correctly. A blank input also means nil";
+    //todo this message is a bit clunky
     public static final String MESSAGE_CONSTRAINTS =
-            "Priority inputs are either 'high', 'medium', or 'low', and shouldn't be empty.";
+            "Priority inputs must start with, at the minimum, h for high, m for medium, l for low, or n for nil. "
+                   + "This is not case sensitive. A blank input also means nil.";
     // Inputs are either 'high', 'medium', or 'low', with some allowance for typos after the first letter, and
     // are case-insensitive
-    public static final String VALIDATION_REGEX = "(?i)^(h[igh]{3}|m[edium]{2,5}|l[ow]{2}|nil|NIL)$";
+    public static final String VALIDATION_REGEX = "([hmln\\s])$";
+    public static final String AFFIRMATION_REGEX = "(h[igh]{0,3}|m[edium]{0,5}|l[ow]{0,2}|n[il]{0,2}|[\\s]*)$";
 
 
     public final PrioLvl value;
@@ -47,6 +52,10 @@ public class Priority {
      */
     public static boolean isValidPriority(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public static boolean isAppropriatePriority(String test) {
+        return test.matches(AFFIRMATION_REGEX);
     }
 
     /**

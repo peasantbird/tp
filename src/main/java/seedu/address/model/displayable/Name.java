@@ -13,13 +13,16 @@ import static seedu.address.commons.util.AppUtil.validateArgument;
 public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
-
+            "Names cannot be blank";
+    public static final String MESSAGE_RECOMMENDATIONS =
+            "Names should contain only alphanumeric characters and spaces";
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "\\S [\\s\\S]*";
+
+    public static final String AFFIRMATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String fullName;
 

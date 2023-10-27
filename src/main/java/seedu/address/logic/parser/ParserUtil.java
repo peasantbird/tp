@@ -12,6 +12,7 @@ import seedu.address.logic.Warning;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.Info;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
 import seedu.address.model.displayable.Priority;
@@ -94,21 +95,21 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String sellHouseInfo} into a {@code SellHouseInfo}.
+     * Parses a {@code String Info} into a {@code Info}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code sellHouseInfo} is invalid.
      */
-    public static SellHouseInfo parseSellHouseInfo(Warning warn, String sellHouseInfo) throws ParseException {
-        requireNonNull(sellHouseInfo);
-        String trimmedInfo = sellHouseInfo.trim();
-        if (!SellHouseInfo.isValidSellHouseInfo(trimmedInfo)) {
+    public static Info parseInfo(Warning warn, String info) throws ParseException {
+        requireNonNull(info);
+        String trimmedInfo = info.trim();
+        if (!Info.isValidInfo(trimmedInfo)) {
             throw new ParseException(SellHouseInfo.MESSAGE_CONSTRAINTS);
         }
-        if (!SellHouseInfo.isAppropriateSellHouseInfo(info)) {
-            warn.addWarning("Inadvisable . " + .MESSAGE_RECOMMENDATIONS);
+        if (!Info.isAppropriateInfo(info)) {
+            warn.addWarning("Inadvisable Info. " + Info.MESSAGE_RECOMMENDATIONS);
         }
-        return new SellHouseInfo(trimmedInfo);
+        return new Info(trimmedInfo);
     }
 
     /**
@@ -123,22 +124,10 @@ public class ParserUtil {
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
-    }
-
-    /**
-     * Parses a {@code String buyHouseInfo} into an {@code BuyHouseInfo}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code buyHouseInfo} is invalid.
-     */
-    public static BuyHouseInfo parseBuyHouseInfo(Warning warn, String buyHouseInfo) throws ParseException {
-        requireNonNull(buyHouseInfo);
-        String trimmedInfo = buyHouseInfo.trim();
-        if (!BuyHouseInfo.isValidBuyHouseInfo(trimmedInfo)) {
-            throw new ParseException(BuyHouseInfo.MESSAGE_CONSTRAINTS);
+        if (!Email.isAppropriateEmail(email)) {
+            warn.addWarning("Inadvisable Email. " + Email.MESSAGE_RECOMMENDATIONS);
         }
-        return new BuyHouseInfo(trimmedInfo);
+        return new Email(trimmedEmail);
     }
 
     /**
@@ -153,6 +142,9 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
+        if (!Tag.isAppropriateTag(tag)) {
+            warn.addWarning("Inadvisable tag. " + Tag.MESSAGE_RECOMMENDATIONS);
+        }
         return new Tag(trimmedTag);
     }
 
@@ -163,7 +155,7 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            tagSet.add(parseTag(warn, tagName));
         }
         return tagSet;
     }
@@ -179,6 +171,9 @@ public class ParserUtil {
         String trimmedPriority = priority.trim().toLowerCase();
         if (!Priority.isValidPriority(trimmedPriority)) {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
+        }
+        if (!Priority.isAppropriatePriority(priority)) {
+            warn.addWarning("Inadvisable Priority. " + Priority.MESSAGE_RECOMMENDATIONS);
         }
         return new Priority(trimmedPriority);
     }

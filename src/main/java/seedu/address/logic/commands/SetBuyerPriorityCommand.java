@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.Warning;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.displayable.Priority;
@@ -31,6 +32,8 @@ public class SetBuyerPriorityCommand extends Command {
     private final Index targetIndex;
     private final Priority priority;
 
+    private final Warning warnMessage;
+
     /**
      * Constructs a SetBuyerPriorityCommand to set the priority level of a specified buyer.
      * @param targetIndex
@@ -39,6 +42,12 @@ public class SetBuyerPriorityCommand extends Command {
     public SetBuyerPriorityCommand(Index targetIndex, Priority priority) {
         this.targetIndex = targetIndex;
         this.priority = priority;
+        this.warnMessage = null;
+    }
+    public SetBuyerPriorityCommand(Warning warnMessage, Index targetIndex, Priority priority) {
+        this.targetIndex = targetIndex;
+        this.priority = priority;
+        this.warnMessage = warnMessage;
     }
 
     @Override
@@ -52,7 +61,9 @@ public class SetBuyerPriorityCommand extends Command {
 
         Buyer targetBuyer = lastShownList.get(targetIndex.getZeroBased());
         Buyer buyerWithPriority = getBuyerWithPriority(targetBuyer, this.priority);
-
+        if (warnMessage != null) {
+            return new CommandResult(String.format("Warning!; ",warnMessage, " If this is intended please ignore."));
+        }
         model.setBuyer(targetBuyer, buyerWithPriority);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(buyerWithPriority)));
     }

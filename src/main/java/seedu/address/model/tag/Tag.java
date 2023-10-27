@@ -13,7 +13,11 @@ import static seedu.address.commons.util.AppUtil.validateArgument;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String MESSAGE_RECOMMENDATIONS = "Tags cannot be blank";
+
+    public static final String VALIDATION_REGEX = "[^\\s].*";
+
+    public static final String AFFIRMATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
 
@@ -33,6 +37,10 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    public static boolean isAppropriateTag(String test) {
+        return test.matches(AFFIRMATION_REGEX);
     }
 
     @Override

@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import seedu.address.logic.Warning;
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.Address;
@@ -33,6 +34,7 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddSellerCommand parse(String args) throws ParseException {
+        Warning warn = new Warning();
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_SELLING_ADDRESS, PREFIX_INFO, PREFIX_TAG);
@@ -44,13 +46,13 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_SELLING_ADDRESS);
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Address sellingAddress = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_SELLING_ADDRESS).get());
-        SellHouseInfo sellHouseInfo = ParserUtil.parseSellHouseInfo(argMultimap.getValue(PREFIX_INFO).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Name name = ParserUtil.parseName(warn, argMultimap.getValue(PREFIX_NAME).get());
+        Phone phone = ParserUtil.parsePhone(warn, argMultimap.getValue(PREFIX_PHONE).get());
+        Email email = ParserUtil.parseEmail(warn, argMultimap.getValue(PREFIX_EMAIL).get());
+        Address address = ParserUtil.parseAddress(warn, argMultimap.getValue(PREFIX_ADDRESS).get());
+        Address sellingAddress = ParserUtil.parseAddress(warn, argMultimap.getValue(PREFIX_SELLING_ADDRESS).get());
+        SellHouseInfo sellHouseInfo = ParserUtil.parseInfo(warn, argMultimap.getValue(PREFIX_INFO).get());
+        Set<Tag> tagList = ParserUtil.parseTags(warn, argMultimap.getAllValues(PREFIX_TAG));
 
         Seller seller = new Seller(name, phone, email, address, sellingAddress, sellHouseInfo, tagList);
 

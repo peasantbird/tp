@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
+import seedu.address.logic.Warning;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.displayable.Priority;
@@ -32,6 +33,7 @@ public class SetSellerPriorityCommand extends Command {
     public static final String MESSAGE_SUCCESS = "The seller's priority level has been set:\n%1$s";
     private final Index targetIndex;
     private final Priority priority;
+    private final Warning warnMessage;
 
     /**
      * Constructs a SetSellerPriorityCommand to set the priority level of a specified seller.
@@ -41,6 +43,18 @@ public class SetSellerPriorityCommand extends Command {
     public SetSellerPriorityCommand(Index targetIndex, Priority priority) {
         this.targetIndex = targetIndex;
         this.priority = priority;
+        this.warnMessage = null;
+    }
+    /**
+     * Constructs a SetSellerPriorityCommand to set the priority level of a specified seller.
+     * @param targetIndex
+     * @param priority
+     * @param warnMessage
+     */
+    public SetSellerPriorityCommand(Warning warnMessage, Index targetIndex, Priority priority) {
+        this.targetIndex = targetIndex;
+        this.priority = priority;
+        this.warnMessage = warnMessage;
     }
 
     @Override
@@ -56,6 +70,9 @@ public class SetSellerPriorityCommand extends Command {
         Seller sellerWithPriority = getSellerWithPriority(targetSeller, this.priority);
 
         model.setSeller(targetSeller, sellerWithPriority);
+        if (warnMessage != null) {
+            return new CommandResult(String.format("Warning!; ", warnMessage, " If this is intended please ignore."));
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(sellerWithPriority)));
     }
 
