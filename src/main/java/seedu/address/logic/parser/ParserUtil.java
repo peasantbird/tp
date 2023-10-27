@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.Warning;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
@@ -44,11 +45,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parseName(String name) throws ParseException {
+    public static Name parseName(Warning warn, String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        if (!Name.isAppropriateName(trimmedName)) {
+            warn.addWarning("Inadvisable name. " + Name.MESSAGE_RECOMMENDATIONS);
         }
         return new Name(trimmedName);
     }
@@ -59,11 +63,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
+    public static Phone parsePhone(Warning warn, String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        if (!Phone.isAppropriatePhone(trimmedPhone)) {
+            warn.addWarning("Inadvisable phone number. " + Phone.MESSAGE_RECOMMENDATIONS);
         }
         return new Phone(trimmedPhone);
     }
@@ -74,11 +81,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
+    public static Address parseAddress(Warning warn, String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        }
+        if (!Address.isAppropriateAddress(trimmedAddress)) {
+            warn.addWarning("Inadvisable address. " + Address.MESSAGE_RECOMMENDATIONS);
         }
         return new Address(trimmedAddress);
     }
@@ -89,11 +99,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code sellHouseInfo} is invalid.
      */
-    public static SellHouseInfo parseSellHouseInfo(String sellHouseInfo) throws ParseException {
+    public static SellHouseInfo parseSellHouseInfo(Warning warn, String sellHouseInfo) throws ParseException {
         requireNonNull(sellHouseInfo);
         String trimmedInfo = sellHouseInfo.trim();
         if (!SellHouseInfo.isValidSellHouseInfo(trimmedInfo)) {
             throw new ParseException(SellHouseInfo.MESSAGE_CONSTRAINTS);
+        }
+        if (!SellHouseInfo.isAppropriateSellHouseInfo(info)) {
+            warn.addWarning("Inadvisable . " + .MESSAGE_RECOMMENDATIONS);
         }
         return new SellHouseInfo(trimmedInfo);
     }
@@ -104,7 +117,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
+    public static Email parseEmail(Warning warn, String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
@@ -119,7 +132,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code buyHouseInfo} is invalid.
      */
-    public static BuyHouseInfo parseBuyHouseInfo(String buyHouseInfo) throws ParseException {
+    public static BuyHouseInfo parseBuyHouseInfo(Warning warn, String buyHouseInfo) throws ParseException {
         requireNonNull(buyHouseInfo);
         String trimmedInfo = buyHouseInfo.trim();
         if (!BuyHouseInfo.isValidBuyHouseInfo(trimmedInfo)) {
@@ -134,7 +147,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
+    public static Tag parseTag(Warning warn, String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
@@ -146,7 +159,7 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static Set<Tag> parseTags(Warning warn, Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -161,7 +174,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code priority} is invalid.
      */
-    public static Priority parsePriority(String priority) throws ParseException {
+    public static Priority parsePriority(Warning warn, String priority) throws ParseException {
         requireNonNull(priority);
         String trimmedPriority = priority.trim().toLowerCase();
         if (!Priority.isValidPriority(trimmedPriority)) {

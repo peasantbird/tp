@@ -1,7 +1,10 @@
 package seedu.address.model.displayable;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.commons.util.AppUtil;
+
+import static seedu.address.commons.util.AppUtil.validateArgument;
 
 /**
  * Represents a Displayable's name in the address book.
@@ -27,7 +30,7 @@ public class Name {
      */
     public Name(String name) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        AppUtil.validateArgument(isValidName(name), MESSAGE_CONSTRAINTS);
         fullName = name;
     }
 
@@ -38,7 +41,16 @@ public class Name {
         return test.matches(VALIDATION_REGEX);
     }
 
+    public static boolean isAppropriateName(String test) {
+        return test.matches(AFFIRMATION_REGEX);
+    }
 
+    // TODO have a check when adding persons to use this fuzzy match to warn if the users seem similar.
+    public boolean isSameNameFuzzyMatch(Name otherName) {
+        String contentName = fullName.replaceAll(" ","");
+        String contentOtherName = otherName.fullName.replaceAll(" ","");
+        return contentName.equalsIgnoreCase(contentOtherName);
+    }
     @Override
     public String toString() {
         return fullName;

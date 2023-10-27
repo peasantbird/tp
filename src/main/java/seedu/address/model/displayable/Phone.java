@@ -1,7 +1,10 @@
 package seedu.address.model.displayable;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.commons.util.AppUtil;
+
+import static seedu.address.commons.util.AppUtil.validateArgument;
 
 /**
  * Represents a Displayable's phone number in the address book.
@@ -22,7 +25,7 @@ public class Phone {
      */
     public Phone(String phone) {
         requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
+        AppUtil.validateArgument(isValidPhone(phone), MESSAGE_CONSTRAINTS);
         value = phone;
     }
 

@@ -1,7 +1,10 @@
 package seedu.address.model.displayable;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.commons.util.AppUtil;
+
+import static seedu.address.commons.util.AppUtil.validateArgument;
 
 /**
  * Represents a House's price in the address book.
@@ -22,7 +25,7 @@ public class Price {
      */
     public Price(String price) {
         requireNonNull(price);
-        checkArgument(isValidPrice(price), MESSAGE_CONSTRAINTS);
+        AppUtil.validateArgument(isValidPrice(price), MESSAGE_CONSTRAINTS);
         value = price;
     }
 

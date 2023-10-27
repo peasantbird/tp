@@ -42,6 +42,16 @@ public class AddBuyerCommand extends Command {
     public static final String MESSAGE_DUPLICATE_BUYER = "This buyer already exists in the address book";
 
     private final Buyer toAdd;
+    private final String warnMessage;
+
+    /**
+     * Creates an AddBuyerCommand to add the specified {@code Buyer}
+     */
+    public AddBuyerCommand(Buyer buyer, String warnMessage) {
+        requireNonNull(buyer);
+        toAdd = buyer;
+        this.warnMessage = warnMessage;
+    }
 
     /**
      * Creates an AddBuyerCommand to add the specified {@code Buyer}
@@ -49,7 +59,9 @@ public class AddBuyerCommand extends Command {
     public AddBuyerCommand(Buyer buyer) {
         requireNonNull(buyer);
         toAdd = buyer;
+        warnMessage = null;
     }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -60,6 +72,9 @@ public class AddBuyerCommand extends Command {
         }
 
         model.addBuyer(toAdd);
+        if (warnMessage != null) {
+            return new CommandResult(String.format("Warning!; ",warnMessage, " If this is intended please ignore."));
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

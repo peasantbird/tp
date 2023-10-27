@@ -1,7 +1,10 @@
 package seedu.address.model.displayable.buyer;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.commons.util.AppUtil;
+
+import static seedu.address.commons.util.AppUtil.validateArgument;
 
 /**
  * Represents the information associated with a house.
@@ -23,7 +26,7 @@ public class BuyHouseInfo {
      */
     public BuyHouseInfo(String buyHouseInfo) {
         requireNonNull(buyHouseInfo);
-        checkArgument(isValidBuyHouseInfo(buyHouseInfo), MESSAGE_CONSTRAINTS);
+        AppUtil.validateArgument(isValidBuyHouseInfo(buyHouseInfo), MESSAGE_CONSTRAINTS);
         this.buyHouseInfo = buyHouseInfo;
     }
 

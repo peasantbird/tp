@@ -1,7 +1,10 @@
 package seedu.address.model.displayable;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.commons.util.AppUtil;
+
+import static seedu.address.commons.util.AppUtil.validateArgument;
 
 /**
  * Represents a Displayable's email in the address book.
@@ -40,7 +43,7 @@ public class Email {
      */
     public Email(String email) {
         requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
+        AppUtil.validateArgument(isValidEmail(email), MESSAGE_CONSTRAINTS);
         value = email;
     }
 

@@ -1,7 +1,10 @@
 package seedu.address.model.displayable;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.commons.util.AppUtil;
+
+import static seedu.address.commons.util.AppUtil.validateArgument;
 
 /**
  * Represents a Displayable's priority level in the address book.
@@ -35,7 +38,7 @@ public class Priority {
      */
     public Priority(String priority) {
         requireNonNull(priority);
-        checkArgument(isValidPriority(priority), MESSAGE_CONSTRAINTS);
+        AppUtil.validateArgument(isValidPriority(priority), MESSAGE_CONSTRAINTS);
         this.value = getPrioLvl(priority);
     }
 
@@ -51,7 +54,7 @@ public class Priority {
      */
     public static PrioLvl getPrioLvl(String priority) {
         requireNonNull(priority);
-        checkArgument(isValidPriority(priority), MESSAGE_CONSTRAINTS);
+        AppUtil.validateArgument(isValidPriority(priority), MESSAGE_CONSTRAINTS);
         char firstLetter = priority.charAt(0);
         if (firstLetter == 'h') {
             return PrioLvl.HIGH;
