@@ -362,6 +362,22 @@ only assigning them for arguments available from the parsed user input (in `Argu
     * Cons: Address book only adds correctly formatted fields and may discard the rest without the user knowing, so
 more robust exception handling is required in parsing the user input which may be tedious to implement.
 
+### \[Proposed\] Sort feature
+
+#### Proposed Implementation
+
+The proposed sort mechanism is facilitated by the `sort` command.
+
+Using the `sort` command, we can sort the buyers and sellers lists respectively by name, priority, and other criteria.
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
+Step 1. The user types in the `sort-b` or `sort-s` keyword, followed by `name`, `priority`, or another `criteria`.
+to sort by. 
+
+The sort command will sort by changing the ObservableList<T> to a SortedList<T>, with the comparator based on the
+certain criteria.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
