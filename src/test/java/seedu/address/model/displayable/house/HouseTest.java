@@ -67,7 +67,7 @@ public class HouseTest {
                 + "{name=" + dummyHouse.getName()
                 + ", price=" + dummyHouse.getPrice()
                 + ", address=" + dummyHouse.getAddress()
-                + ", info=" + dummyHouse.getInfo()
+                + ", info=" + dummyHouse.getHouseInfo()
                 + ", tags=" + dummyHouse.getTags()
                 + "}";
         assertEquals(expected, dummyHouse.toString());
