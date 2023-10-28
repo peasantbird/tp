@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Warning;
+import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.commands.SetBuyerPriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.Priority;
@@ -18,13 +18,12 @@ public class SetBuyerPriorityCommandParser implements Parser<SetBuyerPriorityCom
      * and returns a SetBuyerPriorityCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public SetBuyerPriorityCommand parse(String args) throws ParseException {
+    public SetBuyerPriorityCommand parse(String args, CommandWarnings commandWarnings) throws ParseException {
         try {
-            Warning warn = new Warning();
             String[] splitArgs = args.trim().split("\\s+");
             Index index = ParserUtil.parseIndex(splitArgs[0]);
-            Priority priority = ParserUtil.parsePriority(warn, splitArgs[1]);
-            return new SetBuyerPriorityCommand(warn, index, priority);
+            Priority priority = ParserUtil.parsePriority(commandWarnings, splitArgs[1]);
+            return new SetBuyerPriorityCommand(index, priority, commandWarnings);
         } catch (ParseException | IndexOutOfBoundsException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetBuyerPriorityCommand.MESSAGE_USAGE), pe);

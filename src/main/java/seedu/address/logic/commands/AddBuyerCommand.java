@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -42,24 +43,21 @@ public class AddBuyerCommand extends Command {
     public static final String MESSAGE_DUPLICATE_BUYER = "This buyer already exists in the address book";
 
     private final Buyer toAdd;
-    private final String warnMessage;
+    private final CommandWarnings commandWarnings;
 
     /**
      * Creates an AddBuyerCommand to add the specified {@code Buyer}
      */
-    public AddBuyerCommand(Buyer buyer, String warnMessage) {
+    public AddBuyerCommand(Buyer buyer, CommandWarnings commandWarnings) {
         requireNonNull(buyer);
         toAdd = buyer;
-        this.warnMessage = warnMessage;
+        this.commandWarnings = commandWarnings;
     }
-
     /**
      * Creates an AddBuyerCommand to add the specified {@code Buyer}
      */
     public AddBuyerCommand(Buyer buyer) {
-        requireNonNull(buyer);
-        toAdd = buyer;
-        warnMessage = null;
+        this(buyer, new CommandWarnings());
     }
 
 
@@ -72,8 +70,8 @@ public class AddBuyerCommand extends Command {
         }
 
         model.addBuyer(toAdd);
-        if (warnMessage != null) {
-            return new CommandResult(String.format("Warning!; ",warnMessage, " If this is intended please ignore."));
+        if (commandWarnings.containsWarnings()) {
+            return new CommandResult(commandWarnings.getWarningMessage());
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

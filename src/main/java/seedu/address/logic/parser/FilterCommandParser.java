@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Arrays;
 
+import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.NameContainsKeywordsPredicate;
@@ -18,7 +19,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * and returns a FindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public FilterCommand parse(String args) throws ParseException {
+    public FilterCommand parse(String args, CommandWarnings commandWarnings) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
@@ -27,7 +28,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FilterCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FilterCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)), commandWarnings);
     }
 
 }

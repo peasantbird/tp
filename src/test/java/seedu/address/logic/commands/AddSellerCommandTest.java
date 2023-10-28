@@ -38,7 +38,7 @@ public class AddSellerCommandTest {
         ModelStubAcceptingSellerAdded modelStub = new ModelStubAcceptingSellerAdded();
         Seller validSeller = new SellerBuilder().build();
 
-        CommandResult commandResult = new AddSellerCommand(validSeller).execute(modelStub);
+        CommandResult commandResult = new AddSellerCommand(validSeller).execute(modelStub, );
 
         assertEquals(String.format(AddSellerCommand.MESSAGE_SUCCESS, Messages.format(validSeller)),
                 commandResult.getFeedbackToUser());

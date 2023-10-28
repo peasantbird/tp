@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.displayable.NameContainsKeywordsPredicate;
@@ -21,9 +22,14 @@ public class FilterCommand extends Command {
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;
+    private final CommandWarnings commandWarnings;
 
-    public FilterCommand(NameContainsKeywordsPredicate predicate) {
+    public FilterCommand(NameContainsKeywordsPredicate predicate, CommandWarnings commandWarnings) {
         this.predicate = predicate;
+        this.commandWarnings = commandWarnings;
+    }
+    public FilterCommand(NameContainsKeywordsPredicate predicate) {
+        this(predicate, new CommandWarnings());
     }
 
     @Override
@@ -31,6 +37,9 @@ public class FilterCommand extends Command {
         requireNonNull(model);
         model.updateFilteredBuyerList(predicate);
         model.updateFilteredSellerList(predicate);
+        if (commandWarnings.containsWarnings()) {
+            return new CommandResult(commandWarnings.getWarningMessage());
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredBuyerList().size(),
                         model.getFilteredSellerList().size()));
