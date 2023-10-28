@@ -35,7 +35,7 @@ public class SellerBuilder extends PersonBuilder {
     public SellerBuilder(Seller sellerToCopy) {
         super(sellerToCopy);
         sellingAddress = sellerToCopy.getSellingAddress();
-        houseInfo = sellerToCopy.getInfo();
+        houseInfo = sellerToCopy.getHouseInfo();
     }
 
     /**

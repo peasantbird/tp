@@ -44,7 +44,7 @@ public class House implements Displayable {
     public Address getAddress() {
         return this.address;
     }
-    public HouseInfo getInfo() {
+    public HouseInfo getHouseInfo() {
         return this.houseInfo;
     }
     public Set<Tag> getTags() {

@@ -48,7 +48,7 @@ public class Messages {
                 .append("; Address: ")
                 .append(buyer.getAddress())
                 .append("; House Info: ")
-                .append(buyer.getInfo())
+                .append(buyer.getHouseInfo())
                 .append("; Priority: ")
                 .append(buyer.getPriority())
                 .append("; Tags: ");
@@ -71,7 +71,7 @@ public class Messages {
                 .append("; Selling Address: ")
                 .append(seller.getSellingAddress())
                 .append("; House Info: ")
-                .append(seller.getInfo())
+                .append(seller.getHouseInfo())
                 .append("; Priority: ")
                 .append(seller.getPriority())
                 .append("; Tags: ");

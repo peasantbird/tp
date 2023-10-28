@@ -29,7 +29,7 @@ public class BuyerBuilder extends PersonBuilder {
      */
     public BuyerBuilder(Buyer buyerToCopy) {
         super(buyerToCopy);
-        houseInfo = buyerToCopy.getInfo();
+        houseInfo = buyerToCopy.getHouseInfo();
     }
 
 

@@ -30,7 +30,7 @@ public class JsonAdaptedBuyerTest {
     private static final String VALID_PHONE = ALICE.getPhone().toString();
     private static final String VALID_EMAIL = ALICE.getEmail().toString();
     private static final String VALID_ADDRESS = ALICE.getAddress().toString();
-    private static final String VALID_INFO = ALICE.getInfo().toString();
+    private static final String VALID_INFO = ALICE.getHouseInfo().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = ALICE.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());

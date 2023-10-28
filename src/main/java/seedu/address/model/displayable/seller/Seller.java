@@ -71,7 +71,7 @@ public class Seller extends Person {
         return this.sellingAddress;
     }
 
-    public HouseInfo getInfo() {
+    public HouseInfo getHouseInfo() {
         return houseInfo;
     }
 

@@ -39,7 +39,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + buyer.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + buyer.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + buyer.getAddress().value + " ");
-        sb.append(PREFIX_HOUSE_INFO + buyer.getInfo().toString() + " ");
+        sb.append(PREFIX_HOUSE_INFO + buyer.getHouseInfo().toString() + " ");
         // priority field is optional
         // sb.append(PREFIX_PRIORITY + buyer.getPriority().toString() + " ");
         buyer.getTags().stream().forEach(
@@ -57,7 +57,7 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + seller.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + seller.getAddress().value + " ");
         sb.append(PREFIX_SELLING_ADDRESS + seller.getSellingAddress().value + " ");
-        sb.append(PREFIX_HOUSE_INFO + seller.getInfo().toString() + " ");
+        sb.append(PREFIX_HOUSE_INFO + seller.getHouseInfo().toString() + " ");
         // priority field is optional
         // sb.append(PREFIX_PRIORITY + seller.getPriority().toString() + " ");
         seller.getTags().stream().forEach(

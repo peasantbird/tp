@@ -32,7 +32,7 @@ public class JsonAdaptedSellerTest {
     private static final String VALID_EMAIL = SALICE.getEmail().toString();
     private static final String VALID_ADDRESS = SALICE.getAddress().toString();
     private static final String VALID_SELLING_ADDRESS = SALICE.getSellingAddress().toString();
-    private static final String VALID_INFO = SALICE.getInfo().toString();
+    private static final String VALID_INFO = SALICE.getHouseInfo().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = SALICE.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());

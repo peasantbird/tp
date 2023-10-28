@@ -32,7 +32,7 @@ public class JsonAdaptedBuyer extends JsonAdaptedPerson {
      */
     public JsonAdaptedBuyer(Buyer source) {
         super(source);
-        this.info = source.getInfo().toString();
+        this.info = source.getHouseInfo().toString();
     }
 
     /**

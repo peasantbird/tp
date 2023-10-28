@@ -59,7 +59,7 @@ public class Buyer extends Person {
         this.houseInfo = houseInfo;
     }
 
-    public HouseInfo getInfo() {
+    public HouseInfo getHouseInfo() {
         return houseInfo;
     }
 

@@ -19,6 +19,6 @@ public class BuyerCard extends PersonCard {
      */
     public BuyerCard(Buyer buyer, int displayedIndex) {
         super(buyer, displayedIndex, FXML);
-        houseInfo.setText(buyer.getInfo().toString());
+        houseInfo.setText(buyer.getHouseInfo().toString());
     }
 }

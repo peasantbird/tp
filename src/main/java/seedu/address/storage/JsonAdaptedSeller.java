@@ -35,7 +35,7 @@ public class JsonAdaptedSeller extends JsonAdaptedPerson {
     public JsonAdaptedSeller(Seller source) {
         super(source);
         this.sellingAddress = source.getSellingAddress().value;
-        this.info = source.getInfo().toString();
+        this.info = source.getHouseInfo().toString();
     }
 
     /**

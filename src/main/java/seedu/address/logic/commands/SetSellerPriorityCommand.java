@@ -72,7 +72,7 @@ public class SetSellerPriorityCommand extends Command {
                 targetSeller.getEmail(),
                 targetSeller.getAddress(),
                 targetSeller.getSellingAddress(),
-                targetSeller.getInfo(),
+                targetSeller.getHouseInfo(),
                 targetSeller.getTags(),
                 priority);
     }
