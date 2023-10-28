@@ -86,7 +86,7 @@ public class House implements Displayable {
                 .add("name", name)
                 .add("price", price)
                 .add("address", address)
-                .add("houseInfo", houseInfo)
+                .add("info", houseInfo)
                 .add("tags", tags)
                 .toString();
     }
