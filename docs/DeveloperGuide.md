@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# RTPM-3 Developer Guide
+# RTPM Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -436,7 +436,7 @@ Priority level is based on current iteration
 
 ### Use cases
 
-(For all use cases below, the **System** is the `RTPM (RealtorTrackerPlusMax)` and the **Actor** is the `user`,
+(For all use cases below, the **System** is our app `RTPM (RealtorTrackerPlusMax)` and the **Actor** is the `user`,
 unless specified otherwise)
 
 **Use case: UC1 - Add homeowner and house**

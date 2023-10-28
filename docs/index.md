@@ -10,7 +10,7 @@
 
 ![Ui](images/Ui.png)
 
-**The RealtorTrackerPlusMax (RTPM) allows tech-savvy realtors in their 20s to keep track of their many clients and houses
+**RealtorTrackerPlusMax (RTPM) is an app that allows tech-savvy realtors in their 20s to keep track of their many clients and houses
 all in one place. This product has an edge over conventional tracking methods like Google Sheets as it provides a
 cleaner UI, is easier and quicker to organise via keyboard-typed commands, and has proposed features such as
 auto-matching of clients and houses.**
