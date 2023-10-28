@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.AppUtil;
 
-import static seedu.address.commons.util.AppUtil.validateArgument;
 
 /**
  * Represents a Displayable's name in the address book.
@@ -20,7 +19,7 @@ public class Name {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "\\S [\\s\\S]*";
+    public static final String VALIDATION_REGEX = "\\S.*";
 
     public static final String AFFIRMATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
@@ -49,9 +48,15 @@ public class Name {
     }
 
     // TODO have a check when adding persons to use this fuzzy match to warn if the users seem similar.
+
+    /**
+     * Checks if two names are somewhat similar to each other.
+     * @param otherName the other name to check against.
+     * @return whether the two names are similar.
+     */
     public boolean isSameNameFuzzyMatch(Name otherName) {
-        String contentName = fullName.replaceAll(" ","");
-        String contentOtherName = otherName.fullName.replaceAll(" ","");
+        String contentName = fullName.replaceAll(" ", "");
+        String contentOtherName = otherName.fullName.replaceAll(" ", "");
         return contentName.equalsIgnoreCase(contentOtherName);
     }
     @Override

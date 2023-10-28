@@ -1,7 +1,7 @@
 package seedu.address.model.displayable;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.AppUtil.validateArgument;
 
 /**
  * Info relating to a house.
@@ -10,11 +10,15 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class HouseInfo {
     public static final String MESSAGE_CONSTRAINTS =
         "House information can take any values, and it should not be blank";
+
+    public static final String MESSAGE_RECOMMENDATIONS = MESSAGE_CONSTRAINTS;
+
     /*
      * The first character of the info must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String AFFIRMATION_REGEX = VALIDATION_REGEX;
     private final String info;
 
     /**
@@ -23,7 +27,7 @@ public class HouseInfo {
      */
     public HouseInfo(String info) {
         requireNonNull(info);
-        checkArgument(isValidHouseInfo(info), MESSAGE_CONSTRAINTS);
+        validateArgument(isValidHouseInfo(info), MESSAGE_CONSTRAINTS);
         this.info = info;
     }
 
@@ -47,6 +51,9 @@ public class HouseInfo {
     }
     public static boolean isValidHouseInfo(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+    public static boolean isAppropriateHouseInfo(String test) {
+        return test.matches(AFFIRMATION_REGEX);
     }
     @Override
     public int hashCode() {

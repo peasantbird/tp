@@ -12,6 +12,10 @@ public class CommandWarnings {
     public CommandWarnings() {
         this.warnings = new HashSet<>();
     }
+
+    public boolean containsWarningString(String warning) {
+        return warnings.contains(warning);
+    }
     public void addWarning(String message) {
         warnings.add(message);
     }
@@ -25,6 +29,21 @@ public class CommandWarnings {
         }
         return "Warning!; " + warnings + " Please ignore if this is expected.";
     }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof CommandWarnings)) {
+            return false;
+        }
+
+        CommandWarnings otherCommandWarnings = (CommandWarnings) other;
+        return warnings.equals(otherCommandWarnings.warnings);
+    }
+    @Override
     public String toString() {
         return warnings.toString();
     }

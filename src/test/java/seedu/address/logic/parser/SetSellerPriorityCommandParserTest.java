@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPriorities.DEFAULT_PRIORITY;
+import static seedu.address.testutil.TypicalPriorities.HIGH_PRIORITY;
+import static seedu.address.testutil.TypicalPriorities.MEDIUM_PRIORITY;
 
 import org.junit.jupiter.api.Test;
 
@@ -59,14 +61,23 @@ public class SetSellerPriorityCommandParserTest {
 
     @Test
     public void parse_invalidPriority_exceptionThrown() {
-        assertParseFailure(parser, "1 no",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetSellerPriorityCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "1 1",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetSellerPriorityCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "1",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetSellerPriorityCommand.MESSAGE_USAGE));
     }
 
+    @Test
+    public void parse_unrecommendedPriority_warningGiven() {
+        CommandWarnings warnings = new CommandWarnings();
+        warnings.addWarning(Priority.MESSAGE_RECOMMENDATIONS);
+        assertParseSuccess(parser, "1 no",
+                new SetSellerPriorityCommand(Index.fromZeroBased(0), DEFAULT_PRIORITY, warnings));
+        assertParseSuccess(parser, "1987 hkrhjfek",
+                new SetSellerPriorityCommand(Index.fromZeroBased(1986), HIGH_PRIORITY, warnings));
+        assertParseSuccess(parser, "6 modium",
+                new SetSellerPriorityCommand(Index.fromZeroBased(5), MEDIUM_PRIORITY, warnings));
+    }
     @Test
     public void parse_validPriority_success() {
         assertParseSuccess(parser, "1 high",

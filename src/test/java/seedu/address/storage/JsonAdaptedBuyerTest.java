@@ -19,13 +19,12 @@ import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
 
 public class JsonAdaptedBuyerTest {
-    private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_NAME = "  ";
+    private static final String INVALID_PHONE = "+kjfladkj";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "   ";
     private static final String INVALID_INFO = " ";
-
     private static final String VALID_NAME = ALICE.getName().toString();
     private static final String VALID_PHONE = ALICE.getPhone().toString();
     private static final String VALID_EMAIL = ALICE.getEmail().toString();

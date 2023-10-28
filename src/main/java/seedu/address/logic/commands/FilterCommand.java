@@ -24,6 +24,11 @@ public class FilterCommand extends Command {
     private final NameContainsKeywordsPredicate predicate;
     private final CommandWarnings commandWarnings;
 
+    /**
+     * Creates a FilterCommand.
+     * @param predicate
+     * @param commandWarnings
+     */
     public FilterCommand(NameContainsKeywordsPredicate predicate, CommandWarnings commandWarnings) {
         this.predicate = predicate;
         this.commandWarnings = commandWarnings;

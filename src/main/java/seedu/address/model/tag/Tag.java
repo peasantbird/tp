@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.AppUtil;
 
-import static seedu.address.commons.util.AppUtil.validateArgument;
-
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}

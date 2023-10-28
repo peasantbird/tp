@@ -19,11 +19,11 @@ import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
 
 public class JsonAdaptedSellerTest {
-    private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_NAME = "  ";
+    private static final String INVALID_PHONE = "+kjfladkj";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "   ";
     private static final String INVALID_SELLING_ADDRESS = " ";
     private static final String INVALID_INFO = " ";
 

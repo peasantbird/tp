@@ -4,14 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.AppUtil;
 
-import static seedu.address.commons.util.AppUtil.validateArgument;
-
 /**
  * Represents a Displayable's email in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {
     public static final String MESSAGE_CONSTRAINTS = "Emails must contain at least one '@'.";
+    public static final String VALIDATION_REGEX = "[\\S\\s]*@[\\S\\s]*";
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_RECOMMENDATIONS = "Emails should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
@@ -33,11 +32,7 @@ public class Email {
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
     private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
     public static final String AFFIRMATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
-
-    /*
-    A minimally valid email must have at least one @ symbol.
-     */
-    public static final String VALIDATION_REGEX = "[\\S\\s]*@[\\S\\s]*";
+    // A minimally valid email must have at least one @ symbol.
 
     public final String value;
 

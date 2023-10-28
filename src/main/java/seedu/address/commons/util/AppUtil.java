@@ -39,10 +39,4 @@ public class AppUtil {
             throw new IllegalArgumentException(errorMessage);
         }
     }
-    /**
-     * Checks that the {@code condition} is true, but does not throw an exception.
-     */
-    public static void checkArgument(Boolean condition, String warningMessage) {
-
-    }
 }

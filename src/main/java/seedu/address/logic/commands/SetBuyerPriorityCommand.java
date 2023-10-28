@@ -44,6 +44,12 @@ public class SetBuyerPriorityCommand extends Command {
         this.priority = priority;
         this.commandWarnings = new CommandWarnings();
     }
+    /**
+     * Constructs a SetBuyerPriorityCommand to set the priority level of a specified buyer.
+     * @param targetIndex
+     * @param priority
+     * @param commandWarnings
+     */
     public SetBuyerPriorityCommand(Index targetIndex, Priority priority, CommandWarnings commandWarnings) {
         this.targetIndex = targetIndex;
         this.priority = priority;

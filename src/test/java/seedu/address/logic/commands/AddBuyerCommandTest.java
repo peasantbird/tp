@@ -38,7 +38,7 @@ public class AddBuyerCommandTest {
         ModelStubAcceptingBuyerAdded modelStub = new ModelStubAcceptingBuyerAdded();
         Buyer validBuyer = new BuyerBuilder().build();
 
-        CommandResult commandResult = new AddBuyerCommand(validBuyer).execute(modelStub, );
+        CommandResult commandResult = new AddBuyerCommand(validBuyer).execute(modelStub);
 
         assertEquals(String.format(AddBuyerCommand.MESSAGE_SUCCESS, Messages.format(validBuyer)),
                 commandResult.getFeedbackToUser());
@@ -52,7 +52,7 @@ public class AddBuyerCommandTest {
         ModelStub modelStub = new ModelStubWithBuyer(validBuyer);
 
         assertThrows(CommandException.class,
-                AddBuyerCommand.MESSAGE_DUPLICATE_BUYER, () -> addBuyerCommand.execute(modelStub, ));
+                AddBuyerCommand.MESSAGE_DUPLICATE_BUYER, () -> addBuyerCommand.execute(modelStub));
     }
 
     @Test

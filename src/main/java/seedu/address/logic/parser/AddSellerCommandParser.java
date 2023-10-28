@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_ADDRESS;
@@ -49,8 +49,9 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         Phone phone = ParserUtil.parsePhone(commandWarnings, argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(commandWarnings, argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(commandWarnings, argMultimap.getValue(PREFIX_ADDRESS).get());
-        Address sellingAddress = ParserUtil.parseAddress(commandWarnings, argMultimap.getValue(PREFIX_SELLING_ADDRESS).get());
-        HouseInfo houseInfo = ParserUtil.parseHouseInfo(argMultimap.getValue(PREFIX_HOUSE_INFO).get();
+        Address sellingAddress =
+                ParserUtil.parseAddress(commandWarnings, argMultimap.getValue(PREFIX_SELLING_ADDRESS).get());
+        HouseInfo houseInfo = ParserUtil.parseHouseInfo(commandWarnings, argMultimap.getValue(PREFIX_HOUSE_INFO).get());
         Set<Tag> tagList = ParserUtil.parseTags(commandWarnings, argMultimap.getAllValues(PREFIX_TAG));
 
         Seller seller = new Seller(name, phone, email, address, sellingAddress, houseInfo, tagList);

@@ -1,8 +1,7 @@
 package seedu.address.model.displayable;
 
 import static java.util.Objects.requireNonNull;
-
-import seedu.address.commons.util.AppUtil;
+import static seedu.address.commons.util.AppUtil.validateArgument;
 
 /**
  * Represents a Displayable's address in the address book.
@@ -36,7 +35,7 @@ public class Address {
      */
     public Address(String address) {
         requireNonNull(address);
-        AppUtil.validateArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
+        validateArgument(isValidAddress(address), MESSAGE_CONSTRAINTS);
         value = address;
     }
 

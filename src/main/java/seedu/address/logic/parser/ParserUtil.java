@@ -12,7 +12,6 @@ import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
-import seedu.address.model.displayable.Info;
 import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
@@ -52,7 +51,7 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         if (!Name.isAppropriateName(trimmedName)) {
-            warn.addWarning("Inadvisable name. " + Name.MESSAGE_RECOMMENDATIONS);
+            warn.addWarning(Name.MESSAGE_RECOMMENDATIONS);
         }
         return new Name(trimmedName);
     }
@@ -70,7 +69,7 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         if (!Phone.isAppropriatePhone(trimmedPhone)) {
-            warn.addWarning("Inadvisable phone number. " + Phone.MESSAGE_RECOMMENDATIONS);
+            warn.addWarning(Phone.MESSAGE_RECOMMENDATIONS);
         }
         return new Phone(trimmedPhone);
     }
@@ -88,27 +87,27 @@ public class ParserUtil {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
         if (!Address.isAppropriateAddress(trimmedAddress)) {
-            warn.addWarning("Inadvisable address. " + Address.MESSAGE_RECOMMENDATIONS);
+            warn.addWarning(Address.MESSAGE_RECOMMENDATIONS);
         }
         return new Address(trimmedAddress);
     }
 
     /**
-     * Parses a {@code String Info} into a {@code Info}.
+     * Parses a {@code String HouseInfo} into a {@code HouseInfo}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code sellHouseInfo} is invalid.
+     * @throws ParseException if the given {@code HouseInfo} is invalid.
      */
-    public static Info parseInfo(CommandWarnings warn, String info) throws ParseException {
+    public static HouseInfo parseHouseInfo(CommandWarnings warn, String info) throws ParseException {
         requireNonNull(info);
         String trimmedInfo = info.trim();
-        if (!Info.isValidInfo(trimmedInfo)) {
-            throw new ParseException(SellHouseInfo.MESSAGE_CONSTRAINTS);
+        if (!HouseInfo.isValidHouseInfo(trimmedInfo)) {
+            throw new ParseException(HouseInfo.MESSAGE_CONSTRAINTS);
         }
-        if (!Info.isAppropriateInfo(info)) {
-            warn.addWarning("Inadvisable Info. " + Info.MESSAGE_RECOMMENDATIONS);
+        if (!HouseInfo.isAppropriateHouseInfo(info)) {
+            warn.addWarning(HouseInfo.MESSAGE_RECOMMENDATIONS);
         }
-        return new Info(trimmedInfo);
+        return new HouseInfo(trimmedInfo);
     }
 
     /**
@@ -124,25 +123,11 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         if (!Email.isAppropriateEmail(email)) {
-            warn.addWarning("Inadvisable Email. " + Email.MESSAGE_RECOMMENDATIONS);
+            warn.addWarning(Email.MESSAGE_RECOMMENDATIONS);
         }
         return new Email(trimmedEmail);
     }
 
-    /**
-     * Parses a {@code String HouseInfo} into an {@code HouseInfo}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code HouseInfo} is invalid.
-     */
-    public static HouseInfo parseHouseInfo(String houseInfo) throws ParseException {
-        requireNonNull(houseInfo);
-        String trimmedInfo = houseInfo.trim();
-        if (!HouseInfo.isValidHouseInfo(trimmedInfo)) {
-            throw new ParseException(HouseInfo.MESSAGE_CONSTRAINTS);
-        }
-        return new HouseInfo(trimmedInfo);
-    }
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
@@ -156,7 +141,7 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         if (!Tag.isAppropriateTag(tag)) {
-            warn.addWarning("Inadvisable tag. " + Tag.MESSAGE_RECOMMENDATIONS);
+            warn.addWarning(Tag.MESSAGE_RECOMMENDATIONS);
         }
         return new Tag(trimmedTag);
     }
@@ -186,7 +171,7 @@ public class ParserUtil {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
         if (!Priority.isAppropriatePriority(priority)) {
-            warn.addWarning("Inadvisable Priority. " + Priority.MESSAGE_RECOMMENDATIONS);
+            warn.addWarning(Priority.MESSAGE_RECOMMENDATIONS);
         }
         return new Priority(trimmedPriority);
     }
