@@ -125,4 +125,14 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredSellerList(Predicate<? super Seller> predicate);
+
+    void commitAddressBook();
+
+    void undoAddressBook();
+
+    void redoAddressBook();
+
+    boolean canUndoAddressBook();
+
+    boolean canRedoAddressBook();
 }
