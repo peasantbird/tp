@@ -11,7 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
-import seedu.address.model.displayable.Info;
+import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
 import seedu.address.model.displayable.Priority;
@@ -98,18 +98,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String buyHouseInfo} into an {@code BuyHouseInfo}.
+     * Parses a {@code String HouseInfo} into an {@code HouseInfo}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code buyHouseInfo} is invalid.
+     * @throws ParseException if the given {@code HouseInfo} is invalid.
      */
-    public static Info parseInfo(String buyHouseInfo) throws ParseException {
-        requireNonNull(buyHouseInfo);
-        String trimmedInfo = buyHouseInfo.trim();
-        if (!Info.isValidInfo(trimmedInfo)) {
-            throw new ParseException(Info.MESSAGE_CONSTRAINTS);
+    public static HouseInfo parseHouseInfo(String houseInfo) throws ParseException {
+        requireNonNull(houseInfo);
+        String trimmedInfo = houseInfo.trim();
+        if (!HouseInfo.isValidHouseInfo(trimmedInfo)) {
+            throw new ParseException(HouseInfo.MESSAGE_CONSTRAINTS);
         }
-        return new Info(trimmedInfo);
+        return new HouseInfo(trimmedInfo);
     }
 
     /**

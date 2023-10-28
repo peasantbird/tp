@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_ADDRESS;
@@ -39,7 +39,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + buyer.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + buyer.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + buyer.getAddress().value + " ");
-        sb.append(PREFIX_INFO + buyer.getInfo().toString() + " ");
+        sb.append(PREFIX_HOUSE_INFO + buyer.getInfo().toString() + " ");
         // priority field is optional
         // sb.append(PREFIX_PRIORITY + buyer.getPriority().toString() + " ");
         buyer.getTags().stream().forEach(
@@ -57,7 +57,7 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + seller.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + seller.getAddress().value + " ");
         sb.append(PREFIX_SELLING_ADDRESS + seller.getSellingAddress().value + " ");
-        sb.append(PREFIX_INFO + seller.getInfo().toString() + " ");
+        sb.append(PREFIX_HOUSE_INFO + seller.getInfo().toString() + " ");
         // priority field is optional
         // sb.append(PREFIX_PRIORITY + seller.getPriority().toString() + " ");
         seller.getTags().stream().forEach(

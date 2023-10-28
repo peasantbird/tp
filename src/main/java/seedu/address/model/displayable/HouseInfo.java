@@ -4,10 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Info about a certain displayable.
- * Guarantees: immutable; is valid as declared in {@link #isValidInfo(String)}
+ * Info relating to a house.
+ * Guarantees: immutable; is valid as declared in {@link #isValidHouseInfo(String)}
  */
-public class Info {
+public class HouseInfo {
     public static final String MESSAGE_CONSTRAINTS =
         "House information can take any values, and it should not be blank";
     /*
@@ -18,12 +18,12 @@ public class Info {
     private final String info;
 
     /**
-     * Creates a valid {@code Info}.
+     * Creates a valid {@code HouseInfo}.
      * @param info a valid info text.
      */
-    public Info(String info) {
+    public HouseInfo(String info) {
         requireNonNull(info);
-        checkArgument(isValidInfo(info), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidHouseInfo(info), MESSAGE_CONSTRAINTS);
         this.info = info;
     }
 
@@ -38,14 +38,14 @@ public class Info {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof Info)) {
+        if (!(other instanceof HouseInfo)) {
             return false;
         }
 
-        Info otherInfo = (Info) other;
-        return info.equals(otherInfo.info);
+        HouseInfo otherHouseInfo = (HouseInfo) other;
+        return info.equals(otherHouseInfo.info);
     }
-    public static boolean isValidInfo(String test) {
+    public static boolean isValidHouseInfo(String test) {
         return test.matches(VALIDATION_REGEX);
     }
     @Override

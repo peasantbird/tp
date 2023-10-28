@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
-import seedu.address.model.displayable.Info;
+import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
 
@@ -110,7 +110,7 @@ public class JsonAdaptedBuyerTest {
     public void toModelType_invalidInfo_throwsIllegalValueException() {
         JsonAdaptedBuyer buyer = new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 INVALID_INFO, VALID_TAGS, VALID_PRIORITY);
-        String expectedMessage = String.format(Info.MESSAGE_CONSTRAINTS);
+        String expectedMessage = String.format(HouseInfo.MESSAGE_CONSTRAINTS);
         assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
     }
 
@@ -118,7 +118,7 @@ public class JsonAdaptedBuyerTest {
     public void toModelType_nullInfo_throwsIllegalValueException() {
         JsonAdaptedBuyer buyer = new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 null, VALID_TAGS, VALID_PRIORITY);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Info.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, HouseInfo.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
     }
 

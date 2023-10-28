@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_ADDRESS;
@@ -29,7 +29,7 @@ public class AddSellerCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_SELLING_ADDRESS + "SELLING_ADDRESS "
-            + PREFIX_INFO + "HOUSE_INFO "
+            + PREFIX_HOUSE_INFO + "HOUSE_INFO "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Ryan "
@@ -37,7 +37,7 @@ public class AddSellerCommand extends Command {
             + PREFIX_EMAIL + "ryan@gmail.com "
             + PREFIX_ADDRESS + "My Secret Home "
             + PREFIX_SELLING_ADDRESS + "47D Lor Sarhad, Singapore 119164 "
-            + PREFIX_INFO + "4 Room Flat in Sarhad Ville "
+            + PREFIX_HOUSE_INFO + "4 Room Flat in Sarhad Ville "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

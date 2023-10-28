@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
-import seedu.address.model.displayable.Info;
+import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
 import seedu.address.model.displayable.buyer.Buyer;
@@ -14,14 +14,14 @@ import seedu.address.model.util.SampleDataUtil;
 public class BuyerBuilder extends PersonBuilder {
     public static final String DEFAULT_INFO = "Central Area 5 Room Condominium";
 
-    private Info info;
+    private HouseInfo houseInfo;
 
     /**
      * Creates a {@code BuyerBuilder} with the default details.
      */
     public BuyerBuilder() {
         super();
-        info = new Info(DEFAULT_INFO);
+        houseInfo = new HouseInfo(DEFAULT_INFO);
     }
 
     /**
@@ -29,7 +29,7 @@ public class BuyerBuilder extends PersonBuilder {
      */
     public BuyerBuilder(Buyer buyerToCopy) {
         super(buyerToCopy);
-        info = buyerToCopy.getInfo();
+        houseInfo = buyerToCopy.getInfo();
     }
 
 
@@ -76,15 +76,15 @@ public class BuyerBuilder extends PersonBuilder {
     }
 
     /**
-     * Sets the {@code Info} of the {@code Buyer} that we are building.
+     * Sets the {@code HouseInfo} of the {@code Buyer} that we are building.
      */
     public BuyerBuilder withInfo(String info) {
-        this.info = new Info(info);
+        this.houseInfo = new HouseInfo(info);
         return this;
     }
 
     @Override
     public Buyer build() {
-        return new Buyer(super.name, super.phone, super.email, super.address, info, super.tags);
+        return new Buyer(super.name, super.phone, super.email, super.address, houseInfo, super.tags);
     }
 }
