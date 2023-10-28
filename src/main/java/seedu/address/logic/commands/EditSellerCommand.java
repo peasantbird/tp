@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
@@ -25,12 +25,12 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.displayable.Address;
-import seedu.address.model.displayable.HouseInfo;
-import seedu.address.model.displayable.seller.Seller;
 import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
 import seedu.address.model.displayable.Priority;
+import seedu.address.model.displayable.seller.Seller;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -106,7 +106,8 @@ public class EditSellerCommand extends Command {
         Phone updatedPhone = editSellerDescriptor.getPhone().orElse(sellerToEdit.getPhone());
         Email updatedEmail = editSellerDescriptor.getEmail().orElse(sellerToEdit.getEmail());
         Address updatedAddress = editSellerDescriptor.getAddress().orElse(sellerToEdit.getAddress());
-        Address updatedSellingAddress = editSellerDescriptor.getSellingAddress().orElse(sellerToEdit.getSellingAddress());
+        Address updatedSellingAddress = editSellerDescriptor.getSellingAddress()
+                .orElse(sellerToEdit.getSellingAddress());
         HouseInfo updatedHouseInfo = editSellerDescriptor.getHouseInfo().orElse(sellerToEdit.getHouseInfo());
         Set<Tag> updatedTags = editSellerDescriptor.getTags().orElse(sellerToEdit.getTags());
         Priority updatedPriority = editSellerDescriptor.getPriority().orElse(sellerToEdit.getPriority());

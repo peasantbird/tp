@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
@@ -24,12 +24,12 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.displayable.Address;
-import seedu.address.model.displayable.buyer.Buyer;
 import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
 import seedu.address.model.displayable.Priority;
-import seedu.address.model.displayable.HouseInfo;
+import seedu.address.model.displayable.buyer.Buyer;
 import seedu.address.model.tag.Tag;
 
 /**
