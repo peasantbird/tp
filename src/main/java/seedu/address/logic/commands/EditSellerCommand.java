@@ -7,8 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_BUYERS;
+import static seedu.address.model.Model.PREDICATE_SHOW_SELLERS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -24,8 +25,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.displayable.Address;
-import seedu.address.model.displayable.buyer.BuyHouseInfo;
-import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.seller.SellHouseInfo;
+import seedu.address.model.displayable.seller.Seller;
 import seedu.address.model.displayable.Email;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
@@ -33,83 +34,85 @@ import seedu.address.model.displayable.Priority;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing buyer in the address book.
+ * Edits the details of an existing seller in the address book.
  */
-public class EditBuyerCommand extends Command {
+public class EditSellerCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit-b";
+    public static final String COMMAND_WORD = "edit-s";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the buyer identified "
-            + "by the index number used in the displayed buyer list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the seller identified "
+            + "by the index number used in the displayed seller list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_INFO + "BUY_HOUSE_INFO] "
+            + "[" + PREFIX_SELLING_ADDRESS + "SELLING_ADDRESS] "
+            + "[" + PREFIX_INFO + "SELL_HOUSE_INFO] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "[" + PREFIX_PRIORITY + "PRIORITY] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_BUYER_SUCCESS = "Edited Buyer: %1$s";
+    public static final String MESSAGE_EDIT_SELLER_SUCCESS = "Edited Seller: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_BUYER = "This buyer already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_SELLER = "This seller already exists in the address book.";
 
     private final Index index;
-    private final EditBuyerDescriptor editBuyerDescriptor;
+    private final EditSellerDescriptor editSellerDescriptor;
 
     /**
-     * @param index of the buyer in the filtered buyer list to edit
-     * @param editBuyerDescriptor details to edit the buyer with
+     * @param index of the seller in the filtered seller list to edit
+     * @param editSellerDescriptor details to edit the seller with
      */
-    public EditBuyerCommand(Index index, EditBuyerDescriptor editBuyerDescriptor) {
+    public EditSellerCommand(Index index, EditSellerDescriptor editSellerDescriptor) {
         requireNonNull(index);
-        requireNonNull(editBuyerDescriptor);
+        requireNonNull(editSellerDescriptor);
         this.index = index;
-        this.editBuyerDescriptor = new EditBuyerDescriptor(editBuyerDescriptor);
+        this.editSellerDescriptor = new EditSellerDescriptor(editSellerDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Buyer> lastShownList = model.getFilteredBuyerList();
+        List<Seller> lastShownList = model.getFilteredSellerList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_SELLER_DISPLAYED_INDEX);
         }
 
-        Buyer buyerToEdit = lastShownList.get(index.getZeroBased());
-        Buyer editedBuyer = createEditedBuyer(buyerToEdit, editBuyerDescriptor);
+        Seller sellerToEdit = lastShownList.get(index.getZeroBased());
+        Seller editedSeller = createEditedSeller(sellerToEdit, editSellerDescriptor);
 
-        if (!buyerToEdit.isSamePerson(editedBuyer) && model.hasBuyer(editedBuyer)) {
-            throw new CommandException(MESSAGE_DUPLICATE_BUYER);
+        if (!sellerToEdit.isSamePerson(editedSeller) && model.hasSeller(editedSeller)) {
+            throw new CommandException(MESSAGE_DUPLICATE_SELLER);
         }
 
-        model.setBuyer(buyerToEdit, editedBuyer);
-        model.updateFilteredBuyerList(PREDICATE_SHOW_BUYERS);
-        return new CommandResult(String.format(MESSAGE_EDIT_BUYER_SUCCESS, Messages.format(editedBuyer)));
+        model.setSeller(sellerToEdit, editedSeller);
+        model.updateFilteredSellerList(PREDICATE_SHOW_SELLERS);
+        return new CommandResult(String.format(MESSAGE_EDIT_SELLER_SUCCESS, Messages.format(editedSeller)));
     }
 
     /**
-     * Creates and returns a {@code Buyer} with the details of {@code buyerToEdit}
-     * edited with {@code editBuyerDescriptor}.
+     * Creates and returns a {@code Seller} with the details of {@code sellerToEdit}
+     * edited with {@code editSellerDescriptor}.
      */
-    private static Buyer createEditedBuyer(Buyer buyerToEdit, EditBuyerDescriptor editBuyerDescriptor) {
-        assert buyerToEdit != null;
+    private static Seller createEditedSeller(Seller sellerToEdit, EditSellerDescriptor editSellerDescriptor) {
+        assert sellerToEdit != null;
 
-        Name updatedName = editBuyerDescriptor.getName().orElse(buyerToEdit.getName());
-        Phone updatedPhone = editBuyerDescriptor.getPhone().orElse(buyerToEdit.getPhone());
-        Email updatedEmail = editBuyerDescriptor.getEmail().orElse(buyerToEdit.getEmail());
-        Address updatedAddress = editBuyerDescriptor.getAddress().orElse(buyerToEdit.getAddress());
-        BuyHouseInfo updatedBuyHouseInfo = editBuyerDescriptor.getBuyHouseInfo().orElse(buyerToEdit.getBuyHouseInfo());
-        Set<Tag> updatedTags = editBuyerDescriptor.getTags().orElse(buyerToEdit.getTags());
-        Priority updatedPriority = editBuyerDescriptor.getPriority().orElse(buyerToEdit.getPriority());
+        Name updatedName = editSellerDescriptor.getName().orElse(sellerToEdit.getName());
+        Phone updatedPhone = editSellerDescriptor.getPhone().orElse(sellerToEdit.getPhone());
+        Email updatedEmail = editSellerDescriptor.getEmail().orElse(sellerToEdit.getEmail());
+        Address updatedAddress = editSellerDescriptor.getAddress().orElse(sellerToEdit.getAddress());
+        Address updatedSellingAddress = editSellerDescriptor.getSellingAddress().orElse(sellerToEdit.getSellingAddress());
+        SellHouseInfo updatedSellHouseInfo = editSellerDescriptor.getSellHouseInfo().orElse(sellerToEdit.getSellHouseInfo());
+        Set<Tag> updatedTags = editSellerDescriptor.getTags().orElse(sellerToEdit.getTags());
+        Priority updatedPriority = editSellerDescriptor.getPriority().orElse(sellerToEdit.getPriority());
 
-        return new Buyer(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedBuyHouseInfo,
-                updatedTags, updatedPriority);
+        return new Seller(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSellingAddress,
+                updatedSellHouseInfo, updatedTags, updatedPriority);
     }
 
     @Override
@@ -119,48 +122,50 @@ public class EditBuyerCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditBuyerCommand)) {
+        if (!(other instanceof EditSellerCommand)) {
             return false;
         }
 
-        EditBuyerCommand otherEditCommand = (EditBuyerCommand) other;
+        EditSellerCommand otherEditCommand = (EditSellerCommand) other;
         return index.equals(otherEditCommand.index)
-                && editBuyerDescriptor.equals(otherEditCommand.editBuyerDescriptor);
+                && editSellerDescriptor.equals(otherEditCommand.editSellerDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("index", index)
-                .add("editBuyerDescriptor", editBuyerDescriptor)
+                .add("editSellerDescriptor", editSellerDescriptor)
                 .toString();
     }
 
     /**
-     * Stores the details to edit the buyer with. Each non-empty field value will replace the
-     * corresponding field value of the buyer.
+     * Stores the details to edit the seller with. Each non-empty field value will replace the
+     * corresponding field value of the seller.
      */
-    public static class EditBuyerDescriptor {
+    public static class EditSellerDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
         private Address address;
-        private BuyHouseInfo buyHouseInfo;
+        private Address sellingAddress;
+        private SellHouseInfo sellHouseInfo;
         private Set<Tag> tags;
         private Priority priority;
 
-        public EditBuyerDescriptor() {}
+        public EditSellerDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditBuyerDescriptor(EditBuyerDescriptor toCopy) {
+        public EditSellerDescriptor(EditSellerDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setBuyHouseInfo(toCopy.buyHouseInfo);
+            setSellingAddress(toCopy.sellingAddress);
+            setSellHouseInfo(toCopy.sellHouseInfo);
             setTags(toCopy.tags);
             setPriority(toCopy.priority);
         }
@@ -169,7 +174,8 @@ public class EditBuyerCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, buyHouseInfo, tags, priority);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, sellingAddress,
+                    sellHouseInfo, tags, priority);
         }
 
         public void setName(Name name) {
@@ -203,12 +209,19 @@ public class EditBuyerCommand extends Command {
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
         }
-        public void setBuyHouseInfo(BuyHouseInfo buyHouseInfo) {
-            this.buyHouseInfo = buyHouseInfo;
+        public void setSellingAddress(Address sellingAddress) {
+            this.sellingAddress = sellingAddress;
         }
 
-        public Optional<BuyHouseInfo> getBuyHouseInfo() {
-            return Optional.ofNullable(buyHouseInfo);
+        public Optional<Address> getSellingAddress() {
+            return Optional.ofNullable(sellingAddress);
+        }
+        public void setSellHouseInfo(SellHouseInfo sellHouseInfo) {
+            this.sellHouseInfo = sellHouseInfo;
+        }
+
+        public Optional<SellHouseInfo> getSellHouseInfo() {
+            return Optional.ofNullable(sellHouseInfo);
         }
 
         /**
@@ -243,18 +256,19 @@ public class EditBuyerCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditBuyerDescriptor)) {
+            if (!(other instanceof EditSellerDescriptor)) {
                 return false;
             }
 
-            EditBuyerDescriptor otherEditBuyerDescriptor = (EditBuyerDescriptor) other;
-            return Objects.equals(name, otherEditBuyerDescriptor.name)
-                    && Objects.equals(phone, otherEditBuyerDescriptor.phone)
-                    && Objects.equals(email, otherEditBuyerDescriptor.email)
-                    && Objects.equals(address, otherEditBuyerDescriptor.address)
-                    && Objects.equals(buyHouseInfo, otherEditBuyerDescriptor.buyHouseInfo)
-                    && Objects.equals(tags, otherEditBuyerDescriptor.tags)
-                    && Objects.equals(priority, otherEditBuyerDescriptor.priority);
+            EditSellerDescriptor otherEditSellerDescriptor = (EditSellerDescriptor) other;
+            return Objects.equals(name, otherEditSellerDescriptor.name)
+                    && Objects.equals(phone, otherEditSellerDescriptor.phone)
+                    && Objects.equals(email, otherEditSellerDescriptor.email)
+                    && Objects.equals(address, otherEditSellerDescriptor.address)
+                    && Objects.equals(sellingAddress, otherEditSellerDescriptor.sellingAddress)
+                    && Objects.equals(sellHouseInfo, otherEditSellerDescriptor.sellHouseInfo)
+                    && Objects.equals(tags, otherEditSellerDescriptor.tags)
+                    && Objects.equals(priority, otherEditSellerDescriptor.priority);
         }
 
         @Override
@@ -264,7 +278,8 @@ public class EditBuyerCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
-                    .add("buyHouseInfo", buyHouseInfo)
+                    .add("sellingAddress", sellingAddress)
+                    .add("sellHouseInfo", sellHouseInfo)
                     .add("tags", tags)
                     .add("priority", priority)
                     .toString();
