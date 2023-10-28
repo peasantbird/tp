@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -25,7 +25,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.displayable.Address;
-import seedu.address.model.displayable.seller.SellHouseInfo;
+import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.seller.Seller;
 import seedu.address.model.displayable.Email;
 import seedu.address.model.displayable.Name;
@@ -49,7 +49,7 @@ public class EditSellerCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_SELLING_ADDRESS + "SELLING_ADDRESS] "
-            + "[" + PREFIX_INFO + "SELL_HOUSE_INFO] "
+            + "[" + PREFIX_HOUSE_INFO + "SELL_HOUSE_INFO] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "[" + PREFIX_PRIORITY + "PRIORITY] "
             + "Example: " + COMMAND_WORD + " 1 "
@@ -107,12 +107,12 @@ public class EditSellerCommand extends Command {
         Email updatedEmail = editSellerDescriptor.getEmail().orElse(sellerToEdit.getEmail());
         Address updatedAddress = editSellerDescriptor.getAddress().orElse(sellerToEdit.getAddress());
         Address updatedSellingAddress = editSellerDescriptor.getSellingAddress().orElse(sellerToEdit.getSellingAddress());
-        SellHouseInfo updatedSellHouseInfo = editSellerDescriptor.getSellHouseInfo().orElse(sellerToEdit.getSellHouseInfo());
+        HouseInfo updatedHouseInfo = editSellerDescriptor.getHouseInfo().orElse(sellerToEdit.getHouseInfo());
         Set<Tag> updatedTags = editSellerDescriptor.getTags().orElse(sellerToEdit.getTags());
         Priority updatedPriority = editSellerDescriptor.getPriority().orElse(sellerToEdit.getPriority());
 
         return new Seller(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedSellingAddress,
-                updatedSellHouseInfo, updatedTags, updatedPriority);
+                updatedHouseInfo, updatedTags, updatedPriority);
     }
 
     @Override
@@ -149,7 +149,7 @@ public class EditSellerCommand extends Command {
         private Email email;
         private Address address;
         private Address sellingAddress;
-        private SellHouseInfo sellHouseInfo;
+        private HouseInfo houseInfo;
         private Set<Tag> tags;
         private Priority priority;
 
@@ -165,7 +165,7 @@ public class EditSellerCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setSellingAddress(toCopy.sellingAddress);
-            setSellHouseInfo(toCopy.sellHouseInfo);
+            setHouseInfo(toCopy.houseInfo);
             setTags(toCopy.tags);
             setPriority(toCopy.priority);
         }
@@ -175,7 +175,7 @@ public class EditSellerCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, sellingAddress,
-                    sellHouseInfo, tags, priority);
+                    houseInfo, tags, priority);
         }
 
         public void setName(Name name) {
@@ -216,12 +216,12 @@ public class EditSellerCommand extends Command {
         public Optional<Address> getSellingAddress() {
             return Optional.ofNullable(sellingAddress);
         }
-        public void setSellHouseInfo(SellHouseInfo sellHouseInfo) {
-            this.sellHouseInfo = sellHouseInfo;
+        public void setHouseInfo(HouseInfo houseInfo) {
+            this.houseInfo = houseInfo;
         }
 
-        public Optional<SellHouseInfo> getSellHouseInfo() {
-            return Optional.ofNullable(sellHouseInfo);
+        public Optional<HouseInfo> getHouseInfo() {
+            return Optional.ofNullable(houseInfo);
         }
 
         /**
@@ -266,7 +266,7 @@ public class EditSellerCommand extends Command {
                     && Objects.equals(email, otherEditSellerDescriptor.email)
                     && Objects.equals(address, otherEditSellerDescriptor.address)
                     && Objects.equals(sellingAddress, otherEditSellerDescriptor.sellingAddress)
-                    && Objects.equals(sellHouseInfo, otherEditSellerDescriptor.sellHouseInfo)
+                    && Objects.equals(houseInfo, otherEditSellerDescriptor.houseInfo)
                     && Objects.equals(tags, otherEditSellerDescriptor.tags)
                     && Objects.equals(priority, otherEditSellerDescriptor.priority);
         }
@@ -279,7 +279,7 @@ public class EditSellerCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("sellingAddress", sellingAddress)
-                    .add("sellHouseInfo", sellHouseInfo)
+                    .add("houseInfo", houseInfo)
                     .add("tags", tags)
                     .add("priority", priority)
                     .toString();

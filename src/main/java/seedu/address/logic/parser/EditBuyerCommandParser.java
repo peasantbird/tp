@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -34,7 +34,7 @@ public class EditBuyerCommandParser implements Parser<EditBuyerCommand> {
     public EditBuyerCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_INFO,
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HOUSE_INFO,
                         PREFIX_ADDRESS, PREFIX_TAG, PREFIX_PRIORITY);
 
         Index index;
@@ -46,7 +46,7 @@ public class EditBuyerCommandParser implements Parser<EditBuyerCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_INFO, PREFIX_PRIORITY);
+                PREFIX_HOUSE_INFO, PREFIX_PRIORITY);
 
         EditBuyerDescriptor editBuyerDescriptor = new EditBuyerDescriptor();
 
@@ -62,8 +62,8 @@ public class EditBuyerCommandParser implements Parser<EditBuyerCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editBuyerDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        if (argMultimap.getValue(PREFIX_INFO).isPresent()) {
-            editBuyerDescriptor.setBuyHouseInfo(ParserUtil.parseBuyHouseInfo(argMultimap.getValue(PREFIX_INFO).get()));
+        if (argMultimap.getValue(PREFIX_HOUSE_INFO).isPresent()) {
+            editBuyerDescriptor.setHouseInfo(ParserUtil.parseHouseInfo(argMultimap.getValue(PREFIX_HOUSE_INFO).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editBuyerDescriptor::setTags);
         if (argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {

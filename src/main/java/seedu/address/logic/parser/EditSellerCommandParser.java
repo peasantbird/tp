@@ -29,7 +29,7 @@ public class EditSellerCommandParser implements Parser<EditSellerCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_SELLING_ADDRESS, PREFIX_INFO, PREFIX_TAG, PREFIX_PRIORITY);
+                        PREFIX_ADDRESS, PREFIX_SELLING_ADDRESS, PREFIX_HOUSE_INFO, PREFIX_TAG, PREFIX_PRIORITY);
 
         Index index;
 
@@ -40,7 +40,7 @@ public class EditSellerCommandParser implements Parser<EditSellerCommand> {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_SELLING_ADDRESS, PREFIX_INFO, PREFIX_PRIORITY);
+                PREFIX_SELLING_ADDRESS, PREFIX_HOUSE_INFO, PREFIX_PRIORITY);
 
         EditSellerDescriptor editSellerDescriptor = new EditSellerDescriptor();
 
@@ -59,8 +59,8 @@ public class EditSellerCommandParser implements Parser<EditSellerCommand> {
         if (argMultimap.getValue(PREFIX_SELLING_ADDRESS).isPresent()) {
             editSellerDescriptor.setSellingAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-        if (argMultimap.getValue(PREFIX_INFO).isPresent()) {
-            editSellerDescriptor.setSellHouseInfo(ParserUtil.parseSellHouseInfo(argMultimap.getValue(PREFIX_INFO).get()));
+        if (argMultimap.getValue(PREFIX_HOUSE_INFO).isPresent()) {
+            editSellerDescriptor.setHouseInfo(ParserUtil.parseHouseInfo(argMultimap.getValue(PREFIX_HOUSE_INFO).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editSellerDescriptor::setTags);
         if (argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
