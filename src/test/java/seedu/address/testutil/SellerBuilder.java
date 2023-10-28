@@ -3,9 +3,9 @@ package seedu.address.testutil;
 
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
-import seedu.address.model.displayable.seller.SellHouseInfo;
 import seedu.address.model.displayable.seller.Seller;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -15,10 +15,10 @@ import seedu.address.model.util.SampleDataUtil;
 public class SellerBuilder extends PersonBuilder {
 
     public static final String DEFAULT_SELLING_ADDRESS = "47D Lor Sarhad, Singapore 119164";
-    public static final String DEFAULT_SELL_HOUSE_INFO = "4 Room Flat in Sarhad Ville";
+    public static final String DEFAULT_INFO = "4 Room Flat in Sarhad Ville";
 
     private Address sellingAddress;
-    private SellHouseInfo sellHouseInfo;
+    private HouseInfo houseInfo;
 
     /**
      * Creates a {@code SellerBuilder} with the default details.
@@ -26,7 +26,7 @@ public class SellerBuilder extends PersonBuilder {
     public SellerBuilder() {
         super();
         sellingAddress = new Address(DEFAULT_SELLING_ADDRESS);
-        sellHouseInfo = new SellHouseInfo(DEFAULT_SELL_HOUSE_INFO);
+        houseInfo = new HouseInfo(DEFAULT_INFO);
     }
 
     /**
@@ -35,7 +35,7 @@ public class SellerBuilder extends PersonBuilder {
     public SellerBuilder(Seller sellerToCopy) {
         super(sellerToCopy);
         sellingAddress = sellerToCopy.getSellingAddress();
-        sellHouseInfo = sellerToCopy.getSellHouseInfo();
+        houseInfo = sellerToCopy.getHouseInfo();
     }
 
     /**
@@ -92,16 +92,16 @@ public class SellerBuilder extends PersonBuilder {
     }
 
     /**
-     * Sets the {@code SellHouseInfo()} of the {@code Seller} that we are building.
+     * Sets the {@code HouseInfo} of the {@code Seller} that we are building.
      */
-    public SellerBuilder withSellHouseInfo(String sellHouseInfo) {
-        this.sellHouseInfo = new SellHouseInfo(sellHouseInfo);
+    public SellerBuilder withInfo(String info) {
+        this.houseInfo = new HouseInfo(info);
         return this;
     }
 
     @Override
     public Seller build() {
         return new Seller(super.name, super.phone, super.email,
-                super.address, sellingAddress, sellHouseInfo, super.tags);
+                super.address, sellingAddress, houseInfo, super.tags);
     }
 }

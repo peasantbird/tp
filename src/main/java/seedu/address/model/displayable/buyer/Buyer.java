@@ -7,6 +7,7 @@ import java.util.Set;
 import javafx.scene.layout.Region;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Person;
 import seedu.address.model.displayable.Phone;
@@ -19,7 +20,7 @@ import seedu.address.ui.UiPart;
  * Represents a client looking to buy a house in the address book.
  */
 public class Buyer extends Person {
-    private final BuyHouseInfo buyHouseInfo;
+    private final HouseInfo houseInfo;
 
     /**
      * Constructs a Buyer instance.
@@ -28,14 +29,14 @@ public class Buyer extends Person {
      * @param phone Phone number of the buyer.
      * @param email Email of the buyer.
      * @param address Home address of the buyer.
-     * @param buyHouseInfo Information on the house that the buyer is interested in.
+     * @param houseInfo Information on the house that the buyer is interested in.
      * @param tags Optional tags.
      */
     public Buyer(Name name, Phone phone, Email email, Address address,
-                 BuyHouseInfo buyHouseInfo, Set<Tag> tags) {
+                 HouseInfo houseInfo, Set<Tag> tags) {
         super(name, phone, email, address, tags);
-        requireAllNonNull(buyHouseInfo);
-        this.buyHouseInfo = buyHouseInfo;
+        requireAllNonNull(houseInfo);
+        this.houseInfo = houseInfo;
     }
 
     /**
@@ -47,19 +48,19 @@ public class Buyer extends Person {
      * @param phone Phone number of the buyer.
      * @param email Email of the buyer.
      * @param address Home address of the buyer.
-     * @param buyHouseInfo Information on the house that the buyer is interested in.
+     * @param houseInfo Information on the house that the buyer is interested in.
      * @param tags Optional tags.
      * @param priority Priority level of the buyer.
      */
     public Buyer(Name name, Phone phone, Email email, Address address,
-                 BuyHouseInfo buyHouseInfo, Set<Tag> tags, Priority priority) {
+                 HouseInfo houseInfo, Set<Tag> tags, Priority priority) {
         super(name, phone, email, address, tags, priority);
-        requireAllNonNull(buyHouseInfo);
-        this.buyHouseInfo = buyHouseInfo;
+        requireAllNonNull(houseInfo);
+        this.houseInfo = houseInfo;
     }
 
-    public BuyHouseInfo getBuyHouseInfo() {
-        return buyHouseInfo;
+    public HouseInfo getHouseInfo() {
+        return houseInfo;
     }
 
     @Override
@@ -75,12 +76,12 @@ public class Buyer extends Person {
 
         Buyer otherBuyer = (Buyer) other;
         return this.equalsHelper(otherBuyer)
-                && buyHouseInfo.equals(otherBuyer.buyHouseInfo);
+                && houseInfo.equals(otherBuyer.houseInfo);
     }
     @Override
     public String toString() {
         return toStringBuild()
-                .add("house info", buyHouseInfo)
+                .add("house info", houseInfo)
                 .toString();
     }
     @Override

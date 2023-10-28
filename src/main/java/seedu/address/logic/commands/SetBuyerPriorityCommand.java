@@ -69,7 +69,7 @@ public class SetBuyerPriorityCommand extends Command {
                 targetBuyer.getPhone(),
                 targetBuyer.getEmail(),
                 targetBuyer.getAddress(),
-                targetBuyer.getBuyHouseInfo(),
+                targetBuyer.getHouseInfo(),
                 targetBuyer.getTags(),
                 priority);
     }
