@@ -4,7 +4,7 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "buyerInfo" : "Loves views",
+    "info" : "Loves views",
     "tags" : [ "friends" ],
     "priority": "nil"
   }, {
@@ -12,7 +12,7 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "buyerInfo" : "Loves views",
+    "info" : "Loves views",
     "tags" : [ "friends", "owesMoney" ],
     "priority": "nil"
   }, {
@@ -20,7 +20,7 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "buyerInfo" : "Loves views",
+    "info" : "Loves views",
     "tags" : [ ],
     "priority": "nil"
   }, {
@@ -28,7 +28,7 @@
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "buyerInfo" : "Loves views",
+    "info" : "Loves views",
     "tags" : [ "friends" ],
     "priority": "nil"
   }, {
@@ -36,7 +36,7 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "buyerInfo" : "Loves views",
+    "info" : "Loves views",
     "tags" : [ ],
     "priority": "nil"
   }, {
@@ -44,7 +44,7 @@
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "buyerInfo" : "Loves views",
+    "info" : "Loves views",
     "tags" : [ ],
     "priority": "nil"
   }, {
@@ -52,7 +52,7 @@
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "buyerInfo" : "Loves views",
+    "info" : "Loves views",
     "tags" : [ ],
     "priority": "nil"
   } ],
@@ -62,7 +62,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "sellingAddress" : "Selling address example",
-    "sellerInfo" : "Has Good Views",
+    "info" : "Has Good Views",
     "tags" : [ "friends" ],
     "priority": "nil"
   }, {
@@ -71,7 +71,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "sellingAddress" : "Selling address example",
-    "sellerInfo" : "Has Good Views",
+    "info" : "Has Good Views",
     "tags" : [ "friends", "owesMoney" ],
     "priority": "nil"
   }, {
@@ -80,7 +80,7 @@
     "email" : "heinz@example.com",
     "address" : "wall street",
     "sellingAddress" : "Selling address example",
-    "sellerInfo" : "Has Good Views",
+    "info" : "Has Good Views",
     "tags" : [ ],
     "priority": "nil"
   }, {
@@ -89,7 +89,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "sellingAddress" : "Selling address example",
-    "sellerInfo" : "Has Good Views",
+    "info" : "Has Good Views",
     "tags" : [ "friends" ],
     "priority": "nil"
   }, {
@@ -98,7 +98,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "sellingAddress" : "Selling address example",
-    "sellerInfo" : "Has Good Views",
+    "info" : "Has Good Views",
     "tags" : [ ],
     "priority": "nil"
   }, {
@@ -107,7 +107,7 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "sellingAddress" : "Selling address example",
-    "sellerInfo" : "Has Good Views",
+    "info" : "Has Good Views",
     "tags" : [ ],
     "priority": "nil"
   }, {
@@ -116,7 +116,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "sellingAddress" : "Selling address example",
-    "sellerInfo" : "Has Good Views",
+    "info" : "Has Good Views",
     "tags" : [ ],
     "priority": "nil"
   } ]

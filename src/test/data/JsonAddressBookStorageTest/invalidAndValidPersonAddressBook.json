@@ -4,7 +4,7 @@
     "phone" : "342323",
     "email" : "em@ail",
     "address" : "address",
-    "buyerInfo" : "info",
+    "info" : "info",
     "tags" : [ ]
   }, {
     "name" : "Invalid Buyer",
