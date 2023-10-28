@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalPriorities.DEFAULT_PRIORITY;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.commands.SetSellerPriorityCommand;
 import seedu.address.model.displayable.Priority;
 
@@ -29,7 +30,7 @@ public class SetSellerPriorityCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetSellerPriorityCommand.MESSAGE_USAGE));
         assertParseFailure(parser, "   ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetSellerPriorityCommand.MESSAGE_USAGE));
-        assertThrows(NullPointerException.class, () -> parser.parse(null));
+        assertThrows(NullPointerException.class, () -> parser.parse(null, new CommandWarnings()));
     }
 
     @Test
