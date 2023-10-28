@@ -27,7 +27,7 @@ public class CommandWarnings {
         if (warnings.isEmpty()) {
             return "";
         }
-        return "Warning!; " + warnings + " Please ignore if this is expected.";
+        return "Warning!; " + warnings + "\nPlease ignore if this is expected.";
     }
     @Override
     public boolean equals(Object other) {
