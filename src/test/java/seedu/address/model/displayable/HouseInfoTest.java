@@ -14,7 +14,7 @@ public class HouseInfoTest {
 
     @Test
     public void constructor_invalidInfo_throwsIllegalArgumentException() {
-        String invalidInfo = "";
+        String invalidInfo = " ";
         assertThrows(IllegalArgumentException.class, () -> new HouseInfo(invalidInfo));
     }
 

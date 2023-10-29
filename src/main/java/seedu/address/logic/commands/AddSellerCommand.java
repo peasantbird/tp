@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -46,13 +47,20 @@ public class AddSellerCommand extends Command {
 
     private final Seller toAdd;
 
+    private final CommandWarnings commandWarnings;
+
     /**
      * Creates an AddSellerCommand to add the specified {@code Person}
      */
-    public AddSellerCommand(Seller seller) {
+    public AddSellerCommand(Seller seller, CommandWarnings commandWarnings) {
         requireNonNull(seller);
         toAdd = seller;
+        this.commandWarnings = commandWarnings;
     }
+    public AddSellerCommand(Seller seller) {
+        this(seller, new CommandWarnings());
+    }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -61,7 +69,9 @@ public class AddSellerCommand extends Command {
         if (model.hasSeller(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_SELLER);
         }
-
+        if (commandWarnings.containsWarnings()) {
+            return new CommandResult(commandWarnings.getWarningMessage());
+        }
         model.addSeller(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }

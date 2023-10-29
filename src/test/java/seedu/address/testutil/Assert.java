@@ -1,7 +1,13 @@
 package seedu.address.testutil;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.function.Consumer;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.function.Executable;
+
+import seedu.address.logic.CommandWarnings;
 
 /**
  * A set of assertion methods useful for writing tests.
@@ -29,6 +35,24 @@ public class Assert {
     public static void assertThrows(Class<? extends Throwable> expectedType, String expectedMessage,
             Executable executable) {
         Throwable thrownException = Assertions.assertThrows(expectedType, executable);
-        Assertions.assertEquals(expectedMessage, thrownException.getMessage());
+        assertEquals(expectedMessage, thrownException.getMessage());
+    }
+
+    /**
+     * Asserts that the {@code consumer} provides a warning.
+     */
+    public static void assertWarns(Consumer<? super CommandWarnings> consumer, CommandWarnings expectedWarnings) {
+        CommandWarnings commandWarnings = new CommandWarnings();
+        consumer.accept(commandWarnings);
+        assertEquals(commandWarnings, expectedWarnings);
+    }
+
+    /**
+     * Asserts that the {@code consumer} provides a single string warning, for convenience.
+     */
+    public static void assertWarns(Consumer<? super CommandWarnings> consumer, String expectedWarningString) {
+        CommandWarnings expectedWarnings = new CommandWarnings();
+        expectedWarnings.addWarning(expectedWarningString);
+        assertWarns(consumer, expectedWarnings);
     }
 }
