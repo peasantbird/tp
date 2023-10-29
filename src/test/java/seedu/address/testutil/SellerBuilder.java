@@ -14,8 +14,8 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class SellerBuilder extends PersonBuilder {
 
-    public static final String DEFAULT_SELLING_ADDRESS = "47D Lor Sarhad, Singapore 119164";
-    public static final String DEFAULT_INFO = "4 Room Flat in Sarhad Ville";
+    public static final String DEFAULT_SELLING_ADDRESS = "Placeholder Street, Singapore";
+    public static final String DEFAULT_INFO = "Placeholder house";
 
     private Address sellingAddress;
     private HouseInfo houseInfo;
