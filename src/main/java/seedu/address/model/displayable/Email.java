@@ -11,6 +11,7 @@ import seedu.address.commons.util.AppUtil;
 public class Email {
     public static final String MESSAGE_CONSTRAINTS = "Emails must contain at least one '@'.";
     public static final String VALIDATION_REGEX = "[\\S\\s]*@[\\S\\s]*";
+    public static final String DEFAULT_EMAIL_STRING = "default@email.com";
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_RECOMMENDATIONS = "Emails should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
@@ -32,6 +33,7 @@ public class Email {
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
     private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
     public static final String AFFIRMATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
+
     // A minimally valid email must have at least one @ symbol.
 
     public final String value;

@@ -17,6 +17,7 @@ public class Phone {
                     + "this from the main number.";
     public static final String VALIDATION_REGEX = ".*\\d.*";
     public static final String AFFIRMATION_REGEX = "((\\+\\d{0,3} )?)\\d{3,}";
+    public static final String DEFAULT_PHONE_STRING = "123";
     public final String value;
 
     /**

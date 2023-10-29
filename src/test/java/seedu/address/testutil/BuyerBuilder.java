@@ -12,7 +12,7 @@ import seedu.address.model.util.SampleDataUtil;
  * Builds a buyer.
  */
 public class BuyerBuilder extends PersonBuilder {
-    public static final String DEFAULT_INFO = "Central Area 5 Room Condominium";
+    public static final String DEFAULT_INFO = "Placeholder house";
 
     private HouseInfo houseInfo;
 

@@ -25,6 +25,7 @@ public class Address {
     //REMOVE THIS if you've resolved this.
     public static final String VALIDATION_REGEX = "[^\\s].*";
     public static final String AFFIRMATION_REGEX = VALIDATION_REGEX;
+    public static final String DEFAULT_ADDRESS_STRING = "Placeholder Street, Singapore";
 
     public final String value;
 
