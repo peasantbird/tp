@@ -61,13 +61,13 @@ AddBuyerCommand --> AddBuyerCommandParser
 deactivate AddBuyerCommand
 AddBuyerCommandParser --> AddressBookParser
 deactivate AddBuyerCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
+'Hidden arrow to position the destroy marker below the end of the activation bar.'
 AddressBookParser -[hidden]-> AddressBookParser
 destroy AddBuyerCommandParser
 [<-- AddressBookParser
 deactivate AddressBookParser
 deactivate AddressBookParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
+'Hidden arrow to position the destroy marker below the end of the activation bar.'
 AddressBookParser -[hidden]-> AddressBookParser
 destroy AddressBookParser
 [-> AddBuyerCommand : execute()
