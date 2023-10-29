@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant "warn:CommandWarnings" as Warning LOGIC_COLOR
+participant "warn:CommandWarnings" as warn LOGIC_COLOR
 participant ":AddBuyerCommandParser" as AddBuyerCommandParser LOGIC_COLOR
 participant ":AddBuyerCommand" as AddBuyerCommand LOGIC_COLOR
 participant "<<class>>\nParseUtil" as ParseUtil LOGIC_COLOR
@@ -17,15 +17,14 @@ end box
 
 [-> AddressBookParser : parseCommand("buyer n/毛泽东" p/...)
 activate AddressBookParser
-create Warning
-AddressBookParser -> Warning : new CommandWarnings()
+create warn
+AddressBookParser -> warn : new CommandWarnings()
 
-activate Warning
-Warning --> AddressBookParser
-deactivate Warning
+activate warn
+warn --> AddressBookParser
+deactivate warn
 AddressBookParser --> AddressBookParser : parseCommand("buyer...", warn)
 activate AddressBookParser
-
 create AddBuyerCommandParser
 AddressBookParser -> AddBuyerCommandParser : new AddBuyerCommandParser()
 activate AddBuyerCommandParser
@@ -43,10 +42,10 @@ ParseUtil -> NameClass : isAppropriateName("毛泽东")
 activate NameClass
 NameClass --> ParseUtil : false
 deactivate NameClass
-ParseUtil -> Warning : AddWarning(MESSAGE_RECOMMENDATIONS)
-activate Warning
-Warning --> ParseUtil
-deactivate Warning
+ParseUtil -> warn : AddWarning(MESSAGE_RECOMMENDATIONS)
+activate warn
+warn --> ParseUtil
+deactivate warn
 create Name
 ParseUtil -> Name : new Name("毛泽东")
 activate Name
@@ -72,12 +71,15 @@ AddressBookParser -[hidden]-> AddressBookParser
 destroy AddressBookParser
 [-> AddBuyerCommand : execute()
 activate AddBuyerCommand
-AddBuyerCommand -> Warning : getWarningMessages()
-activate Warning
-Warning --> AddBuyerCommand
-deactivate Warning
+AddBuyerCommand -> warn : getWarningMessages()
+activate warn
+warn --> AddBuyerCommand
+deactivate warn
 [<-- AddBuyerCommand : A CommandResult containing a warning message.
 deactivate AddBuyerCommand
+'Hidden arrow to position the destroy marker below the end of the activation bar.'
+AddressBookParser -[hidden]-> AddressBookParser
+destroy AddBuyerCommand
 
 
 

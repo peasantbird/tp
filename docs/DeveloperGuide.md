@@ -378,14 +378,13 @@ to sort by.
 The sort command will sort by changing the ObservableList<T> to a SortedList<T>, with the comparator based on the
 certain criteria.
 
-## \[In progress\] Optional parameters and relaxed parameter matching
+## Relaxed parameter matching
 ### Background
 In previous versions of the app and in the original brownfield project AB3, fields such as ```Name``` or ```Email```
-had to be input as parameters to every creation of a contact, hence making it unwieldy and difficult for users. 
-There was also a validation method on instantiation, which would throw an ```IllegalArgumentException``` when 
-the provided string did not fit the regex. Although useful this would often be overzealous, causing potential 
+had a validation method on instantiation, which would throw an ```IllegalArgumentException``` when 
+the provided string did not fit the regex. Although useful, this would often be overzealous, causing potential 
 frustration. Furthermore, this exception, as it halts execution, only informs you of the first field that fails 
-to pass. 
+to pass, so if you had multiple errors you would have to resolve and re-execute each time.
 ### Implementation
 In 1.3, we implemented a group of static methods for each parameter, generally named isAppropriate(*Field*), which has a
 looser regex. The result of this boolean check, if it fails, then passes a warning string to the
@@ -393,13 +392,36 @@ looser regex. The result of this boolean check, if it fails, then passes a warni
 command encountered any warnings, then they are output into the returned CommandResult.
 This is then passed through LogicManager into MainWindow for display to the user.
 
-To allow for optional parameters, we create default strings as constants for all fields. When a command is missing
-certain parameters/prefixes, the method getOrDefault() is called on the result of ArgMultiMap
-(which if the field is missing, will be an empty/whitespace string) and returns the default string provided by the
-field, which is used to instantiate a new parameter. An exception to this rule is Name, since we consider Name an
-essential field for instantiating a Buyer/Seller. There is a default name provided to stay consistent with other fields,
-but an assertion is in place to check that this default name is not used.
+<puml src="diagrams/isAppropriateNameSequenceDiagram.puml" alt="isAppropriateNameSequenceDiagram" />
+<box type="info" seamless>
 
+**Note:** The lifeline for `SetBuyerPriorityCommand` should end at the destroy marker (X), but due to a
+limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+#### Design considerations:
+
+**Aspect: How to implement the warnings**
+
+* **Alternative 1 (current choice):** Use a CommandWarnings class to store strings representing warnings
+for inappropriate but valid fields.
+    * Pros: Allows us to hold multiple warnings at a time without halting execution.
+    * Cons: Using strings means that poor usage of addWarnings by callers may give nonsensical results.
+
+* **Alternative 2 (possible future enhancement):** Have CommandWarnings hold a set of predefined Warning singletons 
+instead of Strings, and 
+    * Pros: Constrains the contents of warning messages defensively, ensuring that they are useful.
+    * Cons: Not as flexible, not worth the effort of implementing in this early stage of development
+    , easy to add as future enhancement.
+
+* **Alternative 3 (proposed):** Use an exception such as InappropriateFieldException, which would be thrown by ParserUtil and 
+caught by the add buyer/seller command parsers, which would then pass a String warning to the command for it to output
+as the CommandResult.
+    * Pros: Doesn't require a new class to be created.
+    * Cons: To properly account for every field, you would require a Try/Catch block for every single field parsing.
+     Furthermore, using exceptions in the backend require switching to kernel mode, slowing down the application (which may be 
+     significant for high-usage cases in the future such as company-wide integration.)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
