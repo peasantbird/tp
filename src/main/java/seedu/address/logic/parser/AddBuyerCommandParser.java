@@ -7,6 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.displayable.Address.DEFAULT_ADDRESS_STRING;
+import static seedu.address.model.displayable.Email.DEFAULT_EMAIL_STRING;
+import static seedu.address.model.displayable.Phone.DEFAULT_PHONE_STRING;
+import static seedu.address.model.displayable.HouseInfo.DEFAULT_HOUSE_INFO;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -36,18 +40,21 @@ public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_HOUSE_INFO, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HOUSE_INFO)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBuyerCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE,
                 PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_HOUSE_INFO);
-        Name name = ParserUtil.parseName(commandWarnings, argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(commandWarnings, argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(commandWarnings, argMultimap.getValue(PREFIX_EMAIL).get());
-        Address address = ParserUtil.parseAddress(commandWarnings, argMultimap.getValue(PREFIX_ADDRESS).get());
-        HouseInfo houseInfo = ParserUtil.parseHouseInfo(commandWarnings, argMultimap.getValue(PREFIX_HOUSE_INFO).get());
+        Name name = ParserUtil.parseName(commandWarnings, argMultimap.getValueOrDefault(PREFIX_NAME, ""));
+        Phone phone = ParserUtil.parsePhone(commandWarnings, argMultimap.getValueOrDefault(PREFIX_PHONE,
+                DEFAULT_PHONE_STRING));
+        Email email = ParserUtil.parseEmail(commandWarnings, argMultimap.getValueOrDefault(PREFIX_EMAIL,
+                DEFAULT_EMAIL_STRING));
+        Address address = ParserUtil.parseAddress(commandWarnings, argMultimap.getValueOrDefault(PREFIX_ADDRESS,
+                DEFAULT_ADDRESS_STRING));
+        HouseInfo houseInfo = ParserUtil.parseHouseInfo(commandWarnings, argMultimap.getValueOrDefault(PREFIX_HOUSE_INFO,
+                DEFAULT_HOUSE_INFO));
         Set<Tag> tagList = ParserUtil.parseTags(commandWarnings, argMultimap.getAllValues(PREFIX_TAG));
 
         Buyer buyer = new Buyer(name, phone, email, address, houseInfo, tagList);
@@ -60,7 +67,7 @@ public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
      * {@code ArgumentMultimap}.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValueOrDefault(prefix, "") != "");
     }
 
 }
