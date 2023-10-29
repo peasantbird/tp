@@ -9,8 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.displayable.Address.DEFAULT_ADDRESS_STRING;
 import static seedu.address.model.displayable.Email.DEFAULT_EMAIL_STRING;
-import static seedu.address.model.displayable.Phone.DEFAULT_PHONE_STRING;
 import static seedu.address.model.displayable.HouseInfo.DEFAULT_HOUSE_INFO;
+import static seedu.address.model.displayable.Phone.DEFAULT_PHONE_STRING;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -47,14 +47,15 @@ public class AddBuyerCommandParser implements Parser<AddBuyerCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE,
                 PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_HOUSE_INFO);
         Name name = ParserUtil.parseName(commandWarnings, argMultimap.getValueOrDefault(PREFIX_NAME, ""));
+        assert name != null && !name.toString().trim().isEmpty() : "All buyers must have names!";
         Phone phone = ParserUtil.parsePhone(commandWarnings, argMultimap.getValueOrDefault(PREFIX_PHONE,
                 DEFAULT_PHONE_STRING));
         Email email = ParserUtil.parseEmail(commandWarnings, argMultimap.getValueOrDefault(PREFIX_EMAIL,
                 DEFAULT_EMAIL_STRING));
         Address address = ParserUtil.parseAddress(commandWarnings, argMultimap.getValueOrDefault(PREFIX_ADDRESS,
                 DEFAULT_ADDRESS_STRING));
-        HouseInfo houseInfo = ParserUtil.parseHouseInfo(commandWarnings, argMultimap.getValueOrDefault(PREFIX_HOUSE_INFO,
-                DEFAULT_HOUSE_INFO));
+        HouseInfo houseInfo = ParserUtil.parseHouseInfo(commandWarnings, argMultimap.getValueOrDefault(
+                PREFIX_HOUSE_INFO, DEFAULT_HOUSE_INFO));
         Set<Tag> tagList = ParserUtil.parseTags(commandWarnings, argMultimap.getAllValues(PREFIX_TAG));
 
         Buyer buyer = new Buyer(name, phone, email, address, houseInfo, tagList);

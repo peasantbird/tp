@@ -49,6 +49,7 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                 PREFIX_ADDRESS, PREFIX_SELLING_ADDRESS);
         Name name = ParserUtil.parseName(commandWarnings, argMultimap.getValueOrDefault(PREFIX_NAME, ""));
+        assert name != null && !name.toString().trim().isEmpty() : "All sellers must have names!";
         Phone phone = ParserUtil.parsePhone(commandWarnings, argMultimap.getValueOrDefault(PREFIX_PHONE,
                 DEFAULT_PHONE_STRING));
         Email email = ParserUtil.parseEmail(commandWarnings, argMultimap.getValueOrDefault(PREFIX_EMAIL,
@@ -57,8 +58,8 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
                 DEFAULT_ADDRESS_STRING));
         Address sellingAddress = ParserUtil.parseAddress(commandWarnings, argMultimap.getValueOrDefault(
                 PREFIX_SELLING_ADDRESS, DEFAULT_ADDRESS_STRING));
-        HouseInfo houseInfo = ParserUtil.parseHouseInfo(commandWarnings, argMultimap.getValueOrDefault(PREFIX_HOUSE_INFO,
-                DEFAULT_HOUSE_INFO));
+        HouseInfo houseInfo = ParserUtil.parseHouseInfo(commandWarnings, argMultimap.getValueOrDefault(
+                PREFIX_HOUSE_INFO, DEFAULT_HOUSE_INFO));
         Set<Tag> tagList = ParserUtil.parseTags(commandWarnings, argMultimap.getAllValues(PREFIX_TAG));
 
         Seller seller = new Seller(name, phone, email, address, sellingAddress, houseInfo, tagList);
