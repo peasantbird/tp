@@ -63,6 +63,7 @@ public class AddSellerCommand extends Command {
         }
 
         model.addSeller(toAdd);
+        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

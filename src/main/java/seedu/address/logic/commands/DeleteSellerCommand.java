@@ -44,6 +44,7 @@ public class DeleteSellerCommand extends Command {
 
         Seller sellerToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteSeller(sellerToDelete);
+        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DELETE_SELLER_SUCCESS, Messages.format(sellerToDelete)));
     }
 

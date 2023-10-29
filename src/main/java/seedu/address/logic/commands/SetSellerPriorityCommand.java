@@ -56,6 +56,7 @@ public class SetSellerPriorityCommand extends Command {
         Seller sellerWithPriority = getSellerWithPriority(targetSeller, this.priority);
 
         model.setSeller(targetSeller, sellerWithPriority);
+        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(sellerWithPriority)));
     }
 
