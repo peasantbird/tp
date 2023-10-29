@@ -39,8 +39,8 @@ public class ArgumentMultimap {
      */
     public String getValueOrDefault(Prefix prefix, String defaultString) {
         List<String> values = getAllValues(prefix);
-        return !values.isEmpty() && values.get(values.size() - 1) != null &&
-                !values.get(values.size() - 1).trim().isEmpty() ? values.get(values.size() - 1) : defaultString;
+        return !values.isEmpty() && values.get(values.size() - 1) != null
+                && !values.get(values.size() - 1).trim().isEmpty() ? values.get(values.size() - 1) : defaultString;
     }
 
     /**
