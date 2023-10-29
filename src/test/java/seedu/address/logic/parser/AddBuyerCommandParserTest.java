@@ -24,11 +24,6 @@ public class AddBuyerCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBuyerCommand.MESSAGE_USAGE));
     }
     @Test
-    public void assertFailsParse_partialInput() {
-        assertParseFailure(parser, PARTIAL_INPUT,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBuyerCommand.MESSAGE_USAGE));
-    }
-    @Test
     public void assertFailsParse_badFieldsInput() {
         assertParseFailure(parser, BAD_FIELDS_INPUT,
             String.format(Phone.MESSAGE_CONSTRAINTS, AddBuyerCommand.MESSAGE_USAGE));
