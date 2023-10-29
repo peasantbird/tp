@@ -81,8 +81,4 @@ deactivate AddBuyerCommand
 AddressBookParser -[hidden]-> AddressBookParser
 destroy AddBuyerCommand
 
-
-
-
-
 @enduml
