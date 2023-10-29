@@ -1,0 +1,41 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":Warning" as Warning LOGIC_COLOR
+participant ":AddBuyerCommandParser" as AddBuyerCommandParser LOGIC_COLOR
+participant "<<class>>\nParseUtil" as ParseUtil LOGIC_COLOR
+end box
+
+box Fields MODEL_COLOR_T1
+participant ":Name" as Name MODEL_COLOR
+participant "<<class>>\nName" as NameClass MODEL_COLOR
+end box
+
+[-> AddressBookParser : parseCommand("buyer n/毛泽东" p/...)
+activate AddressBookParser
+create Warning
+AddressBookParser -> Warning : new Warning()
+
+activate Warning
+Warning --> AddressBookParser
+deactivate Warning
+AddressBookParser --> AddressBookParser : parseCommand("buyer...", :Warning)
+activate AddressBookParser
+
+create AddBuyerCommandParser
+AddressBookParser -> AddBuyerCommandParser : new AddBuyerCommandParser()
+activate AddBuyerCommandParser
+AddBuyerCommandParser --> AddressBookParser
+deactivate AddBuyerCommandParser
+AddressBookParser -> AddBuyerCommandParser : parse("n/毛泽东...", :Warning)
+activate AddBuyerCommandParser
+:AddBuyerCommandParser
+deactivate AddressBookParser
+
+
+
+
+@enduml

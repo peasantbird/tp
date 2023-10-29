@@ -379,23 +379,23 @@ The sort command will sort by changing the ObservableList<T> to a SortedList<T>,
 certain criteria.
 
 ## \[In progress\] Optional parameters and relaxed parameter matching
-### Implementation
+### Background
 In previous versions of the app and in the original brownfield project AB3, fields such as ```Name``` or ```Email```
 had to be input as parameters to every creation of a contact, hence making it unwieldy and difficult for users. 
 There was also a validation method on instantiation, which would throw an ```IllegalArgumentException``` when 
 the provided string did not fit the regex. Although useful this would often be overzealous, causing potential 
 frustration. Furthermore, this exception, as it halts execution, only informs you of the first field that fails 
 to pass. 
-
+### Implementation
 In 1.3, we implemented a group of static methods for each parameter, generally named isAppropriate(*Field*), which has a
-looser regex. The result of this boolean check, if it fails, then passes a warning string to the ```Warning``` class, 
-which collects and stores them in a set. At the end of the execute() method, if the command encountered any warnings, 
-then they are collected in the returned CommandResult. This is then passed through LogicManager into MainWindow for 
-display to the user.
+looser regex. The result of this boolean check, if it fails, then passes a warning string to the
+```CommandWarnings``` class, which collects and stores them in a set. At the end of the execute() method, if the
+command encountered any warnings, then they are output into the returned CommandResult.
+This is then passed through LogicManager into MainWindow for display to the user.
 
-To allow for optional parameters, we create default strings as constants for all fields. When a command is missing 
+To allow for optional parameters, we create default strings as constants for all fields. When a command is missing
 certain parameters/prefixes, the method getOrDefault() is called on the result of ArgMultiMap
-(which if the field is missing, will be an empty/whitespace string) and returns the default string provided by the 
+(which if the field is missing, will be an empty/whitespace string) and returns the default string provided by the
 field, which is used to instantiate a new parameter. An exception to this rule is Name, since we consider Name an
 essential field for instantiating a Buyer/Seller. There is a default name provided to stay consistent with other fields,
 but an assertion is in place to check that this default name is not used.
