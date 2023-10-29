@@ -7,11 +7,8 @@ import static seedu.address.testutil.TypicalSellers.SALICE;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddSellerCommand;
-import seedu.address.logic.commands.Command;
 import seedu.address.model.displayable.Phone;
-import seedu.address.testutil.BuyerBuilder;
 import seedu.address.testutil.SellerBuilder;
 
 public class AddSellerCommandParserTest {
