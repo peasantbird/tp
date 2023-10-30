@@ -128,4 +128,6 @@ public interface Model {
     void updateFilteredSellerList(Predicate<? super Seller> predicate);
 
     void updateFilteredSortedBuyerList(Comparator<Buyer> comparator);
+
+    void updateFilteredSortedSellerList(Comparator<Seller> comparator);
 }

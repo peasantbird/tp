@@ -26,8 +26,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Buyer> filteredBuyers;
     private final SortedList<Buyer> filteredSortedBuyers;
-
     private final FilteredList<Seller> filteredSellers;
+    private final SortedList<Seller> filteredSortedSellers;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,6 +42,7 @@ public class ModelManager implements Model {
         filteredBuyers = new FilteredList<>(this.addressBook.getBuyerList());
         filteredSortedBuyers = new SortedList<>(filteredBuyers);
         filteredSellers = new FilteredList<>(this.addressBook.getSellerList());
+        filteredSortedSellers = new SortedList<>(filteredSellers);
     }
 
     public ModelManager() {
@@ -161,7 +162,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Seller> getFilteredSellerList() {
-        return filteredSellers;
+        return filteredSortedSellers;
     }
 
     @Override
@@ -183,6 +184,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredSortedSellerList(Comparator<Seller> comparator) {
+        requireNonNull(comparator);
+        filteredSortedSellers.setComparator(comparator);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -198,7 +205,8 @@ public class ModelManager implements Model {
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredBuyers.equals(otherModelManager.filteredBuyers)
                 && filteredSortedBuyers.equals(otherModelManager.filteredSortedBuyers)
-                && filteredSellers.equals(otherModelManager.filteredSellers);
+                && filteredSellers.equals(otherModelManager.filteredSellers)
+                && filteredSortedSellers.equals(otherModelManager.filteredSortedSellers);
     }
 
 }
