@@ -15,7 +15,7 @@ public class HouseInfo {
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String VALIDATION_REGEX = "[^\\s].*";
-    private final String info;
+    public final String info;
 
     /**
      * Creates a valid {@code HouseInfo}.
