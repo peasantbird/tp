@@ -20,6 +20,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -60,16 +61,18 @@ public class EditBuyerCommand extends Command {
 
     private final Index index;
     private final EditBuyerDescriptor editBuyerDescriptor;
+    private final CommandWarnings commandWarnings;
 
     /**
      * @param index of the buyer in the filtered buyer list to edit
      * @param editBuyerDescriptor details to edit the buyer with
      */
-    public EditBuyerCommand(Index index, EditBuyerDescriptor editBuyerDescriptor) {
+    public EditBuyerCommand(Index index, EditBuyerDescriptor editBuyerDescriptor, CommandWarnings commandWarnings) {
         requireNonNull(index);
         requireNonNull(editBuyerDescriptor);
         this.index = index;
         this.editBuyerDescriptor = new EditBuyerDescriptor(editBuyerDescriptor);
+        this.commandWarnings = commandWarnings;
     }
 
     @Override
@@ -90,6 +93,10 @@ public class EditBuyerCommand extends Command {
 
         model.setBuyer(buyerToEdit, editedBuyer);
         model.updateFilteredBuyerList(PREDICATE_SHOW_BUYERS);
+
+        if (commandWarnings.containsWarnings()) {
+            return new CommandResult(commandWarnings.getWarningMessage());
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_BUYER_SUCCESS, Messages.format(editedBuyer)));
     }
 

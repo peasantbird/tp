@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import seedu.address.logic.Messages;
@@ -41,6 +42,15 @@ public class ArgumentMultimap {
         List<String> values = getAllValues(prefix);
         return !values.isEmpty() && values.get(values.size() - 1) != null
                 && !values.get(values.size() - 1).trim().isEmpty() ? values.get(values.size() - 1) : defaultString;
+    }
+
+
+    /**
+     * Returns the last value of {@code prefix}.
+     */
+    public Optional<String> getValue(Prefix prefix) {
+        List<String> values = getAllValues(prefix);
+        return values.isEmpty() ? Optional.empty() : Optional.of(values.get(values.size() - 1));
     }
 
     /**

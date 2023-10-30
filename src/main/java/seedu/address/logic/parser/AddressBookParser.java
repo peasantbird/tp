@@ -98,10 +98,10 @@ public class AddressBookParser {
             return new SetSellerPriorityCommandParser().parse(arguments, commandWarnings);
 
         case EditBuyerCommand.COMMAND_WORD:
-            return new EditBuyerCommandParser().parse(arguments);
+            return new EditBuyerCommandParser().parse(arguments, commandWarnings);
 
         case EditSellerCommand.COMMAND_WORD:
-            return new EditSellerCommandParser().parse(arguments);
+            return new EditSellerCommandParser().parse(arguments, commandWarnings);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
