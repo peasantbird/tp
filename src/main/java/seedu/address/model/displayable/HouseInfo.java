@@ -20,7 +20,7 @@ public class HouseInfo {
     public static final String VALIDATION_REGEX = "[^\\s].*";
     public static final String AFFIRMATION_REGEX = VALIDATION_REGEX;
     public static final String DEFAULT_HOUSE_INFO = "Placeholder house";
-    private final String info;
+    public final String info;
 
     /**
      * Creates a valid {@code HouseInfo}.
