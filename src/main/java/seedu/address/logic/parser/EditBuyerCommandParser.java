@@ -16,6 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.commands.EditBuyerCommand;
 import seedu.address.logic.commands.EditBuyerCommand.EditBuyerDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -31,7 +32,7 @@ public class EditBuyerCommandParser implements Parser<EditBuyerCommand> {
      * and returns an EditBuyerCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditBuyerCommand parse(String args) throws ParseException {
+    public EditBuyerCommand parse(String args, CommandWarnings commandWarnings) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HOUSE_INFO,
@@ -51,30 +52,35 @@ public class EditBuyerCommandParser implements Parser<EditBuyerCommand> {
         EditBuyerDescriptor editBuyerDescriptor = new EditBuyerDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editBuyerDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editBuyerDescriptor.setName(ParserUtil.parseName(commandWarnings, argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editBuyerDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editBuyerDescriptor.setPhone(ParserUtil.parsePhone(commandWarnings,
+                    argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editBuyerDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+            editBuyerDescriptor.setEmail(ParserUtil.parseEmail(commandWarnings,
+                    argMultimap.getValue(PREFIX_EMAIL).get()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editBuyerDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            editBuyerDescriptor.setAddress(ParserUtil.parseAddress(commandWarnings,
+                    argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_HOUSE_INFO).isPresent()) {
-            editBuyerDescriptor.setHouseInfo(ParserUtil.parseHouseInfo(argMultimap.getValue(PREFIX_HOUSE_INFO).get()));
+            editBuyerDescriptor.setHouseInfo(ParserUtil.parseHouseInfo(commandWarnings,
+                    argMultimap.getValue(PREFIX_HOUSE_INFO).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editBuyerDescriptor::setTags);
+        parseTagsForEdit(commandWarnings, argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editBuyerDescriptor::setTags);
         if (argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
-            editBuyerDescriptor.setPriority(ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get()));
+            editBuyerDescriptor.setPriority(ParserUtil.parsePriority(commandWarnings,
+                    argMultimap.getValue(PREFIX_PRIORITY).get()));
         }
 
         if (!editBuyerDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditBuyerCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditBuyerCommand(index, editBuyerDescriptor);
+        return new EditBuyerCommand(index, editBuyerDescriptor, commandWarnings);
     }
 
     /**
@@ -82,14 +88,15 @@ public class EditBuyerCommandParser implements Parser<EditBuyerCommand> {
      * If {@code tags} contain only one element which is an empty string, it will be parsed into a
      * {@code Set<Tag>} containing zero tags.
      */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+    private Optional<Set<Tag>> parseTagsForEdit(CommandWarnings commandWarnings, Collection<String> tags)
+            throws ParseException {
         assert tags != null;
 
         if (tags.isEmpty()) {
             return Optional.empty();
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        return Optional.of(ParserUtil.parseTags(commandWarnings, tagSet));
     }
 
 }
