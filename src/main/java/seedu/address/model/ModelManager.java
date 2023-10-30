@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.displayable.buyer.Buyer;
@@ -23,6 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Buyer> filteredBuyers;
+    private final SortedList<Buyer> filteredSortedBuyers;
 
     private final FilteredList<Seller> filteredSellers;
 
@@ -37,6 +40,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredBuyers = new FilteredList<>(this.addressBook.getBuyerList());
+        filteredSortedBuyers = new SortedList<>(filteredBuyers);
         filteredSellers = new FilteredList<>(this.addressBook.getSellerList());
     }
 
@@ -148,7 +152,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Buyer> getFilteredBuyerList() {
-        return filteredBuyers;
+        return filteredSortedBuyers;
     }
 
     /**
@@ -173,6 +177,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateFilteredSortedBuyerList(Comparator<Buyer> comparator) {
+        requireNonNull(comparator);
+        filteredSortedBuyers.setComparator(comparator);
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -187,6 +197,7 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredBuyers.equals(otherModelManager.filteredBuyers)
+                && filteredSortedBuyers.equals(otherModelManager.filteredSortedBuyers)
                 && filteredSellers.equals(otherModelManager.filteredSellers);
     }
 
