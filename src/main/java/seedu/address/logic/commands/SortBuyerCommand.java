@@ -40,6 +40,7 @@ public class SortBuyerCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        model.updateFilteredSortedBuyerList(comparator);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
