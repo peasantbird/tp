@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -32,6 +33,7 @@ public class SetSellerPriorityCommand extends Command {
     public static final String MESSAGE_SUCCESS = "The seller's priority level has been set:\n%1$s";
     private final Index targetIndex;
     private final Priority priority;
+    private final CommandWarnings commandWarnings;
 
     /**
      * Constructs a SetSellerPriorityCommand to set the priority level of a specified seller.
@@ -41,6 +43,18 @@ public class SetSellerPriorityCommand extends Command {
     public SetSellerPriorityCommand(Index targetIndex, Priority priority) {
         this.targetIndex = targetIndex;
         this.priority = priority;
+        this.commandWarnings = new CommandWarnings();
+    }
+    /**
+     * Constructs a SetSellerPriorityCommand to set the priority level of a specified seller.
+     * @param targetIndex
+     * @param priority
+     * @param commandWarnings
+     */
+    public SetSellerPriorityCommand(Index targetIndex, Priority priority, CommandWarnings commandWarnings) {
+        this.targetIndex = targetIndex;
+        this.priority = priority;
+        this.commandWarnings = commandWarnings;
     }
 
     @Override
@@ -56,6 +70,9 @@ public class SetSellerPriorityCommand extends Command {
         Seller sellerWithPriority = getSellerWithPriority(targetSeller, this.priority);
 
         model.setSeller(targetSeller, sellerWithPriority);
+        if (commandWarnings.containsWarnings()) {
+            return new CommandResult(commandWarnings.getWarningMessage());
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(sellerWithPriority)));
     }
 
@@ -89,7 +106,9 @@ public class SetSellerPriorityCommand extends Command {
         }
 
         SetSellerPriorityCommand otherPriorityCommand = (SetSellerPriorityCommand) other;
-        return targetIndex.equals(otherPriorityCommand.targetIndex);
+        return targetIndex.equals(otherPriorityCommand.targetIndex)
+                && priority.equals(otherPriorityCommand.priority)
+                && commandWarnings.equals(otherPriorityCommand.commandWarnings);
     }
 
     @Override
@@ -97,6 +116,7 @@ public class SetSellerPriorityCommand extends Command {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
                 .add("priority", priority)
+                .add("warnings", commandWarnings)
                 .toString();
     }
 }

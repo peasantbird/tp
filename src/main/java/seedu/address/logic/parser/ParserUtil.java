@@ -8,6 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
@@ -43,11 +44,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parseName(String name) throws ParseException {
+    public static Name parseName(CommandWarnings warn, String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        if (!Name.isAppropriateName(trimmedName)) {
+            warn.addWarning(Name.MESSAGE_RECOMMENDATIONS);
         }
         return new Name(trimmedName);
     }
@@ -58,11 +62,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
+    public static Phone parsePhone(CommandWarnings warn, String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+        }
+        if (!Phone.isAppropriatePhone(trimmedPhone)) {
+            warn.addWarning(Phone.MESSAGE_RECOMMENDATIONS);
         }
         return new Phone(trimmedPhone);
     }
@@ -73,13 +80,34 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code address} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
+    public static Address parseAddress(CommandWarnings warn, String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
         if (!Address.isValidAddress(trimmedAddress)) {
             throw new ParseException(Address.MESSAGE_CONSTRAINTS);
         }
+        if (!Address.isAppropriateAddress(trimmedAddress)) {
+            warn.addWarning(Address.MESSAGE_RECOMMENDATIONS);
+        }
         return new Address(trimmedAddress);
+    }
+
+    /**
+     * Parses a {@code String HouseInfo} into a {@code HouseInfo}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code HouseInfo} is invalid.
+     */
+    public static HouseInfo parseHouseInfo(CommandWarnings warn, String info) throws ParseException {
+        requireNonNull(info);
+        String trimmedInfo = info.trim();
+        if (!HouseInfo.isValidHouseInfo(trimmedInfo)) {
+            throw new ParseException(HouseInfo.MESSAGE_CONSTRAINTS);
+        }
+        if (!HouseInfo.isAppropriateHouseInfo(info)) {
+            warn.addWarning(HouseInfo.MESSAGE_RECOMMENDATIONS);
+        }
+        return new HouseInfo(trimmedInfo);
     }
 
     /**
@@ -88,28 +116,16 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
+    public static Email parseEmail(CommandWarnings warn, String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
-    }
-
-    /**
-     * Parses a {@code String HouseInfo} into an {@code HouseInfo}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code HouseInfo} is invalid.
-     */
-    public static HouseInfo parseHouseInfo(String houseInfo) throws ParseException {
-        requireNonNull(houseInfo);
-        String trimmedInfo = houseInfo.trim();
-        if (!HouseInfo.isValidHouseInfo(trimmedInfo)) {
-            throw new ParseException(HouseInfo.MESSAGE_CONSTRAINTS);
+        if (!Email.isAppropriateEmail(email)) {
+            warn.addWarning(Email.MESSAGE_RECOMMENDATIONS);
         }
-        return new HouseInfo(trimmedInfo);
+        return new Email(trimmedEmail);
     }
 
     /**
@@ -118,11 +134,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
+    public static Tag parseTag(CommandWarnings warn, String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+        }
+        if (!Tag.isAppropriateTag(tag)) {
+            warn.addWarning(Tag.MESSAGE_RECOMMENDATIONS);
         }
         return new Tag(trimmedTag);
     }
@@ -130,11 +149,11 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static Set<Tag> parseTags(CommandWarnings warn, Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            tagSet.add(parseTag(warn, tagName));
         }
         return tagSet;
     }
@@ -145,11 +164,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code priority} is invalid.
      */
-    public static Priority parsePriority(String priority) throws ParseException {
+    public static Priority parsePriority(CommandWarnings warn, String priority) throws ParseException {
         requireNonNull(priority);
         String trimmedPriority = priority.trim().toLowerCase();
         if (!Priority.isValidPriority(trimmedPriority)) {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
+        }
+        if (!Priority.isAppropriatePriority(priority)) {
+            warn.addWarning(Priority.MESSAGE_RECOMMENDATIONS);
         }
         return new Priority(trimmedPriority);
     }
