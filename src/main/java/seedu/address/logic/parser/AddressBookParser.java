@@ -106,10 +106,10 @@ public class AddressBookParser {
             return new EditSellerCommandParser().parse(arguments, commandWarnings);
 
         case SortBuyerCommand.COMMAND_WORD:
-            return new SortBuyerCommandParser().parse(arguments);
+            return new SortBuyerCommandParser().parse(arguments, commandWarnings);
 
         case SortSellerCommand.COMMAND_WORD:
-            return new SortSellerCommandParser().parse(arguments);
+            return new SortSellerCommandParser().parse(arguments, commandWarnings);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

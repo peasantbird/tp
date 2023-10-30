@@ -7,15 +7,24 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 
+import java.util.Comparator;
+
+import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.commands.SortSellerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.seller.Seller;
 
-import java.util.Comparator;
-
+/**
+ * Parses input arguments and creates a new SortSellerCommand object
+ */
 public class SortSellerCommandParser implements Parser<SortSellerCommand> {
 
-    public SortSellerCommand parse(String args) throws ParseException {
+    /**
+     * Parses the given {@code String} of arguments in the context of the SortSellerCommand
+     * and returns SortSellerCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public SortSellerCommand parse(String args, CommandWarnings commandWarnings) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ADDRESS,
                 PREFIX_HOUSE_INFO, PREFIX_PRIORITY);
@@ -26,13 +35,13 @@ public class SortSellerCommandParser implements Parser<SortSellerCommand> {
             switch (argMultimap.getValue(PREFIX_NAME).get()) {
 
             case ("a"):
-                Comparator<Seller> ascendingNameComparator =
-                        (o1, o2) -> o1.getName().fullName.compareTo(o2.getName().fullName);
+                Comparator<Seller> ascendingNameComparator = (o1, o2) ->
+                        o1.getName().fullName.compareTo(o2.getName().fullName);
                 return new SortSellerCommand(ascendingNameComparator);
 
             case ("d"):
-                Comparator<Seller> descendingNameComparator =
-                        (o1, o2) -> o2.getName().fullName.compareTo(o1.getName().fullName);
+                Comparator<Seller> descendingNameComparator = (o1, o2) ->
+                        o2.getName().fullName.compareTo(o1.getName().fullName);
                 return new SortSellerCommand(descendingNameComparator);
 
             default:
@@ -43,13 +52,13 @@ public class SortSellerCommandParser implements Parser<SortSellerCommand> {
             switch (argMultimap.getValue(PREFIX_ADDRESS).get()) {
 
             case ("a"):
-                Comparator<Seller> ascendingAddressComparator =
-                        (o1, o2) -> o1.getAddress().value.compareTo(o2.getAddress().value);
+                Comparator<Seller> ascendingAddressComparator = (o1, o2) ->
+                        o1.getAddress().value.compareTo(o2.getAddress().value);
                 return new SortSellerCommand(ascendingAddressComparator);
 
             case ("d"):
-                Comparator<Seller> descendingAddressComparator =
-                        (o1, o2) -> o2.getAddress().value.compareTo(o1.getAddress().value);
+                Comparator<Seller> descendingAddressComparator = (o1, o2) ->
+                        o2.getAddress().value.compareTo(o1.getAddress().value);
                 return new SortSellerCommand(descendingAddressComparator);
 
             default:
@@ -60,13 +69,13 @@ public class SortSellerCommandParser implements Parser<SortSellerCommand> {
             switch (argMultimap.getValue(PREFIX_HOUSE_INFO).get()) {
 
             case ("a"):
-                Comparator<Seller> ascendingHouseInfoComparator =
-                        (o1, o2) -> o1.getHouseInfo().info.compareTo(o2.getHouseInfo().info);
+                Comparator<Seller> ascendingHouseInfoComparator = (o1, o2) ->
+                        o1.getHouseInfo().info.compareTo(o2.getHouseInfo().info);
                 return new SortSellerCommand(ascendingHouseInfoComparator);
 
             case ("d"):
-                Comparator<Seller> descendingHouseInfoComparator =
-                        (o1, o2) -> o2.getHouseInfo().info.compareTo(o1.getHouseInfo().info);
+                Comparator<Seller> descendingHouseInfoComparator = (o1, o2) ->
+                        o2.getHouseInfo().info.compareTo(o1.getHouseInfo().info);
                 return new SortSellerCommand(descendingHouseInfoComparator);
 
             default:
@@ -77,13 +86,13 @@ public class SortSellerCommandParser implements Parser<SortSellerCommand> {
             switch (argMultimap.getValue(PREFIX_PRIORITY).get()) {
 
             case ("a"):
-                Comparator<Seller> ascendingPriorityComparator =
-                        (o1, o2) -> o1.getPriority().value.compareTo(o2.getPriority().value);
+                Comparator<Seller> ascendingPriorityComparator = (o1, o2) ->
+                        o1.getPriority().value.compareTo(o2.getPriority().value);
                 return new SortSellerCommand(ascendingPriorityComparator);
 
             case ("d"):
-                Comparator<Seller> descendingPriorityComparator =
-                        (o1, o2) -> o2.getPriority().value.compareTo(o1.getPriority().value);
+                Comparator<Seller> descendingPriorityComparator = (o1, o2) ->
+                        o2.getPriority().value.compareTo(o1.getPriority().value);
                 return new SortSellerCommand(descendingPriorityComparator);
 
             default:

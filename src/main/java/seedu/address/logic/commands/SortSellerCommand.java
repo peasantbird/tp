@@ -13,6 +13,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.displayable.seller.Seller;
 
+/**
+ * Represents a command that sorts the seller list based on a comparator.
+ */
 public class SortSellerCommand extends Command {
 
     public static final String COMMAND_WORD = "sort-s";
@@ -31,6 +34,10 @@ public class SortSellerCommand extends Command {
 
     private final Comparator<Seller> comparator;
 
+    /**
+     * Constructs a SortSellerCommand based on the comparator to be used.
+     * @param comparator the comparator which will be used to arrange the list.
+     */
     public SortSellerCommand(Comparator<Seller> comparator) {
         requireNonNull(comparator);
         this.comparator = comparator;
