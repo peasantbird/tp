@@ -97,7 +97,7 @@ public class SellerTest {
                 + ", email=" + SALICE.getEmail() + ", address=" + SALICE.getAddress() + ", tags=" + SALICE.getTags()
                 + ", priority=" + ALICE.getPriority()
                 + ", selling address=" + SALICE.getSellingAddress()
-                + ", house info=" + SALICE.getSellHouseInfo() + "}";
+                + ", house info=" + SALICE.getHouseInfo() + "}";
         assertEquals(expected, SALICE.toString());
     }
 }

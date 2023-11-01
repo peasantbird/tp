@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -31,6 +32,8 @@ public class SetBuyerPriorityCommand extends Command {
     private final Index targetIndex;
     private final Priority priority;
 
+    private final CommandWarnings commandWarnings;
+
     /**
      * Constructs a SetBuyerPriorityCommand to set the priority level of a specified buyer.
      * @param targetIndex
@@ -39,6 +42,18 @@ public class SetBuyerPriorityCommand extends Command {
     public SetBuyerPriorityCommand(Index targetIndex, Priority priority) {
         this.targetIndex = targetIndex;
         this.priority = priority;
+        this.commandWarnings = new CommandWarnings();
+    }
+    /**
+     * Constructs a SetBuyerPriorityCommand to set the priority level of a specified buyer.
+     * @param targetIndex
+     * @param priority
+     * @param commandWarnings
+     */
+    public SetBuyerPriorityCommand(Index targetIndex, Priority priority, CommandWarnings commandWarnings) {
+        this.targetIndex = targetIndex;
+        this.priority = priority;
+        this.commandWarnings = commandWarnings;
     }
 
     @Override
@@ -52,7 +67,9 @@ public class SetBuyerPriorityCommand extends Command {
 
         Buyer targetBuyer = lastShownList.get(targetIndex.getZeroBased());
         Buyer buyerWithPriority = getBuyerWithPriority(targetBuyer, this.priority);
-
+        if (commandWarnings.containsWarnings()) {
+            return new CommandResult(commandWarnings.getWarningMessage());
+        }
         model.setBuyer(targetBuyer, buyerWithPriority);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(buyerWithPriority)));
@@ -70,7 +87,7 @@ public class SetBuyerPriorityCommand extends Command {
                 targetBuyer.getPhone(),
                 targetBuyer.getEmail(),
                 targetBuyer.getAddress(),
-                targetBuyer.getBuyHouseInfo(),
+                targetBuyer.getHouseInfo(),
                 targetBuyer.getTags(),
                 priority);
     }
@@ -87,7 +104,9 @@ public class SetBuyerPriorityCommand extends Command {
         }
 
         SetBuyerPriorityCommand otherPriorityCommand = (SetBuyerPriorityCommand) other;
-        return targetIndex.equals(otherPriorityCommand.targetIndex);
+        return targetIndex.equals(otherPriorityCommand.targetIndex)
+                && priority.equals(otherPriorityCommand.priority)
+                && commandWarnings.equals(otherPriorityCommand.commandWarnings);
     }
 
     @Override
@@ -95,6 +114,7 @@ public class SetBuyerPriorityCommand extends Command {
         return new ToStringBuilder(this)
                 .add("targetIndex", targetIndex)
                 .add("priority", priority)
+                .add("warnings", commandWarnings)
                 .toString();
     }
 }

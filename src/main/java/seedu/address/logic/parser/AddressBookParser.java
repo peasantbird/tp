@@ -8,12 +8,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteBuyerCommand;
 import seedu.address.logic.commands.DeleteSellerCommand;
+import seedu.address.logic.commands.EditBuyerCommand;
+import seedu.address.logic.commands.EditSellerCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -22,6 +25,8 @@ import seedu.address.logic.commands.ListSellersCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SetBuyerPriorityCommand;
 import seedu.address.logic.commands.SetSellerPriorityCommand;
+import seedu.address.logic.commands.SortBuyerCommand;
+import seedu.address.logic.commands.SortSellerCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -40,10 +45,11 @@ public class AddressBookParser {
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
+     * @param commandWarnings  A warning container.
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput, CommandWarnings commandWarnings) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -60,10 +66,10 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddBuyerCommand.COMMAND_WORD:
-            return new AddBuyerCommandParser().parse(arguments);
+            return new AddBuyerCommandParser().parse(arguments, commandWarnings);
 
         case AddSellerCommand.COMMAND_WORD:
-            return new AddSellerCommandParser().parse(arguments);
+            return new AddSellerCommandParser().parse(arguments, commandWarnings);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -72,7 +78,7 @@ public class AddressBookParser {
             return new ExitCommand();
 
         case FilterCommand.COMMAND_WORD:
-            return new FilterCommandParser().parse(arguments);
+            return new FilterCommandParser().parse(arguments, commandWarnings);
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
@@ -84,16 +90,28 @@ public class AddressBookParser {
             return new ListBuyersCommand();
 
         case DeleteBuyerCommand.COMMAND_WORD:
-            return new DeleteBuyerCommandParser().parse(arguments);
+            return new DeleteBuyerCommandParser().parse(arguments, commandWarnings);
 
         case DeleteSellerCommand.COMMAND_WORD:
-            return new DeleteSellerCommandParser().parse(arguments);
+            return new DeleteSellerCommandParser().parse(arguments, commandWarnings);
 
         case SetBuyerPriorityCommand.COMMAND_WORD:
-            return new SetBuyerPriorityCommandParser().parse(arguments);
+            return new SetBuyerPriorityCommandParser().parse(arguments, commandWarnings);
 
         case SetSellerPriorityCommand.COMMAND_WORD:
-            return new SetSellerPriorityCommandParser().parse(arguments);
+            return new SetSellerPriorityCommandParser().parse(arguments, commandWarnings);
+
+        case EditBuyerCommand.COMMAND_WORD:
+            return new EditBuyerCommandParser().parse(arguments, commandWarnings);
+
+        case EditSellerCommand.COMMAND_WORD:
+            return new EditSellerCommandParser().parse(arguments, commandWarnings);
+
+        case SortBuyerCommand.COMMAND_WORD:
+            return new SortBuyerCommandParser().parse(arguments, commandWarnings);
+
+        case SortSellerCommand.COMMAND_WORD:
+            return new SortSellerCommandParser().parse(arguments, commandWarnings);
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
@@ -105,6 +123,10 @@ public class AddressBookParser {
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
+    }
+
+    public Command parseCommand(String userInput) throws ParseException {
+        return parseCommand(userInput, new CommandWarnings());
     }
 
 }

@@ -8,7 +8,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Displayable;
-import seedu.address.model.displayable.Info;
+import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Price;
 import seedu.address.model.tag.Tag;
@@ -22,16 +22,16 @@ public class House implements Displayable {
     private final Name name;
     private final Price price;
     private final Address address;
-    private final Info info;
+    private final HouseInfo houseInfo;
     private final Set<Tag> tags = new HashSet<>();
     /**
      * Constructs an instance of House.
      */
-    public House(Name name, Price price, Address address, Info info, Set<Tag> tags) {
+    public House(Name name, Price price, Address address, HouseInfo houseInfo, Set<Tag> tags) {
         this.name = name;
         this.price = price;
         this.address = address;
-        this.info = info;
+        this.houseInfo = houseInfo;
         this.tags.addAll(tags);
     }
 
@@ -44,8 +44,8 @@ public class House implements Displayable {
     public Address getAddress() {
         return this.address;
     }
-    public Info getInfo() {
-        return this.info;
+    public HouseInfo getHouseInfo() {
+        return this.houseInfo;
     }
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(this.tags);
@@ -65,7 +65,7 @@ public class House implements Displayable {
         return this.name.equals(otherHouse.name)
                 && this.price.equals(otherHouse.price)
                 && this.address.equals(otherHouse.address)
-                && this.info.equals(otherHouse.info)
+                && this.houseInfo.equals(otherHouse.houseInfo)
                 && this.tags.equals(otherHouse.tags);
     }
     public boolean isSameHouse(House h) {
@@ -86,7 +86,7 @@ public class House implements Displayable {
                 .add("name", name)
                 .add("price", price)
                 .add("address", address)
-                .add("info", info)
+                .add("info", houseInfo)
                 .add("tags", tags)
                 .toString();
     }

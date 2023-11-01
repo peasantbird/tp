@@ -123,7 +123,9 @@ public class SetSellerPriorityCommandTest {
         SetSellerPriorityCommand setSellerPriorityCommand = new SetSellerPriorityCommand(targetIndex, DEFAULT_PRIORITY);
         String expected = SetSellerPriorityCommand.class.getCanonicalName()
                 + "{targetIndex=" + targetIndex
-                + ", priority=" + DEFAULT_PRIORITY + "}";
+                + ", priority=" + DEFAULT_PRIORITY
+                + ", warnings=[]"
+                + "}";
         assertEquals(expected, setSellerPriorityCommand.toString());
     }
 }

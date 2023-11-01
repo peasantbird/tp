@@ -4,15 +4,17 @@
     "phone" : "342323",
     "email" : "em@ail",
     "address" : "address",
-    "buyerInfo" : "info",
-    "tags" : [ ]
+    "info" : "info",
+    "tags" : [ ],
+    "priority": "nil"
   }, {
     "name" : "Invalid Buyer",
-    "phone" : "9435HasInvalidNumber1253",
+    "phone" : "HasInvalidNumber",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "buyerInfo" : "Loves views",
-    "tags" : [ "friends" ]
+    "info" : "Loves views",
+    "tags" : [ "friends" ],
+    "priority": "nil"
   } ],
   "sellers" : [ ]
 }

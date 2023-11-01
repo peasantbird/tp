@@ -16,7 +16,7 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `rtpm.jar` {not available yet, coming soon}.
+1. Download the latest `rtpm.jar` [here](https://github.com/AY2324S1-CS2103T-F11-3/tp/releases/tag/v1.3(trial)).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your RTPM.
 
