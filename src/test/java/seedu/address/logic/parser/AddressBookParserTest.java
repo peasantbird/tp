@@ -20,8 +20,8 @@ import seedu.address.logic.commands.DeleteSellerCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListBuyersCommand;
-import seedu.address.logic.commands.ListSellersCommand;
+import seedu.address.logic.commands.ListBuyerCommand;
+import seedu.address.logic.commands.ListSellerCommand;
 import seedu.address.logic.commands.SetBuyerPriorityCommand;
 import seedu.address.logic.commands.SetSellerPriorityCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -93,14 +93,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_listBuyers() throws Exception {
-        assertTrue(parser.parseCommand(ListBuyersCommand.COMMAND_WORD) instanceof ListBuyersCommand);
-        assertTrue(parser.parseCommand(ListBuyersCommand.COMMAND_WORD + " 3") instanceof ListBuyersCommand);
+        assertTrue(parser.parseCommand(ListBuyerCommand.COMMAND_WORD + " 3") instanceof ListBuyerCommand);
     }
 
     @Test
     public void parseCommand_listSellers() throws Exception {
-        assertTrue(parser.parseCommand(ListSellersCommand.COMMAND_WORD) instanceof ListSellersCommand);
-        assertTrue(parser.parseCommand(ListSellersCommand.COMMAND_WORD + " 3") instanceof ListSellersCommand);
+        assertTrue(parser.parseCommand(ListSellerCommand.COMMAND_WORD + " 3") instanceof ListSellerCommand);
     }
 
     @Test
