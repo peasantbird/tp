@@ -64,11 +64,20 @@ public interface Model {
      * Returns true if a buyer with the same identity as {@code buyer} exists in the address book's buyer list.
      */
     boolean hasBuyer(Buyer buyer);
+    /**
+     * Returns true if a buyer with similar identity as {@code buyer} exists in the address book's buyer list.
+     */
+    boolean hasSimilarBuyer(Buyer buyer);
 
     /**
      * Returns true if a seller with the same identity as {@code seller} exists in the address book's seller list.
      */
     boolean hasSeller(Seller seller);
+    /**
+     * Returns true if a seller with similar identity as {@code seller} exists in the address book's seller list.
+     */
+    boolean hasSimilarSeller(Seller seller);
+
 
     /**
      * Deletes the given buyer.

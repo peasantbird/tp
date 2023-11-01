@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_SIMILAR_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
@@ -90,7 +91,9 @@ public class EditBuyerCommand extends Command {
         if (!buyerToEdit.isSamePerson(editedBuyer) && model.hasBuyer(editedBuyer)) {
             throw new CommandException(MESSAGE_DUPLICATE_BUYER);
         }
-
+        if (!buyerToEdit.isSimilarDisplayable(editedBuyer) && model.hasSimilarBuyer(editedBuyer)) {
+            commandWarnings.addWarning(MESSAGE_SIMILAR_BUYER);
+        }
         model.setBuyer(buyerToEdit, editedBuyer);
         model.updateFilteredBuyerList(PREDICATE_SHOW_BUYERS);
 
