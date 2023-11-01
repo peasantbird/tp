@@ -100,8 +100,7 @@ public class SortSellerCommandParser implements Parser<SortSellerCommand> {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortSellerCommand.MESSAGE_USAGE));
             }
         } else {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortSellerCommand.MESSAGE_USAGE));
+            return new SortSellerCommand(null);
         }
     }
 }
