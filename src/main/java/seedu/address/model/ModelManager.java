@@ -13,7 +13,6 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.displayable.Person;
 import seedu.address.model.displayable.buyer.Buyer;
 import seedu.address.model.displayable.seller.Seller;
 
