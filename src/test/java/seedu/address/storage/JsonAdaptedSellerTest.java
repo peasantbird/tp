@@ -14,16 +14,16 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
-import seedu.address.model.displayable.seller.SellHouseInfo;
 
 public class JsonAdaptedSellerTest {
-    private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_NAME = "  ";
+    private static final String INVALID_PHONE = "+kjfladkj";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "   ";
     private static final String INVALID_SELLING_ADDRESS = " ";
     private static final String INVALID_INFO = " ";
 
@@ -32,7 +32,7 @@ public class JsonAdaptedSellerTest {
     private static final String VALID_EMAIL = SALICE.getEmail().toString();
     private static final String VALID_ADDRESS = SALICE.getAddress().toString();
     private static final String VALID_SELLING_ADDRESS = SALICE.getSellingAddress().toString();
-    private static final String VALID_INFO = SALICE.getSellHouseInfo().toString();
+    private static final String VALID_INFO = SALICE.getHouseInfo().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = SALICE.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -111,7 +111,7 @@ public class JsonAdaptedSellerTest {
     public void toModelType_invalidInfo_throwsIllegalValueException() {
         JsonAdaptedSeller seller = new JsonAdaptedSeller(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_SELLING_ADDRESS, INVALID_INFO, VALID_TAGS, VALID_PRIORITY);
-        String expectedMessage = String.format(SellHouseInfo.MESSAGE_CONSTRAINTS);
+        String expectedMessage = String.format(HouseInfo.MESSAGE_CONSTRAINTS);
         assertThrows(IllegalValueException.class, expectedMessage, seller::toModelType);
     }
 
@@ -119,7 +119,7 @@ public class JsonAdaptedSellerTest {
     public void toModelType_nullInfo_throwsIllegalValueException() {
         JsonAdaptedSeller seller = new JsonAdaptedSeller(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 VALID_SELLING_ADDRESS, null, VALID_TAGS, VALID_PRIORITY);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, SellHouseInfo.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, HouseInfo.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, seller::toModelType);
     }
 

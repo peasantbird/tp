@@ -42,7 +42,7 @@ public class HouseCard extends UiPart<Region> {
         name.setText(house.getName().fullName);
         price.setText(house.getPrice().value);
         address.setText(house.getAddress().value);
-        info.setText(house.getInfo().toString());
+        info.setText(house.getHouseInfo().toString());
         house.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

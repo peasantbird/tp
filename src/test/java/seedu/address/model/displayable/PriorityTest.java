@@ -51,19 +51,22 @@ public class PriorityTest {
 
         // invalid priority levels
         assertFalse(Priority.isValidPriority("")); // empty string
-        assertFalse(Priority.isValidPriority("   ")); // spaces only
+        assertTrue(Priority.isValidPriority("   ")); // spaces only
         assertFalse(Priority.isValidPriority("testing")); // invalid arguments
-        assertFalse(Priority.isValidPriority("h"));
-        assertFalse(Priority.isValidPriority("m"));
-        assertFalse(Priority.isValidPriority("l"));
-        assertFalse(Priority.isValidPriority("hig")); // typos
-        assertFalse(Priority.isValidPriority("h9gh"));
-        assertFalse(Priority.isValidPriority("med ium"));
-        assertFalse(Priority.isValidPriority("lo"));
         assertFalse(Priority.isValidPriority("0")); // non-alphabetical
         assertFalse(Priority.isValidPriority("123")); // non-alphabetical
 
+        // inappropriate priority levels
+        assertTrue(Priority.isValidPriority("h"));
+        assertTrue(Priority.isValidPriority("m"));
+        assertTrue(Priority.isValidPriority("l"));
+        assertTrue(Priority.isValidPriority("hig"));
+        assertTrue(Priority.isValidPriority("h9gh"));
+        assertTrue(Priority.isValidPriority("med ium"));
+        assertTrue(Priority.isValidPriority("lo"));
+
         // valid priority levels
+        assertTrue(Priority.isValidPriority("High"));
         assertTrue(Priority.isValidPriority("high"));
         assertTrue(Priority.isValidPriority("medium"));
         assertTrue(Priority.isValidPriority("med"));
@@ -71,6 +74,30 @@ public class PriorityTest {
         assertTrue(Priority.isValidPriority("low"));
         assertTrue(Priority.isValidPriority("nil"));
         assertTrue(Priority.isValidPriority("NIL"));
+    }
+    @Test
+    public void isAppropriatePriority() {
+        assertFalse(Priority.isAppropriatePriority("")); // empty string
+        assertFalse(Priority.isAppropriatePriority("   ")); // spaces only
+        assertFalse(Priority.isAppropriatePriority("testing")); // invalid arguments
+        assertFalse(Priority.isAppropriatePriority("0")); // non-alphabetical
+        assertFalse(Priority.isAppropriatePriority("123")); // non-alphabetical
+        assertFalse(Priority.isAppropriatePriority("h9gh"));
+        assertFalse(Priority.isAppropriatePriority("med ium"));
+
+        assertTrue(Priority.isAppropriatePriority("h"));
+        assertTrue(Priority.isAppropriatePriority("m"));
+        assertTrue(Priority.isAppropriatePriority("l"));
+        assertTrue(Priority.isAppropriatePriority("hig")); // typos
+        assertTrue(Priority.isAppropriatePriority("lo"));
+
+        assertTrue(Priority.isAppropriatePriority("high"));
+        assertTrue(Priority.isAppropriatePriority("medium"));
+        assertTrue(Priority.isAppropriatePriority("med"));
+        assertTrue(Priority.isAppropriatePriority("medim"));
+        assertTrue(Priority.isAppropriatePriority("low"));
+        assertTrue(Priority.isAppropriatePriority("nil"));
+        assertTrue(Priority.isAppropriatePriority("NIL"));
     }
 
     @Test

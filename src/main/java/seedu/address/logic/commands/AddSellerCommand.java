@@ -3,13 +3,14 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INFO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -29,7 +30,7 @@ public class AddSellerCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_SELLING_ADDRESS + "SELLING_ADDRESS "
-            + PREFIX_INFO + "HOUSE_INFO "
+            + PREFIX_HOUSE_INFO + "HOUSE_INFO "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Ryan "
@@ -37,7 +38,7 @@ public class AddSellerCommand extends Command {
             + PREFIX_EMAIL + "ryan@gmail.com "
             + PREFIX_ADDRESS + "My Secret Home "
             + PREFIX_SELLING_ADDRESS + "47D Lor Sarhad, Singapore 119164 "
-            + PREFIX_INFO + "4 Room Flat in Sarhad Ville "
+            + PREFIX_HOUSE_INFO + "4 Room Flat in Sarhad Ville "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
@@ -46,13 +47,20 @@ public class AddSellerCommand extends Command {
 
     private final Seller toAdd;
 
+    private final CommandWarnings commandWarnings;
+
     /**
      * Creates an AddSellerCommand to add the specified {@code Person}
      */
-    public AddSellerCommand(Seller seller) {
+    public AddSellerCommand(Seller seller, CommandWarnings commandWarnings) {
         requireNonNull(seller);
         toAdd = seller;
+        this.commandWarnings = commandWarnings;
     }
+    public AddSellerCommand(Seller seller) {
+        this(seller, new CommandWarnings());
+    }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -61,7 +69,9 @@ public class AddSellerCommand extends Command {
         if (model.hasSeller(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_SELLER);
         }
-
+        if (commandWarnings.containsWarnings()) {
+            return new CommandResult(commandWarnings.getWarningMessage());
+        }
         model.addSeller(toAdd);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));

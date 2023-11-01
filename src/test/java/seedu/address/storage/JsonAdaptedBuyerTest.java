@@ -14,23 +14,22 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
-import seedu.address.model.displayable.buyer.BuyHouseInfo;
 
 public class JsonAdaptedBuyerTest {
-    private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_NAME = "  ";
+    private static final String INVALID_PHONE = "+kjfladkj";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TAG = "   ";
     private static final String INVALID_INFO = " ";
-
     private static final String VALID_NAME = ALICE.getName().toString();
     private static final String VALID_PHONE = ALICE.getPhone().toString();
     private static final String VALID_EMAIL = ALICE.getEmail().toString();
     private static final String VALID_ADDRESS = ALICE.getAddress().toString();
-    private static final String VALID_INFO = ALICE.getBuyHouseInfo().toString();
+    private static final String VALID_INFO = ALICE.getHouseInfo().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = ALICE.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -110,7 +109,7 @@ public class JsonAdaptedBuyerTest {
     public void toModelType_invalidInfo_throwsIllegalValueException() {
         JsonAdaptedBuyer buyer = new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 INVALID_INFO, VALID_TAGS, VALID_PRIORITY);
-        String expectedMessage = String.format(BuyHouseInfo.MESSAGE_CONSTRAINTS);
+        String expectedMessage = String.format(HouseInfo.MESSAGE_CONSTRAINTS);
         assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
     }
 
@@ -118,7 +117,7 @@ public class JsonAdaptedBuyerTest {
     public void toModelType_nullInfo_throwsIllegalValueException() {
         JsonAdaptedBuyer buyer = new JsonAdaptedBuyer(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
                 null, VALID_TAGS, VALID_PRIORITY);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, BuyHouseInfo.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, HouseInfo.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, buyer::toModelType);
     }
 
