@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ListSellersCommand extends Command {
 
-    public static final String COMMAND_WORD = "list-s";
+    public static final String COMMAND_WORD = "slist";
     public static final String MESSAGE_SUCCESS = "Listed all sellers";
 
     @Override
