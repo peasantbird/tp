@@ -44,6 +44,8 @@ public class AddSellerCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Got it. I've added a seller contact:\n%1$s";
     public static final String MESSAGE_DUPLICATE_SELLER = "This seller already exists in the address book";
+    public static final String MESSAGE_POTENTIAL_DUPLICATE_BUYER = "This seller potentially also exists in the"
+            + " buyer list: If so, please verify that their contact information is the same";
 
     private final Seller toAdd;
 
@@ -65,9 +67,11 @@ public class AddSellerCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         if (model.hasSeller(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_SELLER);
+        }
+        if (model.sellerHasSameBuyerName(toAdd)) {
+            commandWarnings.addWarning(MESSAGE_POTENTIAL_DUPLICATE_BUYER);
         }
         if (commandWarnings.containsWarnings()) {
             return new CommandResult(commandWarnings.getWarningMessage());

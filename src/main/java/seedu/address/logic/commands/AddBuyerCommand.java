@@ -21,7 +21,6 @@ import seedu.address.model.displayable.buyer.Buyer;
 public class AddBuyerCommand extends Command {
 
     public static final String COMMAND_WORD = "buyer";
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a buyer to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
@@ -38,9 +37,10 @@ public class AddBuyerCommand extends Command {
             + PREFIX_HOUSE_INFO + "Central Area 5 Room Condominium "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
-
     public static final String MESSAGE_SUCCESS = "Got it. I've added a buyer contact:\n%1$s";
     public static final String MESSAGE_DUPLICATE_BUYER = "This buyer already exists in the address book";
+    public static final String MESSAGE_POTENTIAL_DUPLICATE_SELLER = "This buyer potentially also exists in the"
+            + " seller list: If so, please verify that their contact information is the same";
 
     private final Buyer toAdd;
     private final CommandWarnings commandWarnings;
@@ -64,11 +64,12 @@ public class AddBuyerCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         if (model.hasBuyer(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_BUYER);
         }
-
+        if (model.buyerHasSameSellerName(toAdd)) {
+            commandWarnings.addWarning(MESSAGE_POTENTIAL_DUPLICATE_SELLER);
+        }
         model.addBuyer(toAdd);
         if (commandWarnings.containsWarnings()) {
             return new CommandResult(commandWarnings.getWarningMessage());

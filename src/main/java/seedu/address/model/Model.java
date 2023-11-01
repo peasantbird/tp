@@ -70,6 +70,10 @@ public interface Model {
      */
     boolean hasSeller(Seller seller);
 
+    boolean buyerHasSameSellerName(Buyer buyer);
+
+    boolean sellerHasSameBuyerName(Seller seller);
+
     /**
      * Deletes the given buyer.
      * The buyer must exist in the address book's buyer list.

@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.displayable.Person;
 import seedu.address.model.displayable.buyer.Buyer;
 import seedu.address.model.displayable.seller.Seller;
 
@@ -107,6 +108,18 @@ public class ModelManager implements Model {
     public boolean hasSeller(Seller seller) {
         requireNonNull(seller);
         return addressBook.hasSeller(seller);
+    }
+
+    @Override
+    public boolean buyerHasSameSellerName(Buyer buyer) {
+        requireNonNull(buyer);
+        return addressBook.buyerHasSameSellerName(buyer);
+    }
+
+    @Override
+    public boolean sellerHasSameBuyerName(Seller seller) {
+        requireNonNull(seller);
+        return addressBook.sellerHasSameBuyerName(seller);
     }
 
     @Override

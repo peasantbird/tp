@@ -58,6 +58,8 @@ public class EditBuyerCommand extends Command {
     public static final String MESSAGE_EDIT_BUYER_SUCCESS = "Edited Buyer: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_BUYER = "This buyer already exists in the address book.";
+    public static final String MESSAGE_POTENTIAL_DUPLICATE_SELLER = "This buyer potentially also exists in the"
+            + " seller list: If so, please verify that their contact information is the same";
 
     private final Index index;
     private final EditBuyerDescriptor editBuyerDescriptor;
@@ -89,6 +91,9 @@ public class EditBuyerCommand extends Command {
 
         if (!buyerToEdit.isSamePerson(editedBuyer) && model.hasBuyer(editedBuyer)) {
             throw new CommandException(MESSAGE_DUPLICATE_BUYER);
+        }
+        if (model.buyerHasSameSellerName(editedBuyer)) {
+            commandWarnings.addWarning(MESSAGE_POTENTIAL_DUPLICATE_SELLER);
         }
 
         model.setBuyer(buyerToEdit, editedBuyer);

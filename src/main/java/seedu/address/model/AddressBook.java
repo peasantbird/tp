@@ -86,6 +86,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         return sellers.contains(seller);
     }
 
+    public boolean buyerHasSameSellerName(Buyer buyer) {
+        requireNonNull(buyer);
+        return sellers.contains(buyer);
+    }
+
+    public boolean sellerHasSameBuyerName(Seller seller) {
+        requireNonNull(seller);
+        return buyers.contains(seller);
+    }
+
     /**
      * Adds a buyer to the address book's buyer list.
      * The buyer must not already exist in the buyer list.
