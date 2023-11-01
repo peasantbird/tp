@@ -36,12 +36,12 @@ public class SortBuyerCommandParser implements Parser<SortBuyerCommand> {
 
             case ("a"):
                 Comparator<Buyer> ascendingNameComparator = (o1, o2) ->
-                        o1.getName().fullName.compareTo(o2.getName().fullName);
+                        o1.getName().fullName.toLowerCase().compareTo(o2.getName().fullName.toLowerCase());
                 return new SortBuyerCommand(ascendingNameComparator);
 
             case ("d"):
                 Comparator<Buyer> descendingNameComparator = (o1, o2) ->
-                        o2.getName().fullName.compareTo(o1.getName().fullName);
+                        o2.getName().fullName.toLowerCase().compareTo(o1.getName().fullName.toLowerCase());
                 return new SortBuyerCommand(descendingNameComparator);
 
             default:
@@ -53,12 +53,12 @@ public class SortBuyerCommandParser implements Parser<SortBuyerCommand> {
 
             case ("a"):
                 Comparator<Buyer> ascendingAddressComparator = (o1, o2) ->
-                        o1.getAddress().value.compareTo(o2.getAddress().value);
+                        o1.getAddress().value.toLowerCase().compareTo(o2.getAddress().value.toLowerCase());
                 return new SortBuyerCommand(ascendingAddressComparator);
 
             case ("d"):
                 Comparator<Buyer> descendingAddressComparator = (o1, o2) ->
-                        o2.getAddress().value.compareTo(o1.getAddress().value);
+                        o2.getAddress().value.toLowerCase().compareTo(o1.getAddress().value.toLowerCase());
                 return new SortBuyerCommand(descendingAddressComparator);
 
             default:
@@ -70,12 +70,12 @@ public class SortBuyerCommandParser implements Parser<SortBuyerCommand> {
 
             case ("a"):
                 Comparator<Buyer> ascendingHouseInfoComparator = (o1, o2) ->
-                        o1.getHouseInfo().info.compareTo(o2.getHouseInfo().info);
+                        o1.getHouseInfo().info.toLowerCase().compareTo(o2.getHouseInfo().info.toLowerCase());
                 return new SortBuyerCommand(ascendingHouseInfoComparator);
 
             case ("d"):
                 Comparator<Buyer> descendingHouseInfoComparator = (o1, o2) ->
-                        o2.getHouseInfo().info.compareTo(o1.getHouseInfo().info);
+                        o2.getHouseInfo().info.toLowerCase().compareTo(o1.getHouseInfo().info.toLowerCase());
                 return new SortBuyerCommand(descendingHouseInfoComparator);
 
             default:
