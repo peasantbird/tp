@@ -46,6 +46,7 @@ public class EditBuyerCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setBuyer(model.getFilteredBuyerList().get(0), editedBuyer);
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -68,6 +69,7 @@ public class EditBuyerCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setBuyer(lastBuyer, editedBuyer);
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(editBuyerCommand, model, expectedMessage, expectedModel);
     }
@@ -81,6 +83,7 @@ public class EditBuyerCommandTest {
                 Messages.format(editedBuyer));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(editBuyerCommand, model, expectedMessage, expectedModel);
     }
@@ -99,6 +102,7 @@ public class EditBuyerCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setBuyer(model.getFilteredBuyerList().get(0), editedBuyer);
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(editBuyerCommand, model, expectedMessage, expectedModel);
     }
