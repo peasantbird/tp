@@ -21,7 +21,7 @@ import seedu.address.model.displayable.seller.Seller;
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListSellerCommand.
  */
-public class ListSellersCommandTest {
+public class ListSellerCommandTest {
 
     private Model model;
     private Model expectedModel;
