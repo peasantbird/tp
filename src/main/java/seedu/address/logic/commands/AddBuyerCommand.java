@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_POTENTIAL_DUPLICATE_SELLER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
@@ -39,9 +40,6 @@ public class AddBuyerCommand extends Command {
             + PREFIX_TAG + "owesMoney";
     public static final String MESSAGE_SUCCESS = "Got it. I've added a buyer contact:\n%1$s";
     public static final String MESSAGE_DUPLICATE_BUYER = "This buyer already exists in the address book";
-    public static final String MESSAGE_POTENTIAL_DUPLICATE_SELLER = "This buyer potentially also exists in the"
-            + " seller list: If so, please verify that their contact information is the same";
-
     private final Buyer toAdd;
     private final CommandWarnings commandWarnings;
 
