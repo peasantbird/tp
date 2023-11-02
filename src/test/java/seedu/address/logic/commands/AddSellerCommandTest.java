@@ -72,7 +72,6 @@ public class AddSellerCommandTest {
 
         // different types -> returns false
         assertFalse(addAliceCommand.equals(1));
-
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
@@ -160,17 +159,14 @@ public class AddSellerCommandTest {
         public boolean buyerHasSameSellerName(Buyer buyer) {
             throw new AssertionError("This method should not be called.");
         }
-        
         @Override
         public boolean hasSimilarSeller(Seller seller) {
             throw new AssertionError("This method should not be called.");
         }
-
         @Override
         public boolean sellerHasSameBuyerName(Seller seller) {
             throw new AssertionError("This method should not be called.");
         }
-        
         @Override
         public void deleteBuyer(Buyer target) {
             throw new AssertionError("This method should not be called.");

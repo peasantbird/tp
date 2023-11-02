@@ -71,10 +71,11 @@ public class AddSellerCommand extends Command {
         if (model.hasSeller(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_SELLER);
         }
-        
+
         if (model.sellerHasSameBuyerName(toAdd)) {
             commandWarnings.addWarning(MESSAGE_POTENTIAL_DUPLICATE_BUYER);
         }
+
         if (model.hasSimilarSeller(toAdd)) {
             commandWarnings.addWarning(MESSAGE_SIMILAR_BUYER);
         }
