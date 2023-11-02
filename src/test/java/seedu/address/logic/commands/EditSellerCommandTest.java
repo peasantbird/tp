@@ -11,9 +11,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showSellerAtIndex;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,8 +25,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.displayable.seller.Seller;
-import seedu.address.testutil.SellerBuilder;
 import seedu.address.testutil.EditSellerDescriptorBuilder;
+import seedu.address.testutil.SellerBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditSellerCommand.
@@ -63,7 +63,8 @@ public class EditSellerCommandTest {
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditSellerCommand editSellerCommand = new EditSellerCommand(indexLastSeller, descriptor);
 
-        String expectedMessage = String.format(EditSellerCommand.MESSAGE_EDIT_SELLER_SUCCESS, Messages.format(editedSeller));
+        String expectedMessage = String.format(EditSellerCommand.MESSAGE_EDIT_SELLER_SUCCESS,
+                Messages.format(editedSeller));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setSeller(lastSeller, editedSeller);

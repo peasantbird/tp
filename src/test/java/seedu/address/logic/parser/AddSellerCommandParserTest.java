@@ -16,7 +16,7 @@ public class AddSellerCommandParserTest {
     static final String INVALID_PARTIAL_INPUT = " p/3094 e/email@com ah/homeaddress";
     static final String VALID_PARTIAL_INPUT = " n/adam";
     static final String BAD_FIELDS_INPUT = " n/adam p/badnumber e/email@com ah/homeaddress as/selladdress i/info";
-    static final String VALID_INPUT = " n/Alice Pauline p/94351253 e/alice@example.com "
+    static final String VALID_INPUT = " n/SAlice Pauline p/94351253 e/alice@example.com "
             + "ah/123, Jurong West Ave 6, #08-111 as/Selling address example i/Has Good Views t/friends";
     private final AddSellerCommandParser parser = new AddSellerCommandParser();
 

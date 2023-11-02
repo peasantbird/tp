@@ -5,11 +5,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditSellerCommand.EditSellerDescriptor;
+import seedu.address.model.displayable.Address;
+import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
-import seedu.address.model.displayable.Email;
-import seedu.address.model.displayable.Address;
-import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Priority;
 import seedu.address.model.displayable.seller.Seller;
 import seedu.address.model.tag.Tag;

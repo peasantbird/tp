@@ -22,7 +22,7 @@ import seedu.address.model.displayable.seller.Seller;
  * A set of typical sellers.
  */
 public class TypicalSellers {
-    public static final Seller SALICE = new SellerBuilder().withName("Alice Pauline")
+    public static final Seller SALICE = new SellerBuilder().withName("SAlice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withSellingAddress("Selling address example")
             .withInfo("Has Good Views").withEmail("alice@example.com")
             .withPhone("94351253")
@@ -45,7 +45,7 @@ public class TypicalSellers {
     public static final Seller SFIONA = new SellerBuilder().withName("Fiona Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").withSellingAddress("Selling address example")
             .withInfo("Has Good Views").build();
-    public static final Seller SGEORGE = new SellerBuilder().withName("George Best").withPhone("9482442")
+    public static final Seller SGEORGE = new SellerBuilder().withName("SGeorge Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").withSellingAddress("Selling address example")
             .withInfo("Has Good Views").build();
 

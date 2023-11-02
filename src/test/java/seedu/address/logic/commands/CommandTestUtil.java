@@ -14,8 +14,6 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.logic.commands.EditBuyerCommand.EditBuyerDescriptor;
-import seedu.address.logic.commands.EditSellerCommand.EditSellerDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;

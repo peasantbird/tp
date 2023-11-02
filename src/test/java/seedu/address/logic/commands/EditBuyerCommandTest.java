@@ -11,9 +11,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showBuyerAtIndex;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +41,8 @@ public class EditBuyerCommandTest {
         EditBuyerDescriptor descriptor = new EditBuyerDescriptorBuilder(editedBuyer).build();
         EditBuyerCommand editCommand = new EditBuyerCommand(INDEX_FIRST_PERSON, descriptor);
 
-        String expectedMessage = String.format(EditBuyerCommand.MESSAGE_EDIT_BUYER_SUCCESS, Messages.format(editedBuyer));
+        String expectedMessage = String.format(EditBuyerCommand.MESSAGE_EDIT_BUYER_SUCCESS,
+                Messages.format(editedBuyer));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setBuyer(model.getFilteredBuyerList().get(0), editedBuyer);
@@ -62,7 +63,8 @@ public class EditBuyerCommandTest {
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
         EditBuyerCommand editBuyerCommand = new EditBuyerCommand(indexLastBuyer, descriptor);
 
-        String expectedMessage = String.format(EditBuyerCommand.MESSAGE_EDIT_BUYER_SUCCESS, Messages.format(editedBuyer));
+        String expectedMessage = String.format(EditBuyerCommand.MESSAGE_EDIT_BUYER_SUCCESS,
+                Messages.format(editedBuyer));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setBuyer(lastBuyer, editedBuyer);
@@ -92,7 +94,8 @@ public class EditBuyerCommandTest {
         EditBuyerCommand editBuyerCommand = new EditBuyerCommand(INDEX_FIRST_PERSON,
                 new EditBuyerDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        String expectedMessage = String.format(EditBuyerCommand.MESSAGE_EDIT_BUYER_SUCCESS, Messages.format(editedBuyer));
+        String expectedMessage = String.format(EditBuyerCommand.MESSAGE_EDIT_BUYER_SUCCESS,
+                Messages.format(editedBuyer));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setBuyer(model.getFilteredBuyerList().get(0), editedBuyer);
