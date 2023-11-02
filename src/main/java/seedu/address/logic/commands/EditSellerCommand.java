@@ -42,7 +42,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditSellerCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit-s";
+    public static final String COMMAND_WORD = "sedit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the seller identified "
             + "by the index number used in the displayed seller list. "
@@ -60,9 +60,9 @@ public class EditSellerCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_SELLER_SUCCESS = "Edited Seller: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_SELLER = "This seller already exists in the address book";
+    public static final String MESSAGE_EDIT_SELLER_SUCCESS = "Got it. I've edited a seller contact:\n%1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided!";
+    public static final String MESSAGE_DUPLICATE_SELLER = "This seller already exists in the address book!";
     private final Index index;
     private final EditSellerDescriptor editSellerDescriptor;
     private final CommandWarnings commandWarnings;
