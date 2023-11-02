@@ -15,8 +15,8 @@ import seedu.address.model.displayable.seller.Seller;
  */
 public class ListSellerCommand extends Command {
 
-    public static final String COMMAND_WORD = "lists";
-    public static final String MESSAGE_LIST_SELLER_SUCCESS = "Got it. Here's the information of this buyer:\n%1$s";
+    public static final String COMMAND_WORD = "slist";
+    public static final String MESSAGE_LIST_SELLER_SUCCESS = "Got it. Here's the information of this seller:\n%1$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays information of the seller identified by the index number used in the displayed seller list.\n"
