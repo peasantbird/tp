@@ -24,6 +24,11 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%d buyer(s) and %d seller(s) listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_POTENTIAL_DUPLICATE_BUYER = "This seller potentially also exists in the"
+            + " buyer list: If so, please verify that their contact information is the same";
+
+    public static final String MESSAGE_POTENTIAL_DUPLICATE_SELLER = "This buyer potentially also exists in the"
+            + " seller list: If so, please verify that their contact information is the same";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

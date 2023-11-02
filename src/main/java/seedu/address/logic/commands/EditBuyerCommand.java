@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_POTENTIAL_DUPLICATE_SELLER;
 import static seedu.address.logic.Messages.MESSAGE_SIMILAR_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -55,10 +56,10 @@ public class EditBuyerCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
-
     public static final String MESSAGE_EDIT_BUYER_SUCCESS = "Edited Buyer: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_BUYER = "This buyer already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_BUYER = "This buyer already exists in the address book";
+
 
     private final Index index;
     private final EditBuyerDescriptor editBuyerDescriptor;
@@ -91,9 +92,15 @@ public class EditBuyerCommand extends Command {
         if (!buyerToEdit.isSamePerson(editedBuyer) && model.hasBuyer(editedBuyer)) {
             throw new CommandException(MESSAGE_DUPLICATE_BUYER);
         }
+
+        if (model.buyerHasSameSellerName(editedBuyer)) {
+            commandWarnings.addWarning(MESSAGE_POTENTIAL_DUPLICATE_SELLER);
+        }
+
         if (!buyerToEdit.isSimilarDisplayable(editedBuyer) && model.hasSimilarBuyer(editedBuyer)) {
             commandWarnings.addWarning(MESSAGE_SIMILAR_BUYER);
         }
+
         model.setBuyer(buyerToEdit, editedBuyer);
         model.updateFilteredBuyerList(PREDICATE_SHOW_BUYERS);
 

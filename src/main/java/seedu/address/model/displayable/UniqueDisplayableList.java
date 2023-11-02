@@ -31,7 +31,7 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
     /**
      * Returns true if the list contains an equivalent displayable to the given argument.
      */
-    public boolean contains(T toCheck) {
+    public boolean contains(Displayable toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameDisplayable);
     }

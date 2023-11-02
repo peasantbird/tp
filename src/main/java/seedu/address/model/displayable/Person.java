@@ -100,6 +100,7 @@ public abstract class Person implements Displayable {
                 && otherPerson.getName().equals(getName());
     }
 
+    @Override
     public boolean isSameDisplayable(Displayable displayable) {
         return ((displayable instanceof Person) && isSamePerson((Person) displayable));
     }
