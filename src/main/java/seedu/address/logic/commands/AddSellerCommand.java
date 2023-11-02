@@ -79,11 +79,12 @@ public class AddSellerCommand extends Command {
         if (model.hasSimilarSeller(toAdd)) {
             commandWarnings.addWarning(MESSAGE_SIMILAR_BUYER);
         }
-          
+
+        model.addSeller(toAdd);
         if (commandWarnings.containsWarnings()) {
             return new CommandResult(commandWarnings.getWarningMessage());
         }
-        model.addSeller(toAdd);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
