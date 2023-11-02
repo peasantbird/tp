@@ -72,13 +72,13 @@ Adds a buyer with their info to the list. This command can cause warnings.
 
 Format: `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_INFO] [t/TAG]…`
 
-- `n/NAME`: String
-- `[p/PHONE_NUMBER]`: int
-- `[e/EMAIL]`: String contains ‘@’
-- `[ah/ADDRESS]`: String
-- `[i/BUY_HOUSE_INFO]`: String
-- `[t/TAG]`: Alphanumeric string
-- 
+- `n/NAME`: contains at least one non-whitespace
+- `[p/PHONE_NUMBER]`: contains at least one number
+- `[e/EMAIL]`: Contains at least one '@'
+- `[ah/HOME_ADDRESS]`: No restrictions
+- `[i/BUY_HOUSE_INFO]`: No restrictions
+- `[t/TAG]`: No restrictions
+
 Example:
 `buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium`
 
