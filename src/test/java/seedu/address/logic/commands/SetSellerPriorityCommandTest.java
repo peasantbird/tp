@@ -43,6 +43,7 @@ public class SetSellerPriorityCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setSeller(targetSeller, targetSeller);
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(setSellerPriorityCommand, model, expectedMessage, expectedModel);
     }
@@ -72,6 +73,7 @@ public class SetSellerPriorityCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         showSellerAtIndex(expectedModel, INDEX_FIRST_PERSON);
         expectedModel.setSeller(targetSeller, targetSeller);
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(setSellerPriorityCommand, model, expectedMessage, expectedModel);
     }
