@@ -179,13 +179,11 @@ public class ModelManager implements Model {
 
     @Override
     public void updateFilteredSortedBuyerList(Comparator<Buyer> comparator) {
-        requireNonNull(comparator);
         filteredSortedBuyers.setComparator(comparator);
     }
 
     @Override
     public void updateFilteredSortedSellerList(Comparator<Seller> comparator) {
-        requireNonNull(comparator);
         filteredSortedSellers.setComparator(comparator);
     }
 
