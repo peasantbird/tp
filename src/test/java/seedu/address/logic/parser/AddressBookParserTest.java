@@ -92,7 +92,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_listBuyers() throws Exception {
+    public void parseCommand_listBuyer() throws Exception {
         assertTrue(parser.parseCommand(ListBuyerCommand.COMMAND_WORD + " 3") instanceof ListBuyerCommand);
     }
 
@@ -132,12 +132,12 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_checkCaseInsensitivity() throws Exception {
-        assertTrue(parser.parseCommand(ListBuyersCommand.COMMAND_WORD.toLowerCase()) instanceof ListBuyersCommand);
-        assertTrue(parser.parseCommand(ListBuyersCommand.COMMAND_WORD.toLowerCase() + " 3")
-                instanceof ListBuyersCommand);
-        assertTrue(parser.parseCommand(ListBuyersCommand.COMMAND_WORD.toUpperCase()) instanceof ListBuyersCommand);
-        assertTrue(parser.parseCommand(ListBuyersCommand.COMMAND_WORD.toUpperCase() + " 3")
-                instanceof ListBuyersCommand);
+        assertTrue(parser.parseCommand(ListBuyerCommand.COMMAND_WORD.toLowerCase()) instanceof ListBuyerCommand);
+        assertTrue(parser.parseCommand(ListBuyerCommand.COMMAND_WORD.toLowerCase() + " 3")
+                instanceof ListBuyerCommand);
+        assertTrue(parser.parseCommand(ListBuyerCommand.COMMAND_WORD.toUpperCase()) instanceof ListBuyerCommand);
+        assertTrue(parser.parseCommand(ListBuyerCommand.COMMAND_WORD.toUpperCase() + " 3")
+                instanceof ListBuyerCommand);
     }
 
 }
