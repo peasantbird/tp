@@ -18,7 +18,7 @@ import seedu.address.model.displayable.buyer.Buyer;
  */
 public class SortBuyerCommand extends Command {
 
-    public static final String COMMAND_WORD = "sort-b";
+    public static final String COMMAND_WORD = "bsort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the buyers in RTPM. "
             + "Parameters: Choose one of "
@@ -30,7 +30,7 @@ public class SortBuyerCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_PRIORITY + "d";
 
-    public static final String MESSAGE_SUCCESS = "Buyer list sorted";
+    public static final String MESSAGE_SUCCESS = "Got it. I've sorted the buyer list!";
 
     private final Comparator<Buyer> comparator;
 

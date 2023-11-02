@@ -41,7 +41,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditBuyerCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit-b";
+    public static final String COMMAND_WORD = "bedit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the buyer identified "
             + "by the index number used in the displayed buyer list. "
@@ -57,9 +57,9 @@ public class EditBuyerCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
-    public static final String MESSAGE_EDIT_BUYER_SUCCESS = "Edited Buyer: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_BUYER = "This buyer already exists in the address book";
+    public static final String MESSAGE_EDIT_BUYER_SUCCESS = "Got it. I've edited a buyer contact:\n%1$s";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided!";
+    public static final String MESSAGE_DUPLICATE_BUYER = "This buyer already exists in the address book!";
 
 
     private final Index index;

@@ -15,8 +15,8 @@ import seedu.address.model.Model;
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
-    public static final String MESSAGE_SUCCESS = "The next command was redone";
-    public static final String MESSAGE_FAILURE = "No commands to redo";
+    public static final String MESSAGE_SUCCESS = "The next command was redone.";
+    public static final String MESSAGE_FAILURE = "No commands to redo!";
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
