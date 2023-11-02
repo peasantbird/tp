@@ -20,7 +20,7 @@ import seedu.address.model.displayable.seller.Seller;
  */
 public class SetSellerPriorityCommand extends Command {
 
-    public static final String COMMAND_WORD = "priority-s";
+    public static final String COMMAND_WORD = "spriority";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets a priority level for the seller, identified by index in the displayed seller list. "

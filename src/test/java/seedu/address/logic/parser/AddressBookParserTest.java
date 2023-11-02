@@ -131,4 +131,15 @@ public class AddressBookParserTest {
     public void parseCommand_unknownCommand_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
     }
+
+    @Test
+    public void parseCommand_checkCaseInsensitivity() throws Exception {
+        assertTrue(parser.parseCommand(ListBuyersCommand.COMMAND_WORD.toLowerCase()) instanceof ListBuyersCommand);
+        assertTrue(parser.parseCommand(ListBuyersCommand.COMMAND_WORD.toLowerCase() + " 3")
+                instanceof ListBuyersCommand);
+        assertTrue(parser.parseCommand(ListBuyersCommand.COMMAND_WORD.toUpperCase()) instanceof ListBuyersCommand);
+        assertTrue(parser.parseCommand(ListBuyersCommand.COMMAND_WORD.toUpperCase() + " 3")
+                instanceof ListBuyersCommand);
+    }
+
 }

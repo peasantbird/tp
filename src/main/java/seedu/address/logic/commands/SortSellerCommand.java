@@ -39,7 +39,6 @@ public class SortSellerCommand extends Command {
      * @param comparator the comparator which will be used to arrange the list.
      */
     public SortSellerCommand(Comparator<Seller> comparator) {
-        requireNonNull(comparator);
         this.comparator = comparator;
     }
 

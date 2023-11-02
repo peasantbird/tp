@@ -90,4 +90,11 @@ public class House implements Displayable {
                 .add("tags", tags)
                 .toString();
     }
+    @Override
+    public boolean isSimilarDisplayable(Displayable displayable) {
+        if (displayable == this) {
+            return true;
+        }
+        return getName().isSameNameFuzzyMatch(displayable.getName());
+    }
 }
