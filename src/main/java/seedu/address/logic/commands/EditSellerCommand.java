@@ -36,6 +36,7 @@ import seedu.address.model.displayable.Priority;
 import seedu.address.model.displayable.seller.Seller;
 import seedu.address.model.tag.Tag;
 
+//Solution below adapted by https://github.com/nus-cs2103-AY2324S1/tp
 /**
  * Edits the details of an existing seller in the address book.
  */
@@ -76,6 +77,18 @@ public class EditSellerCommand extends Command {
         this.index = index;
         this.editSellerDescriptor = new EditSellerDescriptor(editSellerDescriptor);
         this.commandWarnings = commandWarnings;
+    }
+
+    /**
+     * @param index of the seller in the filtered seller list to edit
+     * @param editSellerDescriptor details to edit the seller with
+     */
+    public EditSellerCommand(Index index, EditSellerDescriptor editSellerDescriptor) {
+        requireNonNull(index);
+        requireNonNull(editSellerDescriptor);
+        this.index = index;
+        this.editSellerDescriptor = new EditSellerDescriptor(editSellerDescriptor);
+        this.commandWarnings = new CommandWarnings();
     }
 
     @Override

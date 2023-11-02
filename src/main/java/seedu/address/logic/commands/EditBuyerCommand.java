@@ -35,6 +35,7 @@ import seedu.address.model.displayable.Priority;
 import seedu.address.model.displayable.buyer.Buyer;
 import seedu.address.model.tag.Tag;
 
+//Solution below adapted by https://github.com/nus-cs2103-AY2324S1/tp
 /**
  * Edits the details of an existing buyer in the address book.
  */
@@ -75,6 +76,17 @@ public class EditBuyerCommand extends Command {
         this.index = index;
         this.editBuyerDescriptor = new EditBuyerDescriptor(editBuyerDescriptor);
         this.commandWarnings = commandWarnings;
+    }
+    /**
+     * @param index of the buyer in the filtered buyer list to edit
+     * @param editBuyerDescriptor details to edit the buyer with
+     */
+    public EditBuyerCommand(Index index, EditBuyerDescriptor editBuyerDescriptor) {
+        requireNonNull(index);
+        requireNonNull(editBuyerDescriptor);
+        this.index = index;
+        this.editBuyerDescriptor = new EditBuyerDescriptor(editBuyerDescriptor);
+        this.commandWarnings = new CommandWarnings();
     }
 
     @Override
