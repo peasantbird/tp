@@ -11,13 +11,8 @@ import seedu.address.model.Model;
  */
 public class ListCommand extends Command {
 
-<<<<<<< HEAD:src/main/java/seedu/address/logic/commands/ListCommand.java
     public static final String COMMAND_WORD = "list";
     public static final String MESSAGE_SUCCESS = "Listed all buyers and sellers!";
-=======
-    public static final String COMMAND_WORD = "blist";
-    public static final String MESSAGE_SUCCESS = "Listed all buyers";
->>>>>>> upstream/master:src/main/java/seedu/address/logic/commands/ListBuyersCommand.java
 
     @Override
     public CommandResult execute(Model model) {
