@@ -14,7 +14,7 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your computer.
 
 1. Download the latest `rtpm.jar` [here](https://github.com/AY2324S1-CS2103T-F11-3/tp/releases/tag/v1.3(trial)).
 
@@ -29,9 +29,9 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 
     * `buyer n/John Doe p/91234567 e/johndoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium` : Adds a buyer named John Doe to the RTPM.
 
-    * `list-b` : Lists all buyers.
+    * `list` : Lists all buyers and sellers.
 
-    * `delete-b 2` : Deletes the 2nd buyer shown in the current list.
+    * `bdelete 2` : Deletes the 2nd buyer shown in the current list.
 
     * `exit` : Exits the app.
 
@@ -57,6 +57,9 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+* Commands and prefixes ignore case.<br>
+  e.g. if the command specifies `buyer n/NAME`, `BUYER N/NAME` is also acceptable.
+
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
@@ -65,16 +68,16 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 
 ### Add a buyer: `buyer`
 
-Adds a buyer with their info to the list.
+Adds a buyer with their info to the list. This command can cause warnings.
 
-Format: `buyer n/NAME [p/PHONE\_NUMBER] [e/EMAIL] [ah/HOME\_ADDRESS] [i/BUY\_HOUSE\_INFO] \[t/TAG]…`
+Format: `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_INFO] [t/TAG]…`
 
-- `n/NAME`: String
-- `p/PHONE\_NUMBER`: int
-- `e/EMAIL`: String contains ‘@’
-- `ah/ADDRESS`: String
-- `i/BUY\_HOUSE\_INFO`: String
-- `\[t/TAG]`: Alphanumeric string
+- `n/NAME`: contains at least one non-whitespace
+- `[p/PHONE_NUMBER]`: contains at least one number
+- `[e/EMAIL]`: Contains at least one '@'
+- `[ah/HOME_ADDRESS]`: No restrictions
+- `[i/BUY_HOUSE_INFO]`: No restrictions
+- `[t/TAG]`: No restrictions
 
 Example:
 `buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium`
@@ -84,20 +87,6 @@ Precise outputs when the command succeeds:
 ```
 Got it. I've added a buyer contact:
 Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
-```
-```
-Warning!; [Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.]
-Please ignore if this is expected.
-```
-```
-Warning!; [Emails should be of the format local-part@domain and adhere to the following constraints:
-1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-The domain name must:
-    - end with a domain label at least 2 characters long
-    - have each domain label start and end with alphanumeric characters
-    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.]
-Please ignore if this is expected.
 ```
 
 Precise outputs when the command fails due to missing parameters:
@@ -114,16 +103,16 @@ Emails must contain at least one '@'.
 
 ### Add a seller : `seller`
 
-Adds a seller with their info to the list.
+Adds a seller with their info to the list. This command can cause warnings.
 
 Format: `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [t/TAG]…`
-- `n/NAME`: String
-- `p/PHONE_NUMBER`: int
-- `e/EMAIL`: String contains ‘@’
-- `ah/HOME_ADDRESS`: String
-- `as/SELLING_ADDRESS`: String
-- `i/SELLING_HOUSE_INFO`: String
-- `[t/TAG]`: Alphanumeric String
+- `n/NAME`: contains at least one non-whitespace
+- `[p/PHONE_NUMBER]`: contains at least one number
+- `[e/EMAIL]`: Contains at least one '@'
+- `[ah/HOME_ADDRESS]`: No restrictions
+- `[as/SELLING_ADDRESS]`: No restrictions
+- `[i/SELLING_HOUSE_INFO]`: No restrictions
+- `[t/TAG]`: No restrictions
 
 Example: `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville`
 
@@ -131,20 +120,6 @@ Precise outputs when the command succeeds:
 ```
 Got it. I've added a seller contact:
 Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
-```
-```
-Warning!; [Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.]
-Please ignore if this is expected.
-```
-```
-Warning!; [Emails should be of the format local-part@domain and adhere to the following constraints:
-1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-The domain name must:
-    - end with a domain label at least 2 characters long
-    - have each domain label start and end with alphanumeric characters
-    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.]
-Please ignore if this is expected.
 ```
 
 Precise outputs when the command fails due to missing parameters:
@@ -174,7 +149,7 @@ Listed all buyers and sellers!
 
 ### Edit a buyer: `bedit`
 
-Edits the information of a buyer based on their index number in the buyers' list.
+Edits the information of a buyer based on their index number in the buyers' list. This command can cause warnings.
 
 Format: `bedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]…`
 * `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyers' list
@@ -203,7 +178,7 @@ The buyer index provided is higher than the last number in the list!
 
 ### Edit a seller: `sedit`
 
-Edits the information of a seller based on their index number in the sellers' list.
+Edits the information of a seller based on their index number in the sellers' list. This command can cause warnings.
 
 Format: `sedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]…`
 * `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the sellers' list
@@ -338,7 +313,7 @@ Format: `bsort ATTRIBUTE_PREFIX DIRECTION`
 * `ATTRIBUTE_PREFIX`: Refer to the add buyer command, `buyer`
 * `DIRECTION`: "a" OR "d" for ascending or descending respectively
 
-Example: `bsort n/ d`
+Example: `bsort n/d`
 
 Precise outputs when the command succeeds:
 ```
@@ -358,7 +333,7 @@ Format: `ssort ATTRIBUTE_PREFIX DIRECTION`
 * `ATTRIBUTE_PREFIX`: Refer to the add buyer command, `buyer`
 * `DIRECTION`: "a" OR "d" for ascending or descending respectively
 
-Example: `ssort n/ d`
+Example: `ssort n/d`
 
 Precise outputs when the command succeeds:
 ```
@@ -418,14 +393,41 @@ Precise outputs when the command succeeds:
 Address book has been cleared!
 ```
 
+### Notes on the warning system
+RTPM allows you to flexibly input most fields of data. However, we still have some things in mind for each field.
+Hence, the warning system informs the user of any valid but possibly unintended inputs. The warning system is 
+able to alert the user of multiple errors at once. For a non-exhaustive list, see below.
 
+The warning system is also used to check if, when you are adding new buyers/sellers, whether
+there are two similar buyers or two similar sellers, or a buyer that shares the same name as a seller.
+
+<box type="info" seamless>
+Our definition of 'similar' is as follows:
+Either one of the names is contained in the other, or the names require 2 or less edits (deletions, insertions, transpositions)
+to make them the same. (for more details search for a definition of Levenshtein distance).
+</box>
+
+```
+Warning!; [Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.]
+Please ignore if this is expected.
+```
+```
+Warning!; [Emails should be of the format local-part@domain and adhere to the following constraints:
+1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.]
+Please ignore if this is expected.
+```
 ### Saving the data
 
 RTPM data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-RTPM data are saved automatically as a JSON file `[JAR file location]/data/rtpm.json`. Advanced users are welcome to update data directly by editing that data file.
+RTPM data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
@@ -433,8 +435,6 @@ RTPM data are saved automatically as a JSON file `[JAR file location]/data/rtpm.
 If your changes to the data file are in an invalid format, RTPM will discard all data and start with an empty data file at the next run.
 Hence, it is recommended to take a backup of the file before editing it.
 </box>
-
-### Archiving data files `[coming in v2.0]`
 
 
 
@@ -444,7 +444,7 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RTPM home folder.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -459,17 +459,20 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Seller**    | `seller n/NAME p/PHONE_NUMBER e/EMAIL ah/HOME_ADDRESS as/SELLING_ADDRESS i/SELLING_HOUSE_INFO [t/TAG]​` <br> e.g., `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville`
-**Add Buyer**    | `sbuyer n/NAME p/PHONE_NUMBER e/EMAIL ah/HOME_ADDRESS i/BUY_HOUSE_INFO [t/TAG]` <br> e.g., `buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium`
+**Add Seller**    | `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [t/TAG]​` <br> e.g., `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville`
+**Add Buyer**    | `sbuyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_INFO] [t/TAG]` <br> e.g., `buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium`
+**Edit Seller** | `sedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]` <br> e.g., `sedit 1 n/Aiken`
+**Edit Buyer** | `bedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]` <br> e.g., `bedit 1 n/Aiken`
 **Clear**  | `clear`
-**Delete Buyer** | `delete-b INDEX`<br> e.g., `delete-b 3`
-**Delete Seller** | `delete-s INDEX`<br> e.g., `delete-s 3`
-**Filter**   | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Sort Buyers** | `bsort ATTRIBUTE_PREFIX DIRECTION`<br> e.g., `bsort p/a`
+**Sort Sellers** | `ssort ATTRIBUTE_PREFIX DIRECTION`<br> e.g., `ssort p/a`
+**Delete Buyer** | `bdelete INDEX`<br> e.g., `bdelete 3`
+**Delete Seller** | `sdelete INDEX`<br> e.g., `sdelete 3`
+**Filter**   | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g., `filter James Jake`
 **List All** | `list`
-**List Seller**   | `lists`
-**List Buyer**   | `listb`
+**List Seller**   | `slist INDEX`<br> e.g.,`slist 2`
+**List Buyer**   | `blist INDEX` <br> e.g.,`blist 2`
 **Undo**   | `undo`
 **Redo**  | `redo`
 **Exit**   | `exit`
 **Help**   | `help`
-
