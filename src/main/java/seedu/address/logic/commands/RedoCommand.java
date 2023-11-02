@@ -1,12 +1,17 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
-import static java.util.Objects.requireNonNull;
-
 //@@author peasantbird-reused
 //Reused from Address Book (Level4) with minor modifications
+
+/**
+ * Redoes the last command that was undone.
+ * Only affects commands that changes a buyer or seller in the buyer/seller lists.
+ */
 public class RedoCommand extends Command {
 
     public static final String COMMAND_WORD = "redo";
