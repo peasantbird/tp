@@ -163,7 +163,7 @@ public class AddBuyerCommandTest {
 
         @Override
         public boolean sellerHasSameBuyerName(Seller seller) {
-             throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
