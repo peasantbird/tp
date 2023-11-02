@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -26,19 +27,22 @@ public class AddBuyerCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a buyer to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_HOUSE_INFO + "INFO "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_HOUSE_INFO + "INFO] "
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_PRIORITY + "PRIORITY] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_HOUSE_INFO + "Central Area 5 Room Condominium "
+            + PREFIX_PRIORITY + "medium "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
+
     public static final String MESSAGE_SUCCESS = "Got it. I've added a buyer contact:\n%1$s";
     public static final String MESSAGE_DUPLICATE_BUYER = "This buyer already exists in the address book";
     private final Buyer toAdd;

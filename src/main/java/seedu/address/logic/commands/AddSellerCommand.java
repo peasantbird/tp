@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -28,12 +29,13 @@ public class AddSellerCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a seller to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_SELLING_ADDRESS + "SELLING_ADDRESS "
-            + PREFIX_HOUSE_INFO + "HOUSE_INFO "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_SELLING_ADDRESS + "SELLING_ADDRESS] "
+            + "[" + PREFIX_HOUSE_INFO + "HOUSE_INFO] "
+            + "[" + PREFIX_TAG + "TAG]... "
+            + "[" + PREFIX_PRIORITY + "PRIORITY] \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Ryan "
             + PREFIX_PHONE + "91234567 "
@@ -41,6 +43,7 @@ public class AddSellerCommand extends Command {
             + PREFIX_ADDRESS + "My Secret Home "
             + PREFIX_SELLING_ADDRESS + "47D Lor Sarhad, Singapore 119164 "
             + PREFIX_HOUSE_INFO + "4 Room Flat in Sarhad Ville "
+            + PREFIX_PRIORITY + "medium "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

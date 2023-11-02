@@ -300,7 +300,7 @@ buyers and sellers.
 _{more aspects and alternatives to be added}_
 
 
-### \[In progress\] Priority feature
+### \[Completed\] Priority feature
 
 #### Implementation
 
@@ -352,11 +352,11 @@ of `priority-b`.
 
 **Aspect: How the optional priority field is implemented**
 
-* **Alternative 1 (current choice):** Overload the `Buyer`/`Seller` constructors.
+* **Alternative 1 (initial choice):** Overload the `Buyer`/`Seller` constructors.
     * Pros: Relatively simple to implement and refactor.
     * Cons: Not feasible for implementing various optional fields.
 
-* **Alternative 2 (proposed):** Assign a default value for all non-compulsory fields in `AddBuyer` and `AddSeller`, 
+* **Alternative 2 (current choice):** Assign a default value for all non-compulsory fields in `AddBuyer` and `AddSeller`, 
 only assigning them for arguments available from the parsed user input (in `ArgumentMultimap`).
     * Pros: Only a single constructor for `Buyer`/`Seller` is needed for multiple optional fields.
     * Cons: Address book only adds correctly formatted fields and may discard the rest without the user knowing, so

@@ -20,8 +20,7 @@ public class Priority {
     // are case-insensitive
     public static final String VALIDATION_REGEX = "(?i)[hmln\\s].*";
     public static final String AFFIRMATION_REGEX = "(?i)(h[igh]{0,3}|m[edium]{0,5}|l[ow]{0,2}|n[il]{0,2})$";
-
-
+    public static final String DEFAULT_PRIO_LVL = "NIL";
     public final PrioLvl value;
 
     /**
