@@ -96,12 +96,18 @@ public class VersionedAddressBook extends AddressBook {
                 && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
     }
 
+    /**
+     * Represents an exception for VersionedAddressBook when there are no undoable states.
+     */
     public static class NoUndoableStateException extends RuntimeException {
         private NoUndoableStateException() {
             super("Current state pointer is at the start of the list. There are no more previous states to undo into.");
         }
     }
 
+    /**
+     * Represents an exception for VersionedAddressBook when there are no redoable states.
+     */
     public static class NoRedoableStateException extends RuntimeException {
         private NoRedoableStateException() {
             super("Current state pointer is at the end of the list. There are no more following states to redo into.");
