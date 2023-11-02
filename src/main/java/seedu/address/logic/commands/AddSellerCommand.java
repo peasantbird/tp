@@ -81,10 +81,11 @@ public class AddSellerCommand extends Command {
         }
 
         model.addSeller(toAdd);
+        model.commitAddressBook();
+
         if (commandWarnings.containsWarnings()) {
             return new CommandResult(commandWarnings.getWarningMessage());
         }
-
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

@@ -207,6 +207,29 @@ public class AddSellerCommandTest {
         }
 
         @Override
+        public void commitAddressBook() {}
+
+        @Override
+        public void undoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredSortedBuyerList(Comparator<Buyer> comparator) {
             throw new AssertionError("This method should not be called.");
         }

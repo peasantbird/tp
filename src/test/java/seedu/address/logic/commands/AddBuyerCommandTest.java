@@ -211,6 +211,29 @@ public class AddBuyerCommandTest {
         }
 
         @Override
+        public void commitAddressBook() {}
+
+        @Override
+        public void undoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredSortedBuyerList(Comparator<Buyer> comparator) {
             throw new AssertionError("This method should not be called.");
         }
@@ -256,19 +279,21 @@ public class AddBuyerCommandTest {
             requireNonNull(buyer);
             buyersAdded.add(buyer);
         }
+
         @Override
         public boolean hasSimilarBuyer(Buyer buyer) {
             requireNonNull(buyer);
             return buyersAdded.stream().anyMatch(buyer::isSimilarDisplayable);
         }
+
         @Override
         public boolean buyerHasSameSellerName(Buyer buyer) {
             return false;
         }
+
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
     }
-
 }

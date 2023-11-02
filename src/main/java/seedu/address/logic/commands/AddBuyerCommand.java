@@ -76,6 +76,8 @@ public class AddBuyerCommand extends Command {
         }
 
         model.addBuyer(toAdd);
+        model.commitAddressBook();
+
         if (commandWarnings.containsWarnings()) {
             return new CommandResult(commandWarnings.getWarningMessage());
         }

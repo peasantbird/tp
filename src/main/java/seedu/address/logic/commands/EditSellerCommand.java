@@ -103,7 +103,9 @@ public class EditSellerCommand extends Command {
         }
 
         model.setSeller(sellerToEdit, editedSeller);
+        model.commitAddressBook();
         model.updateFilteredSellerList(PREDICATE_SHOW_SELLERS);
+
         if (commandWarnings.containsWarnings()) {
             return new CommandResult(commandWarnings.getWarningMessage());
         }

@@ -70,6 +70,8 @@ public class SetSellerPriorityCommand extends Command {
         Seller sellerWithPriority = getSellerWithPriority(targetSeller, this.priority);
 
         model.setSeller(targetSeller, sellerWithPriority);
+        model.commitAddressBook();
+
         if (commandWarnings.containsWarnings()) {
             return new CommandResult(commandWarnings.getWarningMessage());
         }

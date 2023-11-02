@@ -43,6 +43,7 @@ public class DeleteBuyerCommand extends Command {
 
         Buyer buyerToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteBuyer(buyerToDelete);
+        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DELETE_BUYER_SUCCESS, Messages.format(buyerToDelete)));
     }
 

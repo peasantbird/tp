@@ -140,6 +140,16 @@ public interface Model {
      */
     void updateFilteredSellerList(Predicate<? super Seller> predicate);
 
+    void commitAddressBook();
+
+    void undoAddressBook();
+
+    void redoAddressBook();
+
+    boolean canUndoAddressBook();
+
+    boolean canRedoAddressBook();
+
     void updateFilteredSortedBuyerList(Comparator<Buyer> comparator);
 
     void updateFilteredSortedSellerList(Comparator<Seller> comparator);

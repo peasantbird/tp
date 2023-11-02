@@ -102,6 +102,7 @@ public class EditBuyerCommand extends Command {
         }
 
         model.setBuyer(buyerToEdit, editedBuyer);
+        model.commitAddressBook();
         model.updateFilteredBuyerList(PREDICATE_SHOW_BUYERS);
 
         if (commandWarnings.containsWarnings()) {

@@ -22,7 +22,7 @@ import seedu.address.model.displayable.seller.Seller;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final VersionedAddressBook versionedAddressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Buyer> filteredBuyers;
     private final SortedList<Buyer> filteredSortedBuyers;
@@ -37,11 +37,11 @@ public class ModelManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.versionedAddressBook = new VersionedAddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredBuyers = new FilteredList<>(this.addressBook.getBuyerList());
+        filteredBuyers = new FilteredList<>(this.versionedAddressBook.getBuyerList());
+        filteredSellers = new FilteredList<>(this.versionedAddressBook.getSellerList());
         filteredSortedBuyers = new SortedList<>(filteredBuyers);
-        filteredSellers = new FilteredList<>(this.addressBook.getSellerList());
         filteredSortedSellers = new SortedList<>(filteredSellers);
     }
 
@@ -89,81 +89,79 @@ public class ModelManager implements Model {
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+        this.versionedAddressBook.resetData(addressBook);
     }
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+        return versionedAddressBook;
     }
 
     @Override
     public boolean hasBuyer(Buyer buyer) {
         requireNonNull(buyer);
-        return addressBook.hasBuyer(buyer);
+        return versionedAddressBook.hasBuyer(buyer);
     }
     @Override
     public boolean hasSimilarBuyer(Buyer buyer) {
         requireNonNull(buyer);
-        return addressBook.hasSimilarBuyer(buyer);
+        return versionedAddressBook.hasSimilarBuyer(buyer);
     }
     @Override
     public boolean hasSeller(Seller seller) {
         requireNonNull(seller);
-        return addressBook.hasSeller(seller);
+        return versionedAddressBook.hasSeller(seller);
     }
     @Override
     public boolean hasSimilarSeller(Seller seller) {
         requireNonNull(seller);
-        return addressBook.hasSimilarSeller(seller);
+        return versionedAddressBook.hasSimilarSeller(seller);
     }
 
     @Override
     public boolean buyerHasSameSellerName(Buyer buyer) {
         requireNonNull(buyer);
-        return addressBook.buyerHasSameSellerName(buyer);
+        return versionedAddressBook.buyerHasSameSellerName(buyer);
     }
 
     @Override
     public boolean sellerHasSameBuyerName(Seller seller) {
         requireNonNull(seller);
-        return addressBook.sellerHasSameBuyerName(seller);
+        return versionedAddressBook.sellerHasSameBuyerName(seller);
     }
 
     @Override
     public void deleteBuyer(Buyer targetBuyer) {
-        addressBook.removeBuyer(targetBuyer);
+        versionedAddressBook.removeBuyer(targetBuyer);
     }
 
     @Override
     public void deleteSeller(Seller targetSeller) {
-        addressBook.removeSeller(targetSeller);
+        versionedAddressBook.removeSeller(targetSeller);
     }
 
     @Override
     public void addBuyer(Buyer buyer) {
-        addressBook.addBuyer(buyer);
+        versionedAddressBook.addBuyer(buyer);
         updateFilteredBuyerList(PREDICATE_SHOW_BUYERS);
     }
 
     @Override
     public void addSeller(Seller seller) {
-        addressBook.addSeller(seller);
+        versionedAddressBook.addSeller(seller);
         updateFilteredSellerList(PREDICATE_SHOW_SELLERS);
     }
 
     @Override
     public void setBuyer(Buyer targetBuyer, Buyer editedBuyer) {
         requireAllNonNull(targetBuyer, editedBuyer);
-
-        addressBook.setBuyer(targetBuyer, editedBuyer);
+        versionedAddressBook.setBuyer(targetBuyer, editedBuyer);
     }
 
     @Override
     public void setSeller(Seller targetSeller, Seller editedSeller) {
         requireAllNonNull(targetSeller, editedSeller);
-
-        addressBook.setSeller(targetSeller, editedSeller);
+        versionedAddressBook.setSeller(targetSeller, editedSeller);
     }
 
     //=========== Filtered Displayable List Accessors =============================================================
@@ -199,6 +197,32 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void commitAddressBook() {
+        versionedAddressBook.commit();
+    }
+
+    @Override
+    public void undoAddressBook() {
+        versionedAddressBook.undo();
+    }
+
+
+    @Override
+    public void redoAddressBook() {
+        versionedAddressBook.redo();
+    }
+
+    @Override
+    public boolean canUndoAddressBook() {
+        return versionedAddressBook.canUndo();
+    }
+
+    @Override
+    public boolean canRedoAddressBook() {
+        return versionedAddressBook.canRedo();
+    }
+
+    @Override
     public void updateFilteredSortedBuyerList(Comparator<Buyer> comparator) {
         filteredSortedBuyers.setComparator(comparator);
     }
@@ -220,7 +244,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return versionedAddressBook.equals(otherModelManager.versionedAddressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredBuyers.equals(otherModelManager.filteredBuyers)
                 && filteredSortedBuyers.equals(otherModelManager.filteredSortedBuyers)
