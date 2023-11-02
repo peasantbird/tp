@@ -74,7 +74,7 @@ public class AddBuyerCommand extends Command {
         if (model.hasSimilarBuyer(toAdd)) {
             commandWarnings.addWarning(MESSAGE_SIMILAR_BUYER);
         }
-
+        
         model.addBuyer(toAdd);
         if (commandWarnings.containsWarnings()) {
             return new CommandResult(commandWarnings.getWarningMessage());
