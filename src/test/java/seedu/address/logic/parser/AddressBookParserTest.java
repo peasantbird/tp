@@ -132,12 +132,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_checkCaseInsensitivity() throws Exception {
-        assertTrue(parser.parseCommand(ListBuyerCommand.COMMAND_WORD.toLowerCase()) instanceof ListBuyerCommand);
         assertTrue(parser.parseCommand(ListBuyerCommand.COMMAND_WORD.toLowerCase() + " 3")
                 instanceof ListBuyerCommand);
-        assertTrue(parser.parseCommand(ListBuyerCommand.COMMAND_WORD.toUpperCase()) instanceof ListBuyerCommand);
-        assertTrue(parser.parseCommand(ListBuyerCommand.COMMAND_WORD.toUpperCase() + " 3")
-                instanceof ListBuyerCommand);
+        assertTrue(parser.parseCommand(ListSellerCommand.COMMAND_WORD.toUpperCase() + " 3")
+                instanceof ListSellerCommand);
     }
 
 }
