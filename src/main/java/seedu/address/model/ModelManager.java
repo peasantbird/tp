@@ -105,7 +105,7 @@ public class ModelManager implements Model {
     @Override
     public boolean hasSimilarBuyer(Buyer buyer) {
         requireNonNull(buyer);
-        return addressBook.hasSimilarBuyer(buyer);
+        return versionedAddressBook.hasSimilarBuyer(buyer);
     }
     @Override
     public boolean hasSeller(Seller seller) {
@@ -115,19 +115,19 @@ public class ModelManager implements Model {
     @Override
     public boolean hasSimilarSeller(Seller seller) {
         requireNonNull(seller);
-        return addressBook.hasSimilarSeller(seller);
+        return versionedAddressBook.hasSimilarSeller(seller);
     }
 
     @Override
     public boolean buyerHasSameSellerName(Buyer buyer) {
         requireNonNull(buyer);
-        return addressBook.buyerHasSameSellerName(buyer);
+        return versionedAddressBook.buyerHasSameSellerName(buyer);
     }
 
     @Override
     public boolean sellerHasSameBuyerName(Seller seller) {
         requireNonNull(seller);
-        return addressBook.sellerHasSameBuyerName(seller);
+        return versionedAddressBook.sellerHasSameBuyerName(seller);
     }
 
     @Override
