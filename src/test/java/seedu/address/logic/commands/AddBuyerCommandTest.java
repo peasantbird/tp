@@ -147,6 +147,11 @@ public class AddBuyerCommandTest {
         }
 
         @Override
+        public boolean hasSimilarBuyer(Buyer buyer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasSeller(Seller seller) {
             throw new AssertionError("This method should not be called.");
         }
@@ -158,6 +163,11 @@ public class AddBuyerCommandTest {
 
         @Override
         public boolean sellerHasSameBuyerName(Seller seller) {
+             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSimilarSeller(Seller seller) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -246,7 +256,11 @@ public class AddBuyerCommandTest {
             requireNonNull(buyer);
             buyersAdded.add(buyer);
         }
-
+        @Override
+        public boolean hasSimilarBuyer(Buyer buyer) {
+            requireNonNull(buyer);
+            return buyersAdded.stream().anyMatch(buyer::isSimilarDisplayable);
+        }
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();

@@ -3,6 +3,7 @@ package seedu.address.model.displayable;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.AppUtil;
+import seedu.address.commons.util.StringUtil;
 
 
 /**
@@ -47,17 +48,16 @@ public class Name {
         return test.matches(AFFIRMATION_REGEX);
     }
 
-    // TODO have a check when adding persons to use this fuzzy match to warn if the users seem similar.
-
     /**
      * Checks if two names are somewhat similar to each other.
      * @param otherName the other name to check against.
-     * @return whether the two names are similar.
+     * @return whether the two names are similar. We determine similarity as requiring 2 or fewer edits
+     *     to make them the same string, or if one contains the other.
      */
     public boolean isSameNameFuzzyMatch(Name otherName) {
-        String contentName = fullName.replaceAll(" ", "");
-        String contentOtherName = otherName.fullName.replaceAll(" ", "");
-        return contentName.equalsIgnoreCase(contentOtherName);
+        return (StringUtil.distanceLeven(otherName.fullName, fullName) <= 2)
+                || otherName.fullName.contains(fullName)
+                || fullName.contains(otherName.fullName);
     }
     @Override
     public String toString() {
