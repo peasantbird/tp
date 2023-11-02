@@ -261,7 +261,10 @@ public class AddSellerCommandTest {
             requireNonNull(seller);
             return sellersAdded.stream().anyMatch(seller::isSimilarDisplayable);
         }
-
+        @Override
+        public boolean sellerHasSameBuyerName(Seller seller) {
+            return false;
+        }
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
