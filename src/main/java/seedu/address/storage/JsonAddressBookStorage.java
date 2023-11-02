@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.IOException;
@@ -22,59 +23,43 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
     private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
 
-    private Path buyersPath;
-    private Path sellersPath;
+    private Path filePath;
 
     /**
      * Constructs a JsonAddressBookStorage.
-     * @param buyersPath the buyer path.
-     * @param sellersPath the seller path.
+     * @param filePath the file path.
      */
-    public JsonAddressBookStorage(Path buyersPath, Path sellersPath) {
-        this.buyersPath = buyersPath;
-        this.sellersPath = sellersPath;
+    public JsonAddressBookStorage(Path filePath) {
+        this.filePath = filePath;
     }
-
-    public Path getBuyersPath() {
-        return buyersPath;
-    }
-    public Path getSellersPath() {
-        return sellersPath;
+    public Path getFilePath() {
+        return filePath;
     }
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataLoadingException {
-        return readAddressBook(buyersPath, sellersPath);
+        return readAddressBook(filePath);
     }
 
     /**
      * Similar to {@link #readAddressBook()}.
      *
-     * @param buyersPath location of the buyer data. Cannot be null.
-     * @param sellersPath location of the seller data. Cannot be null.
+     * @param filePath location of the data. Cannot be null.
      * @throws DataLoadingException if loading the data from storage failed.
      */
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path buyersPath, Path sellersPath)
+    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath)
             throws DataLoadingException {
-        requireAllNonNull(buyersPath, sellersPath);
-        Optional<JsonSerializableAddressBook> jsonBuyers = JsonUtil.readJsonFile(
-                buyersPath, JsonSerializableAddressBook.class);
-        Optional<JsonSerializableAddressBook> jsonAddressBookWithSellers = JsonUtil.readJsonFile(
-                sellersPath, JsonSerializableAddressBook.class);
-        if (!jsonBuyers.isPresent() && !jsonAddressBookWithSellers.isPresent()) {
+        requireNonNull(filePath);
+        Optional<JsonSerializableAddressBook> jsonBook = JsonUtil.readJsonFile(
+                filePath, JsonSerializableAddressBook.class);
+        if (jsonBook.isEmpty()) {
             return Optional.empty();
         }
-        AddressBook addressBook = new AddressBook();
+        AddressBook addressBook;
         try {
-            addressBook.setBuyers(jsonBuyers.get().toModelType().getBuyerList());
+            addressBook = jsonBook.get().toModelType();
         } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + buyersPath + ": " + ive.getMessage());
-            throw new DataLoadingException(ive);
-        }
-        try {
-            addressBook.setSellers(jsonAddressBookWithSellers.get().toModelType().getSellerList());
-        } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + sellersPath + ": " + ive.getMessage());
+            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataLoadingException(ive);
         }
         return Optional.of(addressBook);
@@ -82,34 +67,18 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, sellersPath, buyersPath);
+        saveAddressBook(addressBook, filePath);
     }
 
     /**
      * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}.
      *
-     * @param buyersPath location of the buyer data. Cannot be null.
-     * @param sellersPath location of the seller data. Cannot be null.
+     * @param filePath location of the file data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path buyersPath, Path sellersPath) throws IOException {
-        requireAllNonNull(addressBook, buyersPath, sellersPath);
-        FileUtil.createIfMissing(buyersPath);
-        FileUtil.createIfMissing(sellersPath);
+    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        requireAllNonNull(addressBook, filePath);
+        FileUtil.createIfMissing(filePath);
 
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(createAddressBookWithBuyers(addressBook)),
-                buyersPath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(createAddressBookWithSellers(addressBook)),
-                sellersPath);
-    }
-    public AddressBook createAddressBookWithBuyers(ReadOnlyAddressBook addressBook) {
-        AddressBook addressBookWithBuyers = new AddressBook();
-        addressBookWithBuyers.setBuyers(addressBook.getBuyerList());
-        return addressBookWithBuyers;
-    }
-
-    public AddressBook createAddressBookWithSellers(ReadOnlyAddressBook addressBook) {
-        AddressBook addressBookWithSellers = new AddressBook();
-        addressBookWithSellers.setSellers(addressBook.getSellerList());
-        return addressBookWithSellers;
+        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
     }
 }

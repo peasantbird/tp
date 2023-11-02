@@ -1,13 +1,14 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.buyer.Buyer;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.Person;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.seller.Seller;
 
 /**
  * The API of the Model component.
@@ -45,14 +46,12 @@ public interface Model {
     /**
      * Returns the user prefs' address book file path.
      */
-    Path getSellersFilePath();
-
-    Path getBuyersFilePath();
+    Path getFilePath();
 
     /**
      * Sets the user prefs' address book file path.
      */
-    void setAddressBookFilePaths(Path buyersFilePath, Path sellersFilePath);
+    void setAddressBookFilePath(Path filePath);
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
@@ -65,11 +64,24 @@ public interface Model {
      * Returns true if a buyer with the same identity as {@code buyer} exists in the address book's buyer list.
      */
     boolean hasBuyer(Buyer buyer);
+    /**
+     * Returns true if a buyer with similar identity as {@code buyer} exists in the address book's buyer list.
+     */
+    boolean hasSimilarBuyer(Buyer buyer);
 
     /**
      * Returns true if a seller with the same identity as {@code seller} exists in the address book's seller list.
      */
     boolean hasSeller(Seller seller);
+    /**
+     * Returns true if a seller with similar identity as {@code seller} exists in the address book's seller list.
+     */
+    boolean hasSimilarSeller(Seller seller);
+
+
+    boolean buyerHasSameSellerName(Buyer buyer);
+
+    boolean sellerHasSameBuyerName(Seller seller);
 
     /**
      * Deletes the given buyer.
@@ -98,14 +110,15 @@ public interface Model {
     /**
      * Replaces the given buyer {@code targetBuyer} with {@code editedBuyer}.
      * {@code targetBuyer} must exist in the address book's buyer list.
-     * The person identity of {@code editedBuyer} must not be the same as another existing buyer in the buyer list.
+     * The displayable identity of {@code editedBuyer} must not be the same as another existing buyer in the buyer list.
      */
     void setBuyer(Buyer targetBuyer, Buyer editedBuyer);
 
     /**
      * Replaces the given seller {@code targetSeller} with {@code editedSeller}.
      * {@code targetSeller} must exist in the address book's seller list.
-     * The person identity of {@code editedSeller} must not be the same as another existing seller in the seller list.
+     * The displayable identity of {@code editedSeller} must not be the same
+     * as another existing seller in the seller list.
      */
     void setSeller(Seller targetSeller, Seller editedSeller);
 
@@ -119,11 +132,25 @@ public interface Model {
      * Updates the filter of the filtered buyer list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredBuyerList(Predicate<Buyer> predicate);
+    void updateFilteredBuyerList(Predicate<? super Buyer> predicate);
 
     /**
      * Updates the filter of the filtered seller list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredSellerList(Predicate<Seller> predicate);
+    void updateFilteredSellerList(Predicate<? super Seller> predicate);
+
+    void commitAddressBook();
+
+    void undoAddressBook();
+
+    void redoAddressBook();
+
+    boolean canUndoAddressBook();
+
+    boolean canRedoAddressBook();
+
+    void updateFilteredSortedBuyerList(Comparator<Buyer> comparator);
+
+    void updateFilteredSortedSellerList(Comparator<Seller> comparator);
 }

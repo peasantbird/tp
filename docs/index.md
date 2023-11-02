@@ -5,14 +5,14 @@
 
 # RealtorTrackerPlusMax
 
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
-[![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
+[![CI Status](https://github.com/AY2324S1-CS2103T-F11-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2324S1-CS2103T-F11-3/tp/actions)
+[![codecov](https://codecov.io/gh/AY2324S1-CS2103T-F11-3/tp/branch/master/graph/badge.svg)](https://app.codecov.io/gh/AY2324S1-CS2103T-F11-3/tp)
 
 ![Ui](images/Ui.png)
 
-**The RealtorTrackerPlusMax (RTPM) allows tech-savvy realtors in their 20s to keep track of their many clients and houses 
-all in one place. This product has an edge over conventional tracking methods like Google Sheets as it provides a 
-cleaner UI, is easier and quicker to organise via keyboard-typed commands, and has proposed features such as 
+**RealtorTrackerPlusMax (RTPM) is an app that allows tech-savvy realtors in their 20s to keep track of their many clients and houses
+all in one place. This product has an edge over conventional tracking methods like Google Sheets as it provides a
+cleaner UI, is easier and quicker to organise via keyboard-typed commands, and has proposed features such as
 auto-matching of clients and houses.**
 
 * If you are interested in using RTPM, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).

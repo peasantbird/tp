@@ -3,7 +3,7 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.seller.Seller;
 
 
 /**
@@ -22,7 +22,7 @@ public class SellerCard extends PersonCard {
      */
     public SellerCard(Seller seller, int displayedIndex) {
         super(seller, displayedIndex, FXML);
-        houseInfo.setText(seller.getSellHouseInfo().toString());
+        houseInfo.setText(seller.getHouseInfo().toString());
         sellingAddress.setText(seller.getSellingAddress().value);
     }
 }

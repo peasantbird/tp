@@ -1,19 +1,22 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_POTENTIAL_DUPLICATE_BUYER;
+import static seedu.address.logic.Messages.MESSAGE_SIMILAR_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SELLING_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SELL_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.seller.Seller;
 
 /**
  * Adds a seller to the address book.
@@ -29,7 +32,7 @@ public class AddSellerCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_SELLING_ADDRESS + "SELLING_ADDRESS "
-            + PREFIX_SELL_HOUSE_INFO + "HOUSE_INFO "
+            + PREFIX_HOUSE_INFO + "HOUSE_INFO "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Ryan "
@@ -37,33 +40,53 @@ public class AddSellerCommand extends Command {
             + PREFIX_EMAIL + "ryan@gmail.com "
             + PREFIX_ADDRESS + "My Secret Home "
             + PREFIX_SELLING_ADDRESS + "47D Lor Sarhad, Singapore 119164 "
-            + PREFIX_SELL_HOUSE_INFO + "4 Room Flat in Sarhad Ville "
+            + PREFIX_HOUSE_INFO + "4 Room Flat in Sarhad Ville "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SELLER_SUCCESS = "Got it. I've added a seller contact:\n%1$s";
+    public static final String MESSAGE_SUCCESS = "Got it. I've added a seller contact:\n%1$s";
     public static final String MESSAGE_DUPLICATE_SELLER = "This seller already exists in the address book";
 
+
     private final Seller toAdd;
+
+    private final CommandWarnings commandWarnings;
 
     /**
      * Creates an AddSellerCommand to add the specified {@code Person}
      */
-    public AddSellerCommand(Seller seller) {
+    public AddSellerCommand(Seller seller, CommandWarnings commandWarnings) {
         requireNonNull(seller);
         toAdd = seller;
+        this.commandWarnings = commandWarnings;
     }
+    public AddSellerCommand(Seller seller) {
+        this(seller, new CommandWarnings());
+    }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         if (model.hasSeller(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_SELLER);
         }
 
+        if (model.sellerHasSameBuyerName(toAdd)) {
+            commandWarnings.addWarning(MESSAGE_POTENTIAL_DUPLICATE_BUYER);
+        }
+
+        if (model.hasSimilarSeller(toAdd)) {
+            commandWarnings.addWarning(MESSAGE_SIMILAR_BUYER);
+        }
+
         model.addSeller(toAdd);
-        return new CommandResult(String.format(MESSAGE_SELLER_SUCCESS, Messages.format(toAdd)));
+        model.commitAddressBook();
+
+        if (commandWarnings.containsWarnings()) {
+            return new CommandResult(commandWarnings.getWarningMessage());
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
     @Override

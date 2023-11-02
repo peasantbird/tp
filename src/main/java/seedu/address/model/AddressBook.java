@@ -6,13 +6,13 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.UniqueDisplayableList;
-import seedu.address.model.person.buyer.Buyer;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.UniqueDisplayableList;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.seller.Seller;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameDisplayable comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueDisplayableList<Buyer> buyers;
@@ -33,7 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the lists in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -51,8 +51,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the displayable list with {@code sellerss}.
+     * {@code sellers} must not contain duplicate sellers.
      */
     public void setSellers(List<Seller> sellers) {
         this.sellers.setDisplayables(sellers);
@@ -68,7 +68,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setSellers(newData.getSellerList());
     }
 
-    //// person-level operations
+    //// displayable-level operations
 
     /**
      * Returns true if a buyer with the same identity as {@code buyer} exists in the address book's buyer list.
@@ -77,13 +77,42 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(buyer);
         return buyers.contains(buyer);
     }
-
+    /**
+     * Returns true if a buyer with a similar identity as {@code buyer} exists in the address book's buyer list.
+     */
+    public boolean hasSimilarBuyer(Buyer buyer) {
+        requireNonNull(buyer);
+        return buyers.containsSimilar(buyer);
+    }
     /**
      * Returns true if a seller with the same identity as {@code seller} exists in the address book's seller list.
      */
     public boolean hasSeller(Seller seller) {
         requireNonNull(seller);
         return sellers.contains(seller);
+    }
+    /**
+     * Returns true if a seller with a similar identity as {@code seller} exists in the address book's seller list.
+     */
+    public boolean hasSimilarSeller(Seller seller) {
+        requireNonNull(seller);
+        return sellers.containsSimilar(seller);
+    }
+
+    /**
+     * Returns true if a buyer has the same name as a seller in the address book's seller list.
+     */
+    public boolean buyerHasSameSellerName(Buyer buyer) {
+        requireNonNull(buyer);
+        return sellers.contains(buyer);
+    }
+
+    /**
+     * Returns true if a seller has the same name as buyer in the address book's buyer list.
+     */
+    public boolean sellerHasSameBuyerName(Seller seller) {
+        requireNonNull(seller);
+        return buyers.contains(seller);
     }
 
     /**

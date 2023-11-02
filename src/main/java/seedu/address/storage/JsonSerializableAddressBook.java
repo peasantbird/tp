@@ -11,8 +11,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.buyer.Buyer;
-import seedu.address.model.person.seller.Seller;
+import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.seller.Seller;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -20,13 +20,13 @@ import seedu.address.model.person.seller.Seller;
 @JsonRootName(value = "addressbook")
 class JsonSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE = "list contains duplicate(s).";
 
     private final List<JsonAdaptedBuyer> buyers = new ArrayList<>();
     private final List<JsonAdaptedSeller> sellers = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given buyers and sellers.
      */
     @JsonCreator
     public JsonSerializableAddressBook(@JsonProperty("buyers") List<? extends JsonAdaptedBuyer> buyers,
@@ -55,14 +55,14 @@ class JsonSerializableAddressBook {
         for (JsonAdaptedBuyer jsonAdaptedBuyer : buyers) {
             Buyer buyer = jsonAdaptedBuyer.toModelType();
             if (addressBook.hasBuyer(buyer)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE);
             }
             addressBook.addBuyer(buyer);
         }
         for (JsonAdaptedSeller jsonAdaptedSeller : sellers) {
             Seller seller = jsonAdaptedSeller.toModelType();
             if (addressBook.hasSeller(seller)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE);
             }
             addressBook.addSeller(seller);
         }

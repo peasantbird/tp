@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,8 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
-    private Path buyersFilePath = Paths.get("data" , "buyers.json");
-    private Path sellersFilePath = Paths.get("data", "buyers.json");
+    private Path filePath = Paths.get("data" , "addressbook.json");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -38,7 +36,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
     public void resetData(ReadOnlyUserPrefs newUserPrefs) {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
-        setAddressBookFilePaths(newUserPrefs.getBuyersFilePath(), newUserPrefs.getSellersFilePath());
+        setAddressBookFilePath(newUserPrefs.getFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -50,18 +48,14 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
-    public Path getBuyersFilePath() {
-        return buyersFilePath;
+    public Path getFilePath() {
+        return filePath;
     }
 
-    public Path getSellersFilePath() {
-        return sellersFilePath;
-    }
 
-    public void setAddressBookFilePaths(Path buyersFilePath, Path sellersFilePath) {
-        requireAllNonNull(sellersFilePath, buyersFilePath);
-        this.buyersFilePath = buyersFilePath;
-        this.sellersFilePath = sellersFilePath;
+    public void setAddressBookFilePath(Path filePath) {
+        requireNonNull(filePath);
+        this.filePath = filePath;
     }
 
     @Override
@@ -77,21 +71,19 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
         UserPrefs otherUserPrefs = (UserPrefs) other;
         return guiSettings.equals(otherUserPrefs.guiSettings)
-                && buyersFilePath.equals(otherUserPrefs.buyersFilePath)
-                && sellersFilePath.equals(otherUserPrefs.sellersFilePath);
+                && filePath.equals(otherUserPrefs.filePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, buyersFilePath, sellersFilePath);
+        return Objects.hash(guiSettings, filePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
-        sb.append("\nLocal data file location(buyers) : " + buyersFilePath);
-        sb.append("\nLocal data file location(sellers) : " + sellersFilePath);
+        sb.append("\nLocal data file location : " + filePath);
         return sb.toString();
     }
 

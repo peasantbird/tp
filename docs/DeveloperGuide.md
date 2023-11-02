@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# RTPM-3 Developer Guide
+# RTPM Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -250,7 +250,178 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### \[Proposed\] Edit feature
 
+#### Proposed Implementation
+
+The proposed edit mechanism is facilitated by the `find` command. 
+
+Using the `find` command, we can find the seller or buyer to edit.
+
+Given below is an example usage scenario and how the edit mechanism behaves at each step.
+
+Step 1. The user types in the `edit-b` or `edit-s` keyword, followed by the index of the buyer or seller that they want
+to edit. Following that, they type `/field`, where `field` is a name of the field that they want to edit.
+
+The edit command will call the `find` command to find the corresponding buyer or seller, then it will copy that person,
+edit the field that the user wants to edit, delete that buyer or seller, then add the edited buyer or seller back
+into the list.
+
+<box type="info" seamless>
+
+**Note:** If the index or field is invalid, no command will be executed.
+
+</box>
+
+The following sequence diagram shows how the edit operation works:
+
+<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+#### Design considerations:
+
+**Aspect: How edit executes:**
+
+* **Alternative 1 (current choice):** Deletes the old buyer or seller and adds the edited one.
+    * Pros: Easy to implement.
+    * Cons: May not preserve buyer and seller order
+
+* **Alternative 2:** Deletes the old buyer or seller, then copies and deletes all the buyers or sellers
+after that buyer or seller, then adds the new edited buyer or seller, and then adds back all the copied
+buyers and sellers.
+    * Pros: Preserves order
+    * Cons: Difficult to implement
+
+_{more aspects and alternatives to be added}_
+
+
+### \[In progress\] Priority feature
+
+#### Implementation
+
+The priority feature is associated with the `edit` and `sort` commands, allowing the user to assign and sort clients by 
+their priority levels in the address book. The priority field is optional when instantiating buyers and sellers, and is
+initially unassigned.
+
+To implement this feature, the `Priority` field is firstly added to `Person`, and its corresponding UI Label is
+rendered by modifying the `PersonCard.java` controller and the respective BuyerCard and SellerCard FXML files. 
+* Since the priority field is 
+optional, the `Buyer`/`Seller` constructor is overloaded, such that the one which does not take in priority as an 
+argument will initialise priority to the default `nil` level. 
+* The priority FXML Label is conditionally rendered 
+in `PersonCard.java` based on the buyer/seller's priority field. For instance, its color is red for `high` priority,
+orange for `medium`, green for `low`, and not rendered for `nil`.
+
+To accommodate saving of buyers and sellers with the new priority fields in storage, `JsonAdaptedBuyer` and other
+relevant files are modified to include these fields in JSON format, and to be readable and loaded back into `Model` in
+subsequent RTPM initialisations.
+
+To make it more convenient for the user to directly assign priorities to clients without having to use the `edit` 
+command, the `SetBuyerPriority` and `SetSellerPriority` commands are implemented as part of this feature.
+
+Given below is an example usage scenario for setting priorities for buyers in the address book's buyer list.
+
+Step 1. The user launches the application and executes the `priority-b 2 high` command, which sets the priority level of the
+2nd person in the buyer list to `high`. The `priority-b` command calls `LogicManager`, which gets `AddressBookParser`
+to parse and obtain a `SetBuyerPriorityCommand`, before executing it. The command execution calls `ModelManager` to
+update the address book's buyer list with the newly assigned buyer priority, which is reflected on the UI too. 
+Finally, `LogicManager` calls `StorageManager` to update the JSON file.
+
+The following sequence diagram shows how the undo operation works:
+<puml src="diagrams/SetBuyerPrioritySequenceDiagram.puml" alt="SetBuyerPrioritySequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `SetBuyerPriorityCommand` should end at the destroy marker (X), but due to a 
+limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+Step 2. To unassign the priority level of the 2nd person, the user can execute the `priority-b 2 nil` command, which 
+runs a similar flow as illustrated in the sequence diagram above.
+
+The same logic can be used for assigning priorities to sellers instead of buyers, by using `priority-s` instead 
+of `priority-b`.
+
+#### Design considerations:
+
+**Aspect: How the optional priority field is implemented**
+
+* **Alternative 1 (current choice):** Overload the `Buyer`/`Seller` constructors.
+    * Pros: Relatively simple to implement and refactor.
+    * Cons: Not feasible for implementing various optional fields.
+
+* **Alternative 2 (proposed):** Assign a default value for all non-compulsory fields in `AddBuyer` and `AddSeller`, 
+only assigning them for arguments available from the parsed user input (in `ArgumentMultimap`).
+    * Pros: Only a single constructor for `Buyer`/`Seller` is needed for multiple optional fields.
+    * Cons: Address book only adds correctly formatted fields and may discard the rest without the user knowing, so
+more robust exception handling is required in parsing the user input which may be tedious to implement.
+
+### \[Proposed\] Sort feature
+
+#### Proposed Implementation
+
+The proposed sort mechanism is facilitated by the `sort` command.
+
+Using the `sort` command, we can sort the buyers and sellers lists respectively by name, priority, and other criteria.
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
+Step 1. The user types in the `sort-b` or `sort-s` keyword, followed by `name`, `priority`, or another `criteria`.
+to sort by. 
+
+The sort command will sort by changing the ObservableList<T> to a SortedList<T>, with the comparator based on the
+certain criteria.
+
+## Relaxed parameter matching
+### Background
+In previous versions of the app and in the original brownfield project AB3, fields such as ```Name``` or ```Email```
+had a validation method on instantiation, which would throw an ```IllegalArgumentException``` when 
+the provided string did not fit the regex. Although useful, this would often be overzealous, causing potential 
+frustration. Furthermore, this exception, as it halts execution, only informs you of the first field that fails 
+to pass, so if you had multiple errors you would have to resolve and re-execute each time.
+### Implementation
+In 1.3, we implemented a group of static methods for each parameter, generally named isAppropriate(*Field*), which has a
+looser regex. The result of this boolean check, if it fails, then passes a warning string to the
+```CommandWarnings``` class, which collects and stores them in a set. At the end of the execute() method, if the
+command encountered any warnings, then they are output into the returned CommandResult.
+This is then passed through LogicManager into MainWindow for display to the user.
+
+<puml src="diagrams/isAppropriateNameSequenceDiagram.puml" alt="isAppropriateNameSequenceDiagram" />
+<box type="info" seamless>
+
+**Note:** The lifeline for `SetBuyerPriorityCommand` should end at the destroy marker (X), but due to a
+limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+#### Design considerations:
+
+**Aspect: How to implement the warnings**
+
+* **Alternative 1 (current choice):** Use a CommandWarnings class to store strings representing warnings
+for inappropriate but valid fields.
+    * Pros: Allows us to hold multiple warnings at a time without halting execution.
+    * Cons: Using strings means that poor usage of addWarnings by callers may give nonsensical results.
+
+* **Alternative 2 (possible future enhancement):** Have CommandWarnings hold a set of predefined Warning singletons 
+instead of Strings, and 
+    * Pros: Constrains the contents of warning messages defensively, ensuring that they are useful.
+    * Cons: Not as flexible, not worth the effort of implementing in this early stage of development
+    , easy to add as future enhancement.
+
+* **Alternative 3 (proposed):** Use an exception such as InappropriateFieldException, which would be thrown by ParserUtil and 
+caught by the add buyer/seller command parsers, which would then pass a String warning to the command for it to output
+as the CommandResult.
+    * Pros: Doesn't require a new class to be created.
+    * Cons: To properly account for every field, you would require a Try/Catch block for every single field parsing.
+     Furthermore, using exceptions in the backend require switching to kernel mode, slowing down the application (which may be 
+     significant for high-usage cases in the future such as company-wide integration.)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -292,7 +463,7 @@ Priority level is based on current iteration
 | `* * *`  | realtor                                            | view my contacts                                                            | easily find contacts I want to talk to                                                 |
 | `* * *`  | user who has been using the app for a long time    | delete/archive old contacts                                                 | declutter my list from outdated information                                            |
 | `* * *`  | realtor                                            | save contact data to my computer                                            | refer to it when I reopen my app                                                       |
-| `* * *`  | realtor                                            | add houses into the app together with their price, furnishings, etc.        | quickly list the features to my clients                                                | 
+| `* * *`  | realtor                                            | add houses into the app together with their price, furnishings, etc.        | quickly list the features to my clients                                                |
 | `* * *`  | realtor who wants to pack light on the move        | solely use the keyboard and not need to carry a mouse around to use the app | quickly access and update information without the fuss of using a mouse                |
 | `* *`    | realtor with many contacts                         | view personal contacts separately from work contacts                        | I can focus on work when I need to                                                     |
 | `* *`    | realtor with many client contacts                  | sort my client contacts based on priority (time, importance, etc.)          | I can focus on the most important clients first                                        |
@@ -309,18 +480,18 @@ Priority level is based on current iteration
 
 ### Use cases
 
-(For all use cases below, the **System** is the `RTPM (RealtorTrackerPlusMax)` and the **Actor** is the `user`, 
+(For all use cases below, the **System** is our app `RTPM (RealtorTrackerPlusMax)` and the **Actor** is the `user`,
 unless specified otherwise)
-  
-**Use case: UC1 - Add homeowner and house**  
-System: RTPM  
-Actor: User  
-  
+
+**Use case: UC1 - Add homeowner and house**
+System: RTPM
+Actor: User
+
 **MSS**
 
 1. User enters command to add homeowner and house details.
 2. System adds the entry to the list.
-3. System saves file. 
+3. System saves file.
 
    Use case ends.
 
@@ -331,16 +502,16 @@ Extensions:
 
 * 3a. Failure to update savefile.
   * 3a1. System indicates failure to update.
-    Use case restarts from step 1.  
+    Use case restarts from step 1.
 
- 
-**Use case: UC2 - Add homebuyer and preferences**  
-System: RTPM   
-Actor: User  
+
+**Use case: UC2 - Add homebuyer and preferences**
+System: RTPM
+Actor: User
 **MSS**
 1. User enters command to add homebuyer and preferences.
 2. System adds the entry to the list.
-3. System saves file. 
+3. System saves file.
    Use case ends.
 
 Extensions:
@@ -352,9 +523,9 @@ Extensions:
   * 3a1. System indicates failure to update.
   Use case restarts from step 1.
 
-**Use case: UC3 - View buyers**  
-System: RTPM   
-Actor: User  
+**Use case: UC3 - View buyers**
+System: RTPM
+Actor: User
 **MSS**
 1. User enters the list-b command.
 2. System displays list of buyers.
@@ -371,7 +542,7 @@ Extensions:
 **MSS**
 
 1. User enters the list-s command.
-2. System displays list of sellers. 
+2. System displays list of sellers.
 
     Use case ends.
 
@@ -389,14 +560,14 @@ Extensions:
 1. User enters command to delete a buyer or a seller.
 2. System deletes item.
 3. System updates savefile.
-4. System returns an indicator of execution success. 
+4. System returns an indicator of execution success.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. Failure to update savefile. 
-  * 3a1. System indicates failure to update. 
+* 3a. Failure to update savefile.
+  * 3a1. System indicates failure to update.
   * 3a2. System undoes deletion (to prevent desync of storage and application).<br>
     Use case restarts from step 1.
 
@@ -423,12 +594,12 @@ Extensions:
 5. The software should work on a computer that has version 11 of Java i.e., no other Java version installed.
 6. The software should work without requiring an installer.
 7. The use of third-party frameworks/libraries/services is allowed but only if they are free, open-source (this doesn't apply to services), and have permissive license terms.
-8. The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for 
-* standard screen resolutions 1920x1080 and higher, and 
+8. The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for
+* standard screen resolutions 1920x1080 and higher, and
 * for screen scales 100% and 125%.
 
-In addition, the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for 
-* resolutions 1280x720 and higher, and 
+In addition, the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for
+* resolutions 1280x720 and higher, and
 * for screen scales 150%.
 9. The software should be able to be packaged into a single JAR file.
 10. The DG and UG should be PDF-friendly (Don't use expandable panels, embedded videos, animated GIFs etc.).
