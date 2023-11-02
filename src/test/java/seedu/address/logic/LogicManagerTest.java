@@ -14,7 +14,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.CommandResult;
+<<<<<<< HEAD
 import seedu.address.logic.commands.ListCommand;
+=======
+import seedu.address.logic.commands.DeleteBuyerCommand;
+import seedu.address.logic.commands.ListSellersCommand;
+>>>>>>> upstream/master
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -54,7 +59,7 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete-b 9";
+        String deleteCommand = DeleteBuyerCommand.COMMAND_WORD + " 9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_BUYER_DISPLAYED_INDEX);
     }
 

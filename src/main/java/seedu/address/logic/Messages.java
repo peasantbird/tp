@@ -19,9 +19,16 @@ public class Messages {
             + "the last number in the list!";
     public static final String MESSAGE_INVALID_SELLER_DISPLAYED_INDEX = "The seller index provided is higher than "
             + "the last number in the list!";
+    public static final String MESSAGE_SIMILAR_BUYER = "The buyer is similar to one of the buyers in the list!";
+    public static final String MESSAGE_SIMILAR_SELLER = "The seller is similar to one of the sellers in the list!";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%d buyer(s) and %d seller(s) listed!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_POTENTIAL_DUPLICATE_BUYER = "This seller potentially also exists in the"
+            + " buyer list: If so, please verify that their contact information is the same";
+
+    public static final String MESSAGE_POTENTIAL_DUPLICATE_SELLER = "This buyer potentially also exists in the"
+            + " seller list: If so, please verify that their contact information is the same";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

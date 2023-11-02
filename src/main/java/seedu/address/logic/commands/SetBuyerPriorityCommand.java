@@ -18,7 +18,7 @@ import seedu.address.model.displayable.buyer.Buyer;
  */
 public class SetBuyerPriorityCommand extends Command {
 
-    public static final String COMMAND_WORD = "priority-b";
+    public static final String COMMAND_WORD = "bpriority";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets a priority level for the buyer, identified by index in the displayed buyer list. "
