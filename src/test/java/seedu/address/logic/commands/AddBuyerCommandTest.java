@@ -163,7 +163,7 @@ public class AddBuyerCommandTest {
 
         @Override
         public boolean sellerHasSameBuyerName(Seller seller) {
-             throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -260,6 +260,10 @@ public class AddBuyerCommandTest {
         public boolean hasSimilarBuyer(Buyer buyer) {
             requireNonNull(buyer);
             return buyersAdded.stream().anyMatch(buyer::isSimilarDisplayable);
+        }
+        @Override
+        public boolean buyerHasSameSellerName(Buyer buyer) {
+            return false;
         }
         @Override
         public ReadOnlyAddressBook getAddressBook() {
