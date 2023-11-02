@@ -119,6 +119,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean buyerHasSameSellerName(Buyer buyer) {
+        requireNonNull(buyer);
+        return addressBook.buyerHasSameSellerName(buyer);
+    }
+
+    @Override
+    public boolean sellerHasSameBuyerName(Seller seller) {
+        requireNonNull(seller);
+        return addressBook.sellerHasSameBuyerName(seller);
+    }
+
+    @Override
     public void deleteBuyer(Buyer targetBuyer) {
         addressBook.removeBuyer(targetBuyer);
     }
@@ -188,13 +200,11 @@ public class ModelManager implements Model {
 
     @Override
     public void updateFilteredSortedBuyerList(Comparator<Buyer> comparator) {
-        requireNonNull(comparator);
         filteredSortedBuyers.setComparator(comparator);
     }
 
     @Override
     public void updateFilteredSortedSellerList(Comparator<Seller> comparator) {
-        requireNonNull(comparator);
         filteredSortedSellers.setComparator(comparator);
     }
 

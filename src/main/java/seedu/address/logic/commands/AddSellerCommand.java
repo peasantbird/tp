@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_POTENTIAL_DUPLICATE_BUYER;
 import static seedu.address.logic.Messages.MESSAGE_SIMILAR_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -46,6 +47,7 @@ public class AddSellerCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Got it. I've added a seller contact:\n%1$s";
     public static final String MESSAGE_DUPLICATE_SELLER = "This seller already exists in the address book";
 
+
     private final Seller toAdd;
 
     private final CommandWarnings commandWarnings;
@@ -66,17 +68,23 @@ public class AddSellerCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         if (model.hasSeller(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_SELLER);
         }
+
+        if (model.sellerHasSameBuyerName(toAdd)) {
+            commandWarnings.addWarning(MESSAGE_POTENTIAL_DUPLICATE_BUYER);
+        }
+
         if (model.hasSimilarSeller(toAdd)) {
             commandWarnings.addWarning(MESSAGE_SIMILAR_BUYER);
         }
+
+        model.addSeller(toAdd);
         if (commandWarnings.containsWarnings()) {
             return new CommandResult(commandWarnings.getWarningMessage());
         }
-        model.addSeller(toAdd);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
