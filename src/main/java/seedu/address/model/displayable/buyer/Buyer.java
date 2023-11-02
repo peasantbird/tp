@@ -20,6 +20,7 @@ import seedu.address.ui.UiPart;
  * Represents a client looking to buy a house in the address book.
  */
 public class Buyer extends Person {
+
     private final HouseInfo houseInfo;
 
     /**

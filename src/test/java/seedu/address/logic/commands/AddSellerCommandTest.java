@@ -147,7 +147,17 @@ public class AddSellerCommandTest {
         }
 
         @Override
+        public boolean hasSimilarBuyer(Buyer buyer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasSeller(Seller seller) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSimilarSeller(Seller seller) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -235,6 +245,11 @@ public class AddSellerCommandTest {
         public void addSeller(Seller seller) {
             requireNonNull(seller);
             sellersAdded.add(seller);
+        }
+        @Override
+        public boolean hasSimilarSeller(Seller seller) {
+            requireNonNull(seller);
+            return sellersAdded.stream().anyMatch(seller::isSimilarDisplayable);
         }
 
         @Override

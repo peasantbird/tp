@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_SIMILAR_BUYER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
@@ -68,6 +69,9 @@ public class AddSellerCommand extends Command {
 
         if (model.hasSeller(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_SELLER);
+        }
+        if (model.hasSimilarSeller(toAdd)) {
+            commandWarnings.addWarning(MESSAGE_SIMILAR_BUYER);
         }
         if (commandWarnings.containsWarnings()) {
             return new CommandResult(commandWarnings.getWarningMessage());

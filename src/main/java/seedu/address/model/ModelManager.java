@@ -102,11 +102,20 @@ public class ModelManager implements Model {
         requireNonNull(buyer);
         return addressBook.hasBuyer(buyer);
     }
-
+    @Override
+    public boolean hasSimilarBuyer(Buyer buyer) {
+        requireNonNull(buyer);
+        return addressBook.hasSimilarBuyer(buyer);
+    }
     @Override
     public boolean hasSeller(Seller seller) {
         requireNonNull(seller);
         return addressBook.hasSeller(seller);
+    }
+    @Override
+    public boolean hasSimilarSeller(Seller seller) {
+        requireNonNull(seller);
+        return addressBook.hasSimilarSeller(seller);
     }
 
     @Override
