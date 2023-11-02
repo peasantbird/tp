@@ -15,7 +15,7 @@ import seedu.address.model.displayable.buyer.Buyer;
  */
 public class ListBuyerCommand extends Command {
 
-    public static final String COMMAND_WORD = "listb";
+    public static final String COMMAND_WORD = "blist";
     public static final String MESSAGE_LIST_BUYER_SUCCESS = "Got it. Here's the information of this buyer:\n%1$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
