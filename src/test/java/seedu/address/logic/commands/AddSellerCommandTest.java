@@ -207,9 +207,7 @@ public class AddSellerCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
+        public void commitAddressBook() {}
 
         @Override
         public void undoAddressBook() {

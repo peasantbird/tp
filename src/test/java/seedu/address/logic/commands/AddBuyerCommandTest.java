@@ -211,9 +211,7 @@ public class AddBuyerCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
+        public void commitAddressBook() {}
 
         @Override
         public void undoAddressBook() {
@@ -281,19 +279,21 @@ public class AddBuyerCommandTest {
             requireNonNull(buyer);
             buyersAdded.add(buyer);
         }
+
         @Override
         public boolean hasSimilarBuyer(Buyer buyer) {
             requireNonNull(buyer);
             return buyersAdded.stream().anyMatch(buyer::isSimilarDisplayable);
         }
+
         @Override
         public boolean buyerHasSameSellerName(Buyer buyer) {
             return false;
         }
+
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
     }
-
 }
