@@ -67,11 +67,13 @@ public class SetBuyerPriorityCommand extends Command {
 
         Buyer targetBuyer = lastShownList.get(targetIndex.getZeroBased());
         Buyer buyerWithPriority = getBuyerWithPriority(targetBuyer, this.priority);
+
+        model.setBuyer(targetBuyer, buyerWithPriority);
+        model.commitAddressBook();
+
         if (commandWarnings.containsWarnings()) {
             return new CommandResult(commandWarnings.getWarningMessage());
         }
-        model.setBuyer(targetBuyer, buyerWithPriority);
-        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(buyerWithPriority)));
     }
 
