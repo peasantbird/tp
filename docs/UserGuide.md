@@ -63,11 +63,60 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
+### Add a buyer: `buyer`
+
+Adds a buyer with their info to the list.
+
+Format: `buyer n/NAME [p/PHONE\_NUMBER] [e/EMAIL] [ah/HOME\_ADDRESS] [i/BUY\_HOUSE\_INFO] \[t/TAG]…`
+
+- `n/NAME`: String
+- `p/PHONE\_NUMBER`: int
+- `e/EMAIL`: String contains ‘@’
+- `ah/ADDRESS`: String
+- `i/BUY\_HOUSE\_INFO`: String
+- `\[t/TAG]`: Alphanumeric string
+
+Example:
+`buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium`
+
+Precise outputs when the command succeeds:
+
+```
+Got it. I've added a buyer contact:
+Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
+```
+```
+Warning!; [Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.]
+Please ignore if this is expected.
+```
+```
+Warning!; [Emails should be of the format local-part@domain and adhere to the following constraints:
+1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.]
+Please ignore if this is expected.
+```
+
+Precise outputs when the command fails due to missing parameters:
+```
+Invalid command format!
+buyer: Adds a buyer to the address book. Parameters: n/NAME p/PHONE e/EMAIL ah/ADDRESS i/INFO [t/TAG]...
+Example: buyer n/John Doe p/98765432 e/johnd@example.com ah/311, Clementi Ave 2, #02-25 i/Central Area 5 Room Condominium t/friends t/owesMoney
+```
+
+Precise outputs when the command fails due to invalid parameters:
+```
+Emails must contain at least one '@'.
+```
+
 ### Add a seller : `seller`
 
 Adds a seller with their info to the list.
 
-Format: `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [t/TAG]`
+Format: `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [t/TAG]…`
 - `n/NAME`: String
 - `p/PHONE_NUMBER`: int
 - `e/EMAIL`: String contains ‘@’
@@ -81,7 +130,21 @@ Example: `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor
 Precise outputs when the command succeeds:
 ```
 Got it. I've added a seller contact:
-Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; Sell House Info: 4 Room Flat in Sarhad Ville; Tags:
+Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
+```
+```
+Warning!; [Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.]
+Please ignore if this is expected.
+```
+```
+Warning!; [Emails should be of the format local-part@domain and adhere to the following constraints:
+1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.]
+Please ignore if this is expected.
 ```
 
 Precise outputs when the command fails due to missing parameters:
@@ -93,74 +156,9 @@ Example: seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor 
 
 Precise outputs when the command fails due to invalid parameters:
 ```
-Warning!; [Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.]
-Please ignore if this is expected.
-```
-```
-Warning!; [Emails should be of the format local-part@domain and adhere to the following constraints:
-1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-The domain name must:
-    - end with a domain label at least 2 characters long
-    - have each domain label start and end with alphanumeric characters
-    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.]
-Please ignore if this is expected.
-```
-```
 Emails must contain at least one '@'.
 ```
 
-
-
-
-### Add a buyer: `buyer`
-
-Adds a buyer with their info to the list.
-
-Format: `buyer n/NAME [p/PHONE\_NUMBER] [e/EMAIL] [ah/HOME\_ADDRESS] [i/BUY\_HOUSE\_INFO] \[t/TAG]`
-
-- `n/NAME`: String
-- `p/PHONE\_NUMBER`: int
-- `e/EMAIL`: String contains ‘@’
-- `ah/ADDRESS`: String
-- `i/BUY\_HOUSE\_INFO`: String
-- `\[t/TAG]`: Alphanumeric string
-
-Example: 
-`buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium`
-
-Precise outputs when the command succeeds:
-
-```
-Got it. I've added a buyer contact:
-Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; Buying Info: Central Area 5 Room Condominium; Tags:
-```
-
-Precise outputs when the command fails due to missing parameters:
-```
-Invalid command format!
-buyer: Adds a buyer to the address book. Parameters: n/NAME p/PHONE e/EMAIL ah/ADDRESS i/INFO [t/TAG]...
-Example: buyer n/John Doe p/98765432 e/johnd@example.com ah/311, Clementi Ave 2, #02-25 i/Central Area 5 Room Condominium t/friends t/owesMoney
-```
-
-Precise outputs when the command fails due to invalid parameters:
-```
-Warning!; [Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.]
-Please ignore if this is expected.
-```
-```
-Warning!; [Emails should be of the format local-part@domain and adhere to the following constraints:
-1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-The domain name must:
-    - end with a domain label at least 2 characters long
-    - have each domain label start and end with alphanumeric characters
-    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.]
-Please ignore if this is expected.
-```
-```
-Emails must contain at least one '@'.
-```
 
 ### Listing all buyers and sellers: `list`
 
@@ -174,12 +172,72 @@ Precise outputs when the command succeeds:
 Listed all buyers and sellers!
 ```
 
+### Edit a buyer: `bedit`
 
-### Listing all buyers: `listb`
+Edits the information of a buyer based on their index number in the buyers' list.
+
+Format: `bedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]…`
+* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyers' list
+* `PREFIX/VALUE`: Refer to the add buyer command, `buyer`
+
+Example: `bedit 3 e/example@email.com ah/Residential Street`
+
+Precise outputs when the command succeeds:
+```
+Got it. I've edited a buyer contact:
+Jane Doe; Phone: 91234567; Email: something@else.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Tags:
+```
+Precise outputs when the command fails:
+```
+Invalid command format! 
+bedit: Edits the details of the buyer identified by the index number used in the displayed buyer list. Existing values will be overwritten by the input values.
+Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/ADDRESS] [i/BUY_HOUSE_INFO] [t/TAG]...
+[prio/PRIORITY] Example: bedit 1 p/91234567 e/johndoe@example.com
+```
+```
+At least one field to edit must be provided!
+```
+```
+The buyer index provided is higher than the last number in the list!
+```
+
+### Edit a seller: `sedit`
+
+Edits the information of a seller based on their index number in the sellers' list.
+
+Format: `sedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]…`
+* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the sellers' list
+* `PREFIX/VALUE`: Refer to the add seller command, `seller`
+
+Example: `sedit 3 e/example@email.com ah/Residential Street`
+
+Precise outputs when the command succeeds:
+```
+Got it. I've edited a seller contact:
+Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: Another Place; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
+```
+Precise outputs when the command fails:
+```
+Invalid command format! 
+sedit: Edits the details of the seller identified by the index number used in the displayed seller list. Existing values will be overwritten by the input values.
+Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/ADDRESS] [as/SELLING_ADDRESS] [i/SELL_HOUSE_INFO] [t/TAG]...
+[prio/PRIORITY] Example: sedit 1 p/91234567 e/johndoe@example.com
+```
+```
+At least one field to edit must be provided!
+```
+```
+The seller index provided is higher than the last number in the list!
+```
+
+### Display buyer information from list: `blist`
 
 Displays the information of a buyer based on their index number in the buyers' list.
 
-Format: `listb INDEX`
+Format: `blist INDEX`
+* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyers' list
+
+Example: `blist 3`
 
 Precise outputs when the command succeeds:
 
@@ -189,11 +247,14 @@ Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East
 ```
 
 
-### Listing all buyers: `lists`
+### Display seller information from list: `slist`
 
 Displays the information of a seller based on their index number in the sellers' list.
 
-Format: `lists INDEX`
+Format: `slist INDEX`
+* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the sellers' list
+
+Example: `slist 3`
 
 Precise outputs when the command succeeds:
 
@@ -205,9 +266,9 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling A
 
 ### Filter buyers and sellers: `filter`
 
-Lists only all sellers that the user has added.
+Filters both lists so that they only display buyers and sellers any part of whose names match any of the given keywords fully.
 
-Format: `filter KEYWORD [MORE_KEYWORDS]`
+Format: `filter KEYWORD [MORE_KEYWORDS]…`
 
 - `KEYWORD`: String
 
@@ -217,14 +278,14 @@ Precise outputs when the command succeeds:
 1 buyer(s) and 0 seller(s) listed!
 ```
 
-### Deleting a buyer: `deleteb`
+### Deleting a buyer: `bdelete`
 
 Deletes a buyer based on their index number in the buyers’ list.
 
-Format: `deleteb INDEX`
+Format: `bdelete INDEX`
 * `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyers' list
 
-Example: `deleteb 3`
+Example: `bdelete 3`
 
 Precise outputs when the command succeeds:
 ```
@@ -235,23 +296,23 @@ Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East
 Precise outputs when the command fails:
 ```
 Invalid command format!
-delete-b: Deletes the buyer identified by the index number used in the displayed buyer list.
+bdelete: Deletes the buyer identified by the index number used in the displayed buyer list.
 Parameters: INDEX (must be a positive integer)
-Example: deleteb 1
+Example: bdelete 1
 ```
 ```
 The buyer index provided is higher than the last number in the list!
 ```
 
 
-### Deleting a buyer: `deletes`
+### Deleting a seller: `sdelete`
 
 Deletes a seller based on their index number in the sellers’ list.
 
-Format: `deletes INDEX`
+Format: `sdelete INDEX`
 * `INDEX`: A positive integer (1,2,3 …), which must not exceed last index in the sellers’ list
 
-Example: `deletes 3`
+Example: `sdelete 3`
 
 Precise outputs when the command succeeds:
 ```
@@ -260,13 +321,53 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling A
 ```
 Precise outputs when the command fails:
 ```
-Invalid command format!
-deleteb: Deletes the buyer identified by the index number used in the displayed buyer list.
+Invalid command format! 
+sdelete: Deletes the seller identified by the index number used in the displayed seller list.
 Parameters: INDEX (must be a positive integer)
-Example: deleteb 1
+Example: sdelete 1
 ```
 ```
-The buyer index provided is higher than the last number in the list!
+The seller index provided is higher than the last number in the list!
+```
+
+### Sorting buyers: `bsort`
+
+Sorts the buyers' list by the provided attribute and in the given direction.
+
+Format: `bsort ATTRIBUTE_PREFIX DIRECTION`
+* `ATTRIBUTE_PREFIX`: Refer to the add buyer command, `buyer`
+* `DIRECTION`: "a" OR "d" for ascending or descending respectively
+
+Example: `bsort n/ d`
+
+Precise outputs when the command succeeds:
+```
+Got it. I've sorted the buyer list!
+```
+
+Precise outputs when the command fails:
+```
+Multiple values specified for the following single-valued field(s): n/
+```
+
+### Sorting sellers: `ssort`
+
+Sorts the buyers' list by the provided attribute and in the given direction.
+
+Format: `ssort ATTRIBUTE_PREFIX DIRECTION`
+* `ATTRIBUTE_PREFIX`: Refer to the add buyer command, `buyer`
+* `DIRECTION`: "a" OR "d" for ascending or descending respectively
+
+Example: `ssort n/ d`
+
+Precise outputs when the command succeeds:
+```
+Got it. I've sorted the seller list!
+```
+
+Precise outputs when the command fails:
+```
+Multiple values specified for the following single-valued field(s): n/
 ```
 
 ### Undo: `undo`
@@ -275,11 +376,29 @@ Undoes the previous action.
 
 Format: `undo`
 
+Precise outputs when the command succeeds:
+```
+Last command was undone.
+```
+Precise outputs when the command fails:
+```
+No commands to undo!
+```
+
 ### Redo: `redo`
 
 Restores the previously undone action.
 
 Format :`redo`
+
+Precise outputs when the command succeeds:
+```
+The next command was redone.
+```
+Precise outputs when the command fails:
+```
+No commands to redo!
+```
 
 ### Exiting the program: `exit`
 
@@ -293,6 +412,11 @@ Format: `exit`
 Clears all entries from the address book.
 
 Format: `clear`
+
+Precise outputs when the command succeeds:
+```
+Address book has been cleared!
+```
 
 
 ### Saving the data
