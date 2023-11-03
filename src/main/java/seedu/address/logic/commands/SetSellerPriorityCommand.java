@@ -20,14 +20,14 @@ import seedu.address.model.displayable.seller.Seller;
  */
 public class SetSellerPriorityCommand extends Command {
 
-    public static final String COMMAND_WORD = "spriority";
+    public static final String COMMAND_WORD = "sprio";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets a priority level for the seller, identified by index in the displayed seller list. "
-            + "Index must be a positive integer, while prio_lvl can be either 'high', 'medium', or 'low'.\n"
+            + "INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', or 'low'.\n"
             + "Parameters: "
             + "INDEX "
-            + "PRIO_LVL\n"
+            + "PRIORITY\n"
             + "Example: " + COMMAND_WORD + " 1" + " high";
 
     public static final String MESSAGE_SUCCESS = "The seller's priority level has been set:\n%1$s";

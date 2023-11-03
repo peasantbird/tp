@@ -66,34 +66,35 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Add a buyer: `buyer`
+### Adding a buyer: `buyer`
 
-Adds a buyer with their info to the list. This command can cause warnings.
+Adds a buyer with their info to the list. This command can cause warnings, and empty optional parameters will be omitted.
 
-Format: `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_INFO] [t/TAG]…`
+Format: `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_INFO] [prio/PRIORITY] [t/TAG]…`
 
-- `n/NAME`: contains at least one non-whitespace
-- `[p/PHONE_NUMBER]`: contains at least one number
+- `n/NAME`: Contains at least one non-whitespace
+- `[p/PHONE_NUMBER]`: Contains at least one number
 - `[e/EMAIL]`: Contains at least one '@'
 - `[ah/HOME_ADDRESS]`: No restrictions
 - `[i/BUY_HOUSE_INFO]`: No restrictions
-- `[t/TAG]`: No restrictions
+- `[prio/PRIORITY]`: Either `high`, `medium`, or `low` priority level
+- `[t/TAG]...`: No restrictions
 
 Example:
-`buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium`
+`buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium prio/high`
 
 Precise outputs when the command succeeds:
 
 ```
 Got it. I've added a buyer contact:
-Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
+Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: high; Tags:
 ```
 
-Precise outputs when the command fails due to missing parameters:
+Precise outputs when the command fails due to missing name parameter:
 ```
 Invalid command format!
-buyer: Adds a buyer to the address book. Parameters: n/NAME p/PHONE e/EMAIL ah/ADDRESS i/INFO [t/TAG]...
-Example: buyer n/John Doe p/98765432 e/johnd@example.com ah/311, Clementi Ave 2, #02-25 i/Central Area 5 Room Condominium t/friends t/owesMoney
+buyer: Adds a buyer to the address book. Parameters: n/NAME [p/PHONE] [e/EMAIL] [ah/ADDRESS] [i/INFO] [prio/PRIORITY] [t/TAG]... 
+Example: buyer n/John Doe p/98765432 e/johnd@example.com ah/311, Clementi Ave 2, #02-25 i/Central Area 5 Room Condominium prio/medium t/friends t/owesMoney
 ```
 
 Precise outputs when the command fails due to invalid parameters:
@@ -101,32 +102,33 @@ Precise outputs when the command fails due to invalid parameters:
 Emails must contain at least one '@'.
 ```
 
-### Add a seller : `seller`
+### Adding a seller : `seller`
 
-Adds a seller with their info to the list. This command can cause warnings.
+Adds a seller with their info to the list. This command can cause warnings, and empty optional parameters will be omitted.
 
-Format: `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [t/TAG]…`
-- `n/NAME`: contains at least one non-whitespace
-- `[p/PHONE_NUMBER]`: contains at least one number
+Format: `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [prio/PRIORITY] [t/TAG]…`
+- `n/NAME`: Contains at least one non-whitespace
+- `[p/PHONE_NUMBER]`: Contains at least one number
 - `[e/EMAIL]`: Contains at least one '@'
 - `[ah/HOME_ADDRESS]`: No restrictions
 - `[as/SELLING_ADDRESS]`: No restrictions
 - `[i/SELLING_HOUSE_INFO]`: No restrictions
+- `[prio/PRIORITY]`: Either `high`, `medium`, or `low` priority level
 - `[t/TAG]`: No restrictions
 
-Example: `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville`
+Example: `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/high`
 
 Precise outputs when the command succeeds:
 ```
 Got it. I've added a seller contact:
-Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
+Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: high; Tags:
 ```
 
 Precise outputs when the command fails due to missing parameters:
 ```
 Invalid command format!
 seller: Adds a seller to the address book. Parameters: n/NAME p/PHONE e/EMAIL ah/ADDRESS as/SELLING_ADDRESS i/HOUSE_INFO [t/TAG]...
-Example: seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville t/friends t/owesMoney
+Example: seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/medium t/friends t/owesMoney
 ```
 
 Precise outputs when the command fails due to invalid parameters:
@@ -147,7 +149,41 @@ Precise outputs when the command succeeds:
 Listed all buyers and sellers!
 ```
 
-### Edit a buyer: `bedit`
+### Displaying a buyer from buyer list: `blist`
+
+Displays the information of a buyer based on their index number in the buyers' list.
+
+Format: `blist INDEX`
+* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyers' list
+
+Example: `blist 3`
+
+Precise outputs when the command succeeds:
+
+```
+Got it. Here's the information of this buyer:
+Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
+```
+
+
+### Display a seller from seller list: `slist`
+
+Displays the information of a seller based on their index number in the sellers' list.
+
+Format: `slist INDEX`
+* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the sellers' list
+
+Example: `slist 3`
+
+Precise outputs when the command succeeds:
+
+```
+Got it. Here's the information of this seller:
+Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
+```
+
+
+### Editing a buyer: `bedit`
 
 Edits the information of a buyer based on their index number in the buyers' list. This command can cause warnings.
 
@@ -160,7 +196,7 @@ Example: `bedit 3 e/example@email.com ah/Residential Street`
 Precise outputs when the command succeeds:
 ```
 Got it. I've edited a buyer contact:
-Jane Doe; Phone: 91234567; Email: something@else.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Tags:
+Jane Doe; Phone: 91234567; Email: something@else.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
 ```
 Precise outputs when the command fails:
 ```
@@ -176,7 +212,7 @@ At least one field to edit must be provided!
 The buyer index provided is higher than the last number in the list!
 ```
 
-### Edit a seller: `sedit`
+### Editing a seller: `sedit`
 
 Edits the information of a seller based on their index number in the sellers' list. This command can cause warnings.
 
@@ -205,41 +241,61 @@ At least one field to edit must be provided!
 The seller index provided is higher than the last number in the list!
 ```
 
-### Display buyer information from list: `blist`
+### Setting a buyer's priority:
 
-Displays the information of a buyer based on their index number in the buyers' list.
+Sets the priority level of a buyer based on their index number in the buyer's list. Serves as a convenient shortcut
+for changing a buyer's priority level without having to use `bedit`.
 
-Format: `blist INDEX`
-* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyers' list
+Format: `bprio INDEX PRIORITY`
+* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyer's list
+* `PRIORITY`: Either `high`, `medium`, or `low` priority level
 
-Example: `blist 3`
-
-Precise outputs when the command succeeds:
-
-```
-Got it. Here's the information of this buyer:
-Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
-```
-
-
-### Display seller information from list: `slist`
-
-Displays the information of a seller based on their index number in the sellers' list.
-
-Format: `slist INDEX`
-* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the sellers' list
-
-Example: `slist 3`
+Example: `bprio 3 high`
 
 Precise outputs when the command succeeds:
-
 ```
-Got it. Here's the information of this seller:
-Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
+The buyer's priority level has been set:
+Jane Doe; Phone: 91234567; Email: something@else.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: high; Tags:
+```
+Precise outputs when the command fails:
+```
+Invalid command format! 
+bprio: Sets a priority level for the buyer, identified by index in the displayed buyer list. INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', or 'low'.
+Parameters: INDEX PRIORITY
+```
+```
+The buyer index provided is higher than the last number in the list!
 ```
 
 
-### Filter buyers and sellers: `filter`
+### Setting a seller's priority:
+
+Sets the priority level of a seller based on their index number in the seller's list. Serves as a convenient shortcut
+for changing a seller's priority level without having to use `sedit`.
+
+Format: `sprio INDEX PRIORITY`
+* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyer's list
+* `PRIORITY`: Either `high`, `medium`, or `low` priority level
+
+Example: `sprio 3 high`
+
+Precise outputs when the command succeeds:
+```
+The seller's priority level has been set:
+Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: Another Place; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: high; Tags:
+```
+Precise outputs when the command fails:
+```
+Invalid command format! 
+sprio: Sets a priority level for the seller, identified by index in the displayed seller list. INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', or 'low'.
+Parameters: INDEX PRIORITY
+```
+```
+The seller index provided is higher than the last number in the list!
+```
+
+
+### Filtering buyers and sellers: `filter`
 
 Filters both lists so that they only display buyers and sellers any part of whose names match any of the given keywords fully.
 
@@ -252,6 +308,7 @@ Precise outputs when the command succeeds:
 ```
 1 buyer(s) and 0 seller(s) listed!
 ```
+
 
 ### Deleting a buyer: `bdelete`
 
@@ -304,6 +361,7 @@ Example: sdelete 1
 ```
 The seller index provided is higher than the last number in the list!
 ```
+
 
 ### Sorting buyers: `bsort`
 
