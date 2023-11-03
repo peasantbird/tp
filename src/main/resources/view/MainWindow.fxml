@@ -47,16 +47,16 @@
           </padding>
         </StackPane>
 
-        <HBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+        <HBox fx:id="personList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS" spacing="10">
           <padding>
             <Insets top="10" right="10" bottom="10" left="10" />
           </padding>
-          <VBox HBox.hgrow="ALWAYS" alignment="CENTER" style="-fx-border-color: #8FFFA1;">
-            <Label fx:id="buyers" text="Buyers" style="-fx-text-fill: #8FFFA1; -fx-font-weight: bold; -fx-font-style: italic;"/>
+          <VBox HBox.hgrow="ALWAYS" alignment="CENTER" style="-fx-background-color: #707070; -fx-background-radius: 5; -fx-border-color: #707070; -fx-border-width: 0 5 5 5; -fx-border-radius: 5">
+            <Label fx:id="buyers" text="Buyers" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18"/>
             <StackPane fx:id="buyerListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
-          <VBox HBox.hgrow="ALWAYS" alignment="CENTER" style="-fx-border-color: yellow;">
-            <Label fx:id="sellers" text="Sellers" style="-fx-text-fill: yellow; -fx-font-weight: bold; -fx-font-style: italic;"/>
+          <VBox HBox.hgrow="ALWAYS" alignment="CENTER" style="-fx-background-color: #707070; -fx-background-radius: 5; -fx-border-color: #707070; -fx-border-width: 0 5 5 5; -fx-border-radius: 5">
+            <Label fx:id="sellers" text="Sellers" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18"/>
             <StackPane fx:id="sellerListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
         </HBox>
