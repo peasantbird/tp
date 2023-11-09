@@ -6,7 +6,7 @@
 
 # RTPM User Guide
 
-RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage contacts, optimized for use via a Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, RTPM can get your contact management tasks done faster than traditional GUI apps.
+RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage contacts, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, RTPM can get your contact management tasks done faster than traditional GUI apps.
 
 1. [Quick Start](#quick-start)
 2. [Features](#features)<br>
@@ -72,7 +72,7 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 **Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+  e.g. in `buyer n/NAME`, `NAME` is a parameter which can be used as `buyer n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -117,7 +117,7 @@ Format: `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_
 - `[e/EMAIL]`: Contains at least one '@'
 - `[ah/HOME_ADDRESS]`: No restrictions
 - `[i/BUY_HOUSE_INFO]`: No restrictions
-- `[prio/PRIORITY]`: Either `high`, `medium`, or `low` priority level
+- `[prio/PRIORITY]`: Either `high`, `medium`, `low`, or `nil` priority level
 - `[t/TAG]...`: No restrictions
 
 Example:
@@ -154,7 +154,7 @@ Format: `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_
 - `[ah/HOME_ADDRESS]`: No restrictions
 - `[as/SELLING_ADDRESS]`: No restrictions
 - `[i/SELLING_HOUSE_INFO]`: No restrictions
-- `[prio/PRIORITY]`: Either `high`, `medium`, or `low` priority level
+- `[prio/PRIORITY]`: Either `high`, `medium`, `low`, or `nil` priority level
 - `[t/TAG]`: No restrictions
 
 Example: `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/high`
@@ -299,14 +299,14 @@ Precise outputs when the command succeeds:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Setting a buyer's priority:
+### Setting a buyer's priority: `bprio`
 
 Sets the priority level of a buyer based on their index number in the buyer's list. Serves as a convenient shortcut
-for changing a buyer's priority level without having to use `bedit`.
+for changing a buyer's priority level without having to use `bedit`. Setting the priority level to `nil` removes the priority tag.
 
 Format: `bprio INDEX PRIORITY`
 * `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyer's list
-* `PRIORITY`: Either `high`, `medium`, or `low` priority level
+* `PRIORITY`: Either `high`, `medium`, `low`, or `nil` priority level
 
 Example: `bprio 3 high`
 
@@ -327,14 +327,14 @@ Parameters: INDEX PRIORITY
 
 --------------------------------------------------------------------------------------------------------------------
 
-### Setting a seller's priority:
+### Setting a seller's priority: `sprio`
 
 Sets the priority level of a seller based on their index number in the seller's list. Serves as a convenient shortcut
-for changing a seller's priority level without having to use `sedit`.
+for changing a seller's priority level without having to use `sedit`. Setting the priority level to `nil` removes the priority tag.
 
 Format: `sprio INDEX PRIORITY`
 * `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyer's list
-* `PRIORITY`: Either `high`, `medium`, or `low` priority level
+* `PRIORITY`: Either `high`, `medium`, `low`, or `nil` priority level
 
 Example: `sprio 3 high`
 
@@ -369,7 +369,7 @@ Precise outputs when the command succeeds:
 
 ### Filtering buyers and sellers: `filter`
 
-Filters both lists so that they only display buyers and sellers any part of whose names match any of the given keywords fully.
+Filters both lists so that they only display buyers and sellers any **complete word** of whose names match any of the given keywords fully.
 
 Format: `filter KEYWORD [MORE_KEYWORDS]…`
 
@@ -439,10 +439,10 @@ Precise outputs when the command fails:
 
 ### Sorting sellers: `ssort`
 
-Sorts the buyers' list by the provided attribute and in the given direction.
+Sorts the sellers' list by the provided attribute and in the given direction.
 
 Format: `ssort ATTRIBUTE_PREFIX DIRECTION`
-* `ATTRIBUTE_PREFIX`: Refer to the add buyer command, `buyer`
+* `ATTRIBUTE_PREFIX`: Refer to the add seller command, `seller`
 * `DIRECTION`: "a" OR "d" for ascending or descending respectively
 
 Example: `ssort n/d`
