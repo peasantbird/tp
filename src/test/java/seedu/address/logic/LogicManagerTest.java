@@ -3,6 +3,8 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
@@ -13,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteBuyerCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -22,11 +25,15 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.displayable.seller.Seller;
+import seedu.address.model.displayable.Address;
+import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.HouseInfo;
+import seedu.address.model.displayable.Phone;
+import seedu.address.model.displayable.buyer.Buyer;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-import seedu.address.testutil.SellerBuilder;
+import seedu.address.testutil.BuyerBuilder;
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -156,12 +163,21 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-
         logic = new LogicManager(model, storage);
 
+        String addBuyerCommand = AddBuyerCommand.COMMAND_WORD + NAME_DESC_AMY;
+
         // Triggers the saveAddressBook method by executing an add command
-        Seller expectedSeller = new SellerBuilder().build();
+        Buyer expectedBuyer = new BuyerBuilder()
+                .withName(VALID_NAME_AMY)
+                .withPhone(Phone.DEFAULT_PHONE_STRING)
+                .withEmail(Email.DEFAULT_EMAIL_STRING)
+                .withAddress(Address.DEFAULT_ADDRESS_STRING)
+                .withInfo(HouseInfo.DEFAULT_HOUSE_INFO)
+                .build();
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addSeller(expectedSeller);
+        expectedModel.addBuyer(expectedBuyer);
+        expectedModel.commitAddressBook();
+        assertCommandFailure(addBuyerCommand, CommandException.class, expectedMessage, expectedModel);
     }
 }
