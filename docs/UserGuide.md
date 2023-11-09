@@ -8,34 +8,38 @@
 
 RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage contacts, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, RTPM can get your contact management tasks done faster than traditional GUI apps.
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)<br>
-2.1. Adding a person<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.1.1. [Adding a buyer: `buyer`](#adding-a-buyer-buyer)<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.1.2. [Adding a seller: `seller`](#adding-a-seller--seller)<br>
-2.2. Editing a person<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.2.1. [Editing a buyer: `bedit`](#editing-a-buyer-bedit)<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.2.2. [Editing a seller: `sedit`](#editing-a-seller-sedit)<br>
-2.3. Deleting a person<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.3.1. [Deleting a buyer: `bdelete`](#deleting-a-buyer-bdelete)<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.3.2. [Deleting a seller: `sdelete`](#deleting-a-seller-sdelete)<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.3.3. [Clearing all entries: `clear`](#clearing-all-entries--clear)<br>
-2.4. Setting a person's priority<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.4.1. [Setting a buyer's priority: `bprio`](#setting-a-buyers-priority)<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.4.2. [Setting a seller's priority: `sprio`](#setting-a-sellers-priority)<br>
-2.5. Viewing the lists<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.5.1. [Listing all buyers and sellers: `list`](#listing-all-buyers-and-sellers-list)<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.5.2. [Filtering buyers and sellers: `filter`](#filtering-buyers-and-sellers-filter)<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.5.3. [Displaying a buyer from buyer list: `blist`](#displaying-a-buyer-from-buyer-list-blist)<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.5.4. [Displaying a seller from seller list: `slist`](#displaying-a-seller-from-seller-list-slist)<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.5.5. [Sorting buyers: `bsort`](#sorting-buyers-bsort)<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.5.6. [Sorting sellers: `ssort`](#sorting-sellers-ssort)<br>
-2.6. Miscellaneous commands<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.6.1. [Undoing previous action: `undo`](#undoing-previous-action-undo)<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.6.2. [Redoing previous action: `redo`](#redoing-previous-action-redo)<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.6.2. [Viewing help: `help`](#viewing-help-help)<br>
-   &nbsp;&nbsp;&nbsp;&nbsp;2.6.2. [Exiting the program: `exit`](#exiting-the-program-exit)<br>
-3. 
+* [Quick Start](#quick-start)
+* [Features](#features)<br>
+    * Adding a person<br>
+       * [Adding a buyer: `buyer`](#adding-a-buyer-buyer)<br>
+       * [Adding a seller: `seller`](#adding-a-seller--seller)<br>
+    * Editing a person<br>
+      * [Editing a buyer: `bedit`](#editing-a-buyer-bedit)<br>
+      * [Editing a seller: `sedit`](#editing-a-seller-sedit)<br>
+    * Deleting a person<br>
+      * [Deleting a buyer: `bdelete`](#deleting-a-buyer-bdelete)<br>
+      * [Deleting a seller: `sdelete`](#deleting-a-seller-sdelete)<br>
+      * [Clearing all entries: `clear`](#clearing-all-entries--clear)<br>
+    * Setting a person's priority<br>
+      * [Setting a buyer's priority: `bprio`](#setting-a-buyers-priority)<br>
+      * [Setting a seller's priority: `sprio`](#setting-a-sellers-priority)<br>
+    * Viewing the lists<br>
+      * [Listing all buyers and sellers: `list`](#listing-all-buyers-and-sellers-list)<br>
+      * [Filtering buyers and sellers: `filter`](#filtering-buyers-and-sellers-filter)<br>
+      * [Displaying a buyer from buyer list: `blist`](#displaying-a-buyer-from-buyer-list-blist)<br>
+      * [Displaying a seller from seller list: `slist`](#displaying-a-seller-from-seller-list-slist)<br>
+      * [Sorting buyers: `bsort`](#sorting-buyers-bsort)<br>
+      * [Sorting sellers: `ssort`](#sorting-sellers-ssort)<br>
+    * Miscellaneous commands<br>
+      * [Undoing previous action: `undo`](#undoing-previous-action-undo)<br>
+      * [Redoing previous action: `redo`](#redoing-previous-action-redo)<br>
+      * [Viewing help: `help`](#viewing-help-help)<br>
+      * [Exiting the program: `exit`](#exiting-the-program-exit)<br>
+* [FAQ](#faq)
+* [Known Issues](#known-issues)
+* [Command Summary](#command-summary)
+* Appendices
+    * [Appendix A: Warnings](#appendix-a-warnings)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
@@ -94,6 +98,7 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 
 **General notes about features:**<br>
 
+* RTPM does not require all fields to be filled in when creating buyers or sellers. Fields that have been omitted will be set to their default values.
 * RTPM accepts unconventional entries for data values to an extent. However, the warning system informs the user of any valid but possibly unintended inputs. For more information, refer to [Appendix A: Warnings](#appendix-a-warnings)
 * The priority system allows for the designation of levels of importance to each buyer and seller, which will be displayed as a tag in RTPM. When this priority is set to `nil`, there will be no tag.
 * RTPM data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -108,11 +113,11 @@ Hence, it is recommended to take a backup of the file before editing it.**
 
 ### Adding a buyer: `buyer`
 
-Adds a buyer with their info to the list. This command can cause warnings, and empty optional parameters will be omitted.
+Adds a buyer with their information to the list. 
 
 Format: `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_INFO] [prio/PRIORITY] [t/TAG]…`
 
-- `n/NAME`: Contains at least one non-whitespace
+- `n/NAME`: Contains at least one letter, number or symbol.
 - `[p/PHONE_NUMBER]`: Contains at least one number
 - `[e/EMAIL]`: Contains at least one '@'
 - `[ah/HOME_ADDRESS]`: No restrictions
@@ -141,14 +146,20 @@ Precise outputs when the command fails due to invalid parameters:
 >Emails must contain at least one '@'.
 
 
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Adding a seller : `seller`
 
-Adds a seller with their info to the list. This command can cause warnings, and empty optional parameters will be omitted.
+Adds a seller with their information to the list. 
 
 Format: `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [prio/PRIORITY] [t/TAG]…`
-- `n/NAME`: Contains at least one non-whitespace
+- `n/NAME`: Contains at least one letter, number, or symbol.
 - `[p/PHONE_NUMBER]`: Contains at least one number
 - `[e/EMAIL]`: Contains at least one '@'
 - `[ah/HOME_ADDRESS]`: No restrictions
@@ -176,15 +187,20 @@ Precise outputs when the command fails due to invalid parameters:
 
 >Emails must contain at least one '@'.
 
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Editing a buyer: `bedit`
 
-Edits the information of a buyer based on their index number in the buyers' list. This command can cause warnings.
+Edits the information of a buyer based on their index number in the buyers' list. 
 
 Format: `bedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]…`
-* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyers' list
+* `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyers' list
 * `PREFIX/VALUE`: Refer to the add buyer command, `buyer`
 
 Example: `bedit 3 e/example@email.com ah/Residential Street`
@@ -205,14 +221,20 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 >The buyer index provided is higher than the last number in the list!
 
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Editing a seller: `sedit`
 
-Edits the information of a seller based on their index number in the sellers' list. This command can cause warnings.
+Edits the information of a seller based on their index number in the sellers' list. 
 
 Format: `sedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]…`
-* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the sellers' list
+* `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the sellers' list
 * `PREFIX/VALUE`: Refer to the add seller command, `seller`
 
 Example: `sedit 3 e/example@email.com ah/Residential Street`
@@ -233,6 +255,12 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 >The seller index provided is higher than the last number in the list!
 
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Deleting a buyer: `bdelete`
@@ -240,7 +268,7 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 Deletes a buyer based on their index number in the buyers’ list.
 
 Format: `bdelete INDEX`
-* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyers' list
+* `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyers' list
 
 Example: `bdelete 3`
 
@@ -258,6 +286,12 @@ Example: bdelete 1
 
 >The buyer index provided is higher than the last number in the list!
 
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Deleting a seller: `sdelete`
@@ -265,7 +299,7 @@ Example: bdelete 1
 Deletes a seller based on their index number in the sellers’ list.
 
 Format: `sdelete INDEX`
-* `INDEX`: A positive integer (1,2,3 …), which must not exceed last index in the sellers’ list
+* `INDEX`: A positive integer (1, 2, 3, …), which must not exceed last index in the sellers’ list
 
 Example: `sdelete 3`
 
@@ -284,6 +318,11 @@ Example: sdelete 1
 
 >The seller index provided is higher than the last number in the list!
 
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -297,15 +336,20 @@ Precise outputs when the command succeeds:
 
 >Address book has been cleared!
 
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Setting a buyer's priority: `bprio`
 
-Sets the priority level of a buyer based on their index number in the buyer's list. Serves as a convenient shortcut
-for changing a buyer's priority level without having to use `bedit`. Setting the priority level to `nil` removes the priority tag.
+Sets the priority level of a buyer based on their index number in the buyer's list. 
 
 Format: `bprio INDEX PRIORITY`
-* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyer's list
+* `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyer's list
 * `PRIORITY`: Either `high`, `medium`, `low`, or `nil` priority level
 
 Example: `bprio 3 high`
@@ -324,16 +368,20 @@ Parameters: INDEX PRIORITY
 
 >The buyer index provided is higher than the last number in the list!
 
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Setting a seller's priority: `sprio`
 
-Sets the priority level of a seller based on their index number in the seller's list. Serves as a convenient shortcut
-for changing a seller's priority level without having to use `sedit`. Setting the priority level to `nil` removes the priority tag.
+Sets the priority level of a seller based on their index number in the seller's list.
 
 Format: `sprio INDEX PRIORITY`
-* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyer's list
+* `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyer's list
 * `PRIORITY`: Either `high`, `medium`, `low`, or `nil` priority level
 
 Example: `sprio 3 high`
@@ -352,18 +400,29 @@ Parameters: INDEX PRIORITY
 
 >The seller index provided is higher than the last number in the list!
 
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Listing all buyers and sellers: `list`
 
-Lists all buyers and sellers that the user has added. Buyers and sellers are stored in separate lists for easier differentiation and handling of contacts.
+Lists all buyers and sellers that the user has added. 
 
 Format: `list`
 
 Precise outputs when the command succeeds:
 
 >Listed all buyers and sellers!
+
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -373,11 +432,28 @@ Filters both lists so that they only display buyers and sellers any **complete w
 
 Format: `filter KEYWORD [MORE_KEYWORDS]…`
 
-- `KEYWORD`: String
+- `KEYWORD`: No restrictions; case-insensitive
+
+Example: `filter John Doe`
+
+**Tip: `filter John Doe` will filter for**
+- [x] John
+- [x] John Do
+- [x] Jane Doe
+- [x] John Doe
+- [ ] Johnny
+- [ ] Jo
+
 
 Precise outputs when the command succeeds:
 
 >1 buyer(s) and 0 seller(s) listed!
+
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -386,7 +462,7 @@ Precise outputs when the command succeeds:
 Displays the information of a buyer based on their index number in the buyers' list.
 
 Format: `blist INDEX`
-* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the buyers' list
+* `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyers' list
 
 Example: `blist 3`
 
@@ -394,6 +470,12 @@ Precise outputs when the command succeeds:
 
 >Got it. Here's the information of this buyer:<br>
 Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
+
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -403,7 +485,7 @@ Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East
 Displays the information of a seller based on their index number in the sellers' list.
 
 Format: `slist INDEX`
-* `INDEX`: A positive integer (1,2,3 …) which must not exceed the last index in the sellers' list
+* `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the sellers' list
 
 Example: `slist 3`
 
@@ -411,6 +493,12 @@ Precise outputs when the command succeeds:
 
 >Got it. Here's the information of this seller:<br>
 Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
+
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -434,6 +522,11 @@ Precise outputs when the command fails:
 
 >Multiple values specified for the following single-valued field(s): n/
 
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -456,6 +549,11 @@ Precise outputs when the command fails:
 
 >Multiple values specified for the following single-valued field(s): n/
 
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -465,6 +563,8 @@ Undoes the previous action.
 
 Format: `undo`
 
+**Tip: Using `undo` multiple times will undo multiple actions in order.**
+
 Precise outputs when the command succeeds:
 
 >Last command was undone.
@@ -473,6 +573,11 @@ Precise outputs when the command fails:
 
 >No commands to undo!
 
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -482,6 +587,8 @@ Restores the previously undone action.
 
 Format : `redo`
 
+**Tip: Using `redo` multiple times will redo multiple actions in order.**
+
 Precise outputs when the command succeeds:
 
 >The next command was redone.
@@ -489,6 +596,11 @@ Precise outputs when the command succeeds:
 Precise outputs when the command fails:
 
 >No commands to redo!
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 ### Viewing help: `help`
@@ -496,7 +608,6 @@ Precise outputs when the command fails:
 Shows a message explaining how to access the help page.
 
 Format: `help`
-
 --------------------------------------------------------------------------------------------------------------------
 
 ### Exiting the program: `exit`
@@ -504,6 +615,11 @@ Format: `help`
 Exits the program.
 
 Format: `exit`
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -511,6 +627,11 @@ Format: `exit`
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RTPM home folder.
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -543,6 +664,11 @@ Action     | Format, Examples
 **Redo**  | `redo`
 **Exit**   | `exit`
 **Help**   | `help`
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -552,7 +678,7 @@ RTPM allows you to flexibly input most fields of data. However, we still have so
 
 The warning system is also used to check if, when you are adding new buyers/sellers, whether there are two similar buyers or two similar sellers, or a buyer that shares the same name as a seller.
 
-Our definition of 'similar' is as follows: Either one of the names is contained in the other, or the names require 2 or less edits (deletions, insertions, transpositions) to make them the same. (for more details search for a definition of Levenshtein distance).
+RTPM's definition of 'similar' is as follows: Either one of the names is contained in the other, or the names require 2 or less edits (deletions, insertions, transpositions) to make them the same. (for more details search for a definition of Levenshtein distance).
 
 ```
 Warning!; [Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.]
@@ -568,3 +694,9 @@ The domain name must:
     - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.]
 Please ignore if this is expected.
 ```
+
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
