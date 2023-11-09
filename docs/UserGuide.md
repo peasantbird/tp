@@ -18,7 +18,7 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 
 1. Download the latest `rtpm.jar` [here](https://github.com/AY2324S1-CS2103T-F11-3/tp/releases/tag/v1.3(trial)).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your RTPM.
+1. Copy the file to the folder you want to use as the _home folder_ for RTPM.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar rtpm.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -454,7 +454,8 @@ _Details coming soon ..._
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
 --------------------------------------------------------------------------------------------------------------------
-
+## On the
+--------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
 Action     | Format, Examples
