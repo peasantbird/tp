@@ -87,12 +87,12 @@ public class SortSellerCommandParser implements Parser<SortSellerCommand> {
 
             case ("a"):
                 Comparator<Seller> ascendingPriorityComparator = (o1, o2) ->
-                        o1.getPriority().value.compareTo(o2.getPriority().value);
+                        o2.getPriority().value.compareTo(o1.getPriority().value);
                 return new SortSellerCommand(ascendingPriorityComparator);
 
             case ("d"):
                 Comparator<Seller> descendingPriorityComparator = (o1, o2) ->
-                        o2.getPriority().value.compareTo(o1.getPriority().value);
+                        o1.getPriority().value.compareTo(o2.getPriority().value);
                 return new SortSellerCommand(descendingPriorityComparator);
 
             default:
