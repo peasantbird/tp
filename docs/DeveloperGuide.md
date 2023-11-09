@@ -678,6 +678,16 @@ testers are expected to do more *exploratory* testing.
 
 Given below are the enhancements that will be implemented in a future version.
 
-1. Currently, the UI text is cut off if the entries are too long. While this should not usually happen since the user can decide what to enter (nicknames, abbreviations, acronyms, etc.), we plan to accommodate overly long names, phone numbers, addresses, emails and house info entries within the UI.
-2. Currently, if the user makes a spelling or spacing mistake, the intended prefix of another field is regarded as part of the argument for the previous field. We plan to check for misspelled prefixes and prefixes provided as arguments of other fields and warn the user.
-3. Currently, the user is not warned if addresses, names, and house info entries contain only numbers and special symbols. We plan to expand warnings to include warnings for addresses, names and house info entries containing only non-alphabetical characters
+1. Currently, the UI text is cut off if the entries are too long. While this should not usually happen since the user 
+can decide what to enter (nicknames, abbreviations, acronyms, etc.), we plan to accommodate overly long names, 
+phone numbers, addresses, emails and house info entries within the UI.
+2. Currently, if the user makes a spelling or spacing mistake, the intended prefix of another field is regarded as 
+part of the argument for the previous field. We plan to check for misspelled prefixes and prefixes provided as 
+arguments of other fields and warn the user.
+3. Currently, the user is not warned if addresses, names, and house info entries contain only numbers and special 
+symbols. We plan to expand warnings to include warnings for addresses, names and house info entries containing 
+only non-alphabetical characters.
+4. Currently, for `bprio` and `sprio`, if the user inputs extra arguments 
+at the end, such as `bprio 1 high low`, the app accepts the input and sets the first buyer's priority level to 
+`high` instead of warning the user about extra arguments which would be ignored. As such, we plan to warn the user 
+if any extra arguments are supplied for the user to double check that their priority input is correct.
