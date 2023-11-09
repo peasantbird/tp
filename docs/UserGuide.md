@@ -77,7 +77,7 @@ Format: `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_
 - `[e/EMAIL]`: Contains at least one '@'
 - `[ah/HOME_ADDRESS]`: No restrictions
 - `[i/BUY_HOUSE_INFO]`: No restrictions
-- `[prio/PRIORITY]`: Either `high`, `medium`, or `low` priority level
+- `[prio/PRIORITY]`: Either `high`, `medium`, `low`, or `nil` priority level
 - `[t/TAG]...`: No restrictions
 
 Example:
@@ -113,7 +113,7 @@ Format: `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_
 - `[ah/HOME_ADDRESS]`: No restrictions
 - `[as/SELLING_ADDRESS]`: No restrictions
 - `[i/SELLING_HOUSE_INFO]`: No restrictions
-- `[prio/PRIORITY]`: Either `high`, `medium`, or `low` priority level
+- `[prio/PRIORITY]`: Either `high`, `medium`, `low`, or `nil` priority level
 - `[t/TAG]`: No restrictions
 
 Example: `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/high`
