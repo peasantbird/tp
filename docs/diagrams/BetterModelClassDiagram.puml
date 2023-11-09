@@ -3,18 +3,26 @@
 skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
+skinparam ClassStereotypeFontColor black
+skinparam ClassBorderColor black
 
-AddressBook *-right-> "1" UniqueDisplayableList
+class "UniqueDisplayableList<Seller>" as SellerList
+class "UniqueDisplayableList<Buyer>" as BuyerList
+
+AddressBook *-down-> "1" BuyerList
+AddressBook *-down-> "1" SellerList
 AddressBook *-right-> "1" UniqueTagList
-UniqueTagList -[hidden]down- UniqueDisplayableList
-UniqueTagList -[hidden]down- UniqueDisplayableList
-
+UniqueTagList -[hidden]down- SellerList
+UniqueTagList -[hidden]down- SellerList
 UniqueTagList -right-> "*" Tag
-UniqueDisplayableList -right-> Seller
+SellerList -down-> Seller
+BuyerList -down-> Buyer
 
-Seller *--> Address
+Person .up.> Buyer
+Buyer *--> HouseInfo
 Seller *--> HouseInfo
-Seller -up-> "*" Tag
+Seller *--> Address
+Person -up-> "*" Tag
 Person ..up.> Seller
 Person *--> Name
 Person *--> Phone
