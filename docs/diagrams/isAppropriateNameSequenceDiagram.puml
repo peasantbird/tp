@@ -66,9 +66,6 @@ destroy AddBuyerCommandParser
 [<-- AddressBookParser
 deactivate AddressBookParser
 deactivate AddressBookParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.'
-AddressBookParser -[hidden]-> AddressBookParser
-destroy AddressBookParser
 [-> AddBuyerCommand : execute()
 activate AddBuyerCommand
 AddBuyerCommand -> warn : getWarningMessages()
