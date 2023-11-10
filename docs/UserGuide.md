@@ -260,7 +260,7 @@ Jane Doe; Phone: 91234567; Email: something@else.com; Address: 1 College Ave Eas
 Precise outputs when the command fails:
 ```
 Invalid command format! 
-bprio: Sets a priority level for the buyer, identified by index in the displayed buyer list. INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', or 'low'.
+bprio: Sets a priority level for the buyer, identified by index in the displayed buyer list. INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', 'low', or 'nil'.
 Parameters: INDEX PRIORITY
 ```
 ```
@@ -287,7 +287,7 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: Another Place; Selling Ad
 Precise outputs when the command fails:
 ```
 Invalid command format! 
-sprio: Sets a priority level for the seller, identified by index in the displayed seller list. INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', or 'low'.
+sprio: Sets a priority level for the seller, identified by index in the displayed seller list. INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', 'low', or 'nil'.
 Parameters: INDEX PRIORITY
 ```
 ```
