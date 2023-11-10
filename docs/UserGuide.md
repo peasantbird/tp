@@ -48,7 +48,7 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 
 1. Download the latest `rtpm.jar` [here](https://github.com/AY2324S1-CS2103T-F11-3/tp/releases/tag/v1.3(trial)).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your RTPM.
+1. Copy the file to the folder you want to use as the _home folder_ for RTPM.
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar rtpm.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
@@ -364,7 +364,7 @@ Jane Doe; Phone: 91234567; Email: something@else.com; Address: 1 College Ave Eas
 Precise outputs when the command fails:
 
 >Invalid command format!<br>
-bprio: Sets a priority level for the buyer, identified by index in the displayed buyer list. INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', or 'low'.<br>
+bprio: Sets a priority level for the buyer, identified by index in the displayed buyer list. INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', 'low', or 'nil'.<br>
 Parameters: INDEX PRIORITY
 
 
@@ -398,7 +398,7 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: Another Place; Selling Ad
 Precise outputs when the command fails:
 
 >Invalid command format!<br>
-sprio: Sets a priority level for the seller, identified by index in the displayed seller list. INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', or 'low'.<br>
+sprio: Sets a priority level for the seller, identified by index in the displayed seller list. INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', 'low', or 'nil'.<br>
 Parameters: INDEX PRIORITY
 
 
@@ -644,7 +644,8 @@ Format: `exit`
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. Adding multiple contacts with excessively long names (>5000 characters) may cause RTPM to lag significantly. It is recommended to use nicknames or initials if necessary.
 --------------------------------------------------------------------------------------------------------------------
-
+## On the
+--------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
 Action     | Format, Examples

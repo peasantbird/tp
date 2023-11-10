@@ -24,7 +24,7 @@ public class SetSellerPriorityCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets a priority level for the seller, identified by index in the displayed seller list. "
-            + "INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', or 'low'.\n"
+            + "INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', 'low', or 'nil'.\n"
             + "Parameters: "
             + "INDEX "
             + "PRIORITY\n"
