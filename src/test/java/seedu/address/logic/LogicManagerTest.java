@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -15,7 +16,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddBuyerCommand;
+import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteBuyerCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -53,7 +57,26 @@ public class LogicManagerTest {
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
+    @Test
+    public void test_getters_setters() {
+        assertEquals(logic.getAddressBook(), model.getAddressBook());
+        assertEquals(logic.getFilteredBuyerList(), model.getFilteredBuyerList());
+        assertEquals(logic.getFilteredSellerList(), model.getFilteredSellerList());
+        try {
+            logic.execute(AddBuyerCommand.COMMAND_WORD + NAME_DESC_AMY);
+            logic.execute(AddSellerCommand.COMMAND_WORD + NAME_DESC_BOB);
+        } catch (CommandException | ParseException e) {
+            throw new RuntimeException(e);
+        }
+        assertEquals(logic.getAddressBook(), model.getAddressBook());
+        assertEquals(logic.getFilteredBuyerList(), model.getFilteredBuyerList());
+        assertEquals(logic.getFilteredSellerList(), model.getFilteredSellerList());
 
+        assertEquals(logic.getGuiSettings(), model.getGuiSettings());
+        logic.setGuiSettings(new GuiSettings(55,43, 343,42));
+        assertEquals(logic.getGuiSettings(), model.getGuiSettings());
+        assertEquals(logic.getFilePath(), model.getFilePath());
+    }
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
