@@ -87,13 +87,13 @@ public class ListBuyerCommandTest {
 
     @Test
     public void test_equality() {
-        ListSellerCommand typicalCommand = new ListSellerCommand(INDEX_FIRST_PERSON);
-        ListSellerCommand typicalCommandCopy = new ListSellerCommand(INDEX_FIRST_PERSON);
-        ListSellerCommand otherTypicalCommand = new ListSellerCommand(INDEX_SECOND_PERSON);
-        ListSellerCommand otherTypicalCommandCopy = new ListSellerCommand(INDEX_SECOND_PERSON);
-        Object castAsObjectCommand = new ListSellerCommand(INDEX_FIRST_PERSON);
-        Command castAsCommand = new ListSellerCommand(INDEX_FIRST_PERSON);
-        ListSellerCommand nullCommand = null;
+        ListBuyerCommand typicalCommand = new ListBuyerCommand(INDEX_FIRST_PERSON);
+        ListBuyerCommand typicalCommandCopy = new ListBuyerCommand(INDEX_FIRST_PERSON);
+        ListBuyerCommand otherTypicalCommand = new ListBuyerCommand(INDEX_SECOND_PERSON);
+        ListBuyerCommand otherTypicalCommandCopy = new ListBuyerCommand(INDEX_SECOND_PERSON);
+        Object castAsObjectCommand = new ListBuyerCommand(INDEX_FIRST_PERSON);
+        Command castAsCommand = new ListBuyerCommand(INDEX_FIRST_PERSON);
+        ListBuyerCommand nullCommand = null;
 
         assertEquals(typicalCommand, typicalCommand); //Test self = self
 
