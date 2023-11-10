@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddBuyerCommand;
 import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.CommandResult;
@@ -73,7 +72,7 @@ public class LogicManagerTest {
         assertEquals(logic.getFilteredSellerList(), model.getFilteredSellerList());
 
         assertEquals(logic.getGuiSettings(), model.getGuiSettings());
-        logic.setGuiSettings(new GuiSettings(55,43, 343,42));
+        logic.setGuiSettings(new GuiSettings(55, 43, 343, 42));
         assertEquals(logic.getGuiSettings(), model.getGuiSettings());
         assertEquals(logic.getFilePath(), model.getFilePath());
     }
