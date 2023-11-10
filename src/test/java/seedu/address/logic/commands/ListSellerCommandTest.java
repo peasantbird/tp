@@ -122,4 +122,12 @@ public class ListSellerCommandTest {
         assertNotEquals(typicalCommand, null);
         assertNull(nullCommand);
     }
+
+    @Test
+    public void test_toString() {
+        ListSellerCommand typicalCommand = new ListSellerCommand(INDEX_FIRST_PERSON);
+        assertEquals(typicalCommand.toString(),
+                ListSellerCommand.class.getCanonicalName() + "{targetIndex=" + INDEX_FIRST_PERSON + "}"
+        );
+    }
 }
