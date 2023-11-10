@@ -127,6 +127,6 @@ public class ListBuyerCommandTest {
         ListBuyerCommand typicalCommand = new ListBuyerCommand(INDEX_FIRST_PERSON);
         assertEquals(typicalCommand.toString(),
                 ListBuyerCommand.class.getCanonicalName() + "{targetIndex=" + INDEX_FIRST_PERSON + "}"
-                );
+        );
     }
 }
