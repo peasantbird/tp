@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -18,9 +19,12 @@ import seedu.address.logic.CommandWarnings;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
+import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
+import seedu.address.model.displayable.Priority;
 import seedu.address.model.tag.Tag;
+
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "  ";
@@ -29,10 +33,12 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "  ";
     private static final String INVALID_INFO = "  ";
+    private static final String INVALID_PRIORITY = "fijsgfkl";
     private static final String UNRECOMMENDED_NAME = "R@chel";
     private static final String UNRECOMMENDED_PHONE = "(HP) 2934383, (OFF) 2930211";
-    private static final String UNRECOMMENDED_EMAIL = "ffdoklf@fdf";
+    private static final String UNRECOMMENDED_EMAIL = "ffdoklf@f";
     private static final String UNRECOMMENDED_TAG = "#friend";
+    private static final String UNRECOMMENDED_PRIORITY = "hiiiiiii";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
@@ -40,7 +46,7 @@ public class ParserUtilTest {
     private static final String VALID_INFO = "4 room flat";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-
+    private static final String VALID_PRIORITY = "high";
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -76,14 +82,18 @@ public class ParserUtilTest {
     @Test
     public void parseName_validValueWithoutWhitespace_returnsName() throws Exception {
         Name expectedName = new Name(VALID_NAME);
-        assertEquals(expectedName, ParserUtil.parseName(new CommandWarnings(), VALID_NAME));
+        CommandWarnings commandWarnings = new CommandWarnings();
+        assertEquals(expectedName, ParserUtil.parseName(commandWarnings, VALID_NAME));
+        assertFalse(commandWarnings.containsWarnings());
     }
 
     @Test
     public void parseName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
         String nameWithWhitespace = WHITESPACE + VALID_NAME + WHITESPACE;
         Name expectedName = new Name(VALID_NAME);
-        assertEquals(expectedName, ParserUtil.parseName(new CommandWarnings(), nameWithWhitespace));
+        CommandWarnings commandWarnings = new CommandWarnings();
+        assertEquals(expectedName, ParserUtil.parseName(commandWarnings, nameWithWhitespace));
+        assertFalse(commandWarnings.containsWarnings());
     }
 
     @Test
@@ -99,14 +109,18 @@ public class ParserUtilTest {
     @Test
     public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
         Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(new CommandWarnings(), VALID_PHONE));
+        CommandWarnings commandWarnings = new CommandWarnings();
+        assertEquals(expectedPhone, ParserUtil.parsePhone(commandWarnings, VALID_PHONE));
+        assertFalse(commandWarnings.containsWarnings());
     }
 
     @Test
     public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
         Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(new CommandWarnings(), phoneWithWhitespace));
+        CommandWarnings commandWarnings = new CommandWarnings();
+        assertEquals(expectedPhone, ParserUtil.parsePhone(commandWarnings, phoneWithWhitespace));
+        assertFalse(commandWarnings.containsWarnings());
     }
 
     @Test
@@ -122,16 +136,45 @@ public class ParserUtilTest {
     @Test
     public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
         Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(new CommandWarnings(), VALID_ADDRESS));
+        CommandWarnings commandWarnings = new CommandWarnings();
+        assertEquals(expectedAddress, ParserUtil.parseAddress(commandWarnings, VALID_ADDRESS));
+        assertFalse(commandWarnings.containsWarnings());
     }
 
     @Test
     public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
         String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
         Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(new CommandWarnings(), addressWithWhitespace));
+        CommandWarnings commandWarnings = new CommandWarnings();
+        assertEquals(expectedAddress, ParserUtil.parseAddress(commandWarnings, addressWithWhitespace));
+        assertFalse(commandWarnings.containsWarnings());
+    }
+    @Test
+    public void parseInfo_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseHouseInfo(new CommandWarnings(), (String) null));
     }
 
+    @Test
+    public void parseInfo_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseHouseInfo(new CommandWarnings(), INVALID_INFO));
+    }
+
+    @Test
+    public void parseInfo_validValueWithoutWhitespace_returnsInfo() throws Exception {
+        HouseInfo expectedInfo = new HouseInfo(VALID_INFO);
+        CommandWarnings commandWarnings = new CommandWarnings();
+        assertEquals(expectedInfo, ParserUtil.parseHouseInfo(commandWarnings, VALID_INFO));
+        assertFalse(commandWarnings.containsWarnings());
+    }
+
+    @Test
+    public void parseInfo_validValueWithWhitespace_returnsTrimmedInfo() throws Exception {
+        String infoWithWhitespace = WHITESPACE + VALID_INFO + WHITESPACE;
+        HouseInfo expectedInfo = new HouseInfo(VALID_INFO);
+        CommandWarnings commandWarnings = new CommandWarnings();
+        assertEquals(expectedInfo, ParserUtil.parseHouseInfo(commandWarnings, infoWithWhitespace));
+        assertFalse(commandWarnings.containsWarnings());
+    }
     @Test
     public void parseEmail_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail(new CommandWarnings(), (String) null));
@@ -145,14 +188,44 @@ public class ParserUtilTest {
     @Test
     public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
         Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(new CommandWarnings(), VALID_EMAIL));
+        CommandWarnings commandWarnings = new CommandWarnings();
+        assertEquals(expectedEmail, ParserUtil.parseEmail(commandWarnings, VALID_EMAIL));
+        assertFalse(commandWarnings.containsWarnings());
     }
 
     @Test
     public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(new CommandWarnings(), emailWithWhitespace));
+        CommandWarnings commandWarnings = new CommandWarnings();
+        assertEquals(expectedEmail, ParserUtil.parseEmail(commandWarnings, emailWithWhitespace));
+        assertFalse(commandWarnings.containsWarnings());
+    }
+    @Test
+    public void parsePriority_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parsePriority(new CommandWarnings(), (String) null));
+    }
+
+    @Test
+    public void parsePriority_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parsePriority(new CommandWarnings(), INVALID_PRIORITY));
+    }
+
+    @Test
+    public void parsePriority_validValueWithoutWhitespace_returnsPriority() throws Exception {
+        Priority expectedPriority = new Priority(VALID_PRIORITY);
+        CommandWarnings commandWarnings = new CommandWarnings();
+        assertEquals(expectedPriority, ParserUtil.parsePriority(commandWarnings, VALID_PRIORITY));
+        assertFalse(commandWarnings.containsWarnings());
+    }
+
+    @Test
+    public void parsePriority_validValueWithWhitespace_returnsTrimmedPriority() throws Exception {
+        String priorityWithWhitespace = WHITESPACE + VALID_PRIORITY + WHITESPACE;
+        Priority expectedPriority = new Priority(VALID_PRIORITY);
+        CommandWarnings commandWarnings = new CommandWarnings();
+        assertEquals(expectedPriority, ParserUtil.parsePriority(commandWarnings, priorityWithWhitespace));
+        assertFalse(commandWarnings.containsWarnings());
     }
 
     @Test
@@ -168,14 +241,18 @@ public class ParserUtilTest {
     @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
         Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(new CommandWarnings(), VALID_TAG_1));
+        CommandWarnings commandWarnings = new CommandWarnings();
+        assertEquals(expectedTag, ParserUtil.parseTag(commandWarnings, VALID_TAG_1));
+        assertFalse(commandWarnings.containsWarnings());
     }
 
     @Test
     public void parseTag_validValueWithWhitespace_returnsTrimmedTag() throws Exception {
         String tagWithWhitespace = WHITESPACE + VALID_TAG_1 + WHITESPACE;
         Tag expectedTag = new Tag(VALID_TAG_1);
-        assertEquals(expectedTag, ParserUtil.parseTag(new CommandWarnings(), tagWithWhitespace));
+        CommandWarnings commandWarnings = new CommandWarnings();
+        assertEquals(expectedTag, ParserUtil.parseTag(commandWarnings, tagWithWhitespace));
+        assertFalse(commandWarnings.containsWarnings());
     }
 
     @Test
@@ -191,25 +268,45 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags(new CommandWarnings(), Collections.emptyList()).isEmpty());
+        CommandWarnings commandWarnings = new CommandWarnings();
+        assertTrue(ParserUtil.parseTags(commandWarnings, Collections.emptyList()).isEmpty());
+        assertFalse(commandWarnings.containsWarnings());
     }
 
     @Test
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
-        Set<Tag> actualTagSet = ParserUtil.parseTags(new CommandWarnings(), Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        CommandWarnings commandWarnings = new CommandWarnings();
+        Set<Tag> actualTagSet = ParserUtil.parseTags(commandWarnings, Arrays.asList(VALID_TAG_1, VALID_TAG_2));
+        assertFalse(commandWarnings.containsWarnings());
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseUnrecommendedName_flagsWarning() {
+        assertWarns((CommandWarnings commandWarnings) -> ParserUtil.parseName(commandWarnings, UNRECOMMENDED_NAME),
+                Name.MESSAGE_RECOMMENDATIONS);
+    }
     @Test
     public void parseUnrecommendedPhone_flagsWarning() {
-        assertWarns((CommandWarnings commandWarnings) -> {
-            try {
-                ParserUtil.parsePhone(commandWarnings, UNRECOMMENDED_PHONE);
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
-        }, Phone.MESSAGE_RECOMMENDATIONS);
+        assertWarns((CommandWarnings commandWarnings) -> ParserUtil.parsePhone(commandWarnings, UNRECOMMENDED_PHONE),
+                Phone.MESSAGE_RECOMMENDATIONS);
     }
-    //todo use assertWarns more; I haven't done full testing yet.
+    @Test
+    public void parseUnrecommendedEmail_flagsWarning() {
+        assertWarns((CommandWarnings commandWarnings) -> ParserUtil.parseEmail(commandWarnings, UNRECOMMENDED_EMAIL),
+                Email.MESSAGE_RECOMMENDATIONS);
+    }
+    @Test
+    public void parseUnrecommendedTag_flagsWarning() {
+        assertWarns((CommandWarnings commandWarnings) -> ParserUtil.parseTag(commandWarnings, UNRECOMMENDED_TAG),
+                Tag.MESSAGE_RECOMMENDATIONS);
+    }
+    @Test
+    public void parseUnrecommendedPriority_flagsWarning() {
+        assertWarns((CommandWarnings commandWarnings) ->
+                        ParserUtil.parsePriority(commandWarnings, UNRECOMMENDED_PRIORITY),
+                Priority.MESSAGE_RECOMMENDATIONS);
+    }
 }
