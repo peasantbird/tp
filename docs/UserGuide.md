@@ -354,6 +354,8 @@ Format: `bprio INDEX PRIORITY`
 
 Example: `bprio 3 high`
 
+**Note: `PRIORITY` will only consider the first letter of the input being `h`, `m`, `l`, or `n` to determine the corresponding priority level. `bprio 3 hlow` sets the priority of buyer 3 to high.**
+
 Precise outputs when the command succeeds:
 
 >The buyer's priority level has been set:<br>
@@ -385,6 +387,8 @@ Format: `sprio INDEX PRIORITY`
 * `PRIORITY`: Either `high`, `medium`, `low`, or `nil` priority level
 
 Example: `sprio 3 high`
+
+**Note: `PRIORITY` will only consider the first letter of the input being `h`, `m`, `l`, or `n` to determine the corresponding priority level. `sprio 3 hlow` sets the priority of seller 3 to high.**
 
 Precise outputs when the command succeeds:
 
