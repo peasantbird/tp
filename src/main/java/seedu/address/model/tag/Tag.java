@@ -10,12 +10,11 @@ import seedu.address.commons.util.AppUtil;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String MESSAGE_RECOMMENDATIONS = "Tags cannot be blank";
+    public static final String MESSAGE_CONSTRAINTS = "Tags cannot be blank";
+    public static final String MESSAGE_RECOMMENDATIONS = "Tags names should be alphanumeric";
 
     public static final String VALIDATION_REGEX = "[^\\s].*";
-
-    public static final String AFFIRMATION_REGEX = "\\p{Alnum}+";
+    public static final String AFFIRMATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String tagName;
 
