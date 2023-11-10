@@ -179,7 +179,7 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling A
 Precise outputs when the command fails due to missing parameters:
 
 >Invalid command format!<br>
-seller: Adds a seller to the address book. Parameters: n/NAME p/PHONE e/EMAIL ah/ADDRESS as/SELLING_ADDRESS i/HOUSE_INFO [t/TAG]...<br>
+seller: Adds a seller to the address book. Parameters: n/NAME [p/PHONE] [e/EMAIL] [ah/ADDRESS] [as/SELLING_ADDRESS] [i/HOUSE_INFO] [t/TAG]...<br>
 Example: seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/medium t/friends t/owesMoney
 
 
