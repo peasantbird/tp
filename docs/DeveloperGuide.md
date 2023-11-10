@@ -680,4 +680,5 @@ Given below are the enhancements that will be implemented in a future version.
 
 1. Currently, the UI text is cut off if the entries are too long. While this should not usually happen since the user can decide what to enter (nicknames, abbreviations, acronyms, etc.), we plan to accommodate overly long names, phone numbers, addresses, emails and house info entries within the UI.
 2. Currently, if the user makes a spelling or spacing mistake, the intended prefix of another field is regarded as part of the argument for the previous field. We plan to check for misspelled prefixes and prefixes provided as arguments of other fields and warn the user.
-3. Currently, the user is not warned if addresses, names, and house info entries contain only numbers and special symbols. We plan to expand warnings to include warnings for addresses, names and house info entries containing only non-alphabetical characters
+3. Currently, the user is not warned if addresses, names, and house info entries contain only numbers and special symbols. We plan to expand warnings to include warnings for addresses, names and house info entries containing only non-alphabetical characters.
+4. Currently, attempting to add multiple contacts with long names may cause the app to lag considerably. We plan to optimise the similarity checks for names so that doing so results in less delay.
