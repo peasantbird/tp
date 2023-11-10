@@ -71,7 +71,7 @@ public class EditSellerCommandParser implements Parser<EditSellerCommand> {
         }
         if (argMultimap.getValue(PREFIX_SELLING_ADDRESS).isPresent()) {
             editSellerDescriptor.setSellingAddress(ParserUtil.parseAddress(commandWarnings,
-                    argMultimap.getValue(PREFIX_ADDRESS).get()));
+                    argMultimap.getValue(PREFIX_SELLING_ADDRESS).get()));
         }
         if (argMultimap.getValue(PREFIX_HOUSE_INFO).isPresent()) {
             editSellerDescriptor.setHouseInfo(ParserUtil.parseHouseInfo(commandWarnings,
