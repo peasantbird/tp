@@ -34,13 +34,13 @@ Given below are my contributions to the project.
     * Allocated different sections of the UG & DG for the team in v1.1
     * Delegated team roles and responsibilities for the duration of the project
     * Created a workflow guideline for the team to agree on early project matters (such as Issue/PR/branch 
-    naming conventions, and PR merging/rectifying merge conflicts)
+    naming conventions and PR merging/rectifying merge conflicts)
     * Organised the team's project notes / drive files and created the first few team meeting agendas
     * Assigned planned features to members for v1.2
 
 * **Enhancements to existing features**:
   * Changed the initial GUI appearance for v1.2 (Pull request #73)
-  * Wrote additional tests to increase coverage from 73.39% to 76.49% (Pull request #120)
+  * Wrote additional tests to increase coverage from 73.39 to 76.49% (Pull request #120)
 
 * **Documentation**:
     * User Guide:
@@ -50,7 +50,7 @@ Given below are my contributions to the project.
       * Added proposed plan for implementing optional fields
 
 * **Community**:
-  * Contributed to forum discussions (#118, #238)
-  * Reviewed team PRs promptly, allowing for quicker rectification of issues during the project iterations
+  * Contributed to forum discussions
+  * Reviewed PRs promptly, allowing for quicker rectification of issues
 
 {you can add/remove categories in the list above}
