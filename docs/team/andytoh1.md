@@ -22,6 +22,7 @@ Given below are my contributions to the project.
     * Decided on and assigned issues
 
 * **Enhancements to existing features**:
+  * Made the `buyer` and `seller commands work with incomplete fields since users are not likely to possess all details immediately
   * Made the `list` and `filter` commands work for 2 lists
   * Made the `add` command work for sellers
 
