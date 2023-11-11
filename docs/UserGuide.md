@@ -642,7 +642,7 @@ Format: `exit`
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-
+2. Adding multiple contacts with excessively long names (>5000 characters) may cause RTPM to lag significantly. It is recommended to use nicknames or initials if necessary.
 --------------------------------------------------------------------------------------------------------------------
 ## On the
 --------------------------------------------------------------------------------------------------------------------
