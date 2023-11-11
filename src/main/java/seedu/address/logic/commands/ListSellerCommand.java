@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -40,5 +41,27 @@ public class ListSellerCommand extends Command {
 
         Seller sellerToDisplay = lastShownList.get(targetIndex.getZeroBased());
         return new CommandResult(String.format(MESSAGE_LIST_SELLER_SUCCESS, Messages.format(sellerToDisplay)));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof ListSellerCommand)) {
+            return false;
+        }
+
+        ListSellerCommand otherListSellerCommand = (ListSellerCommand) other;
+        return targetIndex.equals(otherListSellerCommand.targetIndex);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("targetIndex", targetIndex)
+                .toString();
     }
 }
