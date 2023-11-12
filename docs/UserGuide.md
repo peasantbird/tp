@@ -432,7 +432,7 @@ Precise outputs when the command succeeds:
 
 ### Filtering buyers and sellers: `filter`
 
-Filters both lists so that they only display buyers and sellers any **complete word** of whose names match any of the given keywords fully.
+Filters both lists so that they only display buyers and sellers any **complete word** of whose names match any of the given keywords exactly.
 
 Format: `filter KEYWORD [MORE_KEYWORDS]…`
 
@@ -440,11 +440,13 @@ Format: `filter KEYWORD [MORE_KEYWORDS]…`
 
 Example: `filter John Doe`
 
-**Tip: `filter John Doe` will filter for**
+**Tip: `filter John Doe` will return**
 - [x] John
-- [x] John Do
+- [x] Doe
+- [x] Doe John
 - [x] Jane Doe
-- [x] John Doe
+- [x] John Tan
+- [ ] JohnDoe
 - [ ] Johnny
 - [ ] Jo
 
@@ -644,27 +646,25 @@ Format: `exit`
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. Adding multiple contacts with excessively long names (>5000 characters) may cause RTPM to lag significantly. It is recommended to use nicknames or initials if necessary.
 --------------------------------------------------------------------------------------------------------------------
-## On the
---------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Buyer**    | `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_INFO] [prio/PRIORITY] [t/TAG]`
-**Add Seller**    | `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [prio/PRIORITY] [t/TAG]​`
-**Edit Buyer** | `bedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]`
-**Edit Seller** | `sedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]`
-**Delete Buyer** | `bdelete INDEX`
-**Delete Seller** | `sdelete INDEX`
+**Add Buyer**    | `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_INFO] [prio/PRIORITY] [t/TAG]`<br> e.g. buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium prio/high
+**Add Seller**    | `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [prio/PRIORITY] [t/TAG]​`<br> e.g. seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/high
+**Edit Buyer** | `bedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]`<br> e.g. bedit 3 e/example@email.com ah/Residential Street
+**Edit Seller** | `sedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]`<br> e.g. sedit 3 e/example@email.com as/Selling Street
+**Delete Buyer** | `bdelete INDEX`<br> e.g. bdelete 2
+**Delete Seller** | `sdelete INDEX`<br> e.g. sdelete 2
 **Clear**  | `clear`
-**Set Buyer Priority** | `bprio INDEX PRIORITY`
-**Set Seller Priority** | `sprio INDEX PRIORITY`
+**Set Buyer Priority** | `bprio INDEX PRIORITY`<br> e.g. bprio 3 high
+**Set Seller Priority** | `sprio INDEX PRIORITY`<br> e.g. sprio 3 high
 **List All** | `list`
-**Filter**   | `filter KEYWORD [MORE_KEYWORDS]`
-**List Seller**   | `slist INDEX`
-**List Buyer**   | `blist INDEX` 
-**Sort Buyers** | `bsort ATTRIBUTE_PREFIX DIRECTION`
-**Sort Sellers** | `ssort ATTRIBUTE_PREFIX DIRECTION`
+**Filter**   | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g. filter John Doe
+**List Buyer**   | `blist INDEX` <br> e.g. blist 1
+**List Seller**   | `slist INDEX`<br> e.g. slist 1
+**Sort Buyers** | `bsort ATTRIBUTE_PREFIX DIRECTION`<br> e.g. bsort n/d
+**Sort Sellers** | `ssort ATTRIBUTE_PREFIX DIRECTION`<br> e.g. ssort prio/a
 **Undo**   | `undo`
 **Redo**  | `redo`
 **Exit**   | `exit`
