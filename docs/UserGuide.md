@@ -708,14 +708,11 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-<<<<<<< HEAD
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
 
 </div>
-=======
->>>>>>> 5e61e882daa4eb819cdefb755f20246dde0d65d1
 
 --------------------------------------------------------------------------------------------------------------------
 
