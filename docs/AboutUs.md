@@ -35,7 +35,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 <img src="images/iantsaii.png" width="200px">
 
-[[github](http://github.com/iantsaii)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/iantsaii)] [[portfolio](team/iantsaii.md)]
 
 * Role: Developer
 * Responsibilities: Quality assurance: Simulated System and Acceptance Testing

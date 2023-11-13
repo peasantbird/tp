@@ -263,18 +263,10 @@ _{more aspects and alternatives to be added}_
 
 #### Implementation
 
-The  edit mechanism is facilitated by the `find` command. 
-
-Using the `find` command, we can find the seller or buyer to edit.
-
 Given below is an example usage scenario and how the edit mechanism behaves at each step.
 
 Step 1. The user types in the `bedit` or `sedit` keyword, followed by the index of the buyer or seller that they want
-to edit. Following that, they type `/field`, where `field` is a name of the field that they want to edit.
-
-The edit command will call the `find` command to find the corresponding buyer or seller, then it will copy that person,
-edit the field that the user wants to edit, delete that buyer or seller, then add the edited buyer or seller back
-into the list.
+to edit. Following that, they type one or more of `/PREFIX`, where `PREFIX` is a field that they want to edit. 
 
 <box type="info" seamless>
 
@@ -284,11 +276,11 @@ into the list.
 
 The following sequence diagram shows how the edit operation works:
 
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
+<puml src="diagrams/EditBuyerSequenceDiagram.puml" alt="EditBuyerSequenceDiagram" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `EditBuyerCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
@@ -296,17 +288,16 @@ The following sequence diagram shows how the edit operation works:
 
 **Aspect: How edit executes:**
 
-* **Alternative 1 (current choice):** Deletes the old buyer or seller and adds the edited one.
-    * Pros: Easy to implement.
-    * Cons: May not preserve buyer and seller order
+* **Alternative 1 (current choice):** Creates an EditBuyerDescriptor or an EditSellerDescriptor to abstract away 
+* all the Optional functionality
+    * Pros: Assigns concern of dealing with optional fields to the Descriptor class, making the code within
+  the `edit` commands easier to read and debug.
+    * Cons: Requires creation of additional Descriptor class, which makes it harder to trace through the code
 
-* **Alternative 2:** Deletes the old buyer or seller, then copies and deletes all the buyers or sellers
-after that buyer or seller, then adds the new edited buyer or seller, and then adds back all the copied
-buyers and sellers.
-    * Pros: Preserves order
-    * Cons: Difficult to implement
-
-_{more aspects and alternatives to be added}_
+* **Alternative 2:** `edit` command parsers pass Optionals directly to the Buyer Command
+    * Pros: Avoid creation of a new class that might introduce bugs
+    * Cons: Optionals are not intended to be used as inputs to methods, as they introduce additional 
+  work to be done in the method to handle the different inputs.
 
 
 ### Priority feature
