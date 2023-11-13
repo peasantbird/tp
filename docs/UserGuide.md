@@ -116,15 +116,14 @@ Hence, it is recommended to take a backup of the file before editing it.**
 
 Adds a buyer with their information to the list. 
 
+<box type="info" seamless>
+
+Note that this command throws warnings. For more info on fields, head [here.](#appendix-a-fields) For more info on warnings, head [here.](#appendix-a-warnings)
+
+</box>
+
 Format: `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_INFO] [prio/PRIORITY] [t/TAG]…`
 
-- `n/NAME`: Contains at least one letter, number or symbol.
-- `[p/PHONE_NUMBER]`: Contains at least one number
-- `[e/EMAIL]`: Contains at least one '@'
-- `[ah/HOME_ADDRESS]`: No restrictions
-- `[i/BUY_HOUSE_INFO]`: No restrictions
-- `[prio/PRIORITY]`: Either `high`, `medium`, `low`, or `nil` priority level
-- `[t/TAG]...`: No restrictions
 
 Example:
 `buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium prio/high`
@@ -159,15 +158,14 @@ Precise outputs when the command fails due to invalid parameters:
 
 Adds a seller with their information to the list. 
 
+<box type="info" seamless>
+
+Note that this command throws warnings. For more info on fields, head [here.](#appendix-a-fields) For more info on warnings, head [here.](#appendix-a-warnings)
+
+</box>
+
 Format: `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [prio/PRIORITY] [t/TAG]…`
-- `n/NAME`: Contains at least one letter, number, or symbol.
-- `[p/PHONE_NUMBER]`: Contains at least one number
-- `[e/EMAIL]`: Contains at least one '@'
-- `[ah/HOME_ADDRESS]`: No restrictions
-- `[as/SELLING_ADDRESS]`: No restrictions
-- `[i/SELLING_HOUSE_INFO]`: No restrictions
-- `[prio/PRIORITY]`: Either `high`, `medium`, `low`, or `nil` priority level
-- `[t/TAG]`: No restrictions
+
 
 Example: `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/high`
 
@@ -198,11 +196,17 @@ Precise outputs when the command fails due to invalid parameters:
 
 ### Editing a buyer: `bedit`
 
-Edits the information of a buyer based on their index number in the buyers' list. 
+Edits the information of a buyer based on their index number in the buyers' list.
+
+<box type="info" seamless>
+
+Note that this command throws warnings. For more info on fields, head [here.](#appendix-a-fields) For more info on warnings, head [here.](#appendix-a-warnings)
+
+</box>
 
 Format: `bedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]…`
 * `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyers' list
-* `PREFIX/VALUE`: Refer to the add buyer command, `buyer`
+* `PREFIX/VALUE`: Refer to the appendix linked above.
 
 Example: `bedit 3 e/example@email.com ah/Residential Street`
 
@@ -232,11 +236,17 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 ### Editing a seller: `sedit`
 
-Edits the information of a seller based on their index number in the sellers' list. 
+Edits the information of a seller based on their index number in the sellers' list.
+
+<box type="info" seamless>
+
+Note that this command throws warnings. For more info on fields, head [here.](#appendix-a-fields) For more info on warnings, head [here.](#appendix-a-warnings)
+
+</box>
 
 Format: `sedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]…`
 * `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the sellers' list
-* `PREFIX/VALUE`: Refer to the add seller command, `seller`
+* `PREFIX/VALUE`: Refer to the appendix linked above.
 
 Example: `sedit 3 e/example@email.com ah/Residential Street`
 
@@ -347,11 +357,17 @@ Precise outputs when the command succeeds:
 
 ### Setting a buyer's priority: `bprio`
 
-Sets the priority level of a buyer based on their index number in the buyer's list. 
+Sets the priority level of a buyer based on their index number in the buyer's list.
+
+<box type="info" seamless>
+
+Note that this command throws warnings. For more info on warnings, head [here.](#appendix-a-warnings)
+
+</box>
 
 Format: `bprio INDEX PRIORITY`
 * `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyer's list
-* `PRIORITY`: Either `high`, `medium`, `low`, or `nil` priority level
+* `PRIORITY`: See [here.](#appendix-a-fields)
 
 Example: `bprio 3 high`
 
@@ -381,11 +397,17 @@ Parameters: INDEX PRIORITY
 
 ### Setting a seller's priority: `sprio`
 
+<box type="info" seamless>
+
+Note that this command throws warnings. For more info on warnings, head [here.](#appendix-a-warnings)
+
+</box>
+
 Sets the priority level of a seller based on their index number in the seller's list.
 
 Format: `sprio INDEX PRIORITY`
 * `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyer's list
-* `PRIORITY`: Either `high`, `medium`, `low`, or `nil` priority level
+* `PRIORITY`: See [here.](#appendix-a-fields)
 
 Example: `sprio 3 high`
 
@@ -433,7 +455,7 @@ Precise outputs when the command succeeds:
 
 ### Filtering buyers and sellers: `filter`
 
-Filters both lists so that they only display buyers and sellers any **complete word** of whose names match any of the given keywords exactly.
+Filters both lists so that they only display buyers and sellers whose names match any of the given keywords exactly.
 
 Format: `filter KEYWORD [MORE_KEYWORDS]…`
 
@@ -447,6 +469,9 @@ Example: `filter John Doe`
 - [x] Doe John
 - [x] Jane Doe
 - [x] John Tan
+- [x] John Doe
+- [x] john doe
+- [x] JOHN DOE
 - [ ] JohnDoe
 - [ ] Johnny
 - [ ] Jo
@@ -680,10 +705,14 @@ Action     | Format, Examples
 
 ## Appendix A: Warnings
 
-RTPM allows you to flexibly input most fields of data. However, we still have some things in mind for each field. Hence, the warning system informs the user of any valid but possibly unintended inputs. The warning system is able to alert the user of multiple errors at once. For a non-exhaustive list, see below.
+RTPM allows you to flexibly input most fields of data. 
+However, we still have some things in mind for each field. 
+Hence, the warning system informs the user of any valid but possibly unintended inputs. 
+The warning system is able to alert the user of multiple errors at once. For a non-exhaustive list, see below.
 
-The warning system is also used to check if, when you are adding new buyers/sellers, whether there are two similar buyers or two similar sellers, or a buyer that shares the same name as a seller.
-
+The warning system is also used to inform the user if, when you are adding new buyers/sellers, 
+whether there are two similar buyers or two similar sellers, 
+or a buyer that shares the same name as a seller. See [Appendix C](#appendix-c-similar-names) for more details.
 ```
 Warning!; [Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.]
 Please ignore if this is expected.
@@ -708,21 +737,46 @@ Please ignore if this is expected.
 ## Appendix B: Fields
 Here, we provide the exact checks that RTPM does for each field, and the warning given if the field is inappropriate.
 
-Field     | Valid                                    | Appropriate                                                                                      | Exact warning given
------------|------------------------------------------|--------------------------------------------------------------------------------------------------|-------------------------------------------
-**Name**        | Must not be blank                        | Alphanumeric characters only                                                                     | 
-**Phone Number**| At least one numerical character         | Only numerical characters, and at least 3 digits long. Area codes allowed as provided in warning. | `Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.`
-**Email**       | At least one `@` character               | See warning message.                                                                             | `Emails should be of the format local-part@domain and adhere to the following constraints: 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. 2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: - end with a domain label at least 2 characters long - have each domain label start and end with alphanumeric characters - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.`
-**Address**     | Must not be blank                        | Nil                                                                                              | Nil
-**Info**        | Must not be blank                        | Nil                                                                                              | Nil
-**Priority**    | Starts with one of the letters `h,l,m,n` | Matches the first part of one of the words `high, low, medium, nil`.                             | `Inputs should be 'high', 'medium', 'low' or 'nil'. However, if at least the first letter is valid, we will read correctly.`
-**Tags**        | Must not be blank                        | Alphanumeric characters only                                                                     | `Tags names should be alphanumeric`
+| Field            | Valid                                    | Appropriate                                                                                       | Exact warning given                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+|------------------|------------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Name**         | Must not be blank                        | Alphanumeric characters only                                                                      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| **Phone Number** | At least one numerical character         | Only numerical characters, and at least 3 digits long. Area codes allowed as provided in warning. | `Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.`                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| **Email**        | At least one `@` character               | See warning message.                                                                              | `Emails should be of the format local-part@domain and adhere to the following constraints: 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. 2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: - end with a domain label at least 2 characters long - have each domain label start and end with alphanumeric characters - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.` |
+| **Address**      | Must not be blank                        | Nil                                                                                               | Nil                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Info**         | Must not be blank                        | Nil                                                                                               | Nil                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Priority**     | Starts with one of the letters `h,l,m,n` | Matches the first part of one of the words `high, low, medium, nil`.                              | `Inputs should be 'high', 'medium', 'low' or 'nil'. However, if at least the first letter is valid, we will read correctly.`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| **Tags**         | Must not be blank                        | Alphanumeric characters only                                                                      | `Tags names should be alphanumeric`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 ## Appendix C: Similar names
 RTPM does checks to ensure users do not accidentally enter the same person twice, preventing cases where you have duplicate entries.
+This is also true if you try to edit two people to have the same name.
 
-There may be some ambiguity when names are similar but not exactly the same; in this case, the app will warn the user in case this was unintentional, but will not prevent the command from executing. This appendix aims to explain how exactly similar names are determined.
+There may be some ambiguity when names are similar but not exactly the same; in this case,
+the app will warn the user in case this was unintentional,
+but will not prevent the command from executing. 
+This appendix aims to explain how exactly similar names are determined.
 
 RTPM's definition of 'similar' is as follows: Either one of the names is contained 
-in the other, or the names require 2 or less edits (deletions, insertions, transpositions)
+in the other, or the names require 2 or fewer edits (deletions, insertions, transpositions)
 to make them the same. (for more details search for the definition of Levenshtein distance).
+
+An example when the same name is detected across buyers and sellers: 
+```This seller potentially also exists in the buyer list: If so, please verify that their contact information is the same```
+
+An example when similar names are detected:
+```The seller is similar to one of the sellers in the list!```
+
+An example when the same name is detected:
+```This seller already exists in the address book```
+(This is not allowed, hence the command does not execute.)
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
