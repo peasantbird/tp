@@ -325,10 +325,11 @@ Step 2. The user executes `buyer n/Amy`, `buyer n/Bob` and `buyer n/Carla` to ad
 
 Step 3. The user executes `bsort n/d` to sort the buyer list by name in descending order. 
 
+<puml src="diagrams/SortBuyerSequenceDiagram.puml" alt="SortBuyerSequenceDiagram" />
 
-The execution of this `bsort` 
-command updates the `SortedList<Buyer>` list via the `updateFilteredSortedBuyerList(Comparator<Buyer> comparator)`
-method, passing into the method a `BuyerComparator` instance that sorts by name descending.
+The execution of this `bsort` command updates the `SortedList<Buyer>` list via the 
+`updateFilteredSortedBuyerList(Comparator<Buyer> comparator)` method, passing into the method a `BuyerComparator` 
+instance that sorts by name descending.
 
 Step 4. RTPM shows the list of buyers that is sorted by name in descending order on the GUI.
 
