@@ -12,8 +12,8 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+Our app uses this snippet to implement Levenshtein distance, which allows us to detect similar but not matching names.
+https://rosettacode.org/wiki/Levenshtein_distance#Java
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -133,7 +133,7 @@ inherit from the `Parser` interface so that they can be treated similarly where 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Displayable` objects (which are contained in the appropriate `UniqueDisplayableList<? extends Displayable>` object, in this case only buyers and sellers).
+* stores the address book data i.e., all `Displayable` objects (which are contained in the appropriate `UniqueDisplayableList<T extends Displayable>` object, in this case only buyers and sellers).
 * stores the currently 'selected' `Displayable` objects (e.g., results of a search query) as a separate _filtered_ list which 
 is exposed to outsiders as an unmodifiable `ObservableList<Buyer>`/`ObservableList<Seller>` that can be 'observed' e.g. 
 the UI can be bound to this list so that the UI automatically updates when the data in the list change.
@@ -259,21 +259,17 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Edit feature
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Implementation
 
-### \[Proposed\] Edit feature
-
-#### Proposed Implementation
-
-The proposed edit mechanism is facilitated by the `find` command. 
+The  edit mechanism is facilitated by the `find` command. 
 
 Using the `find` command, we can find the seller or buyer to edit.
 
 Given below is an example usage scenario and how the edit mechanism behaves at each step.
 
-Step 1. The user types in the `edit-b` or `edit-s` keyword, followed by the index of the buyer or seller that they want
+Step 1. The user types in the `bedit` or `sedit` keyword, followed by the index of the buyer or seller that they want
 to edit. Following that, they type `/field`, where `field` is a name of the field that they want to edit.
 
 The edit command will call the `find` command to find the corresponding buyer or seller, then it will copy that person,
@@ -313,19 +309,25 @@ buyers and sellers.
 _{more aspects and alternatives to be added}_
 
 
-### \[Completed\] Priority feature
+### Priority feature
+
+#### Rationale
+
+The priority feature allows the user to assign priority levels to their clients in the address book, using
+the `SetBuyerPriority` and `SetSellerPriority` commands. These commands act as a shortcut for conveniently
+assigning priority levels to clients, without having to use the edit command (`bedit` or `sedit`).
+
+Also, when the priority feature is used with the sorting command (`bsort` or `ssort`), this allows users to 
+view high priority clients at the top of the list first.
+
 
 #### Implementation
 
-The priority feature is associated with the `edit` and `sort` commands, allowing the user to assign and sort clients by 
-their priority levels in the address book. The priority field is optional when instantiating buyers and sellers, and is
-initially unassigned.
-
 To implement this feature, the `Priority` field is firstly added to `Person`, and its corresponding UI Label is
-rendered by modifying the `PersonCard.java` controller and the respective BuyerCard and SellerCard FXML files. 
-* Since the priority field is 
-optional, the `Buyer`/`Seller` constructor is overloaded, such that the one which does not take in priority as an 
-argument will initialise priority to the default `nil` level. 
+rendered by modifying the `PersonCard.java` controller and the respective BuyerCard and SellerCard FXML files.
+The priority field is optional when instantiating buyers and sellers, and is initially set to a default priority 
+level of `nil`.
+* Details of how `Priority` is implemented as an optional field is elaborated below under 'Design considerations'.
 * The priority FXML Label is conditionally rendered 
 in `PersonCard.java` based on the buyer/seller's priority field. For instance, its color is red for `high` priority,
 orange for `medium`, green for `low`, and not rendered for `nil`.
@@ -334,13 +336,11 @@ To accommodate saving of buyers and sellers with the new priority fields in stor
 relevant files are modified to include these fields in JSON format, and to be readable and loaded back into `Model` in
 subsequent RTPM initialisations.
 
-To make it more convenient for the user to directly assign priorities to clients without having to use the `edit` 
-command, the `SetBuyerPriority` and `SetSellerPriority` commands are implemented as part of this feature.
 
 Given below is an example usage scenario for setting priorities for buyers in the address book's buyer list.
 
-Step 1. The user launches the application and executes the `priority-b 2 high` command, which sets the priority level of the
-2nd person in the buyer list to `high`. The `priority-b` command calls `LogicManager`, which gets `AddressBookParser`
+Step 1. The user launches the application and executes the `bprio 2 high` command, which sets the priority level of the
+2nd person in the buyer list to `high`. The `bprio` command calls `LogicManager`, which gets `AddressBookParser`
 to parse and obtain a `SetBuyerPriorityCommand`, before executing it. The command execution calls `ModelManager` to
 update the address book's buyer list with the newly assigned buyer priority, which is reflected on the UI too. 
 Finally, `LogicManager` calls `StorageManager` to update the JSON file.
@@ -355,11 +355,11 @@ limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
-Step 2. To unassign the priority level of the 2nd person, the user can execute the `priority-b 2 nil` command, which 
+Step 2. To unassign the priority level of the 2nd person, the user can execute the `bprio 2 nil` command, which 
 runs a similar flow as illustrated in the sequence diagram above.
 
-The same logic can be used for assigning priorities to sellers instead of buyers, by using `priority-s` instead 
-of `priority-b`.
+The same logic can be used for assigning priorities to sellers instead of buyers, by using `sprio` instead 
+of `bprio`.
 
 #### Design considerations:
 
@@ -379,9 +379,9 @@ of `priority-b`.
     invalid without the user knowing, so more robust exception handling is required when parsing the user input 
     which may be tedious to implement.
 
-### \[Proposed\] Sort feature
+### Sort feature
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed sort mechanism is facilitated by the `sort` command.
 
@@ -389,20 +389,20 @@ Using the `sort` command, we can sort the buyers and sellers lists respectively 
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
-Step 1. The user types in the `sort-b` or `sort-s` keyword, followed by `name`, `priority`, or another `criteria`.
+Step 1. The user types in the `bsort` or `ssort` keyword, followed by `name`, `priority`, or another `criteria`.
 to sort by. 
 
 The sort command will sort by changing the ObservableList<T> to a SortedList<T>, with the comparator based on the
 certain criteria.
 
-## Relaxed parameter matching
-### Background
+### Relaxed parameter matching
+#### Background
 In previous versions of the app and in the original brownfield project AB3, fields such as ```Name``` or ```Email```
 had a validation method on instantiation, which would throw an ```IllegalArgumentException``` when 
 the provided string did not fit the regex. Although useful, this would often be overzealous, causing potential 
 frustration. Furthermore, this exception, as it halts execution, only informs you of the first field that fails 
 to pass, so if you had multiple errors you would have to resolve and re-execute each time.
-### Implementation
+#### Implementation
 In 1.3, we implemented a group of static methods for each parameter, generally named isAppropriate(*Field*), which has a
 looser regex. The result of this boolean check, if it fails, then passes a warning string to the
 ```CommandWarnings``` class, which collects and stores them in a set. At the end of the execute() method, if the
@@ -427,7 +427,7 @@ for inappropriate but valid fields.
     * Cons: Using strings means that poor usage of addWarnings by callers may give nonsensical results.
 
 * **Alternative 2 (possible future enhancement):** Have CommandWarnings hold a set of predefined Warning singletons 
-instead of Strings, and 
+instead of Strings.
     * Pros: Constrains the contents of warning messages defensively, ensuring that they are useful.
     * Cons: Not as flexible, not worth the effort of implementing in this early stage of development
     , easy to add as future enhancement.
@@ -605,29 +605,30 @@ Extensions:
 ### Non-Functional Requirements
 *NFRs taken from the given constraints found **[here](https://nus-cs2103-ay2324s1.github.io/website/schedule/week4/project.html)**:*
 
-1. The product should be optimized for keyboard users who can type fast and prefer typing over other means of input.
-2. The data should be stored locally in a human editable text file, instead of in a database.
-3. The software should primarily follow OOP.
-4. The software should work on the Windows, Linux, and OS-X platforms (hence shouldn’t depend on OS-specific libraries).
-5. The software should work on a computer that has version 11 of Java i.e., no other Java version installed.
-6. The software should work without requiring an installer.
-7. The use of third-party frameworks/libraries/services is allowed but only if they are free, open-source (this doesn't apply to services), and have permissive license terms.
-8. The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for
-* standard screen resolutions 1920x1080 and higher, and
-* for screen scales 100% and 125%.
+-[x] The product should be optimized for keyboard users who can type fast and prefer typing over other means of input.
+-[x] The data should be stored locally in a human editable text file, instead of in a database.
+-[x] The software should primarily follow OOP.
+-[x] The software should work on the Windows, Linux, and OS-X platforms (hence shouldn’t depend on OS-specific libraries).
+-[x] The software should work on a computer that has version 11 of Java i.e., no other Java version installed.
+-[x] The software should work without requiring an installer.
+-[x] The use of third-party frameworks/libraries/services is allowed but only if they are free, open-source (this doesn't apply to services), and have permissive license terms.
+
+The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for
+* [x] standard screen resolutions 1920x1080 and higher, and
+* [x] for screen scales 100% and 125%.
 
 In addition, the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for
-* resolutions 1280x720 and higher, and
-* for screen scales 150%.
-9. The software should be able to be packaged into a single JAR file.
-10. The DG and UG should be PDF-friendly (Don't use expandable panels, embedded videos, animated GIFs etc.).
+* [x] resolutions 1280x720 and higher, and
+* [x] for screen scales 150%.
+- [x] The software should be able to be packaged into a single JAR file. 
+- [x] The DG and UG should be PDF-friendly (Don't use expandable panels, embedded videos, animated GIFs etc.).
 
 Additional NFRs
-11. The internal implementation should be readable and adhere to the coding quality guidelines found here, for maintainability and for peer evaluation.
-12. The deliverable deadlines should be met with a fully functioning product (hence, most important features should be prioritized and tested to eliminate bugs) to allow for usage as promised.
-13. The software should be resistant to crashes while running to prevent losing important contact details that realtors need to do business with.
-14. The software should work fast even on old / low-end laptop so that realtors on the go with their busy days can use our app quickly and efficiently without getting frustrated with lag.
-15. The software should be free and easy to use as an open source product.
+- [x] The internal implementation should be readable and adhere to the coding quality guidelines found [here](https://se-education.org/guides/conventions/java/), for maintainability and for peer evaluation.
+- [x] The deliverable deadlines should be met with a fully functioning product (hence, most important features should be prioritized and tested to eliminate bugs) to allow for usage as promised.
+- [x] The software should be resistant to crashes while running to prevent losing important contact details that realtors need to do business with.
+- [x] The software should work fast even on old / low-end laptop so that realtors on the go with their busy days can use our app quickly and efficiently without getting frustrated with lag.
+- [x] The software should be free and easy to use as an open source product.
 
 
 ### Glossary
@@ -729,11 +730,12 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
+
    2. Test case: `bdelete 1`<br>
-      Expected: First contact is deleted from the buyer list. Details of the deleted contact shown in the status message. 
+      Expected: First buyer is deleted from the buyer list. Details of the deleted contact shown in the status message. 
 
    3. Test case: `bdelete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. 
+      Expected: No buyer is deleted. Error details shown in the status message. 
 
    4. Other incorrect delete commands to try: `bdelete`, `bdelete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
@@ -842,11 +844,17 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
+  
    1. Prerequisites: Launch the app and run any command so that a `data/rtpm.json` file is created.
-
-   2. Test case: Corrupt the file by deleting lines from `data/rtpm.json`
-      Expected: The app will launch with empty buyer and seller lists
+   2. Find the JSON file that stores the data (By default, this is in /data/rptm.json. If it has been changed, you can
+   find its location by looking at the bottom bar that displays when the app is running.)
+   3. Fill it with invalid data.
+   4. Expected: The app will recognize that the file is unreadable, and will start with a cleared contact list.
+   
+2. Extension: missing data
+   1. Instead of filling it with invalid data, delete the JSON file.
+   2. Expected: The app will recognize that there is no stored file, and will default to providing a 
+   typical sample of a contact list.
 
    3. Test case: Delete the file `data/rtpm.json` or the folder `data`
       Expected: The app will launch with sample data in the buyer and seller lists
@@ -861,13 +869,22 @@ Given below are the enhancements that will be implemented in a future version.
 1. Currently, the UI text is cut off if the entries are too long. While this should not usually happen since the user 
 can decide what to enter (nicknames, abbreviations, acronyms, etc.), we plan to accommodate overly long names, 
 phone numbers, addresses, emails and house info entries within the UI.
-2. Currently, if the user makes a spelling or spacing mistake, the intended prefix of another field is regarded as 
+As a current workaround, users can call the `blist`/`slist` commands to display the text representation of the entry in
+the results box.
+
+2. Extremely long inputs can cause the program to hang or crash. This is a minor issue, since users are unlikely to
+enter such long fields into the app. A possible enhancement is to prevent overly long entries by blocking the command
+execution.
+
+3. Currently, if the user makes a spelling or spacing mistake, the intended prefix of another field is regarded as 
 part of the argument for the previous field. We plan to check for misspelled prefixes and prefixes provided as 
 arguments of other fields and warn the user.
-3. Currently, the user is not warned if addresses, names, and house info entries contain only numbers and special 
+
+4. Currently, the user is not warned if addresses, names, and house info entries contain only numbers and special 
 symbols. We plan to expand warnings to include warnings for addresses, names and house info entries containing 
 only non-alphabetical characters.
-4. Currently, for `bprio` and `sprio`,
+  
+5. Currently, for `bprio` and `sprio`,
    * if the user inputs extra arguments, such as `bprio 1 high low`, the app 
    accepts the input and sets the first buyer's priority level to `high` instead of warning the user about extra 
    arguments which would be ignored. As such, we plan to warn the user if any extra arguments are supplied for the 
@@ -893,6 +910,15 @@ only non-alphabetical characters.
    <br> As such, we plan to 
      change the validation regex to only accept `h`, `m`, `l`, or `nil` as inputs
      for priority in future.
-5. Currently, attempting to add multiple contacts with long names may cause the app to lag considerably. 
+  
+6. Currently, attempting to add multiple contacts with long names may cause the app to lag considerably. 
 We plan to optimise the similarity checks for names so that doing so results in less delay.
 
+7. As of v1.4, we have received reports that a warning is thrown even when there are no names that users considered similar.
+After testing, we determined that users in fact had two names that were very short, and this caused a discrepancy between commonly expected behavior and actual implementation.
+We defined distance between similar names as either one name contains the other entirely, 
+or the Levenshtein distance between the two names is 2 or less
+(It takes 2 or fewer substitutions/additions/removals to turn one of the names into the other.)
+An unintended effect was that, for example, if you had short names (e.g d, hi in the original case for us), 
+the names would match despite normal users probably not defining these two names as similar. 
+Possible future enhancements would be to make it percentage-based, so that short names are not producing warnings unnecessarily.
