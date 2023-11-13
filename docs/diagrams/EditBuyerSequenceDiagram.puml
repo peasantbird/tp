@@ -16,7 +16,7 @@ participant ":Model" as Model MODEL_COLOR
 end box
 
 box Storage STORAGE_COLOR_T1
-participant ":Storagemanager" as StorageManager MODEL_COLOR
+participant ":Storage" as Storage MODEL_COLOR
 end box
 
 [-> LogicManager : execute(bedit 2 n/John)
@@ -80,11 +80,11 @@ deactivate CommandResult
 EditBuyerCommand --> LogicManager : result
 deactivate EditBuyerCommand
 
-LogicManager -> StorageManager : saveAddressBook(curAddressBook)
-activate StorageManager
+LogicManager -> Storage : saveAddressBook(curAddressBook)
+activate Storage
 
-StorageManager --> LogicManager
-deactivate StorageManager
+Storage --> LogicManager
+deactivate Storage
 
 
 
