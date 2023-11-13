@@ -6,7 +6,9 @@
 
 # RTPM User Guide
 
-RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage contacts, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI), so you can get your contact management tasks done faster than traditional GUI apps.
+RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage contacts, optimized for use via a 
+Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI), so you can get your 
+contact management tasks done faster than traditional GUI apps!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -25,8 +27,8 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
       * [Deleting a seller: `sdelete`](#deleting-a-seller-sdelete)<br>
       * [Clearing all entries: `clear`](#clearing-all-entries-clear)<br>
     * Setting a client's priority<br>
-      * [Setting a buyer's priority: `bprio`](#setting-a-buyers-priority-bprio)<br>
-      * [Setting a seller's priority: `sprio`](#setting-a-sellers-priority-sprio)<br>
+      * [Setting a buyer's priority: `bprio`](#setting-a-buyer-s-priority-bprio)<br>
+      * [Setting a seller's priority: `sprio`](#setting-a-seller-s-priority-sprio)<br>
     * Viewing the clients<br>
       * [Listing all buyers and sellers: `list`](#listing-all-buyers-and-sellers-list)<br>
       * [Filtering buyers and sellers: `filter`](#filtering-buyers-and-sellers-filter)<br>
@@ -399,6 +401,7 @@ Precise outputs when the command succeeds:
 
 
 
+<br>
 
 ### Setting a buyer's priority: `bprio`
 
@@ -449,7 +452,7 @@ Parameters: INDEX PRIORITY
 
 
 
-
+<br>
 
 ### Setting a seller's priority: `sprio`
 
@@ -463,7 +466,7 @@ Sets the priority level of a seller based on their index number in the seller's 
 
 Format: `sprio INDEX PRIORITY`
 * `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyer's list
-* `PRIORITY`: See [here.](#appendix-a-fields)
+* `PRIORITY`: See [here.](#appendix-b-fields)
 
 Example: `sprio 3 high`
 
