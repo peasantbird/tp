@@ -45,7 +45,7 @@ public class SortBuyerCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
+        assert comparator != null;
         model.updateFilteredSortedBuyerList(comparator);
         return new CommandResult(MESSAGE_SUCCESS);
     }

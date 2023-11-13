@@ -1,3 +1,7 @@
+//@@author ruiyangzh-unused
+//This class was meant to be representative of a houseCard in the final application. Not enough time was available
+//to implement the automatching buyers-with-houses feature, so we decided to cut this class and
+//focus on core features instead.
 package seedu.address.ui;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;

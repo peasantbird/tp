@@ -1,3 +1,7 @@
+//@@author ruiyangzh-unused
+//This class was meant to be representative of a house in the final application. Not enough time was available
+//to implement the automatching buyers-with-houses feature, so we decided to cut this class and
+//focus on core features instead.
 package seedu.address.model.displayable.house;
 
 import java.util.Collections;

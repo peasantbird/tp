@@ -51,7 +51,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the displayable list with {@code sellerss}.
+     * Replaces the contents of the displayable list with {@code sellers}.
      * {@code sellers} must not contain duplicate sellers.
      */
     public void setSellers(List<Seller> sellers) {
