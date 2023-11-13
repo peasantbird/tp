@@ -14,10 +14,13 @@ public class CommandWarnings {
     }
 
     public boolean containsWarningString(String warning) {
+        assert warning != null || !warnings.contains(null);
         return warnings.contains(warning);
     }
     public void addWarning(String message) {
-        warnings.add(message);
+        if (message != null) {
+            warnings.add(message);
+        }
     }
     public boolean containsWarnings() {
         return !(warnings.isEmpty());
