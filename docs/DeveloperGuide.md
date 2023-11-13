@@ -457,7 +457,7 @@ as the CommandResult.
 
 **Target user profile**:
 
-This product is for student/junior realtors who have many clients and houses to keep track of. 
+This product is for student/junior realtors who have many clients to keep track of. 
 They are relatively tech-savvy and prefer the keyboard over the mouse, 
 prefer concise commands as opposed to full sentences, 
 and would like to customise the software to suit their preferences.
@@ -466,8 +466,8 @@ and would like to customise the software to suit their preferences.
 **Value proposition**:
 
 Our free and open-source app helps realtors to keep track of their clients’ preferences and 
-house viewings in one place. Unlike apps like Google Sheets, our app is more optimized for large databases.
-In addition, we help auto-match appropriate houses to a client with matching budget, needs and location.
+details in one place. Unlike generic apps such as Google Sheets, our app is optimised 
+for typical realtor workloads and databases.
 
 
 ### User stories
@@ -503,7 +503,7 @@ Priority level is based on current iteration
 (For all use cases below, the **System** is our app `RTPM (RealtorTrackerPlusMax)` and the **Actor** is the `user`,
 unless specified otherwise)
 
-**Use case: UC1 - Add homeowner and house**
+**Use case: UC1 - Add homeowner and house info**
 System: RTPM
 Actor: User
 
