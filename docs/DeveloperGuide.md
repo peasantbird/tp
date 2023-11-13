@@ -909,7 +909,7 @@ only non-alphabetical characters.
      and only made it harder to test for invalid priority inputs. 
    <br> As such, we plan to 
      change the validation regex to only accept `h`, `m`, `l`, or `nil` as inputs
-     for priority in future.
+     for priority in the future.
   
 6. Currently, attempting to add multiple contacts with long names may cause the app to lag considerably. 
 We plan to optimise the similarity checks for names so that doing so results in less delay.
@@ -924,7 +924,7 @@ the names would match despite normal users probably not defining these two names
 Possible future enhancements would be to make it percentage-based, so that short names are not 
 producing warnings unnecessarily.
 
-7. Currently, we have sellers only having one selling address and one house info. This is not fully representative of all
+8. Currently, we have sellers only having one selling address and one house info. This is not fully representative of all
 real-life conditions, since a seller can own and sell multiple houses. Likewise, a buyer could be
 theoretically searching for multiple houses (e.g. a rental firm). However we have decided in this early version, 
 and in view of our target audience (student/junior realtors) to have a one-to-one correspondence to simplify the 
