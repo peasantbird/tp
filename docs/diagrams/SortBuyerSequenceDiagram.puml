@@ -6,7 +6,9 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":SortBuyerCommandParser" as SortBuyerCommandParser LOGIC_COLOR
-participant "d:SetPriorityCommand" as SetPriorityCommand LOGIC_COLOR
+participant "sortOrder:SortOrder" as SortOrder LOGIC_COLOR
+participant "<<class>>\nBuyerComparator" as BuyerComparator LOGIC_COLOR
+participant ":SortBuyerCommand" as SortBuyerCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -15,13 +17,13 @@ participant ":Model" as Model MODEL_COLOR
 end box
 
 box Storage STORAGE_COLOR_T1
-participant ":Storage" as Storage STORAGE_COLOR
+participant ":Storage" as Storage MODEL_COLOR
 end box
 
-[-> LogicManager : execute(\n"bsort n/d")
+[-> LogicManager : execute("bsort n/d")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(\n"bsort n/d")
+LogicManager -> AddressBookParser : parseCommand("bsort n/d")
 activate AddressBookParser
 
 create SortBuyerCommandParser
@@ -31,43 +33,72 @@ activate SortBuyerCommandParser
 SortBuyerCommandParser --> AddressBookParser
 deactivate SortBuyerCommandParser
 
-AddressBookParser -> SortBuyerCommandParser : parse("2 high")
+AddressBookParser -> SortBuyerCommandParser : parse("n/d")
 activate SortBuyerCommandParser
 
-create SetPriorityCommand
-SortBuyerCommandParser -> SetPriorityCommand
-activate SetPriorityCommand
+alt prefix is n/, ah/, i/ or prio/
 
-SetPriorityCommand --> SortBuyerCommandParser : command
-deactivate SetPriorityCommand
+    create SortOrder
+    SortBuyerCommandParser -> SortOrder
+    activate SortOrder
+
+    SortOrder --> SortBuyerCommandParser
+    deactivate SortOrder
+
+    SortBuyerCommandParser -> BuyerComparator : of(n/, sortOrder)
+    activate BuyerComparator
+
+    BuyerComparator --> SortBuyerCommandParser : comparator
+    deactivate BuyerComparator
+
+    create SortBuyerCommand
+    SortBuyerCommandParser -> SortBuyerCommand : SortBuyerCommand(comparator)
+    activate SortBuyerCommand
+
+    SortBuyerCommand --> SortBuyerCommandParser : command
+    deactivate SortBuyerCommand
+
+else else
+
+    SortBuyerCommandParser -> BuyerComparator : of()
+    activate BuyerComparator
+
+    BuyerComparator --> SortBuyerCommandParser : comparator
+    deactivate BuyerComparator
+
+    create SortBuyerCommand
+    SortBuyerCommandParser -> SortBuyerCommand : SortBuyerCommand(comparator)
+    activate SortBuyerCommand
+
+    SortBuyerCommand --> SortBuyerCommandParser : command
+    deactivate SortBuyerCommand
+
+end
 
 SortBuyerCommandParser --> AddressBookParser : command
 deactivate SortBuyerCommandParser
-'Hidden arrow to position the destroy marker below the end of the activation bar.
-SortBuyerCommandParser -[hidden]-> AddressBookParser
-destroy SortBuyerCommandParser
 
 AddressBookParser --> LogicManager : command
 deactivate AddressBookParser
 
-LogicManager -> SetPriorityCommand : execute()
-activate SetPriorityCommand
+LogicManager -> SortBuyerCommand : execute()
+activate SortBuyerCommand
 
-SetPriorityCommand -> Model : setBuyer(old, new)
+SortBuyerCommand -> Model : updateFilteredSortedBuyerList(comparator)
 activate Model
 
-Model --> SetPriorityCommand
+Model --> SortBuyerCommand
 deactivate Model
 
 create CommandResult
-SetPriorityCommand -> CommandResult
+SortBuyerCommand -> CommandResult
 activate CommandResult
 
-CommandResult --> SetPriorityCommand
+CommandResult --> SortBuyerCommand
 deactivate CommandResult
 
-SetPriorityCommand --> LogicManager : result
-deactivate SetPriorityCommand
+SortBuyerCommand --> LogicManager : result
+deactivate SortBuyerCommand
 
 LogicManager -> Storage : saveAddressBook(curAddressBook)
 activate Storage

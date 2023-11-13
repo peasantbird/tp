@@ -314,15 +314,23 @@ initial address book state, and the `currentStatePointer` pointing to that singl
 
 Step 2. The user executes `buyer n/Amy`, `buyer n/Bob` and `buyer n/Carla` to add three new buyers.
 
-Step 3. The user executes `bsort n/d` to sort the buyer list by name in descending order. 
+Step 3. The user executes `bsort n/d` to sort the buyer list by name in descending order. Inputting `bsort n/d` calls 
+`LogicManager`, which gets `AddressBookParser` to create an instance of `SortBuyerCommandParser`. If there is a valid
+prefix, `SortBuyerCommandParser` parses its `SortOrder`, and creates a `SortBuyerCommand` with a `BuyerComparator` for
+the prefix and sort order. If there is no valid prefixes, the `SortBuyerCommand` will have a null `BuyerComparator`. 
+The `bsort` command is then executed, updating the `SortedList` in this case by passing the `BuyerComparator`
+instance that sorts by name descending. These changes are reflected in the UI, showing a list of buyers that is sorted 
+by name in descending order. Finally, `LogicManager` calls `StorageManager` to update the JSON file.
+
+The following sequence diagram shows how the sort operation works:
 
 <puml src="diagrams/SortBuyerSequenceDiagram.puml" alt="SortBuyerSequenceDiagram" />
 
-The execution of this `bsort` command updates the `SortedList<Buyer>` list via the 
-`updateFilteredSortedBuyerList(Comparator<Buyer> comparator)` method, passing into the method a `BuyerComparator` 
-instance that sorts by name descending.
+Step 4. To sort the buyer list by its default order, the user can execute `bsort`, which runs a similar flow as 
+illustrated in the sequence diagram above, except passing a null `BuyerComparator` into the `SortedList` for a default 
+sorting.
 
-Step 4. RTPM shows the list of buyers that is sorted by name in descending order on the GUI.
+The same logic can be used for sorting sellers instead of buyers, by using `ssort` instead of `bsort`.
 
 #### Design considerations:
 
