@@ -8,6 +8,10 @@
 
 RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage contacts, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, RTPM can get your contact management tasks done faster than traditional GUI apps.
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Contents
+
 * [Quick Start](#quick-start)
 * [Features](#features)<br>
     * Adding a person<br>
@@ -42,8 +46,11 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
     * [Appendix A: Warnings](#appendix-a-warnings)<br>
     * [Appendix B: Fields](#appendix-b-fields)<br>
     * [Appendix C: Similar names](#appendix-c-similar-names)<br>
---------------------------------------------------------------------------------------------------------------------
+
+
 <div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
 
@@ -70,8 +77,10 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 
 6. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
@@ -101,23 +110,28 @@ Here are some things regarding RTPM's features to take note of before using them
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
+
+
 <div style="page-break-after: always;"></div>
 
 <box type="info" seamless>
+
 **General notes about features:**<br>
 
 * RTPM does not require all fields to be filled in when creating buyers or sellers. Fields that have been omitted will be set to their default values.
 * RTPM accepts unconventional entries for data values to an extent. However, the warning system informs the user of any valid but possibly unintended inputs. For more information, refer to [Appendix A: Warnings](#appendix-a-warnings)
 * The priority system allows for the designation of levels of importance to each buyer and seller, which will be displayed as a tag in RTPM. When this priority is set to `nil`, there will be no tag.
 * RTPM data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-* RTPM data are saved automatically as a JSON file `[JAR file location]/data/rtpm.json`. Advanced users are welcome to update data directly by editing that data file.
-* Note that RTPM does checks for duplicate and similar entries. For more info, go [here.](#appendix-c-similar-names)
+* RTPM data are saved automatically as a JSON file `[JAR file location]/data/rtpm.json`.
+* Note that RTPM checks for duplicate and similar entries. Refer to [Appendix C: Similar Names](#appendix-c-similar-names) for more info.
 * **If you manually make changes to the saved data file such that the JSON format is invalid, RTPM will discard all data and start with an empty data file at the next run.
-Hence, manually modifying the saved data file is not recommended.**
+  Hence, manually modifying the saved data file is not recommended.**
 </box>
 
---------------------------------------------------------------------------------------------------------------------
+
 <div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Adding a buyer: `buyer`
 
@@ -158,9 +172,9 @@ Precise outputs when the command fails due to invalid parameters:
 [Back to top](#rtpm-user-guide)
 
 </div>
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
-<div style="page-break-after: always;"></div>
 
 ### Adding a seller : `seller`
 
@@ -200,8 +214,9 @@ Precise outputs when the command fails due to invalid parameters:
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Editing a buyer: `bedit`
 
@@ -241,8 +256,10 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Editing a seller: `sedit`
 
@@ -282,9 +299,9 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### Deleting a buyer: `bdelete`
 
@@ -308,6 +325,17 @@ Parameters: INDEX (must be a positive integer)<br>
 Example: bdelete 1
 
 >The buyer index provided is higher than the last number in the list!
+
+
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
+
+<div style="page-break-after: always;"></div>
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Deleting a seller: `sdelete`
@@ -340,9 +368,10 @@ Example: sdelete 1
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Clearing all entries : `clear`
 
@@ -394,9 +423,10 @@ Parameters: INDEX PRIORITY
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Setting a seller's priority: `sprio`
 
@@ -436,9 +466,10 @@ Parameters: INDEX PRIORITY
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Listing all buyers and sellers: `list`
 
@@ -483,8 +514,10 @@ Precise outputs when the command succeeds:
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Displaying a buyer from buyer list: `blist`
 
@@ -500,8 +533,10 @@ Precise outputs when the command succeeds:
 >Got it. Here's the information of this buyer:<br>
 Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
 
---------------------------------------------------------------------------------------------------------------------
+<br>
+<br>
 
+--------------------------------------------------------------------------------------------------------------------
 
 ### Displaying a seller from seller list: `slist`
 
@@ -564,10 +599,9 @@ Example: bsort prio/d
 valid prefix (`n`, `ah`, `i` or `prio`).
   * For example, `bsort qwerty z/asdf prio/d` will execute `bsort prio/d`.
   * However, any extraneous inputs or invalid prefixes after a valid prefix will cause an error.
-* When two or more valid prefixes are provided, `bsort` will sort by only one of the provided prefixes. It will choose
-the prefix to sort by in this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
+* When two or more valid prefixes are provided, `bsort` will sort by only one of the provided prefixes, which is chosen
+  based on this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
   * For example, `bsort prio/d n/d` will execute `bsort n/d`.
-
 
 </box>
 
@@ -577,8 +611,10 @@ the prefix to sort by in this order: **1. Name**, **2. Home address**, **3. Hous
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Sorting sellers: `ssort`
 
@@ -618,8 +654,8 @@ Example: ssort prio/d
   valid prefix (`n`, `ah`, `i` or `prio`).
     * For example, `ssort qwerty z/asdf prio/d` will execute `ssort prio/d`.
     * However, any extraneous inputs or invalid prefixes after a valid prefix will cause an error.
-* When two or more valid prefixes are provided, `ssort` will sort by only one of the provided prefixes. It will choose
-  the prefix to sort by in this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
+* When two or more valid prefixes are provided, `ssort` will sort by only one of the provided prefixes, which is chosen
+  based on this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
     * For example, `ssort prio/d n/d` will execute `ssort n/d`.
 
 
@@ -631,9 +667,10 @@ Example: ssort prio/d
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Undoing previous action: `undo`
 
@@ -691,9 +728,10 @@ Precise outputs when the command fails:
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
+
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Viewing help: `help`
 
@@ -714,12 +752,6 @@ Format: `exit`
 Upon exit, the latest data is saved to your computer at data/addressbook.json.
 
 </box>
-
-<div style='text-align: right;'>
-
-[Back to top](#rtpm-user-guide)
-
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -743,8 +775,9 @@ Upon exit, the latest data is saved to your computer at data/addressbook.json.
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
@@ -761,18 +794,7 @@ Action     | Format, Examples
 **Set Seller Priority** | `sprio INDEX PRIORITY`<br> e.g. sprio 3 high
 **List All** | `list`
 **Filter**   | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g. filter John Doe
-
-<div style='text-align: right;'>
-
-[Back to top](#rtpm-user-guide)
-
-</div>
-
-<div style="page-break-after: always;"></div>
-
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**List Buyer**   | `blist INDEX` <br> e.g. blist 1
+**List Buyer**   | `blist INDEX` <br> e.g. blist 1 
 **List Seller**   | `slist INDEX`<br> e.g. slist 1
 **Sort Buyers** | `bsort [PREFIX/DIRECTION]`<br> e.g. bsort n/d
 **Sort Sellers** | `ssort [PREFIX/DIRECTION]`<br> e.g. ssort prio/a
@@ -781,14 +803,17 @@ Action     | Format, Examples
 **Exit**   | `exit`
 **Help**   | `help`
 
+<br>
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Appendix A: Warnings
 
@@ -805,17 +830,24 @@ or a buyer that shares the same name as a seller. See [Appendix C](#appendix-c-s
 
 There are some limitations to the warning system
 ```
-Warning!; [Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.]
+Warning!; [Phone numbers should only contain numbers, and it should be at 
+least 3 digits long. Area codes are allowed, signified by a '+' and up to 
+3 numbers, followed by a space separating this from the main number.]
 Please ignore if this is expected.
 ```
 ```
-Warning!; [Emails should be of the format local-part@domain and adhere to the following constraints:
-1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+Warning!; [Emails should be of the format local-part@domain and adhere to 
+the following constraints:
+1. The local-part should only contain alphanumeric characters and these 
+special characters, excluding the parentheses, (+_.-). The local-part may 
+not start or end with any special characters.
+2. This is followed by a '@' and then a domain name. The domain name is 
+made up of domain labels separated by periods.
 The domain name must:
     - end with a domain label at least 2 characters long
     - have each domain label start and end with alphanumeric characters
-    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.]
+    - have each domain label consist of alphanumeric characters, separated 
+      only by hyphens, if any.]
 Please ignore if this is expected.
 ```
 
@@ -825,8 +857,9 @@ Please ignore if this is expected.
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Appendix B: Fields
 Here, we provide the exact checks that RTPM does for each field, and the warning given if the field is inappropriate.
@@ -847,8 +880,9 @@ Here, we provide the exact checks that RTPM does for each field, and the warning
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Appendix C: Similar names
 RTPM does checks to ensure users do not accidentally enter the same person twice, preventing cases where you have duplicate entries.
@@ -878,3 +912,4 @@ An example when the same name is detected:
 [Back to top](#rtpm-user-guide)
 
 </div>
+
