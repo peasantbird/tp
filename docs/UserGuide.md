@@ -150,7 +150,7 @@ Adds a buyer with their information to the list.
 
 <box type="info" seamless>
 
-Note that this command throws warnings. For more info on fields, head [here.](#appendix-a-fields) For more info on warnings, head [here.](#appendix-a-warnings)
+Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
 
 </box>
 
@@ -194,7 +194,7 @@ Adds a seller with their information to the list.
 
 <box type="info" seamless>
 
-Note that this command throws warnings. For more info on fields, head [here.](#appendix-a-fields) For more info on warnings, head [here.](#appendix-a-warnings)
+Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
 
 </box>
 
@@ -238,7 +238,7 @@ Edits the information of a buyer based on their index number in the buyers' list
 
 <box type="info" seamless>
 
-Note that this command throws warnings. For more info on fields, head [here.](#appendix-a-fields) For more info on warnings, head [here.](#appendix-a-warnings)
+Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
 
 </box>
 
@@ -281,7 +281,7 @@ Edits the information of a seller based on their index number in the sellers' li
 
 <box type="info" seamless>
 
-Note that this command throws warnings. For more info on fields, head [here.](#appendix-a-fields) For more info on warnings, head [here.](#appendix-a-warnings)
+Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
 
 </box>
 
@@ -631,13 +631,18 @@ Example: bsort prio/d
 * The sort command will ignore any extraneous inputs and invalid prefixes after the `bsort` keyword and before the next 
 valid prefix (`n`, `ah`, `i` or `prio`).
   * For example, `bsort qwerty z/asdf prio/d` will execute `bsort prio/d`.
-  * However, any extraneous inputs or invalid prefixes after a valid prefix will cause an error.
+  * Any extraneous inputs or invalid prefixes after a valid prefix will cause an error.
 * When two or more valid prefixes are provided, `bsort` will sort by only one of the provided prefixes, which is chosen
   based on this order:<br> **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
   * For example, `bsort prio/d n/d` will execute `bsort n/d`.
 
 </box>
 
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -895,6 +900,16 @@ Here, we provide the exact checks that RTPM does for each field, and the warning
 | **Email**        | At least one `@` character               | See warning message.                                                                              | `Emails should be of the format local-part@domain and adhere to the following constraints: 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. 2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: - end with a domain label at least 2 characters long - have each domain label start and end with alphanumeric characters - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.` |
 | **Address**      | Must not be blank                        | Nil                                                                                               | Nil                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | **Info**         | Must not be blank                        | Nil                                                                                               | Nil                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
+<div style="page-break-after: always;"></div>
+
+| Field            | Valid                                    | Appropriate                                                                                       | Exact warning given                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+|------------------|------------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Priority**     | Starts with one of the letters `h,l,m,n` | Matches the first part of one of the words `high, low, medium, nil`.                              | `Inputs should be 'high', 'medium', 'low' or 'nil'. However, if at least the first letter is valid, we will read correctly.`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | **Tags**         | Must not be blank                        | Alphanumeric characters only                                                                      | `Tags names should be alphanumeric`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
