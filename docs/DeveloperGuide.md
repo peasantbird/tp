@@ -365,15 +365,19 @@ of `priority-b`.
 
 **Aspect: How the optional priority field is implemented**
 
-* **Alternative 1 (initial choice):** Overload the `Buyer`/`Seller` constructors.
+* **Initial implementation:** Overload the `Buyer`/`Seller` constructors.
     * Pros: Relatively simple to implement and refactor.
     * Cons: Not feasible for implementing various optional fields.
 
-* **Alternative 2 (current choice):** Assign a default value for all non-compulsory fields in `AddBuyer` and `AddSeller`, 
-only assigning them for arguments available from the parsed user input (in `ArgumentMultimap`).
-    * Pros: Only a single constructor for `Buyer`/`Seller` is needed for multiple optional fields.
-    * Cons: Address book only adds correctly formatted fields and may discard the rest without the user knowing, so
-more robust exception handling is required in parsing the user input which may be tedious to implement.
+* **Current implementation:** Assign a default value for all non-compulsory fields in `AddBuyer` and `AddSeller`
+  (for example, default phone number = 123, default priority = nil, and so on), and only assign these optional 
+  fields if the user supplies arguments for them, which would be available in `ArgumentMultimap` after parsing 
+  the user input. 
+    * Pros: Only a single constructor for `Buyer`/`Seller` is needed for multiple optional fields instead of having
+    to overload the constructors.
+    * Cons: Address book only adds correctly formatted fields, and may discard the remaining arguments which are
+    invalid without the user knowing, so more robust exception handling is required when parsing the user input 
+    which may be tedious to implement.
 
 ### \[Proposed\] Sort feature
 
@@ -701,10 +705,29 @@ arguments of other fields and warn the user.
 3. Currently, the user is not warned if addresses, names, and house info entries contain only numbers and special 
 symbols. We plan to expand warnings to include warnings for addresses, names and house info entries containing 
 only non-alphabetical characters.
-4. Currently, for `bprio` and `sprio`, if the user inputs extra arguments 
-at the end, such as `bprio 1 high low`, the app accepts the input and sets the first buyer's priority level to 
-`high` instead of warning the user about extra arguments which would be ignored. As such, we plan to warn the user 
-if any extra arguments are supplied for the user to double check that their priority input is correct.
+4. Currently, for `bprio` and `sprio`,
+   * if the user inputs extra arguments, such as `bprio 1 high low`, the app 
+   accepts the input and sets the first buyer's priority level to `high` instead of warning the user about extra 
+   arguments which would be ignored. As such, we plan to warn the user if any extra arguments are supplied for the 
+   user to double check that their priority input is correct.
+   * the current regex for determining if an input is appropriate is as follows: 
+   `(?i)(h[igh]{0,3}|m[edium]{0,5}|l[ow]{0,2}|n[il]{0,2})$`
+     * `(?i)` refers to case-insensitive matching
+     * `(h[igh]{0,3}|m[edium]{0,5}|l[ow]{0,2}|n[il]{0,2})` means that the string input can match one of four possible
+     options, with each option separated by a `|`:
+       * `h[igh]{0,3}` accepts a string with a first letter 'h', followed by 0 to 3 letters after 'h', which can be
+       any of the letters inside the square brackets, so `h`, `hi`, `hhh` and `hggi` are all appropriate inputs.
+       * `m[edium]{0,5}` accepts a string with a first letter 'm', followed by 0 to 5 letters after 'm', which can be
+       any of the letters inside the square brackets, so `m`, `mii` and `mdmiue` are all appropriate inputs.
+       * `l[ow]{0,2}` accepts a string with a first letter 'l', followed by 0 to 2 letters after 'l', which can be
+       any of the letters inside the square brackets, so `l`, `lw`, and `lww` are all appropriate inputs.
+       * `n[il]{0,2}` accepts a string with a first letter 'n', followed by 0 to 2 letters after 'n', which can be
+       any of the letters inside the square brackets, so `n`, `nl`, and `nll` are all appropriate inputs.
+     * `$` demarcates the end of the matching
+   * Initially, the regex above was meant to allow for user typos, such as `hgih` or `meduim`, but in hindsight, 
+   this was unnecessary and only reduced this feature's testability by making it harder to test for invalid 
+   priority inputs. As such, we plan to change the validation regex to only accept `h`, `m`, `l`, or `nil` as inputs
+   for priority in future.
 5. Currently, attempting to add multiple contacts with long names may cause the app to lag considerably. 
 We plan to optimise the similarity checks for names so that doing so results in less delay.
 
