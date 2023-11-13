@@ -34,10 +34,10 @@ public class DisplayableListPanel extends UiPart<Region> {
      */
     class DisplayableListViewCell extends ListCell<Displayable> {
         @Override
-        protected void updateItem(Displayable displayable, boolean empty) {
-            super.updateItem(displayable, empty);
+        protected void updateItem(Displayable displayable, boolean isEmpty) {
+            super.updateItem(displayable, isEmpty);
 
-            if (empty || displayable == null) {
+            if (isEmpty || displayable == null) {
                 setGraphic(null);
                 setText(null);
             } else {
