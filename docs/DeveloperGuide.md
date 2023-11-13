@@ -596,7 +596,7 @@ Extensions:
 
 ### Non-Functional Requirements
 *NFRs taken from the given constraints found **[here](https://nus-cs2103-ay2324s1.github.io/website/schedule/week4/project.html)**:*
-
+The marking of NFRs as fulfilled/unfulfilled below is accurate for v1.4.
 -[x] The product should be optimized for keyboard users who can type fast and prefer typing over other means of input.
 -[x] The data should be stored locally in a human editable text file, instead of in a database.
 -[x] The software should primarily follow OOP.
@@ -712,7 +712,7 @@ execution.
 part of the argument for the previous field. We plan to check for misspelled prefixes and prefixes provided as 
 arguments of other fields and warn the user.
 
-4. Currently, the user is not warned if addresses, names, and house info entries contain only numbers and special 
+4. Currently, the user is not warned if addresses, names, or house info entries contain only numbers and special 
 symbols. We plan to expand warnings to include warnings for addresses, names and house info entries containing 
 only non-alphabetical characters.
 
@@ -728,6 +728,17 @@ After testing, we determined that users in fact had two names that were very sho
 We defined distance between similar names as either one name contains the other entirely, 
 or the Levenshtein distance between the two names is 2 or less
 (It takes 2 or fewer substitutions/additions/removals to turn one of the names into the other.)
-An unintended effect was that, for example, if you had short names (e.g d, hi in the original case for us), 
+An unintended effect was that, for example, if you had short names (e.g "d", "hi", in the original case for us), 
 the names would match despite normal users probably not defining these two names as similar. 
-Possible future enhancements would be to make it percentage-based, so that short names are not producing warnings unnecessarily.
+Possible future enhancements would be to make it percentage-based, so that short names are not 
+producing warnings unnecessarily.
+
+7. Currently, we have sellers only having one selling address and one house info. This is not fully representative of all
+real-life conditions, since a seller can own and sell multiple houses. Likewise, a buyer could be
+theoretically searching for multiple houses (e.g. a rental firm). However we have decided in this early version, 
+and in view of our target audience (student/junior realtors) to have a one-to-one correspondence to simplify the 
+UI and refine other features. A future enhancement would be to use a House class that can
+have a many-to-one relation to buyers and sellers. (In fact, the class is already available and is 
+in the repository as an unused .java file; we did not manage to integrate it in time for v1.3 release.)
+A workaround for such cases in v1.4 is to add the info about both houses into
+the address field and info field (since we do not limit the user from doing this.)
