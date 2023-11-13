@@ -13,11 +13,24 @@ public class CommandWarnings {
         this.warnings = new HashSet<>();
     }
 
+    /**
+     * Returns whether the warning string provided is part of the calling CommandWarnings. As we prevent null warnings
+     * from being added in the following method, there is an assertion that the CommandWarnings should not contain
+     * any null warnings.
+     * @param warning a warning that is being searched for.
+     */
     public boolean containsWarningString(String warning) {
+        assert warning != null || !warnings.contains(null);
         return warnings.contains(warning);
     }
+    /**
+     * Adds a warning into the CommandWarnings object. If the message is null, nothing happens.
+     * @param message the warning to be added.
+     */
     public void addWarning(String message) {
-        warnings.add(message);
+        if (message != null) {
+            warnings.add(message);
+        }
     }
     public boolean containsWarnings() {
         return !(warnings.isEmpty());

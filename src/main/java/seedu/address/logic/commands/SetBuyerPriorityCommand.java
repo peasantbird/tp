@@ -22,7 +22,7 @@ public class SetBuyerPriorityCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sets a priority level for the buyer, identified by index in the displayed buyer list. "
-            + "INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', or 'low'.\n"
+            + "INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', 'low', or 'nil'.\n"
             + "Parameters: "
             + "INDEX "
             + "PRIORITY\n"
@@ -36,8 +36,8 @@ public class SetBuyerPriorityCommand extends Command {
 
     /**
      * Constructs a SetBuyerPriorityCommand to set the priority level of a specified buyer.
-     * @param targetIndex
-     * @param priority
+     * @param targetIndex the index of the buyer to set the priority of.
+     * @param priority the priority that the buyer is to be set to.
      */
     public SetBuyerPriorityCommand(Index targetIndex, Priority priority) {
         this.targetIndex = targetIndex;
@@ -46,9 +46,9 @@ public class SetBuyerPriorityCommand extends Command {
     }
     /**
      * Constructs a SetBuyerPriorityCommand to set the priority level of a specified buyer.
-     * @param targetIndex
-     * @param priority
-     * @param commandWarnings
+     * @param targetIndex the index of the buyer to set the priority of.
+     * @param priority the priority that the buyer is to be set to.
+     * @param commandWarnings A container for warnings that may occur.
      */
     public SetBuyerPriorityCommand(Index targetIndex, Priority priority, CommandWarnings commandWarnings) {
         this.targetIndex = targetIndex;

@@ -18,11 +18,6 @@ public class Address {
      * otherwise " " (a blank string) becomes a valid input.
      */
 
-    //TODO anyone can think of any stricter constraints on addresses?
-    //currently validation and affirmation are the same.
-    //Therefore the affirmation will never fail since we only fail affirmation when validation fails,
-    //and validation throws an exception.
-    //REMOVE THIS if you've resolved this.
     public static final String VALIDATION_REGEX = "[^\\s].*";
     public static final String AFFIRMATION_REGEX = VALIDATION_REGEX;
     public static final String DEFAULT_ADDRESS_STRING = "Placeholder Street, Singapore";

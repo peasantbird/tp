@@ -17,13 +17,19 @@ import seedu.address.logic.commands.AddSellerCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteBuyerCommand;
 import seedu.address.logic.commands.DeleteSellerCommand;
+import seedu.address.logic.commands.EditBuyerCommand;
+import seedu.address.logic.commands.EditSellerCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListBuyerCommand;
 import seedu.address.logic.commands.ListSellerCommand;
+import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SetBuyerPriorityCommand;
 import seedu.address.logic.commands.SetSellerPriorityCommand;
+import seedu.address.logic.commands.SortBuyerCommand;
+import seedu.address.logic.commands.SortSellerCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.NameContainsKeywordsPredicate;
 import seedu.address.model.displayable.buyer.Buyer;
@@ -118,7 +124,32 @@ public class AddressBookParserTest {
                         + HIGH_PRIORITY);
         assertEquals(new SetSellerPriorityCommand(INDEX_FIRST_PERSON, HIGH_PRIORITY), command);
     }
-
+    @Test
+    public void parseCommand_editBuyerCommand() throws Exception {
+        assertTrue(parser
+                .parseCommand(EditBuyerCommand.COMMAND_WORD + " 1 n/test") instanceof EditBuyerCommand);
+    }
+    @Test
+    public void parseCommand_editSellerCommand() throws Exception {
+        assertTrue(parser
+                .parseCommand(EditSellerCommand.COMMAND_WORD + " 1 n/test") instanceof EditSellerCommand);
+    }
+    @Test
+    public void parseCommand_sortBuyerCommand() throws Exception {
+        assertTrue(parser.parseCommand(SortBuyerCommand.COMMAND_WORD + " n/a") instanceof SortBuyerCommand);
+    }
+    @Test
+    public void parseCommand_sortSellerCommand() throws Exception {
+        assertTrue(parser.parseCommand(SortSellerCommand.COMMAND_WORD + " n/a") instanceof SortSellerCommand);
+    }
+    @Test
+    public void parseCommand_undoCommand() throws Exception {
+        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
+    }
+    @Test
+    public void parseCommand_redoCommand() throws Exception {
+        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD) instanceof RedoCommand);
+    }
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()

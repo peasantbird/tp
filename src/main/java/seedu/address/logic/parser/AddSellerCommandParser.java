@@ -79,7 +79,8 @@ public class AddSellerCommandParser implements Parser<AddSellerCommand> {
      * {@code ArgumentMultimap}.
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValueOrDefault(prefix, "") != "");
+        return Stream.of(prefixes)
+                .allMatch(prefix -> !argumentMultimap.getValueOrDefault(prefix, "").isEmpty());
     }
 
 }

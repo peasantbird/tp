@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -80,5 +83,50 @@ public class ListBuyerCommandTest {
         ListBuyerCommand listBuyerCommand = new ListBuyerCommand(outOfBoundIndex);
 
         assertCommandFailure(listBuyerCommand, model, Messages.MESSAGE_INVALID_BUYER_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void test_equality() {
+        ListBuyerCommand typicalCommand = new ListBuyerCommand(INDEX_FIRST_PERSON);
+        ListBuyerCommand typicalCommandCopy = new ListBuyerCommand(INDEX_FIRST_PERSON);
+        ListBuyerCommand otherTypicalCommand = new ListBuyerCommand(INDEX_SECOND_PERSON);
+        ListBuyerCommand otherTypicalCommandCopy = new ListBuyerCommand(INDEX_SECOND_PERSON);
+        Object castAsObjectCommand = new ListBuyerCommand(INDEX_FIRST_PERSON);
+        Command castAsCommand = new ListBuyerCommand(INDEX_FIRST_PERSON);
+        ListBuyerCommand nullCommand = null;
+
+        assertEquals(typicalCommand, typicalCommand); //Test self = self
+
+        assertEquals(typicalCommand, typicalCommandCopy); // Test identical copies
+        assertEquals(typicalCommandCopy, typicalCommand);
+        assertEquals(otherTypicalCommand, otherTypicalCommandCopy);
+        assertEquals(otherTypicalCommandCopy, otherTypicalCommand);
+
+        assertEquals(castAsCommand, typicalCommand); // Test casting
+        assertEquals(typicalCommand, castAsCommand);
+        assertEquals(typicalCommand, castAsObjectCommand);
+        assertEquals(castAsObjectCommand, typicalCommand);
+        assertEquals(castAsCommand, castAsObjectCommand); //Transitivity
+        assertEquals(castAsObjectCommand, castAsCommand);
+
+        assertNotEquals(typicalCommand, otherTypicalCommand); // Test different copies
+        assertNotEquals(otherTypicalCommand, typicalCommand);
+        assertNotEquals(typicalCommand, otherTypicalCommandCopy);
+        assertNotEquals(otherTypicalCommandCopy, typicalCommand);
+        assertNotEquals(castAsCommand, otherTypicalCommandCopy);
+        assertNotEquals(otherTypicalCommandCopy, castAsCommand);
+
+        assertNotEquals(nullCommand, typicalCommand); // Test null
+        assertNotEquals(typicalCommand, nullCommand);
+        assertNotEquals(null, typicalCommand);
+        assertNotEquals(typicalCommand, null);
+        assertNull(nullCommand);
+    }
+    @Test
+    public void test_toString() {
+        ListBuyerCommand typicalCommand = new ListBuyerCommand(INDEX_FIRST_PERSON);
+        assertEquals(typicalCommand.toString(),
+                ListBuyerCommand.class.getCanonicalName() + "{targetIndex=" + INDEX_FIRST_PERSON + "}"
+        );
     }
 }

@@ -17,7 +17,7 @@ import seedu.address.model.displayable.seller.Seller;
 /**
  * An Immutable AddressBook that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
+@JsonRootName(value = "rtpm-addressbook")
 class JsonSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE = "list contains duplicate(s).";

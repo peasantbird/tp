@@ -42,7 +42,7 @@ public class SortSellerCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
+        assert comparator != null;
         model.updateFilteredSortedSellerList(comparator);
         return new CommandResult(MESSAGE_SUCCESS);
     }
