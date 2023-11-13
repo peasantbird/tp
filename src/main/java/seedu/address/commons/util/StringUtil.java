@@ -75,6 +75,7 @@ public class StringUtil {
      * @param b The second string to compare.
      * @return the Levenshtein distance between a and b.
      */
+    //@@author ruiyangzh-reused
     public static int distanceLeven(String a, String b) {
         a = a.toLowerCase();
         b = b.toLowerCase();
