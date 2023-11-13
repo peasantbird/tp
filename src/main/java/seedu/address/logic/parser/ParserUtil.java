@@ -193,9 +193,11 @@ public class ParserUtil {
         String trimmedSortOrder = sortOrder.trim();
         if (!SortOrder.isValidSortOrder(trimmedSortOrder)) {
             if (parser instanceof SortBuyerCommandParser) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortBuyerCommand.MESSAGE_USAGE));
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortBuyerCommand.MESSAGE_USAGE));
             } else if (parser instanceof SortSellerCommandParser) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortSellerCommand.MESSAGE_USAGE));
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortSellerCommand.MESSAGE_USAGE));
             } else {
                 throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
             }
