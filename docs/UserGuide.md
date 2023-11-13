@@ -535,13 +535,20 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling A
 
 ### Sorting buyers: `bsort`
 
-Sorts the buyers' list by the provided attribute and in the given direction.
+Sorts the buyers' list either by a provided prefix and direction, or by the list's default order when no prefix and
+direction is provided.
 
-Format: `bsort ATTRIBUTE_PREFIX DIRECTION`
-* `ATTRIBUTE_PREFIX`: Refer to the add buyer command, `buyer`
+Format: `bsort [PREFIX/DIRECTION]`
+* `PREFIX`: Choose <u>one</u> of:
+  * `n` - sort by **name**
+  * `ah` - sort by **home address**
+  * `i` - sort by **house info**
+  * `prio` - sort by **priority**
 * `DIRECTION`: "a" OR "d" for ascending or descending respectively
 
-Example: `bsort n/d`
+Examples: 
+* `bsort` to sort by default
+* `bsort n/d` to sort by name descending
 
 Precise outputs when the command succeeds:
 
@@ -549,8 +556,26 @@ Precise outputs when the command succeeds:
 
 
 Precise outputs when the command fails:
+1. For general errors:
+>Invalid command format!<br>
+bsort: Sorts the buyers in RTPM. Parameters: Choose zero or one of [n/] [ah/] [i/] [prio/] a/d (for ASC/DESC)<br>
+Example: bsort prio/d
+2. When the same prefix is used more than once:
+>Multiple values specified for the following single-valued field(s): ...
 
->Multiple values specified for the following single-valued field(s): n/
+<box type="info">
+
+**Note:**
+
+* The sort command will ignore any extraneous inputs and invalid prefixes after the `bsort` keyword and before the next 
+valid prefix (`n`, `ah`, `i` or `prio`).
+  * For example, `bsort qwerty z/asdf prio/d` will execute `bsort prio/d`.
+  * However, any extraneous inputs or invalid prefixes after a valid prefix will cause an error.
+* When two or more valid prefixes are provided, `bsort` will sort by only one of the provided prefixes. It will choose
+the prefix to sort by in this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
+  * For example, `bsort prio/d n/d` will execute `bsort n/d`.
+
+</box>
 
 <div style='text-align: right;'>
 
@@ -562,13 +587,20 @@ Precise outputs when the command fails:
 
 ### Sorting sellers: `ssort`
 
-Sorts the sellers' list by the provided attribute and in the given direction.
+Sorts the sellers' list either by a provided prefix and direction, or by the list's default order when no prefix and 
+direction is provided.
 
-Format: `ssort ATTRIBUTE_PREFIX DIRECTION`
-* `ATTRIBUTE_PREFIX`: Refer to the add seller command, `seller`
+Format: `ssort [PREFIX/DIRECTION]`
+* `PREFIX`: Choose <u>one</u> of:
+    * `n` - sort by **name**
+    * `ah` - sort by **home address**
+    * `i` - sort by **house info**
+    * `prio` - sort by **priority**
 * `DIRECTION`: "a" OR "d" for ascending or descending respectively
 
-Example: `ssort n/d`
+Examples:
+* `ssort` to sort by default
+* `ssort n/d` to sort by name descending
 
 Precise outputs when the command succeeds:
 
@@ -576,8 +608,26 @@ Precise outputs when the command succeeds:
 
 
 Precise outputs when the command fails:
+1. For general errors:
+>Invalid command format!<br>
+ssort: Sorts the sellers in RTPM. Parameters: Choose zero or one of [n/] [ah/] [i/] [prio/] a/d (for ASC/DESC)<br>
+Example: ssort prio/d
+2. When the same prefix is used more than once:
+>Multiple values specified for the following single-valued field(s): ...
 
->Multiple values specified for the following single-valued field(s): n/
+<box type="info">
+
+**Note:**
+
+* The sort command will ignore any extraneous inputs and invalid prefixes after the `ssort` keyword and before the next
+  valid prefix (`n`, `ah`, `i` or `prio`).
+    * For example, `ssort qwerty z/asdf prio/d` will execute `ssort prio/d`.
+    * However, any extraneous inputs or invalid prefixes after a valid prefix will cause an error.
+* When two or more valid prefixes are provided, `ssort` will sort by only one of the provided prefixes. It will choose
+  the prefix to sort by in this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
+    * For example, `ssort prio/d n/d` will execute `ssort n/d`.
+
+</box>
 
 <div style='text-align: right;'>
 
@@ -676,27 +726,27 @@ Format: `exit`
 --------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
-| Action                  | Format, Examples                                                                                                                  |
-|-------------------------|-----------------------------------------------------------------------------------------------------------------------------------|
-| **Add Buyer**           | `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_INFO] [prio/PRIORITY] [t/TAG]`                            |
-| **Add Seller**          | `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [prio/PRIORITY] [t/TAG]​` |
-| **Edit Buyer**          | `bedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]`                                                                                    |
-| **Edit Seller**         | `sedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]`                                                                                    |
-| **Delete Buyer**        | `bdelete INDEX`                                                                                                                   |
-| **Delete Seller**       | `sdelete INDEX`                                                                                                                   |
-| **Clear**               | `clear`                                                                                                                           |
-| **Set Buyer Priority**  | `bprio INDEX PRIORITY`                                                                                                            |
-| **Set Seller Priority** | `sprio INDEX PRIORITY`                                                                                                            |
-| **List All**            | `list`                                                                                                                            |
-| **Filter**              | `filter KEYWORD [MORE_KEYWORDS]`                                                                                                  |
-| **List Seller**         | `slist INDEX`                                                                                                                     |
-| **List Buyer**          | `blist INDEX`                                                                                                                     |
-| **Sort Buyers**         | `bsort ATTRIBUTE_PREFIX DIRECTION`                                                                                                |
-| **Sort Sellers**        | `ssort ATTRIBUTE_PREFIX DIRECTION`                                                                                                |
-| **Undo**                | `undo`                                                                                                                            |
-| **Redo**                | `redo`                                                                                                                            |
-| **Exit**                | `exit`                                                                                                                            |
-| **Help**                | `help`                                                                                                                            |
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add Buyer**    | `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_INFO] [prio/PRIORITY] [t/TAG]`<br> e.g. buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium prio/high
+**Add Seller**    | `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [prio/PRIORITY] [t/TAG]​`<br> e.g. seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/high
+**Edit Buyer** | `bedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]`<br> e.g. bedit 3 e/example@email.com ah/Residential Street
+**Edit Seller** | `sedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]`<br> e.g. sedit 3 e/example@email.com as/Selling Street
+**Delete Buyer** | `bdelete INDEX`<br> e.g. bdelete 2
+**Delete Seller** | `sdelete INDEX`<br> e.g. sdelete 2
+**Clear**  | `clear`
+**Set Buyer Priority** | `bprio INDEX PRIORITY`<br> e.g. bprio 3 high
+**Set Seller Priority** | `sprio INDEX PRIORITY`<br> e.g. sprio 3 high
+**List All** | `list`
+**Filter**   | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g. filter John Doe
+**List Buyer**   | `blist INDEX` <br> e.g. blist 1
+**List Seller**   | `slist INDEX`<br> e.g. slist 1
+**Sort Buyers** | `bsort [PREFIX/DIRECTION]`<br> e.g. bsort n/d
+**Sort Sellers** | `ssort [PREFIX/DIRECTION]`<br> e.g. ssort prio/a
+**Undo**   | `undo`
+**Redo**  | `redo`
+**Exit**   | `exit`
+**Help**   | `help`
 
 <div style='text-align: right;'>
 
