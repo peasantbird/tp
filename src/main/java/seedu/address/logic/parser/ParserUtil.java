@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -192,9 +193,9 @@ public class ParserUtil {
         String trimmedSortOrder = sortOrder.trim();
         if (!SortOrder.isValidSortOrder(trimmedSortOrder)) {
             if (parser instanceof SortBuyerCommandParser) {
-                throw new ParseException(SortBuyerCommand.MESSAGE_USAGE);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortBuyerCommand.MESSAGE_USAGE));
             } else if (parser instanceof SortSellerCommandParser) {
-                throw new ParseException(SortSellerCommand.MESSAGE_USAGE);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortSellerCommand.MESSAGE_USAGE));
             } else {
                 throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
             }
