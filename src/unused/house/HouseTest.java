@@ -45,7 +45,7 @@ public class HouseTest {
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Assert.assertThrows(UnsupportedOperationException.class, () -> dummyHouse.getTags().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> dummyHouse.getTags().remove(0));
     }
 
     @Test
