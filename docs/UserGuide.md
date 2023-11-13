@@ -511,7 +511,8 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling A
 
 ### Sorting buyers: `bsort`
 
-Sorts the buyers' list either by the list's default order, or by a provided prefix and direction.
+Sorts the buyers' list either by a provided prefix and direction, or by the list's default order when no prefix and
+direction is provided.
 
 Format: `bsort [PREFIX/DIRECTION]`
 * `PREFIX`: Choose <u>one</u> of:
@@ -562,7 +563,8 @@ the prefix to sort by in this order: **1. Name**, **2. Home address**, **3. Hous
 
 ### Sorting sellers: `ssort`
 
-Sorts the sellers' list either by the list's default order, or by a provided prefix and direction.
+Sorts the sellers' list either by a provided prefix and direction, or by the list's default order when no prefix and 
+direction is provided.
 
 Format: `ssort [PREFIX/DIRECTION]`
 * `PREFIX`: Choose <u>one</u> of:
