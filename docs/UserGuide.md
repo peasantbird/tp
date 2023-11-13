@@ -538,6 +538,20 @@ Example: bsort prio/d
 2. When the same prefix is used more than once:
 >Multiple values specified for the following single-valued field(s): ...
 
+<box type="info">
+
+**Note:**
+
+* The sort command will ignore any extraneous inputs and invalid prefixes after the `bsort` keyword and before the next 
+valid prefix (`n`, `ah`, `i` or `prio`).
+  * For example, `bsort qwerty z/asdf prio/d` will execute `bsort prio/d`.
+  * However, any extraneous inputs or invalid prefixes after a valid prefix will cause an error.
+* When two or more valid prefixes are provided, `bsort` will sort by only one of the provided prefixes. It will choose
+the prefix to sort by in this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
+  * For example, `bsort prio/d n/d` will execute `bsort n/d`.
+
+</box>
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -574,6 +588,20 @@ ssort: Sorts the sellers in RTPM. Parameters: Choose zero or one of [n/] [ah/] [
 Example: ssort prio/d
 2. When the same prefix is used more than once:
 >Multiple values specified for the following single-valued field(s): ...
+
+<box type="info">
+
+**Note:**
+
+* The sort command will ignore any extraneous inputs and invalid prefixes after the `ssort` keyword and before the next
+  valid prefix (`n`, `ah`, `i` or `prio`).
+    * For example, `ssort qwerty z/asdf prio/d` will execute `ssort prio/d`.
+    * However, any extraneous inputs or invalid prefixes after a valid prefix will cause an error.
+* When two or more valid prefixes are provided, `ssort` will sort by only one of the provided prefixes. It will choose
+  the prefix to sort by in this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
+    * For example, `ssort prio/d n/d` will execute `ssort n/d`.
+
+</box>
 
 <div style='text-align: right;'>
 
