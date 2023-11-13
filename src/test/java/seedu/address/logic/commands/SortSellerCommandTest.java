@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
