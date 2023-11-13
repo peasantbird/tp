@@ -695,13 +695,33 @@ Given below are the enhancements that will be implemented in a future version.
 1. Currently, the UI text is cut off if the entries are too long. While this should not usually happen since the user 
 can decide what to enter (nicknames, abbreviations, acronyms, etc.), we plan to accommodate overly long names, 
 phone numbers, addresses, emails and house info entries within the UI.
+As a current workaround, users can call the `blist`/`slist` commands to display the text representation of the entry in
+the results box.
+
+2. Extremely long inputs can cause the program to hang or crash. This is a minor issue, since users are unlikely to
+enter such long fields into the app. A possible enhancement is to prevent overly long entries by blocking the command
+execution.
+
 2. Currently, if the user makes a spelling or spacing mistake, the intended prefix of another field is regarded as 
 part of the argument for the previous field. We plan to check for misspelled prefixes and prefixes provided as 
 arguments of other fields and warn the user.
+
 3. Currently, the user is not warned if addresses, names, and house info entries contain only numbers and special 
 symbols. We plan to expand warnings to include warnings for addresses, names and house info entries containing 
 only non-alphabetical characters.
+
 4. Currently, for `bprio` and `sprio`, if the user inputs extra arguments 
 at the end, such as `bprio 1 high low`, the app accepts the input and sets the first buyer's priority level to 
 `high` instead of warning the user about extra arguments which would be ignored. As such, we plan to warn the user 
 if any extra arguments are supplied for the user to double check that their priority input is correct.
+
+5. As of v1.4, we have received reports that a warning is thrown even when there are no names that users considered similar.
+After testing, we determined that users in fact had two names that were very short, and this caused a discrepancy between commonly expected behavior and actual implementation.
+We defined distance between similar names as either one name contains the other entirely, 
+or the Levenshtein distance between the two names is 2 or less
+(It takes 2 or fewer substitutions/additions/removals to turn one of the names into the other.)
+An unintended effect was that, for example, if you had short names (e.g d, hi in the original case for us), 
+the names would match despite normal users probably not defining these two names as similar. 
+Possible future enhancements would be to make it percentage-based, so that short names are not producing warnings unnecessarily.
+
+6. 
