@@ -89,7 +89,7 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Commands and prefixes ignore case.<br>
+* All commands and prefixes ignore case. Fields however, are case-sensitive. <br>
   e.g. if the command specifies `buyer n/NAME`, `BUYER N/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -638,6 +638,8 @@ Precise outputs when the command fails:
 Shows a message explaining how to access the help page.
 
 Format: `help`
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Exiting the program: `exit`
@@ -657,6 +659,8 @@ Format: `exit`
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RTPM home folder.
+
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
