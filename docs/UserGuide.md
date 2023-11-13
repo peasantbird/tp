@@ -704,9 +704,11 @@ Format: `exit`
 
 ## Appendix A: Warnings
 
-RTPM allows you to flexibly input most fields of data. 
-However, we still have some things in mind for each field. 
-Hence, the warning system informs the user of any valid but possibly unintended inputs. 
+RTPM allows you to flexibly input most fields of data, for example, you can insert chinese characters as names or
+slashes to abbreviate "son of" as "s/o".
+However, we still have some things in mind for each field, to reduce faulty data.
+
+Hence, the warning system allows our app to inform you of any valid but possibly unintended inputs.
 The warning system is able to alert the user of multiple errors at once. For a non-exhaustive list, see below.
 
 The warning system is also used to inform the user if, when you are adding new buyers/sellers, 
