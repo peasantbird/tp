@@ -383,17 +383,29 @@ of `bprio`.
 
 #### Implementation
 
-The proposed sort mechanism is facilitated by the `sort` command.
+The sort mechanism is facilitated by `SortedList` in `ModelManager`. A `SortedList` wraps an `ObservableList` and sorts 
+its content. In `ModelManager`, we have `SortedList<Buyer>` and `SortedList<Seller>` which wrap around 
+`FilteredList<Buyer>` and `FilteredList<Seller>`, allowing the user to filter the buyer and seller lists as well as 
+sort them at the same time. Additionally, `ModelManager` implements the following operations:
 
-Using the `sort` command, we can sort the buyers and sellers lists respectively by name, priority, and other criteria.
+* `ModelManager#updateFilteredSortedBuyerList(Comparator<Buyer> comparator)` - Sets the buyer `SortedList` with a 
+comparator that denotes the order of this list.
+* `ModelManager#updateFilteredSortedSellerList(Comparator<Seller> comparator)` - Sets the seller `SortedList` with a
+comparator that denotes the order of this list.
+
+These operations are exposed in the `Model` interface as 
+`Model#updateFilteredSortedBuyerList(Comparator<Buyer> comparator)` and 
+`Model#updateFilteredSortedSellerList(Comparator<Seller> comparator)` respectively, which are executed by 
+`SortBuyerCommand` and `SortSellerCommand` respectively.
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
 Step 1. The user types in the `bsort` or `ssort` keyword, followed by `name`, `priority`, or another `criteria`.
 to sort by. 
 
-The sort command will sort by changing the ObservableList<T> to a SortedList<T>, with the comparator based on the
-certain criteria.
+#### Design considerations:
+
+**Aspect:**
 
 ### Relaxed parameter matching
 #### Background
