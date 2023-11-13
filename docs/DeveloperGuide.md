@@ -710,11 +710,11 @@ only non-alphabetical characters.
    accepts the input and sets the first buyer's priority level to `high` instead of warning the user about extra 
    arguments which would be ignored. As such, we plan to warn the user if any extra arguments are supplied for the 
    user to double check that their priority input is correct.
-   * the current regex for determining if an input is appropriate is as follows: 
-   `(?i)(h[igh]{0,3}|m[edium]{0,5}|l[ow]{0,2}|n[il]{0,2})$`
+   * the current regex for determining if an input is appropriate is as follows:
+   <br>`(?i)(h[igh]{0,3}|m[edium]{0,5}|l[ow]{0,2}|n[il]{0,2})$`
      * `(?i)` refers to case-insensitive matching
      * `(h[igh]{0,3}|m[edium]{0,5}|l[ow]{0,2}|n[il]{0,2})` means that the string input can match one of four possible
-     options, with each option separated by a `|`:
+     options below, with each option separated by a `|`:
        * `h[igh]{0,3}` accepts a string with a first letter 'h', followed by 0 to 3 letters after 'h', which can be
        any of the letters inside the square brackets, so `h`, `hi`, `hhh` and `hggi` are all appropriate inputs.
        * `m[edium]{0,5}` accepts a string with a first letter 'm', followed by 0 to 5 letters after 'm', which can be
@@ -723,11 +723,13 @@ only non-alphabetical characters.
        any of the letters inside the square brackets, so `l`, `lw`, and `lww` are all appropriate inputs.
        * `n[il]{0,2}` accepts a string with a first letter 'n', followed by 0 to 2 letters after 'n', which can be
        any of the letters inside the square brackets, so `n`, `nl`, and `nll` are all appropriate inputs.
-     * `$` demarcates the end of the matching
-   * Initially, the regex above was meant to allow for user typos, such as `hgih` or `meduim`, but in hindsight, 
-   this was unnecessary and only reduced this feature's testability by making it harder to test for invalid 
-   priority inputs. As such, we plan to change the validation regex to only accept `h`, `m`, `l`, or `nil` as inputs
-   for priority in future.
+     * `$` demarcates the end of the matching 
+     
+     Initially, the regex above was meant to allow for user typos, such as `hgih` or `meduim`, but in hindsight, 
+     this parsing is unnecessary, and only made it harder to test for invalid priority inputs. 
+   <br> As such, we plan to 
+     change the validation regex to only accept `h`, `m`, `l`, or `nil` as inputs
+     for priority in future.
 5. Currently, attempting to add multiple contacts with long names may cause the app to lag considerably. 
 We plan to optimise the similarity checks for names so that doing so results in less delay.
 
