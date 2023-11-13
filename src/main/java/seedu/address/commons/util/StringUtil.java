@@ -44,7 +44,7 @@ public class StringUtil {
         requireNonNull(t);
         StringWriter sw = new StringWriter();
         t.printStackTrace(new PrintWriter(sw));
-        return t.getMessage() + "\n" + sw.toString();
+        return t.getMessage() + "\n" + sw;
     }
 
     /**
@@ -75,6 +75,7 @@ public class StringUtil {
      * @param b The second string to compare.
      * @return the Levenshtein distance between a and b.
      */
+    //@@author ruiyangzh-reused
     public static int distanceLeven(String a, String b) {
         a = a.toLowerCase();
         b = b.toLowerCase();

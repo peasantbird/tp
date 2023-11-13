@@ -109,7 +109,7 @@ public class ParserUtil {
         if (!HouseInfo.isValidHouseInfo(trimmedInfo)) {
             throw new ParseException(HouseInfo.MESSAGE_CONSTRAINTS);
         }
-        if (!HouseInfo.isAppropriateHouseInfo(info)) {
+        if (!HouseInfo.isAppropriateHouseInfo(trimmedInfo)) {
             warn.addWarning(HouseInfo.MESSAGE_RECOMMENDATIONS);
         }
         return new HouseInfo(trimmedInfo);
@@ -127,7 +127,7 @@ public class ParserUtil {
         if (!Email.isValidEmail(trimmedEmail)) {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
-        if (!Email.isAppropriateEmail(email)) {
+        if (!Email.isAppropriateEmail(trimmedEmail)) {
             warn.addWarning(Email.MESSAGE_RECOMMENDATIONS);
         }
         return new Email(trimmedEmail);
@@ -145,7 +145,7 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        if (!Tag.isAppropriateTag(tag)) {
+        if (!Tag.isAppropriateTag(trimmedTag)) {
             warn.addWarning(Tag.MESSAGE_RECOMMENDATIONS);
         }
         return new Tag(trimmedTag);
@@ -175,7 +175,7 @@ public class ParserUtil {
         if (!Priority.isValidPriority(trimmedPriority)) {
             throw new ParseException(Priority.MESSAGE_CONSTRAINTS);
         }
-        if (!Priority.isAppropriatePriority(priority)) {
+        if (!Priority.isAppropriatePriority(trimmedPriority)) {
             warn.addWarning(Priority.MESSAGE_RECOMMENDATIONS);
         }
         return new Priority(trimmedPriority);

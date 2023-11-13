@@ -41,7 +41,7 @@ public abstract class Person implements Displayable {
     /**
      * Overloaded constructor for Person with an optional field for priority.
      * NOTE: This method is meant for temporal usage; Person is to be refactored to have only 1 constructor
-     * which includes priority as an argument, with all test cases being refactored to match this change, qfter
+     * which includes priority as an argument, with all test cases being refactored to match this change, after
      * the SetPriorityCommand has been implemented.
      * we can instead modify the AddBuyerCommandParser / AddSellerCommandParser to check if argMultimap contains
      * the respective prefixes or not, with only PrefixName being compulsory. Else, if argMultimap does not

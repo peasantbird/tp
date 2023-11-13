@@ -2,12 +2,11 @@ package seedu.address.testutil;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.function.Consumer;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.function.Executable;
 
 import seedu.address.logic.CommandWarnings;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * A set of assertion methods useful for writing tests.
@@ -39,20 +38,24 @@ public class Assert {
     }
 
     /**
-     * Asserts that the {@code consumer} provides a warning.
+     * Asserts that the {@code func} provides a warning.
      */
-    public static void assertWarns(Consumer<? super CommandWarnings> consumer, CommandWarnings expectedWarnings) {
+    public static void assertWarns(FunctionWithWarnings func, CommandWarnings expectedWarnings) {
         CommandWarnings commandWarnings = new CommandWarnings();
-        consumer.accept(commandWarnings);
+        try {
+            func.apply(commandWarnings);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         assertEquals(commandWarnings, expectedWarnings);
     }
 
     /**
-     * Asserts that the {@code consumer} provides a single string warning, for convenience.
+     * Asserts that the {@code func} provides a single string warning, for convenience.
      */
-    public static void assertWarns(Consumer<? super CommandWarnings> consumer, String expectedWarningString) {
+    public static void assertWarns(FunctionWithWarnings func, String expectedWarningString) {
         CommandWarnings expectedWarnings = new CommandWarnings();
         expectedWarnings.addWarning(expectedWarningString);
-        assertWarns(consumer, expectedWarnings);
+        assertWarns(func, expectedWarnings);
     }
 }

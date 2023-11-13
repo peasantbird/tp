@@ -7,7 +7,7 @@ import seedu.address.model.displayable.seller.Seller;
 
 
 /**
- * An UI component that displays information of a {@code Seller}.
+ * A UI component that displays information of a {@code Seller}.
  */
 public class SellerCard extends PersonCard {
     private static final String FXML = "SellerListCard.fxml";
@@ -18,7 +18,7 @@ public class SellerCard extends PersonCard {
     private Label houseInfo;
 
     /**
-     * Creates a {@code Sellercard} with the given {@code Seller} and index to display.
+     * Creates a {@code SellerCard} with the given {@code Seller} and index to display.
      */
     public SellerCard(Seller seller, int displayedIndex) {
         super(seller, displayedIndex, FXML);
