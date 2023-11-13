@@ -17,6 +17,9 @@ public class CommandWarningsTest {
     @Test
     public void warnings_addTest() {
         CommandWarnings warnings = new CommandWarnings();
+        assertFalse(warnings.containsWarningString(null));
+        warnings.addWarning(null);
+        assertFalse(warnings.containsWarningString(null));
         warnings.addWarning(TEST1);
         assertTrue(warnings.containsWarningString(TEST1));
         warnings.addWarning(TEST2);

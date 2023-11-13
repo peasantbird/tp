@@ -67,6 +67,7 @@ public class AddBuyerCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        assert toAdd != null;
         if (model.hasBuyer(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_BUYER);
         }

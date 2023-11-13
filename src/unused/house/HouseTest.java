@@ -1,3 +1,5 @@
+//@@author ruiyangzh-unused
+//This was meant to test the house class.
 package seedu.address.model.displayable.house;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
