@@ -656,39 +656,201 @@ testers are expected to do more *exploratory* testing.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Exiting the program
 
-### Deleting a person
+   4. Test case: `exit`<br>
+      Expected: App terminates immediately
 
-1. Deleting a person while all persons are being shown
+### Adding a contact
+
+1. Adding a buyer contact
+
+   1. Prerequisites: Clear the lists with the `clear` command to prevent conflicts from prior testing.
+   2. Test case: `buyer n/Bob`<br>
+      Expected: A contact with the name "Bob" is added to the buyer list.
+   3. Test case: `buyer n/John Doe p/98765432 e/johnd@example.com ah/311, Clementi Ave 2, #02-25 i/Central Area 5 Room Condominium prio/medium t/friends t/owesMoney`<br>
+      Expected: A contact with the name "John Doe" and the corresponding particulars is added to the buyer list.
+   4. Test case: `buyer n/Bob` (this test case proceeds the one in ii, without clearing)<br>
+      Expected: No contact is added. Error details shown in the status message.
+   5. Test case: `buyer n/Tom p/phone e/email`
+      Expected: Similar to previous.
+
+2. Adding a seller contact
+
+    1. Prerequisites: Clear the lists with the `clear` command to prevent conflicts from prior testing.
+    2. Test case: `seller n/Bob`<br>
+       Expected: A contact with the name "Bob" is added to the seller list.
+    3. Test case: `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/high`<br>
+       Expected: A contact with the name "Ryan" and the corresponding particulars is added to the seller list.
+    4. Test case: `seller n/Bob`(this test case proceeds the one in ii, without clearing)<br>
+       Expected: No contact is added. Error details shown in the status message.
+    5. Test case: `seller n/Tom p/invalidphone e/invalidemail`
+       Expected: Similar to previous.
+
+
+### Editing a contact
+
+1. Editing a buyer contact
+   1. Prerequisites: At least one but less than ten thousand contacts present in the buyer list.
+   2. Test case: `bedit 1 p/12345 e/example@email.com`<br>
+      Expected: First contact in the buyer list has their phone number updated to "12345" and their email updated to "example@email.com".
+   3. Test case: `bedit 1 p/invalidphone`<br>
+      Expected: No contact is edited. Error details shown in status message.
+   5. Test case: `bedit 99999 p/12345`<br>
+      Expected: Similar to previous.
+   6. Test case: `bedit 0 p/12345`<br>
+      Expected: Similar to previous.
+   8. Test case: `bedit`, `bedit 1`, `bedit p/12345`<br>
+      Expected: Similar to previous.
+
+1. Editing a seller contact
+    1. Prerequisites: At least one but less than ten thousand contacts present in the seller list.
+    2. Test case: `sedit 1 p/12345 e/example@email.com`<br>
+       Expected: First contact in the seller list has their phone number updated to "12345" and their email updated to "example@email.com".
+    3. Test case: `sedit 1 p/invalidphone`<br>
+       Expected: No contact is edited. Error details shown in status message.
+    5. Test case: `sedit 99999 p/12345`<br>
+       Expected: Similar to previous.
+    6. Test case: `sedit 0 p/12345`<br>
+       Expected: Similar to previous.
+    8. Test case: `sedit`, `sedit 1`, `sedit p/12345`<br>
+       Expected: Similar to previous.
+   
+### Deleting a contact
+
+1. Deleting a buyer contact while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `bdelete 1`<br>
+      Expected: First contact is deleted from the buyer list. Details of the deleted contact shown in the status message. 
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `bdelete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message. 
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `bdelete`, `bdelete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting a seller contact while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `sdelete 1`<br>
+      Expected: First contact is deleted from the seller list. Details of the deleted contact shown in the status message.
+
+   3. Test case: `sdelete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message. 
+
+   4. Other incorrect delete commands to try: `sdelete`, `sdelete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+### Setting a contact's priority
+
+1. Setting a buyer's priority
+
+   1. Prerequisites: At least one but less than ten thousand contacts present in the buyer list.
+   2. Test case: `bprio 1 high`, `bprio 1 h`<br>
+      Expected: First contact in the buyer list has their priority updated to "high".
+   3. Test case: `bprio 1 medium`, `bprio 1 m`<br>
+      Expected: First contact in the buyer list has their priority updated to "med".
+   4. Test case: `bprio 1 low`, `bprio 1 l`<br>
+      Expected: First contact in the buyer list has their priority updated to "low".
+   5. Test case: `bprio 1 nil`, `bprio 1 n`<br>
+      Expected: First contact in the buyer list has their priority updated to "nil".
+   6. Test case: `bprio 99999 high`<br>
+      Expected: No contact's priority is updated. Error details shown in the status message.
+   7. Test case: `bprio 0 high`<br>
+      Expected: Similar to previous.
+   8. Test case: `bprio 0 invalidprio`<br>
+      Expected: Similar to previous.
+   9. Test case: `bprio`, `bprio high`, `bprio 1`<br>
+      Expected: Similar to previous.
+
+2. Setting a seller's priority
+
+    1. Prerequisites: At least one but less than ten thousand contacts present in the seller list.
+    2. Test case: `sprio 1 high`, `sprio 1 h`<br>
+       Expected: First contact in the seller list has their priority updated to "high".
+    3. Test case: `sprio 1 medium`, `sprio 1 m`<br>
+       Expected: First contact in the seller list has their priority updated to "med".
+    4. Test case: `sprio 1 low`, `sprio 1 l`<br>
+       Expected: First contact in the seller list has their priority updated to "low".
+    5. Test case: `sprio 1 nil`, `sprio 1 n`<br>
+       Expected: First contact in the seller list has their priority updated to "nil".
+    6. Test case: `sprio 99999 high`<br>
+       Expected: No contact's priority is updated. Error details shown in the status message.
+    7. Test case: `sprio 0 high`<br>
+       Expected: Similar to previous.
+    8. Test case: `sprio 0 invalidprio`<br>
+       Expected: Similar to previous.
+    9. Test case: `sprio`, `sprio high`, `sprio 1`<br>
+       Expected: Similar to previous.
+
+### Filtering the lists
+
+1. Prerequisites: Clear the lists with the `clear` command and add buyers named "John", "John Doe", "JohnDoe", and "Doe" with the `buyer` command.
+2. Test case: `filter John`<br>
+   Expected: "John" and "John Doe" remain in the buyer list.
+3. Test case: `filter Doe`<br>
+   Expected: "Doe" and "John Doe" remain in the buyer list.
+4. Test case: `filter`<br>
+   Expected: The buyer list does not change. Error details shown in the status message.
+
+### Displaying a contact's information
+
+1. Displaying a buyer contact's information
+   1. Prerequisites: At least one but less than ten thousand contacts present in the buyer list.
+   2. Test case: `blist 1`<br>
+      Expected: Information of first contact in buyer list displayed in the status message.
+   3. Test case: `blist`, `blist 0`, `blist 99999`<br>
+      Expected: No updates occur. Error details shown in the status message.
+
+1. Displaying a seller contact's information
+    1. Prerequisites: At least one but less than ten thousand contacts present in the seller list.
+    2. Test case: `slist 1`<br>
+       Expected: Information of first contact in seller list displayed in the status message.
+    3. Test case: `slist`, `slist 0`, `slist 99999`<br>
+       Expected: No updates occur. Error details shown in the status message.
+
+### Sorting contacts
+
+1. Sorting buyer contacts
+   1. Prerequisites: At least one but less than ten thousand contacts present in the buyer list.
+   2. Test case: `bsort prio/d`<br>
+      Expected: Buyer list is sorted by priority in descending order, with the highest priority at the top of the list.
+   3. Test case: `bsort invalidprefix/d`, `bsort prio/invalidorder`<br>
+      Expected: The buyer list is not updated. Error details shown in the status message.
+   4. Test case: `bsort`, `bsort prio/`, `bsort d`<br>
+      Expected: Similar to previous.
+
+2. Sorting seller contacts
+    1. Prerequisites: At least one but less than ten thousand contacts present in the seller list.
+    2. Test case: `ssort prio/d`<br>
+       Expected: Seller list is sorted by priority in descending order, with the highest priority at the top of the list.
+    3. Test case: `ssort invalidprefix/d`, `ssort prio/invalidorder`<br>
+       Expected: The seller list is not updated. Error details shown in the status message.
+    4. Test case: `ssort`, `ssort prio/`, `ssort d`<br>
+       Expected: Similar to previous.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: Launch the app and run any command so that a `data/rtpm.json` file is created.
 
-1. _{ more test cases …​ }_
+   2. Test case: Corrupt the file by deleting lines from `data/rtpm.json`
+      Expected: The app will launch with empty buyer and seller lists
+
+   3. Test case: Delete the file `data/rtpm.json` or the folder `data`
+      Expected: The app will launch with sample data in the buyer and seller lists
+   
 
 --------------------------------------------------------------------------------------------------------------------
 
