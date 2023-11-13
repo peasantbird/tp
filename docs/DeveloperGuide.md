@@ -637,6 +637,25 @@ Additional NFRs
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
+## **Appendix: Effort**
+
+We consider that as of the current release (v1.4), substantial effort has been put in by our team to rework the original
+AB3 project into a product that is useful for realtors and contains all the features required, including sorting, flexible
+command typing, reordering and undoing/redoing commands.
+### Difficulties and challenges faced
+We had some difficulties doing ??? idk guys help me out here
+
+### Achievements
+One of the things that we believe show the effort that we put into the project was the restructuring in the back-end to
+allow Model to hold, and UI to display, multiple lists of different types. In AB3, the application only needed to deal
+with one type of object, while in our case, we wanted to add 3 (Houses, buyers and sellers, although we only ended up
+adding the latter 2). Hence, we decided to abstract out the responsibility for displaying the object to the object itself
+(so we would not need a class to hold and display every type we wanted to add. 
+
+Displayable is an interface that allows the UniqueDisplayableList to abstractify the actual displaying and maintaining
+of uniqueness to the contained class itself. Thus we can reduce the number of repetitive classes required. 
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
 
