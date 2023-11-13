@@ -25,7 +25,8 @@ public class FilterCommand extends Command {
     private final CommandWarnings commandWarnings;
 
     /**
-     * Creates a FilterCommand that filters displayables by the predicate according to their names.
+     * Creates a FilterCommand that filters displayables based on whether their names are contained
+     * in the given keywords of the predicate.
      * @param predicate the predicate to filter by.
      * @param commandWarnings a container for any warnings that occur.
      */
