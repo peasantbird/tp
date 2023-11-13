@@ -315,17 +315,23 @@ _{more aspects and alternatives to be added}_
 
 ### \[Completed\] Priority feature
 
+#### Rationale
+
+The priority feature allows the user to assign priority levels to their clients in the address book, using
+the `SetBuyerPriority` and `SetSellerPriority` commands. These commands act as a shortcut for conveniently
+assigning priority levels to clients, without having to use the edit command (`bedit` or `sedit`).
+
+Also, when the priority feature is used with the sorting command (`bsort` or `ssort`), this allows users to 
+view high priority clients at the top of the list first.
+
+
 #### Implementation
 
-The priority feature is associated with the `edit` and `sort` commands, allowing the user to assign and sort clients by 
-their priority levels in the address book. The priority field is optional when instantiating buyers and sellers, and is
-initially unassigned.
-
 To implement this feature, the `Priority` field is firstly added to `Person`, and its corresponding UI Label is
-rendered by modifying the `PersonCard.java` controller and the respective BuyerCard and SellerCard FXML files. 
-* Since the priority field is 
-optional, the `Buyer`/`Seller` constructor is overloaded, such that the one which does not take in priority as an 
-argument will initialise priority to the default `nil` level. 
+rendered by modifying the `PersonCard.java` controller and the respective BuyerCard and SellerCard FXML files.
+The priority field is optional when instantiating buyers and sellers, and is initially set to a default priority 
+level of `nil`.
+* Details of how `Priority` is implemented as an optional field is elaborated below under 'Design considerations'.
 * The priority FXML Label is conditionally rendered 
 in `PersonCard.java` based on the buyer/seller's priority field. For instance, its color is red for `high` priority,
 orange for `medium`, green for `low`, and not rendered for `nil`.
@@ -334,13 +340,11 @@ To accommodate saving of buyers and sellers with the new priority fields in stor
 relevant files are modified to include these fields in JSON format, and to be readable and loaded back into `Model` in
 subsequent RTPM initialisations.
 
-To make it more convenient for the user to directly assign priorities to clients without having to use the `edit` 
-command, the `SetBuyerPriority` and `SetSellerPriority` commands are implemented as part of this feature.
 
 Given below is an example usage scenario for setting priorities for buyers in the address book's buyer list.
 
-Step 1. The user launches the application and executes the `priority-b 2 high` command, which sets the priority level of the
-2nd person in the buyer list to `high`. The `priority-b` command calls `LogicManager`, which gets `AddressBookParser`
+Step 1. The user launches the application and executes the `bprio 2 high` command, which sets the priority level of the
+2nd person in the buyer list to `high`. The `bprio` command calls `LogicManager`, which gets `AddressBookParser`
 to parse and obtain a `SetBuyerPriorityCommand`, before executing it. The command execution calls `ModelManager` to
 update the address book's buyer list with the newly assigned buyer priority, which is reflected on the UI too. 
 Finally, `LogicManager` calls `StorageManager` to update the JSON file.
@@ -355,11 +359,11 @@ limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
-Step 2. To unassign the priority level of the 2nd person, the user can execute the `priority-b 2 nil` command, which 
+Step 2. To unassign the priority level of the 2nd person, the user can execute the `bprio 2 nil` command, which 
 runs a similar flow as illustrated in the sequence diagram above.
 
-The same logic can be used for assigning priorities to sellers instead of buyers, by using `priority-s` instead 
-of `priority-b`.
+The same logic can be used for assigning priorities to sellers instead of buyers, by using `sprio` instead 
+of `bprio`.
 
 #### Design considerations:
 
