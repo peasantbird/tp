@@ -112,8 +112,8 @@ Here are some things regarding RTPM's features to take note of before using them
 * RTPM data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 * RTPM data are saved automatically as a JSON file `[JAR file location]/data/rtpm.json`. Advanced users are welcome to update data directly by editing that data file.
 * Note that RTPM does checks for duplicate and similar entries. For more info, go [here.](#appendix-c-similar-names)
-* **If your changes to the data file are in an invalid format, RTPM will discard all data and start with an empty data file at the next run.
-Hence, it is recommended to keep a backup of the file before editing it.**
+* **If you manually make changes to the saved data file such that the JSON format is invalid, RTPM will discard all data and start with an empty data file at the next run.
+Hence, manually modifying the saved data file is not recommended.**
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
