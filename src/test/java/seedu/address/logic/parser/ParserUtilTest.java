@@ -22,13 +22,9 @@ import seedu.address.model.displayable.Email;
 import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
-<<<<<<< HEAD
-import seedu.address.model.displayable.SortOrder;
-=======
 import seedu.address.model.displayable.Priority;
->>>>>>> 902462df57c53223b57b4fedf332d188cc420f29
+import seedu.address.model.displayable.SortOrder;
 import seedu.address.model.tag.Tag;
-
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "  ";
@@ -37,11 +33,8 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "  ";
     private static final String INVALID_INFO = "  ";
-<<<<<<< HEAD
-    private static final String INVALID_SORT_ORDER = "b";
-=======
     private static final String INVALID_PRIORITY = "fijsgfkl";
->>>>>>> 902462df57c53223b57b4fedf332d188cc420f29
+    private static final String INVALID_SORT_ORDER = "b";
     private static final String UNRECOMMENDED_NAME = "R@chel";
     private static final String UNRECOMMENDED_PHONE = "(HP) 2934383, (OFF) 2930211";
     private static final String UNRECOMMENDED_EMAIL = "ffdoklf@f";
@@ -54,12 +47,8 @@ public class ParserUtilTest {
     private static final String VALID_INFO = "4 room flat";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-<<<<<<< HEAD
-    private static final String VALID_SORT_ORDER = "a";
-
-=======
     private static final String VALID_PRIORITY = "high";
->>>>>>> 902462df57c53223b57b4fedf332d188cc420f29
+    private static final String VALID_SORT_ORDER = "a";
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
