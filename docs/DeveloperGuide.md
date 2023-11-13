@@ -709,10 +709,9 @@ only non-alphabetical characters.
 5. Currently, for `bprio` and `sprio`, if the user inputs extra arguments 
 at the end, such as `bprio 1 high low`, the app accepts the input and sets the first buyer's priority level to 
 `high` instead of warning the user about extra arguments which would be ignored. As such, we plan to warn the user 
-if any extra arguments are supplied for the user to double check that their priority input is correct.
+if any extra arguments are supplied for the user to double-check that their priority input is correct.
 5.Currently, attempting to add multiple contacts with long names may cause the app to lag considerably. 
 We plan to optimise the similarity checks for names so that doing so results in less delay.
-
 
 6. As of v1.4, we have received reports that a warning is thrown even when there are no names that users considered similar.
 After testing, we determined that users in fact had two names that were very short, and this caused a discrepancy between commonly expected behavior and actual implementation.
