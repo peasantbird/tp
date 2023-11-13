@@ -4,7 +4,7 @@
   pageNav: 3
 ---
 
-# AB-3 Developer Guide
+# RTPM Developer Guide
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -71,7 +71,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 <puml src="diagrams/UiClassDiagram.puml" alt="Structure of the UI Component"/>
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `DisplayableListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -80,7 +80,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Displayable` objects residing in the `Model`.
 
 ### Logic component
 
@@ -90,20 +90,20 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("sdelete 1")` API call as an example.
 
 <puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `DeleteSellerCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </box>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteSellerCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteSellerCommand`) which is executed by the `LogicManager`.
+1. The command can communicate with the `Model` when it is executed (e.g. to delete a seller).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
@@ -111,8 +111,19 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` 
+(`XYZ` is a placeholder for the specific command name e.g., `AddSellerCommandParser`) which uses the other classes shown above 
+to parse the user command and create a `XYZCommand` object (e.g., `AddSellerCommand`) which the `AddressBookParser` 
+returns back as a `Command` object.
+
+* `AddressBookParser` also creates a CommandWarnings object, which is used to handle user errors that do not require the system
+to fail execution of the command (e.g. if user is trying to add seller with a non-alphanumeric name.) If the command inherits
+from the `Parser` interface, then it will use this object to store warnings to output into the Command and eventually into 
+the resulting CommandResult. It is also used by LogicManager to log warnings. Classes which do not implement `Parser` do
+not use warnings (because they either execute successfully or fail; there is no potential for user misinput.)
+
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...)
+inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -122,8 +133,10 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Displayable` objects (which are contained in the appropriate `UniqueDisplayableList<? extends Displayable>` object, in this case only buyers and sellers).
+* stores the currently 'selected' `Displayable` objects (e.g., results of a search query) as a separate _filtered_ list which 
+is exposed to outsiders as an unmodifiable `ObservableList<Buyer>`/`ObservableList<Seller>` that can be 'observed' e.g. 
+the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -250,7 +263,182 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### \[Proposed\] Edit feature
 
+#### Proposed Implementation
+
+The proposed edit mechanism is facilitated by the `find` command. 
+
+Using the `find` command, we can find the seller or buyer to edit.
+
+Given below is an example usage scenario and how the edit mechanism behaves at each step.
+
+Step 1. The user types in the `edit-b` or `edit-s` keyword, followed by the index of the buyer or seller that they want
+to edit. Following that, they type `/field`, where `field` is a name of the field that they want to edit.
+
+The edit command will call the `find` command to find the corresponding buyer or seller, then it will copy that person,
+edit the field that the user wants to edit, delete that buyer or seller, then add the edited buyer or seller back
+into the list.
+
+<box type="info" seamless>
+
+**Note:** If the index or field is invalid, no command will be executed.
+
+</box>
+
+The following sequence diagram shows how the edit operation works:
+
+<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+#### Design considerations:
+
+**Aspect: How edit executes:**
+
+* **Alternative 1 (current choice):** Deletes the old buyer or seller and adds the edited one.
+    * Pros: Easy to implement.
+    * Cons: May not preserve buyer and seller order
+
+* **Alternative 2:** Deletes the old buyer or seller, then copies and deletes all the buyers or sellers
+after that buyer or seller, then adds the new edited buyer or seller, and then adds back all the copied
+buyers and sellers.
+    * Pros: Preserves order
+    * Cons: Difficult to implement
+
+_{more aspects and alternatives to be added}_
+
+
+### \[Completed\] Priority feature
+
+#### Implementation
+
+The priority feature is associated with the `edit` and `sort` commands, allowing the user to assign and sort clients by 
+their priority levels in the address book. The priority field is optional when instantiating buyers and sellers, and is
+initially unassigned.
+
+To implement this feature, the `Priority` field is firstly added to `Person`, and its corresponding UI Label is
+rendered by modifying the `PersonCard.java` controller and the respective BuyerCard and SellerCard FXML files. 
+* Since the priority field is 
+optional, the `Buyer`/`Seller` constructor is overloaded, such that the one which does not take in priority as an 
+argument will initialise priority to the default `nil` level. 
+* The priority FXML Label is conditionally rendered 
+in `PersonCard.java` based on the buyer/seller's priority field. For instance, its color is red for `high` priority,
+orange for `medium`, green for `low`, and not rendered for `nil`.
+
+To accommodate saving of buyers and sellers with the new priority fields in storage, `JsonAdaptedBuyer` and other
+relevant files are modified to include these fields in JSON format, and to be readable and loaded back into `Model` in
+subsequent RTPM initialisations.
+
+To make it more convenient for the user to directly assign priorities to clients without having to use the `edit` 
+command, the `SetBuyerPriority` and `SetSellerPriority` commands are implemented as part of this feature.
+
+Given below is an example usage scenario for setting priorities for buyers in the address book's buyer list.
+
+Step 1. The user launches the application and executes the `priority-b 2 high` command, which sets the priority level of the
+2nd person in the buyer list to `high`. The `priority-b` command calls `LogicManager`, which gets `AddressBookParser`
+to parse and obtain a `SetBuyerPriorityCommand`, before executing it. The command execution calls `ModelManager` to
+update the address book's buyer list with the newly assigned buyer priority, which is reflected on the UI too. 
+Finally, `LogicManager` calls `StorageManager` to update the JSON file.
+
+The following sequence diagram shows how the undo operation works:
+<puml src="diagrams/SetBuyerPrioritySequenceDiagram.puml" alt="SetBuyerPrioritySequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `SetBuyerPriorityCommand` should end at the destroy marker (X), but due to a 
+limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+Step 2. To unassign the priority level of the 2nd person, the user can execute the `priority-b 2 nil` command, which 
+runs a similar flow as illustrated in the sequence diagram above.
+
+The same logic can be used for assigning priorities to sellers instead of buyers, by using `priority-s` instead 
+of `priority-b`.
+
+#### Design considerations:
+
+**Aspect: How the optional priority field is implemented**
+
+* **Initial implementation:** Overload the `Buyer`/`Seller` constructors.
+    * Pros: Relatively simple to implement and refactor.
+    * Cons: Not feasible for implementing various optional fields.
+
+* **Current implementation:** Assign a default value for all non-compulsory fields in `AddBuyer` and `AddSeller`
+  (for example, default phone number = 123, default priority = nil, and so on), and only assign these optional 
+  fields if the user supplies arguments for them, which would be available in `ArgumentMultimap` after parsing 
+  the user input. 
+    * Pros: Only a single constructor for `Buyer`/`Seller` is needed for multiple optional fields instead of having
+    to overload the constructors.
+    * Cons: Address book only adds correctly formatted fields, and may discard the remaining arguments which are
+    invalid without the user knowing, so more robust exception handling is required when parsing the user input 
+    which may be tedious to implement.
+
+### \[Proposed\] Sort feature
+
+#### Proposed Implementation
+
+The proposed sort mechanism is facilitated by the `sort` command.
+
+Using the `sort` command, we can sort the buyers and sellers lists respectively by name, priority, and other criteria.
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
+Step 1. The user types in the `sort-b` or `sort-s` keyword, followed by `name`, `priority`, or another `criteria`.
+to sort by. 
+
+The sort command will sort by changing the ObservableList<T> to a SortedList<T>, with the comparator based on the
+certain criteria.
+
+## Relaxed parameter matching
+### Background
+In previous versions of the app and in the original brownfield project AB3, fields such as ```Name``` or ```Email```
+had a validation method on instantiation, which would throw an ```IllegalArgumentException``` when 
+the provided string did not fit the regex. Although useful, this would often be overzealous, causing potential 
+frustration. Furthermore, this exception, as it halts execution, only informs you of the first field that fails 
+to pass, so if you had multiple errors you would have to resolve and re-execute each time.
+### Implementation
+In 1.3, we implemented a group of static methods for each parameter, generally named isAppropriate(*Field*), which has a
+looser regex. The result of this boolean check, if it fails, then passes a warning string to the
+```CommandWarnings``` class, which collects and stores them in a set. At the end of the execute() method, if the
+command encountered any warnings, then they are output into the returned CommandResult.
+This is then passed through LogicManager into MainWindow for display to the user.
+
+<puml src="diagrams/isAppropriateNameSequenceDiagram.puml" alt="isAppropriateNameSequenceDiagram" />
+<box type="info" seamless>
+
+**Note:** The lifeline for `SetBuyerPriorityCommand` should end at the destroy marker (X), but due to a
+limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+#### Design considerations:
+
+**Aspect: How to implement the warnings**
+
+* **Alternative 1 (current choice):** Use a CommandWarnings class to store strings representing warnings
+for inappropriate but valid fields.
+    * Pros: Allows us to hold multiple warnings at a time without halting execution.
+    * Cons: Using strings means that poor usage of addWarnings by callers may give nonsensical results.
+
+* **Alternative 2 (possible future enhancement):** Have CommandWarnings hold a set of predefined Warning singletons 
+instead of Strings, and 
+    * Pros: Constrains the contents of warning messages defensively, ensuring that they are useful.
+    * Cons: Not as flexible, not worth the effort of implementing in this early stage of development
+    , easy to add as future enhancement.
+
+* **Alternative 3 (proposed):** Use an exception such as InappropriateFieldException, which would be thrown by ParserUtil and 
+caught by the add buyer/seller command parsers, which would then pass a String warning to the command for it to output
+as the CommandResult.
+    * Pros: Doesn't require a new class to be created.
+    * Cons: To properly account for every field, you would require a Try/Catch block for every single field parsing.
+     Furthermore, using exceptions in the backend require switching to kernel mode, slowing down the application (which may be 
+     significant for high-usage cases in the future such as company-wide integration.)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -269,66 +457,178 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+This product is for student/junior realtors who have many clients and houses to keep track of. 
+They are relatively tech-savvy and prefer the keyboard over the mouse, 
+prefer concise commands as opposed to full sentences, 
+and would like to customise the software to suit their preferences.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**:
+
+Our free and open-source app helps realtors to keep track of their clients’ preferences and house viewings in one place. Unlike apps like Google Sheets, our app is more optimized for large databases. In addition, we help auto-match appropriate houses to a client with matching budget, needs and location.
 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities: High (must have) - * * *, Medium (nice to have) - * *, Low (unlikely to have) - *
 
-| Priority | As a …​                                    | I want to …​                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------|------------------------------------------------------------------------|
-| `* * *`  | new user                                   | see usage instructions       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person             |                                                                        |
-| `* * *`  | user                                       | delete a person              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name        | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name         | locate a person easily                                                 |
+Priority level is based on current iteration
 
-*{More to be added}*
+| Priority | As a …​                                            | I want to …​                                                                | So that I can…​                                                                        |
+|----------|----------------------------------------------------|-----------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| `* * *`  | realtor                                            | add home-buyer clients into the app                                         | keep track of them and their requirements                                              |
+| `* * *`  | realtor                                            | add home owners and their houses into the app                               | keep track of them and relevant details (such as the price they are looking for, etc.) |
+| `* * *`  | realtor                                            | view my contacts                                                            | easily find contacts I want to talk to                                                 |
+| `* * *`  | user who has been using the app for a long time    | delete/archive old contacts                                                 | declutter my list from outdated information                                            |
+| `* * *`  | realtor                                            | save contact data to my computer                                            | refer to it when I reopen my app                                                       |
+| `* * *`  | realtor                                            | add houses into the app together with their price, furnishings, etc.        | quickly list the features to my clients                                                |
+| `* * *`  | realtor who wants to pack light on the move        | solely use the keyboard and not need to carry a mouse around to use the app | quickly access and update information without the fuss of using a mouse                |
+| `* *`    | realtor with many contacts                         | view personal contacts separately from work contacts                        | I can focus on work when I need to                                                     |
+| `* *`    | realtor with many client contacts                  | sort my client contacts based on priority (time, importance, etc.)          | I can focus on the most important clients first                                        |
+| `* *`    | realtor                                            | add prospective rental clients into the app                                 | keep track of them and their requirements                                              |
+| `* *`    | realtor who spends a lot of time at house viewings | I want the app to start up and respond quickly                              | use the app to note down any of my client’s preferences while talking to them          |
+| `* *`    | realtor who is flexible with scheduling            | reschedule or postpone my meetings easily in the app                        | so I can avoid the hassle of constantly deleting and making new meetings               |
+| `* *`    | realtor                                            | add time to tasks related to each of my clients                             | remember to do them                                                                    |
+| `* *`    | busy realtor with other activities in my life      | enter my schedule                                                           | account for overlaps with any meetings                                                 |
+| `*`      | forgetful user                                     | be reminded if I have any upcoming or late meetings                         | follow up on my clients                                                                |
+| `*`      | realtor                                            | track tasks related to each of my clients                                   | remember what I need to do to follow up on each of them                                |
+| `*`      | realtor                                            | be reminded of upcoming tasks or late tasks                                 | do them before meeting clients                                                         |
+| `*`      | power user                                         | modify the syntax of (at least some) commands                               | enter them faster                                                                      |
+| `*`      | lazy user                                          | be able to automatically match appropriate houses to prospective buyers     | avoid doing it manually                                                                |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is our app `RTPM (RealtorTrackerPlusMax)` and the **Actor** is the `user`,
+unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: UC1 - Add homeowner and house**
+System: RTPM
+Actor: User
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User enters command to add homeowner and details of the house they are selling.
+2. System adds the entry to the list.
+3. System saves file.
+
+   Use case ends.
+
+Extensions:
+* 1a. User enters invalid parameters.
+  * 1a1. System indicates to user that the parameters are invalid.
+    Use case restarts from step 1.
+
+* 3a. Failure to update savefile.
+  * 3a1. System indicates failure to update.
+    Use case restarts from step 1.
+
+
+**Use case: UC2 - Add homebuyer and preferences**
+System: RTPM
+Actor: User
+**MSS**
+1. User enters command to add homebuyer and preferences.
+2. System adds the entry to the list.
+3. System saves file.
+   Use case ends.
+
+Extensions:
+* 1a. User enters invalid parameters.
+  * 1a1. System indicates to user that the parameters are invalid.
+  Use case restarts from step 1.
+
+* 3a. Failure to update savefile.
+  * 3a1. System indicates failure to update.
+  Use case restarts from step 1.
+
+**Use case: UC3 - View buyers**
+System: RTPM
+Actor: User
+**MSS**
+1. User enters the list-b command.
+2. System displays list of buyers.
+
+Use case ends.
+
+Extensions:
+* 1a. User makes a typo leading to an invalid command.
+  * 1a1. System indicates to user that command is invalid, prompting the user for a new input.
+  Use case restarts from step 1.
+
+**Use case: UC4 - View sellers**
+
+**MSS**
+
+1. User enters the list-s command.
+2. System displays list of sellers.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. User makes a typo leading to an invalid command.
+  * 1a1. System indicates to user that command is invalid, prompting the user for a new input.<br>
+    Use case resumes at step 1.
 
-  Use case ends.
+<br>
 
-* 3a. The given index is invalid.
+**Use case: UC5 - Delete a buyer/seller**
 
-    * 3a1. AddressBook shows an error message.
+**MSS**
+1. User enters command to delete a buyer or a seller.
+2. System deletes item.
+3. System updates savefile.
+4. System returns an indicator of execution success.
 
-      Use case resumes at step 2.
+    Use case ends.
+
+**Extensions**
+
+* 3a. Failure to update savefile.
+  * 3a1. System indicates failure to update.
+  * 3a2. System undoes deletion (to prevent desync of storage and application).<br>
+    Use case restarts from step 1.
+
+<br>
+
+**Use case: UC6 - Enter an invalid command**
+
+**MSS:**
+1. User enters misspelled command.
+2. System displays invalid command error and refers user to help page.
 
 *{More to be added}*
+
+
+
 
 ### Non-Functional Requirements
+*NFRs taken from the given constraints found **[here](https://nus-cs2103-ay2324s1.github.io/website/schedule/week4/project.html)**:*
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. The product should be optimized for keyboard users who can type fast and prefer typing over other means of input.
+2. The data should be stored locally in a human editable text file, instead of in a database.
+3. The software should primarily follow OOP.
+4. The software should work on the Windows, Linux, and OS-X platforms (hence shouldn’t depend on OS-specific libraries).
+5. The software should work on a computer that has version 11 of Java i.e., no other Java version installed.
+6. The software should work without requiring an installer.
+7. The use of third-party frameworks/libraries/services is allowed but only if they are free, open-source (this doesn't apply to services), and have permissive license terms.
+8. The GUI should work well (i.e., should not cause any resolution-related inconveniences to the user) for
+* standard screen resolutions 1920x1080 and higher, and
+* for screen scales 100% and 125%.
 
-*{More to be added}*
+In addition, the GUI should be usable (i.e., all functions can be used even if the user experience is not optimal) for
+* resolutions 1280x720 and higher, and
+* for screen scales 150%.
+9. The software should be able to be packaged into a single JAR file.
+10. The DG and UG should be PDF-friendly (Don't use expandable panels, embedded videos, animated GIFs etc.).
+
+Additional NFRs
+11. The internal implementation should be readable and adhere to the coding quality guidelines found here, for maintainability and for peer evaluation.
+12. The deliverable deadlines should be met with a fully functioning product (hence, most important features should be prioritized and tested to eliminate bugs) to allow for usage as promised.
+13. The software should be resistant to crashes while running to prevent losing important contact details that realtors need to do business with.
+14. The software should work fast even on old / low-end laptop so that realtors on the go with their busy days can use our app quickly and efficiently without getting frustrated with lag.
+15. The software should be free and easy to use as an open source product.
+
 
 ### Glossary
 
@@ -356,36 +656,243 @@ testers are expected to do more *exploratory* testing.
 
    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. Exiting the program
 
-### Deleting a person
+   4. Test case: `exit`<br>
+      Expected: App terminates immediately
 
-1. Deleting a person while all persons are being shown
+### Adding a contact
+
+1. Adding a buyer contact
+
+   1. Prerequisites: Clear the lists with the `clear` command to prevent conflicts from prior testing.
+   2. Test case: `buyer n/Bob`<br>
+      Expected: A contact with the name "Bob" is added to the buyer list.
+   3. Test case: `buyer n/John Doe p/98765432 e/johnd@example.com ah/311, Clementi Ave 2, #02-25 i/Central Area 5 Room Condominium prio/medium t/friends t/owesMoney`<br>
+      Expected: A contact with the name "John Doe" and the corresponding particulars is added to the buyer list.
+   4. Test case: `buyer n/Bob` (this test case proceeds the one in ii, without clearing)<br>
+      Expected: No contact is added. Error details shown in the status message.
+   5. Test case: `buyer n/Tom p/phone e/email`
+      Expected: Similar to previous.
+
+2. Adding a seller contact
+
+    1. Prerequisites: Clear the lists with the `clear` command to prevent conflicts from prior testing.
+    2. Test case: `seller n/Bob`<br>
+       Expected: A contact with the name "Bob" is added to the seller list.
+    3. Test case: `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/high`<br>
+       Expected: A contact with the name "Ryan" and the corresponding particulars is added to the seller list.
+    4. Test case: `seller n/Bob`(this test case proceeds the one in ii, without clearing)<br>
+       Expected: No contact is added. Error details shown in the status message.
+    5. Test case: `seller n/Tom p/invalidphone e/invalidemail`
+       Expected: Similar to previous.
+
+
+### Editing a contact
+
+1. Editing a buyer contact
+   1. Prerequisites: At least one but less than ten thousand contacts present in the buyer list.
+   2. Test case: `bedit 1 p/12345 e/example@email.com`<br>
+      Expected: First contact in the buyer list has their phone number updated to "12345" and their email updated to "example@email.com".
+   3. Test case: `bedit 1 p/invalidphone`<br>
+      Expected: No contact is edited. Error details shown in status message.
+   5. Test case: `bedit 99999 p/12345`<br>
+      Expected: Similar to previous.
+   6. Test case: `bedit 0 p/12345`<br>
+      Expected: Similar to previous.
+   8. Test case: `bedit`, `bedit 1`, `bedit p/12345`<br>
+      Expected: Similar to previous.
+
+1. Editing a seller contact
+    1. Prerequisites: At least one but less than ten thousand contacts present in the seller list.
+    2. Test case: `sedit 1 p/12345 e/example@email.com`<br>
+       Expected: First contact in the seller list has their phone number updated to "12345" and their email updated to "example@email.com".
+    3. Test case: `sedit 1 p/invalidphone`<br>
+       Expected: No contact is edited. Error details shown in status message.
+    5. Test case: `sedit 99999 p/12345`<br>
+       Expected: Similar to previous.
+    6. Test case: `sedit 0 p/12345`<br>
+       Expected: Similar to previous.
+    8. Test case: `sedit`, `sedit 1`, `sedit p/12345`<br>
+       Expected: Similar to previous.
+   
+### Deleting a contact
+
+1. Deleting a buyer contact while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `bdelete 1`<br>
+      Expected: First contact is deleted from the buyer list. Details of the deleted contact shown in the status message. 
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `bdelete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message. 
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `bdelete`, `bdelete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting a seller contact while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `sdelete 1`<br>
+      Expected: First contact is deleted from the seller list. Details of the deleted contact shown in the status message.
+
+   3. Test case: `sdelete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message. 
+
+   4. Other incorrect delete commands to try: `sdelete`, `sdelete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+### Setting a contact's priority
+
+1. Setting a buyer's priority
+
+   1. Prerequisites: At least one but less than ten thousand contacts present in the buyer list.
+   2. Test case: `bprio 1 high`, `bprio 1 h`<br>
+      Expected: First contact in the buyer list has their priority updated to "high".
+   3. Test case: `bprio 1 medium`, `bprio 1 m`<br>
+      Expected: First contact in the buyer list has their priority updated to "med".
+   4. Test case: `bprio 1 low`, `bprio 1 l`<br>
+      Expected: First contact in the buyer list has their priority updated to "low".
+   5. Test case: `bprio 1 nil`, `bprio 1 n`<br>
+      Expected: First contact in the buyer list has their priority updated to "nil".
+   6. Test case: `bprio 99999 high`<br>
+      Expected: No contact's priority is updated. Error details shown in the status message.
+   7. Test case: `bprio 0 high`<br>
+      Expected: Similar to previous.
+   8. Test case: `bprio 0 invalidprio`<br>
+      Expected: Similar to previous.
+   9. Test case: `bprio`, `bprio high`, `bprio 1`<br>
+      Expected: Similar to previous.
+
+2. Setting a seller's priority
+
+    1. Prerequisites: At least one but less than ten thousand contacts present in the seller list.
+    2. Test case: `sprio 1 high`, `sprio 1 h`<br>
+       Expected: First contact in the seller list has their priority updated to "high".
+    3. Test case: `sprio 1 medium`, `sprio 1 m`<br>
+       Expected: First contact in the seller list has their priority updated to "med".
+    4. Test case: `sprio 1 low`, `sprio 1 l`<br>
+       Expected: First contact in the seller list has their priority updated to "low".
+    5. Test case: `sprio 1 nil`, `sprio 1 n`<br>
+       Expected: First contact in the seller list has their priority updated to "nil".
+    6. Test case: `sprio 99999 high`<br>
+       Expected: No contact's priority is updated. Error details shown in the status message.
+    7. Test case: `sprio 0 high`<br>
+       Expected: Similar to previous.
+    8. Test case: `sprio 0 invalidprio`<br>
+       Expected: Similar to previous.
+    9. Test case: `sprio`, `sprio high`, `sprio 1`<br>
+       Expected: Similar to previous.
+
+### Filtering the lists
+
+1. Prerequisites: Clear the lists with the `clear` command and add buyers named "John", "John Doe", "JohnDoe", and "Doe" with the `buyer` command.
+2. Test case: `filter John`<br>
+   Expected: "John" and "John Doe" remain in the buyer list.
+3. Test case: `filter Doe`<br>
+   Expected: "Doe" and "John Doe" remain in the buyer list.
+4. Test case: `filter`<br>
+   Expected: The buyer list does not change. Error details shown in the status message.
+
+### Displaying a contact's information
+
+1. Displaying a buyer contact's information
+   1. Prerequisites: At least one but less than ten thousand contacts present in the buyer list.
+   2. Test case: `blist 1`<br>
+      Expected: Information of first contact in buyer list displayed in the status message.
+   3. Test case: `blist`, `blist 0`, `blist 99999`<br>
+      Expected: No updates occur. Error details shown in the status message.
+
+1. Displaying a seller contact's information
+    1. Prerequisites: At least one but less than ten thousand contacts present in the seller list.
+    2. Test case: `slist 1`<br>
+       Expected: Information of first contact in seller list displayed in the status message.
+    3. Test case: `slist`, `slist 0`, `slist 99999`<br>
+       Expected: No updates occur. Error details shown in the status message.
+
+### Sorting contacts
+
+1. Sorting buyer contacts
+   1. Prerequisites: At least one but less than ten thousand contacts present in the buyer list.
+   2. Test case: `bsort prio/d`<br>
+      Expected: Buyer list is sorted by priority in descending order, with the highest priority at the top of the list.
+   3. Test case: `bsort invalidprefix/d`, `bsort prio/invalidorder`<br>
+      Expected: The buyer list is not updated. Error details shown in the status message.
+   4. Test case: `bsort`, `bsort prio/`, `bsort d`<br>
+      Expected: Similar to previous.
+
+2. Sorting seller contacts
+    1. Prerequisites: At least one but less than ten thousand contacts present in the seller list.
+    2. Test case: `ssort prio/d`<br>
+       Expected: Seller list is sorted by priority in descending order, with the highest priority at the top of the list.
+    3. Test case: `ssort invalidprefix/d`, `ssort prio/invalidorder`<br>
+       Expected: The seller list is not updated. Error details shown in the status message.
+    4. Test case: `ssort`, `ssort prio/`, `ssort d`<br>
+       Expected: Similar to previous.
 
 ### Saving data
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Prerequisites: Launch the app and run any command so that a `data/rtpm.json` file is created.
 
-1. _{ more test cases …​ }_
+   2. Test case: Corrupt the file by deleting lines from `data/rtpm.json`
+      Expected: The app will launch with empty buyer and seller lists
+
+   3. Test case: Delete the file `data/rtpm.json` or the folder `data`
+      Expected: The app will launch with sample data in the buyer and seller lists
+   
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **Appendix: Planned Enhancements**
+
+Given below are the enhancements that will be implemented in a future version.
+
+1. Currently, the UI text is cut off if the entries are too long. While this should not usually happen since the user 
+can decide what to enter (nicknames, abbreviations, acronyms, etc.), we plan to accommodate overly long names, 
+phone numbers, addresses, emails and house info entries within the UI.
+2. Currently, if the user makes a spelling or spacing mistake, the intended prefix of another field is regarded as 
+part of the argument for the previous field. We plan to check for misspelled prefixes and prefixes provided as 
+arguments of other fields and warn the user.
+3. Currently, the user is not warned if addresses, names, and house info entries contain only numbers and special 
+symbols. We plan to expand warnings to include warnings for addresses, names and house info entries containing 
+only non-alphabetical characters.
+4. Currently, for `bprio` and `sprio`,
+   * if the user inputs extra arguments, such as `bprio 1 high low`, the app 
+   accepts the input and sets the first buyer's priority level to `high` instead of warning the user about extra 
+   arguments which would be ignored. As such, we plan to warn the user if any extra arguments are supplied for the 
+   user to double check that their priority input is correct.
+   * the current regex for determining if an input is appropriate is as follows:
+   <br>`(?i)(h[igh]{0,3}|m[edium]{0,5}|l[ow]{0,2}|n[il]{0,2})$`
+     * `(?i)` refers to case-insensitive matching
+     * `(h[igh]{0,3}|m[edium]{0,5}|l[ow]{0,2}|n[il]{0,2})` means that the string input can match one of four possible
+     options below, with each option separated by a `|`:
+       * `h[igh]{0,3}` accepts a string with a first letter 'h', followed by 0 to 3 letters after 'h', which can be
+       any of the letters inside the square brackets, so `h`, `hi`, `hhh` and `hggi` are all appropriate inputs.
+       * `m[edium]{0,5}` accepts a string with a first letter 'm', followed by 0 to 5 letters after 'm', which can be
+       any of the letters inside the square brackets, so `m`, `mii` and `mdmiue` are all appropriate inputs.
+       * `l[ow]{0,2}` accepts a string with a first letter 'l', followed by 0 to 2 letters after 'l', which can be
+       any of the letters inside the square brackets, so `l`, `lw`, and `lww` are all appropriate inputs.
+       * `n[il]{0,2}` accepts a string with a first letter 'n', followed by 0 to 2 letters after 'n', which can be
+       any of the letters inside the square brackets, so `n`, `nl`, and `nll` are all appropriate inputs.
+     * `$` demarcates the end of the matching 
+     
+     Initially, the regex above was meant to allow for user typos, such as `hgih` or `meduim`, but in hindsight, 
+     this regex is unnecessary as it doesn't value add much to the user experience, 
+     and only made it harder to test for invalid priority inputs. 
+   <br> As such, we plan to 
+     change the validation regex to only accept `h`, `m`, `l`, or `nil` as inputs
+     for priority in future.
+5. Currently, attempting to add multiple contacts with long names may cause the app to lag considerably. 
+We plan to optimise the similarity checks for names so that doing so results in less delay.
+
