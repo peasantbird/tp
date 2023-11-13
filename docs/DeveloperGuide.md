@@ -726,7 +726,8 @@ only non-alphabetical characters.
      * `$` demarcates the end of the matching 
      
      Initially, the regex above was meant to allow for user typos, such as `hgih` or `meduim`, but in hindsight, 
-     this parsing is unnecessary, and only made it harder to test for invalid priority inputs. 
+     this regex is unnecessary as it doesn't value add much to the user experience, 
+     and only made it harder to test for invalid priority inputs. 
    <br> As such, we plan to 
      change the validation regex to only accept `h`, `m`, `l`, or `nil` as inputs
      for priority in future.
