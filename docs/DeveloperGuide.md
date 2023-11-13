@@ -12,7 +12,9 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-Our app uses this snippet to implement Levenshtein distance, which allows us to detect similar but not matching names.
+1. The undo & redo feature and its DG implementation details were reused from 
+[Address Book (Level4)](https://github.com/se-edu/addressbook-level4) with minor modifications.
+2. Our app uses this snippet to implement Levenshtein distance, which allows us to detect similar but not matching names.
 https://rosettacode.org/wiki/Levenshtein_distance#Java
 
 --------------------------------------------------------------------------------------------------------------------
@@ -130,7 +132,6 @@ inherit from the `Parser` interface so that they can be treated similarly where 
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
-
 The `Model` component,
 
 * stores the address book data i.e., all `Displayable` objects (which are contained in the appropriate `UniqueDisplayableList<T extends Displayable>` object, in this case only buyers and sellers).
@@ -169,95 +170,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how the undo operation works:
-
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 ### Edit feature
 
@@ -374,19 +286,141 @@ of `bprio`.
 
 #### Implementation
 
-The proposed sort mechanism is facilitated by the `sort` command.
+The sort mechanism is facilitated by `SortedList` in `ModelManager`. A `SortedList` wraps an `ObservableList` and sorts 
+its content. In `ModelManager`, we have `SortedList<Buyer>` and `SortedList<Seller>` which wrap around 
+`FilteredList<Buyer>` and `FilteredList<Seller>`, allowing the user to filter the buyer and seller lists as well as 
+sort them at the same time. Additionally, `ModelManager` implements the following operations:
 
-Using the `sort` command, we can sort the buyers and sellers lists respectively by name, priority, and other criteria.
+* `ModelManager#updateFilteredSortedBuyerList(Comparator<Buyer> comparator)` - Sets the buyer `SortedList` with a 
+comparator that denotes the order of this list.
+* `ModelManager#updateFilteredSortedSellerList(Comparator<Seller> comparator)` - Sets the seller `SortedList` with a
+comparator that denotes the order of this list.
+
+These operations are exposed in the `Model` interface as 
+`Model#updateFilteredSortedBuyerList(Comparator<Buyer> comparator)` and 
+`Model#updateFilteredSortedSellerList(Comparator<Seller> comparator)`, which are executed by `SortBuyerCommand` and 
+`SortSellerCommand` respectively to sort the buyer and seller lists.
+
+The `comparator` passed into the methods above defines the way buyers and sellers are sorted. This sorting logic is 
+handled by the `BuyerComparator` and `SellerComparator` classes, which come with predefined implementations for the 
+`compare` method of `Comparator<T>`. Based on the prefix and sort order (ascending/descending) that is passed after
+the `bsort/ssort` keyword, an instance of `BuyerComparator`/`SellerComparator` with the corresponding implementation of
+`compare` method will be constructed and passed into the `SortedList` through the sort command. 
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
-Step 1. The user types in the `bsort` or `ssort` keyword, followed by `name`, `priority`, or another `criteria`.
-to sort by. 
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the 
+initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-The sort command will sort by changing the ObservableList<T> to a SortedList<T>, with the comparator based on the
-certain criteria.
+Step 2. The user executes `buyer n/Amy`, `buyer n/Bob` and `buyer n/Carla` to add three new buyers.
+
+Step 3. The user executes `bsort n/d` to sort the buyer list by name in descending order. Inputting `bsort n/d` calls 
+`LogicManager`, which gets `AddressBookParser` to create an instance of `SortBuyerCommandParser`. If there is a valid
+prefix, `SortBuyerCommandParser` parses its `SortOrder`, and creates a `SortBuyerCommand` with a `BuyerComparator` for
+the prefix and sort order. If there is no valid prefixes, the `SortBuyerCommand` will have a null `BuyerComparator`. 
+The `bsort` command is then executed, updating the `SortedList` in this case by passing the `BuyerComparator`
+instance that sorts by name descending. These changes are reflected in the UI, showing a list of buyers that is sorted 
+by name in descending order. Finally, `LogicManager` calls `StorageManager` to update the JSON file.
+
+The following sequence diagram shows how the sort operation works:
+
+<puml src="diagrams/SortBuyerSequenceDiagram.puml" alt="SortBuyerSequenceDiagram" />
+
+Step 4. To sort the buyer list by its default order, the user can execute `bsort`, which runs a similar flow as 
+illustrated in the sequence diagram above, except passing a null `BuyerComparator` into the `SortedList` for a default 
+sorting.
+
+The same logic can be used for sorting sellers instead of buyers, by using `ssort` instead of `bsort`.
+
+### Undo & redo feature
+
+#### Implementation
+
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+
+<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+
+Step 2. The user executes `bdelete 5` command to delete the 5th buyer in the address book. The `bdelete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `bdelete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+
+<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+
+Step 3. The user executes `buyer n/David …​` to add a new buyer. The `buyer` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+
+<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+
+</box>
+
+Step 4. The user now decides that adding the buyer was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+
+<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+
+
+<box type="info" seamless>
+
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the undo.
+
+</box>
+
+The following sequence diagram shows how the undo operation works:
+
+<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+
+<box type="info" seamless>
+
+**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</box>
+
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+
+<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
+
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `buyer n/David …​` command. This is the behavior that most modern desktop applications follow.
+
+<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire address book.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+    * Pros: Will use less memory (e.g. for `bdelete`, just save the buyer being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 ### Relaxed parameter matching
+
 #### Background
 In previous versions of the app and in the original brownfield project AB3, fields such as ```Name``` or ```Email```
 had a validation method on instantiation, which would throw an ```IllegalArgumentException``` when 
