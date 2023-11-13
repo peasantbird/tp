@@ -954,8 +954,7 @@ or the Levenshtein distance between the two names is 2 or less
 (It takes 2 or fewer substitutions/additions/removals to turn one of the names into the other.)
 An unintended effect was that, for example, if you had short names (e.g "d", "hi", in the original case for us), 
 the names would match despite normal users probably not defining these two names as similar. 
-Possible future enhancements would be to make it percentage-based, so that short names are not 
-producing warnings unnecessarily.
+Possible future enhancements would be to make it percentage-based, so that short names are not producing warnings unnecessarily.
 
 8. Currently, we have sellers only having one selling address and one house info. This is not fully representative of all
 real-life conditions, since a seller can own and sell multiple houses. Likewise, a buyer could be
