@@ -511,13 +511,19 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling A
 
 ### Sorting buyers: `bsort`
 
-Sorts the buyers' list by the provided attribute and in the given direction.
+Sorts the buyers' list either by the list's default order, or by a provided prefix and direction.
 
 Format: `bsort [PREFIX/DIRECTION]`
-* `PREFIX`: `n` OR `ah` OR `i` OR `prio`
+* `PREFIX`: Choose <u>one</u> of:
+  * `n` - sort by **name**
+  * `ah` - sort by **home address**
+  * `i` - sort by **house info**
+  * `prio` - sort by **priority**
 * `DIRECTION`: "a" OR "d" for ascending or descending respectively
 
-Example: `bsort n/d`
+Examples: 
+* `bsort` to sort by default
+* `bsort n/d` to sort by name descending
 
 Precise outputs when the command succeeds:
 
@@ -525,11 +531,12 @@ Precise outputs when the command succeeds:
 
 
 Precise outputs when the command fails:
-
->
-
-
->Multiple values specified for the following single-valued field(s): n/
+1. For general errors:
+>Invalid command format!<br>
+bsort: Sorts the buyers in RTPM. Parameters: Choose zero or one of [n/] [ah/] [i/] [prio/] a/d (for ASC/DESC)<br>
+Example: bsort prio/d
+2. When the same prefix is used more than once:
+>Multiple values specified for the following single-valued field(s): ...
 
 <div style='text-align: right;'>
 
@@ -541,13 +548,19 @@ Precise outputs when the command fails:
 
 ### Sorting sellers: `ssort`
 
-Sorts the sellers' list by the provided attribute and in the given direction.
+Sorts the sellers' list either by the list's default order, or by a provided prefix and direction.
 
-Format: `ssort PREFIX DIRECTION`
-* `PREFIX`: Refer to the add seller command, `seller`
+Format: `ssort [PREFIX/DIRECTION]`
+* `PREFIX`: Choose <u>one</u> of:
+    * `n` - sort by **name**
+    * `ah` - sort by **home address**
+    * `i` - sort by **house info**
+    * `prio` - sort by **priority**
 * `DIRECTION`: "a" OR "d" for ascending or descending respectively
 
-Example: `ssort n/d`
+Examples:
+* `ssort` to sort by default
+* `ssort n/d` to sort by name descending
 
 Precise outputs when the command succeeds:
 
@@ -555,8 +568,12 @@ Precise outputs when the command succeeds:
 
 
 Precise outputs when the command fails:
-
->Multiple values specified for the following single-valued field(s): n/
+1. For general errors:
+>Invalid command format!<br>
+ssort: Sorts the sellers in RTPM. Parameters: Choose zero or one of [n/] [ah/] [i/] [prio/] a/d (for ASC/DESC)<br>
+Example: ssort prio/d
+2. When the same prefix is used more than once:
+>Multiple values specified for the following single-valued field(s): ...
 
 <div style='text-align: right;'>
 
@@ -666,8 +683,8 @@ Action     | Format, Examples
 **Filter**   | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g. filter John Doe
 **List Buyer**   | `blist INDEX` <br> e.g. blist 1
 **List Seller**   | `slist INDEX`<br> e.g. slist 1
-**Sort Buyers** | `bsort PREFIX DIRECTION`<br> e.g. bsort n/d
-**Sort Sellers** | `ssort PREFIX DIRECTION`<br> e.g. ssort prio/a
+**Sort Buyers** | `bsort [PREFIX/DIRECTION]`<br> e.g. bsort n/d
+**Sort Sellers** | `ssort [PREFIX/DIRECTION]`<br> e.g. ssort prio/a
 **Undo**   | `undo`
 **Redo**  | `redo`
 **Exit**   | `exit`
