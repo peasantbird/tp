@@ -62,11 +62,4 @@ public class SortBuyerCommand extends Command {
         SortBuyerCommand otherSortBuyerCommand = (SortBuyerCommand) other;
         return comparator.equals(otherSortBuyerCommand.comparator);
     }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("comparator", comparator)
-                .toString();
-    }
 }

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -29,24 +30,28 @@ public class SortBuyerCommandParser implements Parser<SortBuyerCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_HOUSE_INFO, PREFIX_PRIORITY);
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            SortOrder sortOrder =
-                    ParserUtil.parseSortOrder(commandWarnings, argMultimap.getValue(PREFIX_NAME).get(), this);
-            return new SortBuyerCommand(BuyerComparator.of(PREFIX_NAME, sortOrder));
-        } else if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            SortOrder sortOrder =
-                    ParserUtil.parseSortOrder(commandWarnings, argMultimap.getValue(PREFIX_ADDRESS).get(), this);
-            return new SortBuyerCommand(BuyerComparator.of(PREFIX_ADDRESS, sortOrder));
-        } else if (argMultimap.getValue(PREFIX_HOUSE_INFO).isPresent()) {
-            SortOrder sortOrder =
-                    ParserUtil.parseSortOrder(commandWarnings, argMultimap.getValue(PREFIX_HOUSE_INFO).get(), this);
-            return new SortBuyerCommand(BuyerComparator.of(PREFIX_HOUSE_INFO, sortOrder));
-        } else if (argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
-            SortOrder sortOrder =
-                    ParserUtil.parseSortOrder(commandWarnings, argMultimap.getValue(PREFIX_PRIORITY).get(), this);
-            return new SortBuyerCommand(BuyerComparator.of(PREFIX_PRIORITY, sortOrder));
-        } else {
-            return new SortBuyerCommand(BuyerComparator.of());
+        try {
+            if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+                SortOrder sortOrder =
+                        ParserUtil.parseSortOrder(commandWarnings, argMultimap.getValue(PREFIX_NAME).get());
+                return new SortBuyerCommand(BuyerComparator.of(PREFIX_NAME, sortOrder));
+            } else if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+                SortOrder sortOrder =
+                        ParserUtil.parseSortOrder(commandWarnings, argMultimap.getValue(PREFIX_ADDRESS).get());
+                return new SortBuyerCommand(BuyerComparator.of(PREFIX_ADDRESS, sortOrder));
+            } else if (argMultimap.getValue(PREFIX_HOUSE_INFO).isPresent()) {
+                SortOrder sortOrder =
+                        ParserUtil.parseSortOrder(commandWarnings, argMultimap.getValue(PREFIX_HOUSE_INFO).get());
+                return new SortBuyerCommand(BuyerComparator.of(PREFIX_HOUSE_INFO, sortOrder));
+            } else if (argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
+                SortOrder sortOrder =
+                        ParserUtil.parseSortOrder(commandWarnings, argMultimap.getValue(PREFIX_PRIORITY).get());
+                return new SortBuyerCommand(BuyerComparator.of(PREFIX_PRIORITY, sortOrder));
+            } else {
+                return new SortBuyerCommand(BuyerComparator.of());
+            }
+        } catch (Exception e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortBuyerCommand.MESSAGE_USAGE));
         }
     }
 }

@@ -187,20 +187,11 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code sortOrder} is invalid.
      */
-    public static SortOrder parseSortOrder(CommandWarnings warn, String sortOrder, Parser<? extends Command> parser)
-            throws ParseException {
+    public static SortOrder parseSortOrder(CommandWarnings warn, String sortOrder) throws ParseException {
         requireNonNull(sortOrder);
         String trimmedSortOrder = sortOrder.trim();
         if (!SortOrder.isValidSortOrder(trimmedSortOrder)) {
-            if (parser instanceof SortBuyerCommandParser) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortBuyerCommand.MESSAGE_USAGE));
-            } else if (parser instanceof SortSellerCommandParser) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortSellerCommand.MESSAGE_USAGE));
-            } else {
-                throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
-            }
+            throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
         }
         return new SortOrder(trimmedSortOrder);
     }

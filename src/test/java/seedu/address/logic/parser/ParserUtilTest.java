@@ -15,6 +15,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.CommandWarnings;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
@@ -212,4 +213,9 @@ public class ParserUtilTest {
         }, Phone.MESSAGE_RECOMMENDATIONS);
     }
     //todo use assertWarns more; I haven't done full testing yet.
+
+    @Test
+    public void parseSortOrder_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortOrder(new CommandWarnings(), null));
+    }
 }
