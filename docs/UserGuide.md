@@ -702,17 +702,12 @@ Precise outputs when the command fails:
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+
 ### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
 Format: `help`
-
-<div style='text-align: right;'>
-
-[Back to top](#rtpm-user-guide)
-
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
