@@ -551,6 +551,7 @@ valid prefix (`n`, `ah`, `i` or `prio`).
 the prefix to sort by in this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
   * For example, `bsort prio/d n/d` will execute `bsort n/d`.
 
+
 </box>
 
 <div style='text-align: right;'>
@@ -603,6 +604,7 @@ Example: ssort prio/d
   the prefix to sort by in this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
     * For example, `ssort prio/d n/d` will execute `ssort n/d`.
 
+
 </box>
 
 <div style='text-align: right;'>
@@ -615,11 +617,19 @@ Example: ssort prio/d
 
 ### Undoing previous action: `undo`
 
-Undoes the previous action.
+Undoes the previous action. Only undoes actions that changes the contacts in RTPM, and does not undo actions that 
+changes the list view (i.e. `list`, `filter`, `sort`).
 
 Format: `undo`
 
-**Tip: Using `undo` multiple times will undo multiple actions in order.**
+<box type="tip">
+
+**Tip:** 
+
+Using `undo` multiple times will undo multiple actions in order.
+
+
+</box>
 
 Precise outputs when the command succeeds:
 
@@ -639,11 +649,19 @@ Precise outputs when the command fails:
 
 ### Redoing previous action: `redo`
 
-Restores the previously undone action.
+Restores the previously undone action. Only redoes actions that changes the contacts in RTPM, and does not redo actions
+that changes the list view (i.e. `list`, `filter`, `sort`).
 
 Format : `redo`
 
-**Tip: Using `redo` multiple times will redo multiple actions in order.**
+<box type="tip">
+
+**Tip:**
+
+Using `redo` multiple times will redo multiple actions in order.
+
+
+</box>
 
 Precise outputs when the command succeeds:
 
@@ -652,6 +670,7 @@ Precise outputs when the command succeeds:
 Precise outputs when the command fails:
 
 >No commands to redo!
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -664,6 +683,13 @@ Precise outputs when the command fails:
 Shows a message explaining how to access the help page.
 
 Format: `help`
+
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Exiting the program: `exit`
@@ -671,6 +697,13 @@ Format: `help`
 Exits the program.
 
 Format: `exit`
+
+<box type="info">
+
+Upon exit, the latest data is saved to your computer at data/addressbook.json.
+
+</box>
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
