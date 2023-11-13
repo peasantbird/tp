@@ -6,12 +6,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 
-import java.util.Comparator;
-
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.displayable.seller.Seller;
+import seedu.address.model.displayable.seller.SellerComparator;
 
 /**
  * Represents a command that sorts the seller list based on a comparator.
@@ -21,7 +19,7 @@ public class SortSellerCommand extends Command {
     public static final String COMMAND_WORD = "ssort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the sellers in RTPM. "
-            + "Parameters: Choose one of "
+            + "Parameters: Choose zero or one of "
             + "[" + PREFIX_NAME + "] "
             + "[" + PREFIX_ADDRESS + "] "
             + "[" + PREFIX_HOUSE_INFO + "] "
@@ -32,13 +30,13 @@ public class SortSellerCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Got it. I've sorted the seller list!";
 
-    private final Comparator<Seller> comparator;
+    private final SellerComparator comparator;
 
     /**
      * Constructs a SortSellerCommand based on the comparator to be used.
      * @param comparator the comparator which will be used to arrange the list.
      */
-    public SortSellerCommand(Comparator<Seller> comparator) {
+    public SortSellerCommand(SellerComparator comparator) {
         this.comparator = comparator;
     }
 
