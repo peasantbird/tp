@@ -23,6 +23,10 @@ public class DisplayableListPanel extends UiPart<Region> {
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
+    @SuppressWarnings("unchecked")
+    //It is okay for us to suppress warnings here, because we know for a fact that our displayableList can be cast to
+    // ObservableList<Displayable>, although <? extends Displayable> will be type erased during runtime.
+
     public DisplayableListPanel(ObservableList<? extends Displayable> displayableList) {
         super(FXML);
         displayableListView.setItems((ObservableList<Displayable>) displayableList);
