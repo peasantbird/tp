@@ -313,7 +313,7 @@ buyers and sellers.
 _{more aspects and alternatives to be added}_
 
 
-### \[Completed\] Priority feature
+### Priority feature
 
 #### Rationale
 
