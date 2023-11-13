@@ -307,15 +307,30 @@ comparator that denotes the order of this list.
 
 These operations are exposed in the `Model` interface as 
 `Model#updateFilteredSortedBuyerList(Comparator<Buyer> comparator)` and 
-`Model#updateFilteredSortedSellerList(Comparator<Seller> comparator)` respectively, which are executed by 
-`SortBuyerCommand` and `SortSellerCommand` respectively.
+`Model#updateFilteredSortedSellerList(Comparator<Seller> comparator)`, which are executed by `SortBuyerCommand` and 
+`SortSellerCommand` respectively to sort the buyer and seller lists.
+
+The `comparator` passed into the methods above defines the way buyers and sellers are sorted. This sorting logic is 
+handled by the `BuyerComparator` and `SellerComparator` classes, which come with predefined implementations for the 
+`compare` method of `Comparator<T>`. Based on the prefix and sort order (ascending/descending) that is passed after
+the `bsort/ssort` keyword, an instance of `BuyerComparator`/`SellerComparator` with the corresponding implementation of
+`compare` method will be constructed and passed into the `SortedList` through the sort command. 
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the 
 initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-Step 2. The user executes 
+Step 2. The user executes `buyer n/Amy`, `buyer n/Bob` and `buyer n/Carla` to add three new buyers.
+
+Step 3. The user executes `bsort n/d` to sort the buyer list by name in descending order. 
+
+
+The execution of this `bsort` 
+command updates the `SortedList<Buyer>` list via the `updateFilteredSortedBuyerList(Comparator<Buyer> comparator)`
+method, passing into the method a `BuyerComparator` instance that sorts by name descending.
+
+Step 4. RTPM shows the list of buyers that is sorted by name in descending order on the GUI.
 
 #### Design considerations:
 
