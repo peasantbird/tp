@@ -513,8 +513,8 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling A
 
 Sorts the buyers' list by the provided attribute and in the given direction.
 
-Format: `bsort ATTRIBUTE_PREFIX DIRECTION`
-* `ATTRIBUTE_PREFIX`: Refer to the add buyer command, `buyer`
+Format: `bsort [PREFIX/DIRECTION]`
+* `PREFIX`: `n` OR `ah` OR `i` OR `prio`
 * `DIRECTION`: "a" OR "d" for ascending or descending respectively
 
 Example: `bsort n/d`
@@ -525,6 +525,9 @@ Precise outputs when the command succeeds:
 
 
 Precise outputs when the command fails:
+
+>
+
 
 >Multiple values specified for the following single-valued field(s): n/
 
@@ -540,8 +543,8 @@ Precise outputs when the command fails:
 
 Sorts the sellers' list by the provided attribute and in the given direction.
 
-Format: `ssort ATTRIBUTE_PREFIX DIRECTION`
-* `ATTRIBUTE_PREFIX`: Refer to the add seller command, `seller`
+Format: `ssort PREFIX DIRECTION`
+* `PREFIX`: Refer to the add seller command, `seller`
 * `DIRECTION`: "a" OR "d" for ascending or descending respectively
 
 Example: `ssort n/d`
@@ -663,8 +666,8 @@ Action     | Format, Examples
 **Filter**   | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g. filter John Doe
 **List Buyer**   | `blist INDEX` <br> e.g. blist 1
 **List Seller**   | `slist INDEX`<br> e.g. slist 1
-**Sort Buyers** | `bsort ATTRIBUTE_PREFIX DIRECTION`<br> e.g. bsort n/d
-**Sort Sellers** | `ssort ATTRIBUTE_PREFIX DIRECTION`<br> e.g. ssort prio/a
+**Sort Buyers** | `bsort PREFIX DIRECTION`<br> e.g. bsort n/d
+**Sort Sellers** | `ssort PREFIX DIRECTION`<br> e.g. ssort prio/a
 **Undo**   | `undo`
 **Redo**  | `redo`
 **Exit**   | `exit`
