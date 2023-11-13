@@ -12,8 +12,8 @@
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
-
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+Our app uses this snippet to implement Levenshtein distance, which allows us to detect similar but not matching names.
+https://rosettacode.org/wiki/Levenshtein_distance#Java
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -259,21 +259,17 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Edit feature
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Implementation
 
-### \[Proposed\] Edit feature
-
-#### Proposed Implementation
-
-The proposed edit mechanism is facilitated by the `find` command. 
+The  edit mechanism is facilitated by the `find` command. 
 
 Using the `find` command, we can find the seller or buyer to edit.
 
 Given below is an example usage scenario and how the edit mechanism behaves at each step.
 
-Step 1. The user types in the `edit-b` or `edit-s` keyword, followed by the index of the buyer or seller that they want
+Step 1. The user types in the `bedit` or `sedit` keyword, followed by the index of the buyer or seller that they want
 to edit. Following that, they type `/field`, where `field` is a name of the field that they want to edit.
 
 The edit command will call the `find` command to find the corresponding buyer or seller, then it will copy that person,
@@ -313,7 +309,7 @@ buyers and sellers.
 _{more aspects and alternatives to be added}_
 
 
-### \[Completed\] Priority feature
+### Priority feature
 
 #### Implementation
 
@@ -375,9 +371,9 @@ only assigning them for arguments available from the parsed user input (in `Argu
     * Cons: Address book only adds correctly formatted fields and may discard the rest without the user knowing, so
 more robust exception handling is required in parsing the user input which may be tedious to implement.
 
-### \[Proposed\] Sort feature
+### Sort feature
 
-#### Proposed Implementation
+#### Implementation
 
 The proposed sort mechanism is facilitated by the `sort` command.
 
@@ -385,20 +381,20 @@ Using the `sort` command, we can sort the buyers and sellers lists respectively 
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
-Step 1. The user types in the `sort-b` or `sort-s` keyword, followed by `name`, `priority`, or another `criteria`.
+Step 1. The user types in the `bsort` or `ssort` keyword, followed by `name`, `priority`, or another `criteria`.
 to sort by. 
 
 The sort command will sort by changing the ObservableList<T> to a SortedList<T>, with the comparator based on the
 certain criteria.
 
-## Relaxed parameter matching
-### Background
+### Relaxed parameter matching
+#### Background
 In previous versions of the app and in the original brownfield project AB3, fields such as ```Name``` or ```Email```
 had a validation method on instantiation, which would throw an ```IllegalArgumentException``` when 
 the provided string did not fit the regex. Although useful, this would often be overzealous, causing potential 
 frustration. Furthermore, this exception, as it halts execution, only informs you of the first field that fails 
 to pass, so if you had multiple errors you would have to resolve and re-execute each time.
-### Implementation
+#### Implementation
 In 1.3, we implemented a group of static methods for each parameter, generally named isAppropriate(*Field*), which has a
 looser regex. The result of this boolean check, if it fails, then passes a warning string to the
 ```CommandWarnings``` class, which collects and stores them in a set. At the end of the execute() method, if the
