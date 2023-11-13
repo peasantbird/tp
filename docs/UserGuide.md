@@ -129,7 +129,7 @@ Note that this command throws warnings. For more info on fields, head [here.](#a
 
 </box>
 
-Format: `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_INFO] [prio/PRIORITY] [t/TAG]…`
+Format: `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/HOUSE_INFO] [prio/PRIORITY] [t/TAG]…`
 
 
 Example:
@@ -172,7 +172,7 @@ Note that this command throws warnings. For more info on fields, head [here.](#a
 
 </box>
 
-Format: `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [prio/PRIORITY] [t/TAG]…`
+Format: `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/HOUSE_INFO] [prio/PRIORITY] [t/TAG]…`
 
 
 Example: `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/high`
@@ -228,7 +228,7 @@ Precise outputs when the command fails:
 
 >Invalid command format!<br> 
 bedit: Edits the details of the buyer identified by the index number used in the displayed buyer list. Existing values will be overwritten by the input values.<br>
-Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/ADDRESS] [i/BUY_HOUSE_INFO] [t/TAG]...<br>
+Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/ADDRESS] [i/HOUSE_INFO] [t/TAG]...<br>
 [prio/PRIORITY] Example: bedit 1 p/91234567 e/johndoe@example.com
 
 >At least one field to edit must be provided!
@@ -269,7 +269,7 @@ Precise outputs when the command fails:
 
 >Invalid command format!<br>
 sedit: Edits the details of the seller identified by the index number used in the displayed seller list. Existing values will be overwritten by the input values.<br>
-Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/ADDRESS] [as/SELLING_ADDRESS] [i/SELL_HOUSE_INFO] [t/TAG]...<br>
+Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/ADDRESS] [as/SELLING_ADDRESS] [i/HOUSE_INFO] [t/TAG]...<br>
 [prio/PRIORITY] Example: sedit 1 p/91234567 e/johndoe@example.com
 
 >At least one field to edit must be provided!
