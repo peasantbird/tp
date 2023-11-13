@@ -647,6 +647,18 @@ command typing, reordering and undoing/redoing commands.
 ### Difficulties and challenges faced
 We had some difficulties doing ??? idk guys help me out here
 
+The first difficulty we encountered was in modifying the UI to fit our requirements. As developers newly introduced to the
+brownfield AB-3 project, we had to spend quite a fair bit of time familiarising ourselves with the project architecture, and
+the initial process of integrating some basic new commands and tests (such as the one given in the AB-3 tutorial) was already 
+rather tedious, let alone adding our own features to the project and changes to the UI. For example, when trying to separate 
+the initial `Person`s object into `Buyer`s and `Seller`s, the app wasn't able to launch due to having a broken test codebase, 
+which required us to refactor at least 20 files across different directories in the project in order for operations to resume. 
+After much refactoring and tinkling with the JavaFX GUI, we were finally more familiar and comfortable with making changes to 
+the AB-3 project, and were able to begin system testing of our app in preparation for our very first release of RTPM, in 
+the v1.2 release.
+
+
+
 ### Achievements
 One of the things that we believe show the effort that we put into the project was the restructuring in the back-end to
 allow Model to hold, and UI to display, multiple lists of different types. In AB3, the application only needed to deal
