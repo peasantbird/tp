@@ -734,7 +734,8 @@ Upon exit, the latest data is saved to your computer at data/addressbook.json.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. Adding multiple contacts with excessively long names (>5000 characters) may cause RTPM to lag significantly. It is recommended to use nicknames or initials if necessary.
-
+3. Long fields can cause the details of a client to not be displayed fully. A workaround is to use the 
+```slist```/```blist``` commands to display the details of the client in the result box.
 
 <div style='text-align: right;'>
 
@@ -801,6 +802,8 @@ The warning system is able to alert the user of multiple errors at once. For a n
 The warning system is also used to inform the user if, when you are adding new buyers/sellers, 
 whether there are two similar buyers or two similar sellers, 
 or a buyer that shares the same name as a seller. See [Appendix C](#appendix-c-similar-names) for more details.
+
+There are some limitations to the warning system
 ```
 Warning!; [Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.]
 Please ignore if this is expected.
