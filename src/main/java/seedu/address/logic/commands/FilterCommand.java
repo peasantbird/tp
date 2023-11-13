@@ -10,7 +10,7 @@ import seedu.address.model.displayable.NameContainsKeywordsPredicate;
 
 /**
  * Filters and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FilterCommand extends Command {
 
@@ -25,9 +25,9 @@ public class FilterCommand extends Command {
     private final CommandWarnings commandWarnings;
 
     /**
-     * Creates a FilterCommand.
-     * @param predicate
-     * @param commandWarnings
+     * Creates a FilterCommand that filters displayables by the predicate according to their names.
+     * @param predicate the predicate to filter by.
+     * @param commandWarnings a container for any warnings that occur.
      */
     public FilterCommand(NameContainsKeywordsPredicate predicate, CommandWarnings commandWarnings) {
         this.predicate = predicate;
