@@ -452,7 +452,7 @@ Parameters: INDEX PRIORITY
 
 
 
-<sprio>
+<br>
 
 ### Setting a seller's priority: `sprio`
 
