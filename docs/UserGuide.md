@@ -36,10 +36,12 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
       * [Viewing help: `help`](#viewing-help-help)<br>
       * [Exiting the program: `exit`](#exiting-the-program-exit)<br>
 * [FAQ](#faq)
-* [Known Issues](#known-issues)
-* [Command Summary](#command-summary)
+* [Known Issues](#known-issues)<br>
+* [Command Summary](#command-summary)<br>
 * Appendices
-    * [Appendix A: Warnings](#appendix-a-warnings)
+    * [Appendix A: Warnings](#appendix-a-warnings)<br>
+    * [Appendix B: Fields](#appendix-b-fields)<br>
+    * [Appendix C: Similar names](#appendix-c-similar-names)<br>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
@@ -107,7 +109,6 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 **If your changes to the data file are in an invalid format, RTPM will discard all data and start with an empty data file at the next run.
 Hence, it is recommended to take a backup of the file before editing it.**
 </box>
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -677,13 +678,11 @@ Action     | Format, Examples
 
 --------------------------------------------------------------------------------------------------------------------
 
-##Appendix A: Warnings
+## Appendix A: Warnings
 
 RTPM allows you to flexibly input most fields of data. However, we still have some things in mind for each field. Hence, the warning system informs the user of any valid but possibly unintended inputs. The warning system is able to alert the user of multiple errors at once. For a non-exhaustive list, see below.
 
 The warning system is also used to check if, when you are adding new buyers/sellers, whether there are two similar buyers or two similar sellers, or a buyer that shares the same name as a seller.
-
-RTPM's definition of 'similar' is as follows: Either one of the names is contained in the other, or the names require 2 or less edits (deletions, insertions, transpositions) to make them the same. (for more details search for a definition of Levenshtein distance).
 
 ```
 Warning!; [Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.]
@@ -705,3 +704,25 @@ Please ignore if this is expected.
 [Back to top](#rtpm-user-guide)
 
 </div>
+
+## Appendix B: Fields
+Here, we provide the exact checks that RTPM does for each field, and the warning given if the field is inappropriate.
+
+Field     | Valid                                    | Appropriate                                                                                      | Exact warning given
+-----------|------------------------------------------|--------------------------------------------------------------------------------------------------|-------------------------------------------
+**Name**        | Must not be blank                        | Alphanumeric characters only                                                                     | 
+**Phone Number**| At least one numerical character         | Only numerical characters, and at least 3 digits long. Area codes allowed as provided in warning. | `Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.`
+**Email**       | At least one `@` character               | See warning message.                                                                             | `Emails should be of the format local-part@domain and adhere to the following constraints: 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. 2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: - end with a domain label at least 2 characters long - have each domain label start and end with alphanumeric characters - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.`
+**Address**     | Must not be blank                        | Nil                                                                                              | Nil
+**Info**        | Must not be blank                        | Nil                                                                                              | Nil
+**Priority**    | Starts with one of the letters `h,l,m,n` | Matches the first part of one of the words `high, low, medium, nil`.                             | `Inputs should be 'high', 'medium', 'low' or 'nil'. However, if at least the first letter is valid, we will read correctly.`
+**Tags**        | Must not be blank                        | Alphanumeric characters only                                                                     | `Tags names should be alphanumeric`
+
+## Appendix C: Similar names
+RTPM does checks to ensure users do not accidentally enter the same person twice, preventing cases where you have duplicate entries.
+
+There may be some ambiguity when names are similar but not exactly the same; in this case, the app will warn the user in case this was unintentional, but will not prevent the command from executing. This appendix aims to explain how exactly similar names are determined.
+
+RTPM's definition of 'similar' is as follows: Either one of the names is contained 
+in the other, or the names require 2 or less edits (deletions, insertions, transpositions)
+to make them the same. (for more details search for the definition of Levenshtein distance).
