@@ -56,4 +56,19 @@ public class SortOrder {
     public static boolean isValidSortOrder(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof SortOrder)) {
+            return false;
+        }
+
+        SortOrder otherSortOrder = (SortOrder) other;
+        return orderType.equals(otherSortOrder.orderType);
+    }
 }

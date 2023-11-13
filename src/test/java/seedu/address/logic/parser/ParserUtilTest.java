@@ -15,12 +15,12 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.CommandWarnings;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.displayable.Address;
 import seedu.address.model.displayable.Email;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
+import seedu.address.model.displayable.SortOrder;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -30,6 +30,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "  ";
     private static final String INVALID_INFO = "  ";
+    private static final String INVALID_SORT_ORDER = "b";
     private static final String UNRECOMMENDED_NAME = "R@chel";
     private static final String UNRECOMMENDED_PHONE = "(HP) 2934383, (OFF) 2930211";
     private static final String UNRECOMMENDED_EMAIL = "ffdoklf@fdf";
@@ -41,6 +42,7 @@ public class ParserUtilTest {
     private static final String VALID_INFO = "4 room flat";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_SORT_ORDER = "a";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -52,7 +54,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -202,6 +204,7 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
     @Test
     public void parseUnrecommendedPhone_flagsWarning() {
         assertWarns((CommandWarnings commandWarnings) -> {
@@ -217,5 +220,23 @@ public class ParserUtilTest {
     @Test
     public void parseSortOrder_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseSortOrder(new CommandWarnings(), null));
+    }
+
+    @Test
+    public void parseSortOrder_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortOrder(new CommandWarnings(), INVALID_SORT_ORDER));
+    }
+
+    @Test
+    public void parseSortOrder_validValueWithoutWhitespace_returnsSortOrder() throws Exception {
+        SortOrder expectedSortOrder = new SortOrder(VALID_SORT_ORDER);
+        assertEquals(expectedSortOrder, ParserUtil.parseSortOrder(new CommandWarnings(), VALID_SORT_ORDER));
+    }
+
+    @Test
+    public void parseSortOrder_validValueWithWhitespace_returnsSortOrder() throws Exception {
+        String sortOrderWithWhitespace = WHITESPACE + VALID_SORT_ORDER + WHITESPACE;
+        SortOrder expectedSortOrder = new SortOrder(VALID_SORT_ORDER);
+        assertEquals(expectedSortOrder, ParserUtil.parseSortOrder(new CommandWarnings(), sortOrderWithWhitespace));
     }
 }

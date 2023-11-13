@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.displayable.seller.SellerComparator;
@@ -60,13 +59,9 @@ public class SortSellerCommand extends Command {
         }
 
         SortSellerCommand otherSortSellerCommand = (SortSellerCommand) other;
+        if (this.comparator == null && otherSortSellerCommand.comparator == null) {
+            return true;
+        }
         return comparator.equals(otherSortSellerCommand.comparator);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("comparator", comparator)
-                .toString();
     }
 }
