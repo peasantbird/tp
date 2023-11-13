@@ -6,7 +6,7 @@
 
 # RTPM User Guide
 
-RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage contacts, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, RTPM can get your contact management tasks done faster than traditional GUI apps.
+RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage contacts, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI), so you can get your contact management tasks done faster than traditional GUI apps.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -14,20 +14,20 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 
 * [Quick Start](#quick-start)
 * [Features](#features)<br>
-    * Adding a person<br>
+    * Adding a client<br>
        * [Adding a buyer: `buyer`](#adding-a-buyer-buyer)<br>
-       * [Adding a seller: `seller`](#adding-a-seller--seller)<br>
-    * Editing a person<br>
+       * [Adding a seller: `seller`](#adding-a-seller-seller)<br>
+    * Editing a client<br>
       * [Editing a buyer: `bedit`](#editing-a-buyer-bedit)<br>
       * [Editing a seller: `sedit`](#editing-a-seller-sedit)<br>
-    * Deleting a person<br>
+    * Deleting a client<br>
       * [Deleting a buyer: `bdelete`](#deleting-a-buyer-bdelete)<br>
       * [Deleting a seller: `sdelete`](#deleting-a-seller-sdelete)<br>
-      * [Clearing all entries: `clear`](#clearing-all-entries--clear)<br>
-    * Setting a person's priority<br>
-      * [Setting a buyer's priority: `bprio`](#setting-a-buyers-priority)<br>
-      * [Setting a seller's priority: `sprio`](#setting-a-sellers-priority)<br>
-    * Viewing the lists<br>
+      * [Clearing all entries: `clear`](#clearing-all-entries-clear)<br>
+    * Setting a client's priority<br>
+      * [Setting a buyer's priority: `bprio`](#setting-a-buyers-priority-bprio)<br>
+      * [Setting a seller's priority: `sprio`](#setting-a-sellers-priority-sprio)<br>
+    * Viewing the clients<br>
       * [Listing all buyers and sellers: `list`](#listing-all-buyers-and-sellers-list)<br>
       * [Filtering buyers and sellers: `filter`](#filtering-buyers-and-sellers-filter)<br>
       * [Displaying a buyer from buyer list: `blist`](#displaying-a-buyer-from-buyer-list-blist)<br>
@@ -50,8 +50,6 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
-
 ## Quick Start
 
 1. Ensure you have Java `11` or above installed in your computer.
@@ -62,7 +60,10 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar rtpm.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+<div style="text-align:center;">
    <img src="images/Ui.png" alt="Ui" style="width:500px"/>
+</div>
+
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -77,10 +78,11 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 
 6. Refer to the [Features](#features) below for details of each command.
 
+--------------------------------------------------------------------------------------------------------------------
 
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
+
 
 ## Features
 
@@ -128,10 +130,8 @@ Here are some things regarding RTPM's features to take note of before using them
   Hence, manually modifying the saved data file is not recommended.**
 </box>
 
-
-<div style="page-break-after: always;"></div>
-
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Adding a buyer: `buyer`
 
@@ -166,15 +166,17 @@ Precise outputs when the command fails due to invalid parameters:
 
 >Emails must contain at least one '@'.
 
+--------------------------------------------------------------------------------------------------------------------
 
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
 
 </div>
+
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
+
 
 ### Adding a seller : `seller`
 
@@ -208,6 +210,8 @@ Precise outputs when the command fails due to invalid parameters:
 
 >Emails must contain at least one '@'.
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -216,7 +220,7 @@ Precise outputs when the command fails due to invalid parameters:
 
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
+
 
 ### Editing a buyer: `bedit`
 
@@ -250,6 +254,8 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 >The buyer index provided is higher than the last number in the list!
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -259,7 +265,6 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 <div style="page-break-after: always;"></div>
 
 
---------------------------------------------------------------------------------------------------------------------
 
 ### Editing a seller: `sedit`
 
@@ -293,6 +298,8 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 >The seller index provided is higher than the last number in the list!
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -301,7 +308,7 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
+
 
 ### Deleting a buyer: `bdelete`
 
@@ -327,6 +334,8 @@ Example: bdelete 1
 >The buyer index provided is higher than the last number in the list!
 
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -336,7 +345,6 @@ Example: bdelete 1
 <div style="page-break-after: always;"></div>
 
 
---------------------------------------------------------------------------------------------------------------------
 
 ### Deleting a seller: `sdelete`
 
@@ -362,6 +370,8 @@ Example: sdelete 1
 
 >The seller index provided is higher than the last number in the list!
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -371,7 +381,6 @@ Example: sdelete 1
 <div style="page-break-after: always;"></div>
 
 
---------------------------------------------------------------------------------------------------------------------
 
 ### Clearing all entries : `clear`
 
@@ -397,11 +406,17 @@ Note that this command throws warnings. For more info on warnings, head [here.](
 
 Format: `bprio INDEX PRIORITY`
 * `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyer's list
-* `PRIORITY`: See [here.](#appendix-a-fields)
+* `PRIORITY`: See [here.](#appendix-b-fields)
 
 Example: `bprio 3 high`
 
-**Note: `PRIORITY` will only consider the first letter of the input being `h`, `m`, `l`, or `n` to determine the corresponding priority level. `bprio 3 hlow` sets the priority of buyer 3 to high.**
+<box type="info">
+
+Note: 
+* `PRIORITY` only considers the first letter of the input being `h`, `m`, `l`, or `n` to determine the corresponding priority level. For example, `bprio 3 hlow` sets the priority of buyer 3 to high.
+* Any additional inputs given after `PRIORITY` will be ignored. For example, `bprio 3 high low` still sets the priority of buyer 3 to high. 
+
+</box>
 
 Precise outputs when the command succeeds:
 
@@ -417,6 +432,8 @@ Parameters: INDEX PRIORITY
 
 >The buyer index provided is higher than the last number in the list!
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -426,7 +443,6 @@ Parameters: INDEX PRIORITY
 <div style="page-break-after: always;"></div>
 
 
---------------------------------------------------------------------------------------------------------------------
 
 ### Setting a seller's priority: `sprio`
 
@@ -444,7 +460,13 @@ Format: `sprio INDEX PRIORITY`
 
 Example: `sprio 3 high`
 
-**Note: `PRIORITY` will only consider the first letter of the input being `h`, `m`, `l`, or `n` to determine the corresponding priority level. `sprio 3 hlow` sets the priority of seller 3 to high.**
+<box type="info">
+
+Note:
+* `PRIORITY` only considers the first letter of the input being `h`, `m`, `l`, or `n` to determine the corresponding priority level. For example, `bprio 3 hlow` sets the priority of buyer 3 to high.
+* Any additional inputs given after `PRIORITY` will be ignored. For example, `bprio 3 high low` still sets the priority of buyer 3 to high.
+
+</box>
 
 Precise outputs when the command succeeds:
 
@@ -460,6 +482,8 @@ Parameters: INDEX PRIORITY
 
 >The seller index provided is higher than the last number in the list!
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -469,7 +493,6 @@ Parameters: INDEX PRIORITY
 <div style="page-break-after: always;"></div>
 
 
---------------------------------------------------------------------------------------------------------------------
 
 ### Listing all buyers and sellers: `list`
 
@@ -508,6 +531,8 @@ Precise outputs when the command succeeds:
 
 >1 buyer(s) and 0 seller(s) listed!
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -517,7 +542,6 @@ Precise outputs when the command succeeds:
 <div style="page-break-after: always;"></div>
 
 
---------------------------------------------------------------------------------------------------------------------
 
 ### Displaying a buyer from buyer list: `blist`
 
@@ -552,14 +576,17 @@ Precise outputs when the command succeeds:
 >Got it. Here's the information of this seller:<br>
 Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
+
+
 
 ### Sorting buyers: `bsort`
 
@@ -600,10 +627,12 @@ valid prefix (`n`, `ah`, `i` or `prio`).
   * For example, `bsort qwerty z/asdf prio/d` will execute `bsort prio/d`.
   * However, any extraneous inputs or invalid prefixes after a valid prefix will cause an error.
 * When two or more valid prefixes are provided, `bsort` will sort by only one of the provided prefixes, which is chosen
-  based on this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
+  based on this order:<br> **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
   * For example, `bsort prio/d n/d` will execute `bsort n/d`.
 
 </box>
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style='text-align: right;'>
 
@@ -614,7 +643,6 @@ valid prefix (`n`, `ah`, `i` or `prio`).
 <div style="page-break-after: always;"></div>
 
 
---------------------------------------------------------------------------------------------------------------------
 
 ### Sorting sellers: `ssort`
 
@@ -650,16 +678,14 @@ Example: ssort prio/d
 
 **Note:**
 
-* The sort command will ignore any extraneous inputs and invalid prefixes after the `ssort` keyword and before the next
+* Similar to `bsort`, the `ssort` command will also ignore any extraneous inputs and invalid prefixes after the `ssort` keyword and before the next
   valid prefix (`n`, `ah`, `i` or `prio`).
-    * For example, `ssort qwerty z/asdf prio/d` will execute `ssort prio/d`.
-    * However, any extraneous inputs or invalid prefixes after a valid prefix will cause an error.
-* When two or more valid prefixes are provided, `ssort` will sort by only one of the provided prefixes, which is chosen
-  based on this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
-    * For example, `ssort prio/d n/d` will execute `ssort n/d`.
-
+* Similar to `bsort`, when two or more valid prefixes are provided, `ssort` will sort by only one of the provided prefixes, which is chosen
+  based on this order: <br> **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
 
 </box>
+
+--------------------------------------------------------------------------------------------------------------------
 
 <div style='text-align: right;'>
 
@@ -669,8 +695,6 @@ Example: ssort prio/d
 
 <div style="page-break-after: always;"></div>
 
-
---------------------------------------------------------------------------------------------------------------------
 
 ### Undoing previous action: `undo`
 
@@ -722,6 +746,8 @@ Precise outputs when the command fails:
 
 >No commands to redo!
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -731,7 +757,6 @@ Precise outputs when the command fails:
 <div style="page-break-after: always;"></div>
 
 
---------------------------------------------------------------------------------------------------------------------
 
 ### Viewing help: `help`
 
@@ -769,6 +794,8 @@ Upon exit, the latest data is saved to your computer at data/addressbook.json.
 3. Long fields can cause the details of a client to not be displayed fully. A workaround is to use the 
 ```slist```/```blist``` commands to display the details of the client in the result box.
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -777,7 +804,7 @@ Upon exit, the latest data is saved to your computer at data/addressbook.json.
 
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
+
 
 ## Command summary
 
@@ -805,6 +832,8 @@ Action     | Format, Examples
 
 <br>
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -813,7 +842,7 @@ Action     | Format, Examples
 
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
+
 
 ## Appendix A: Warnings
 
@@ -851,6 +880,8 @@ The domain name must:
 Please ignore if this is expected.
 ```
 
+--------------------------------------------------------------------------------------------------------------------
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -859,7 +890,6 @@ Please ignore if this is expected.
 
 <div style="page-break-after: always;"></div>
 
---------------------------------------------------------------------------------------------------------------------
 
 ## Appendix B: Fields
 Here, we provide the exact checks that RTPM does for each field, and the warning given if the field is inappropriate.
@@ -874,13 +904,6 @@ Here, we provide the exact checks that RTPM does for each field, and the warning
 | **Priority**     | Starts with one of the letters `h,l,m,n` | Matches the first part of one of the words `high, low, medium, nil`.                              | `Inputs should be 'high', 'medium', 'low' or 'nil'. However, if at least the first letter is valid, we will read correctly.`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | **Tags**         | Must not be blank                        | Alphanumeric characters only                                                                      | `Tags names should be alphanumeric`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
-<div style='text-align: right;'>
-
-[Back to top](#rtpm-user-guide)
-
-</div>
-
-<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
