@@ -175,18 +175,10 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The  edit mechanism is facilitated by the `find` command. 
-
-Using the `find` command, we can find the seller or buyer to edit.
-
 Given below is an example usage scenario and how the edit mechanism behaves at each step.
 
 Step 1. The user types in the `bedit` or `sedit` keyword, followed by the index of the buyer or seller that they want
-to edit. Following that, they type `/field`, where `field` is a name of the field that they want to edit.
-
-The edit command will call the `find` command to find the corresponding buyer or seller, then it will copy that person,
-edit the field that the user wants to edit, delete that buyer or seller, then add the edited buyer or seller back
-into the list.
+to edit. Following that, they type one or more of `/PREFIX`, where `PREFIX` is a field that they want to edit. 
 
 <box type="info" seamless>
 
@@ -196,11 +188,11 @@ into the list.
 
 The following sequence diagram shows how the edit operation works:
 
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
+<puml src="diagrams/EditBuyerSequenceDiagram.puml" alt="EditBuyerSequenceDiagram" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `EditBuyerCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
 
@@ -208,17 +200,16 @@ The following sequence diagram shows how the edit operation works:
 
 **Aspect: How edit executes:**
 
-* **Alternative 1 (current choice):** Deletes the old buyer or seller and adds the edited one.
-    * Pros: Easy to implement.
-    * Cons: May not preserve buyer and seller order
+* **Alternative 1 (current choice):** Creates an EditBuyerDescriptor or an EditSellerDescriptor to abstract away 
+* all the Optional functionality
+    * Pros: Assigns concern of dealing with optional fields to the Descriptor class, making the code within
+  the `edit` commands easier to read and debug.
+    * Cons: Requires creation of additional Descriptor class, which makes it harder to trace through the code
 
-* **Alternative 2:** Deletes the old buyer or seller, then copies and deletes all the buyers or sellers
-after that buyer or seller, then adds the new edited buyer or seller, and then adds back all the copied
-buyers and sellers.
-    * Pros: Preserves order
-    * Cons: Difficult to implement
-
-_{more aspects and alternatives to be added}_
+* **Alternative 2:** `edit` command parsers pass Optionals directly to the Buyer Command
+    * Pros: Avoid creation of a new class that might introduce bugs
+    * Cons: Optionals are not intended to be used as inputs to methods, as they introduce additional 
+  work to be done in the method to handle the different inputs.
 
 
 ### Priority feature
@@ -487,7 +478,7 @@ as the CommandResult.
 
 **Target user profile**:
 
-This product is for student/junior realtors who have many clients and houses to keep track of. 
+This product is for student/junior realtors who have many clients to keep track of. 
 They are relatively tech-savvy and prefer the keyboard over the mouse, 
 prefer concise commands as opposed to full sentences, 
 and would like to customise the software to suit their preferences.
@@ -495,7 +486,9 @@ and would like to customise the software to suit their preferences.
 
 **Value proposition**:
 
-Our free and open-source app helps realtors to keep track of their clients’ preferences and house viewings in one place. Unlike apps like Google Sheets, our app is more optimized for large databases. In addition, we help auto-match appropriate houses to a client with matching budget, needs and location.
+Our free and open-source app helps realtors to keep track of their clients’ preferences and 
+details in one place. Unlike generic apps such as Google Sheets, our app is optimised 
+for typical realtor workloads and databases.
 
 
 ### User stories
@@ -531,7 +524,7 @@ Priority level is based on current iteration
 (For all use cases below, the **System** is our app `RTPM (RealtorTrackerPlusMax)` and the **Actor** is the `user`,
 unless specified otherwise)
 
-**Use case: UC1 - Add homeowner and house**
+**Use case: UC1 - Add homeowner and house info**
 System: RTPM
 Actor: User
 
@@ -634,7 +627,7 @@ Extensions:
 
 ### Non-Functional Requirements
 *NFRs taken from the given constraints found **[here](https://nus-cs2103-ay2324s1.github.io/website/schedule/week4/project.html)**:*
-
+The marking of NFRs as fulfilled/unfulfilled below is accurate for v1.4.
 -[x] The product should be optimized for keyboard users who can type fast and prefer typing over other means of input.
 -[x] The data should be stored locally in a human editable text file, instead of in a database.
 -[x] The software should primarily follow OOP.
@@ -665,6 +658,37 @@ Additional NFRs
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+
+--------------------------------------------------------------------------------------------------------------------
+## **Appendix: Effort**
+
+We consider that as of the current release (v1.4), substantial effort has been put in by our team to rework the original
+AB3 project into a product that is useful for realtors and contains all the features required, including sorting, flexible
+command typing, reordering and undoing/redoing commands.
+### Difficulties and challenges faced
+We had some difficulties doing ??? idk guys help me out here
+
+The first difficulty we encountered was in modifying the UI to fit our requirements. As developers newly introduced to the
+brownfield AB-3 project, we had to spend quite a fair bit of time familiarising ourselves with the project architecture, and
+the initial process of integrating some basic new commands and tests (such as the one given in the AB-3 tutorial) was already 
+rather tedious, let alone adding our own features to the project and changes to the UI. For example, when trying to separate 
+the initial `Person`s object into `Buyer`s and `Seller`s, the app wasn't able to launch due to having a broken test codebase, 
+which required us to refactor at least 20 files across different directories in the project in order for operations to resume. 
+After much refactoring and tinkling with the JavaFX GUI, we were finally more familiar and comfortable with making changes to 
+the AB-3 project, and were able to begin system testing of our app in preparation for our very first release of RTPM, in 
+the v1.2 release.
+
+
+
+### Achievements
+One of the things that we believe show the effort that we put into the project was the restructuring in the back-end to
+allow Model to hold, and UI to display, multiple lists of different types. In AB3, the application only needed to deal
+with one type of object, while in our case, we wanted to add 3 (Houses, buyers and sellers, although we only ended up
+adding the latter 2). Hence, we decided to abstract out the responsibility for displaying the object to the object itself
+(so we would not need a class to hold and display every type we wanted to add. 
+
+Displayable is an interface that allows the UniqueDisplayableList to abstractify the actual displaying and maintaining
+of uniqueness to the contained class itself. Thus we can reduce the number of repetitive classes required. 
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -910,7 +934,7 @@ execution.
 part of the argument for the previous field. We plan to check for misspelled prefixes and prefixes provided as 
 arguments of other fields and warn the user.
 
-4. Currently, the user is not warned if addresses, names, and house info entries contain only numbers and special 
+4. Currently, the user is not warned if addresses, names, or house info entries contain only numbers and special 
 symbols. We plan to expand warnings to include warnings for addresses, names and house info entries containing 
 only non-alphabetical characters.
   
@@ -939,7 +963,7 @@ only non-alphabetical characters.
      and only made it harder to test for invalid priority inputs. 
    <br> As such, we plan to 
      change the validation regex to only accept `h`, `m`, `l`, or `nil` as inputs
-     for priority in future.
+     for priority in the future.
   
 6. Currently, attempting to add multiple contacts with long names may cause the app to lag considerably. 
 We plan to optimise the similarity checks for names so that doing so results in less delay.
@@ -949,6 +973,16 @@ After testing, we determined that users in fact had two names that were very sho
 We defined distance between similar names as either one name contains the other entirely, 
 or the Levenshtein distance between the two names is 2 or less
 (It takes 2 or fewer substitutions/additions/removals to turn one of the names into the other.)
-An unintended effect was that, for example, if you had short names (e.g d, hi in the original case for us), 
+An unintended effect was that, for example, if you had short names (e.g "d", "hi", in the original case for us), 
 the names would match despite normal users probably not defining these two names as similar. 
 Possible future enhancements would be to make it percentage-based, so that short names are not producing warnings unnecessarily.
+
+8. Currently, we have sellers only having one selling address and one house info. This is not fully representative of all
+real-life conditions, since a seller can own and sell multiple houses. Likewise, a buyer could be
+theoretically searching for multiple houses (e.g. a rental firm). However we have decided in this early version, 
+and in view of our target audience (student/junior realtors) to have a one-to-one correspondence to simplify the 
+UI and refine other features. A future enhancement would be to use a House class that can
+have a many-to-one relation to buyers and sellers. (In fact, the class is already available and is 
+in the repository as an unused .java file; we did not manage to integrate it in time for v1.3 release.)
+A workaround for such cases in v1.4 is to add the info about both houses into
+the address field and info field (since we do not limit the user from doing this.)
