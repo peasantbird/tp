@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.AppUtil;
 
+/**
+ * Represents a sort order to sort Displayables in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidSortOrder(String)}
+ */
 public class SortOrder {
 
     public static final String MESSAGE_CONSTRAINTS =

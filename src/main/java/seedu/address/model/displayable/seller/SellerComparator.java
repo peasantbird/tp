@@ -11,7 +11,14 @@ import java.util.Comparator;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.displayable.SortOrder;
 
+/**
+ * Represents a comparator used to sort sellers in the address book.
+ */
 public class SellerComparator implements Comparator<Seller> {
+
+    public static final String MESSAGE_INVALID_SORT_ORDER =
+            "Seller comparator only works with ascending and descending sort orders!";
+    public static final String MESSAGE_UNSUPPORTED_PREFIX = "Seller comparator does not support that prefix!";
 
     private static final SellerComparator ASCENDING_NAME_COMPARATOR = new SellerComparator((o1, o2) ->
             o1.getName().fullName.toLowerCase().compareTo(o2.getName().fullName.toLowerCase()));
@@ -31,15 +38,25 @@ public class SellerComparator implements Comparator<Seller> {
             o1.getPriority().value.compareTo(o2.getPriority().value));
     private static final SellerComparator DEFAULT_COMPARATOR = null;
 
-    public static final String MESSAGE_INVALID_SORT_ORDER =
-            "Seller comparator only works with ascending and descending sort orders!";
-    public static final String MESSAGE_UNSUPPORTED_PREFIX = "Seller comparator does not support that prefix!";
     private final Comparator<Seller> sellerComparator;
 
+    /**
+     * Constructs a SellerComparator instance.
+     *
+     * @param comparator A comparator that implements a comparison function to sort sellers by.
+     */
     private SellerComparator(Comparator<Seller> comparator) {
         this.sellerComparator = comparator;
     }
 
+    /**
+     * Returns a SellerComparator instance that can be passed into a sort method.
+     * Sorts sellers by the field specified by the prefix, and by the specified sort order.
+     *
+     * @param prefix The prefix indicating the field to sort sellers by.
+     * @param sortOrder The sort order, which can be either ascending or descending, to sort sellers by.
+     * @return A SellerComparator instance.
+     */
     public static SellerComparator of(Prefix prefix, SortOrder sortOrder) {
         requireNonNull(prefix);
         requireNonNull(sortOrder);
@@ -85,6 +102,11 @@ public class SellerComparator implements Comparator<Seller> {
         }
     }
 
+    /**
+     * Returns a default SellerComparator instance, which is null.
+     *
+     * @return A default SellerComparator instance, which is null.
+     */
     public static SellerComparator of() {
         return DEFAULT_COMPARATOR;
     }
