@@ -465,7 +465,9 @@ and would like to customise the software to suit their preferences.
 
 **Value proposition**:
 
-Our free and open-source app helps realtors to keep track of their clients’ preferences and house viewings in one place. Unlike apps like Google Sheets, our app is more optimized for large databases. In addition, we help auto-match appropriate houses to a client with matching budget, needs and location.
+Our free and open-source app helps realtors to keep track of their clients’ preferences and 
+house viewings in one place. Unlike apps like Google Sheets, our app is more optimized for large databases.
+In addition, we help auto-match appropriate houses to a client with matching budget, needs and location.
 
 
 ### User stories

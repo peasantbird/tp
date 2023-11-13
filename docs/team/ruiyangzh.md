@@ -44,6 +44,7 @@ Given below are my contributions to this project.
 * **Project management**:
   * Team lead for Week 10 (for v1.3)
      * Created, assigned and tagged issues for the milestone 
+     * Arranged v1.2 postmortem to discuss issues and how to improve for later iterations
   * Wrote test cases to boost code coverage back to AB3 levels after restructuring e.g.
   ([\#206](https://github.com/AY2324S1-CS2103T-F11-3/tp/pull/206))
 
