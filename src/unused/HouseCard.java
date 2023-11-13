@@ -1,3 +1,7 @@
+//@@author ruiyangzh-unused
+//This class was meant to be representative of a houseCard in the final application. Not enough time was available
+//to implement the automatching buyers-with-houses feature, so we decided to cut this class and
+//focus on core features instead.
 package seedu.address.ui;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -42,7 +46,7 @@ public class HouseCard extends UiPart<Region> {
         name.setText(house.getName().fullName);
         price.setText(house.getPrice().value);
         address.setText(house.getAddress().value);
-        info.setText(house.getInfo().toString());
+        info.setText(house.getHouseInfo().toString());
         house.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

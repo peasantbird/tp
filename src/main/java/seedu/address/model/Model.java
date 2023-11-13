@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -63,11 +64,24 @@ public interface Model {
      * Returns true if a buyer with the same identity as {@code buyer} exists in the address book's buyer list.
      */
     boolean hasBuyer(Buyer buyer);
+    /**
+     * Returns true if a buyer with similar identity as {@code buyer} exists in the address book's buyer list.
+     */
+    boolean hasSimilarBuyer(Buyer buyer);
 
     /**
      * Returns true if a seller with the same identity as {@code seller} exists in the address book's seller list.
      */
     boolean hasSeller(Seller seller);
+    /**
+     * Returns true if a seller with similar identity as {@code seller} exists in the address book's seller list.
+     */
+    boolean hasSimilarSeller(Seller seller);
+
+
+    boolean buyerHasSameSellerName(Buyer buyer);
+
+    boolean sellerHasSameBuyerName(Seller seller);
 
     /**
      * Deletes the given buyer.
@@ -125,4 +139,18 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredSellerList(Predicate<? super Seller> predicate);
+
+    void commitAddressBook();
+
+    void undoAddressBook();
+
+    void redoAddressBook();
+
+    boolean canUndoAddressBook();
+
+    boolean canRedoAddressBook();
+
+    void updateFilteredSortedBuyerList(Comparator<Buyer> comparator);
+
+    void updateFilteredSortedSellerList(Comparator<Seller> comparator);
 }

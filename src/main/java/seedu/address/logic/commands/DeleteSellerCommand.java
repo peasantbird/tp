@@ -18,7 +18,7 @@ import seedu.address.model.displayable.seller.Seller;
  */
 public class DeleteSellerCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete-s";
+    public static final String COMMAND_WORD = "sdelete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the seller identified by the index number used in the displayed seller list.\n"
@@ -44,6 +44,7 @@ public class DeleteSellerCommand extends Command {
 
         Seller sellerToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteSeller(sellerToDelete);
+        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DELETE_SELLER_SUCCESS, Messages.format(sellerToDelete)));
     }
 

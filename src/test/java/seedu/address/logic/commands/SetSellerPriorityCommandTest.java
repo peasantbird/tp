@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
@@ -43,6 +44,27 @@ public class SetSellerPriorityCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setSeller(targetSeller, targetSeller);
+        expectedModel.commitAddressBook();
+
+        assertCommandSuccess(setSellerPriorityCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_lastIndexUnfilteredList_success() {
+        ObservableList<Seller> sellerList = model.getFilteredSellerList();
+        Index lastIndex = Index.fromOneBased(sellerList.size());
+        Seller targetSeller = sellerList.get(lastIndex.getZeroBased());
+        SetSellerPriorityCommand setSellerPriorityCommand = new SetSellerPriorityCommand(
+                lastIndex,
+                DEFAULT_PRIORITY
+        );
+
+        String expectedMessage = String.format(SetSellerPriorityCommand.MESSAGE_SUCCESS,
+                Messages.format(targetSeller));
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setSeller(targetSeller, targetSeller);
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(setSellerPriorityCommand, model, expectedMessage, expectedModel);
     }
@@ -72,6 +94,7 @@ public class SetSellerPriorityCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         showSellerAtIndex(expectedModel, INDEX_FIRST_PERSON);
         expectedModel.setSeller(targetSeller, targetSeller);
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(setSellerPriorityCommand, model, expectedMessage, expectedModel);
     }
@@ -86,6 +109,18 @@ public class SetSellerPriorityCommandTest {
 
         SetSellerPriorityCommand setSellerPriorityCommand = new SetSellerPriorityCommand(
                 outOfBoundIndex,
+                DEFAULT_PRIORITY
+        );
+
+        assertCommandFailure(setSellerPriorityCommand, model, Messages.MESSAGE_INVALID_SELLER_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_emptyFilteredList_throwsCommandException() {
+        model.updateFilteredSellerList(x -> false);
+
+        SetSellerPriorityCommand setSellerPriorityCommand = new SetSellerPriorityCommand(
+                INDEX_FIRST_PERSON,
                 DEFAULT_PRIORITY
         );
 
@@ -123,7 +158,9 @@ public class SetSellerPriorityCommandTest {
         SetSellerPriorityCommand setSellerPriorityCommand = new SetSellerPriorityCommand(targetIndex, DEFAULT_PRIORITY);
         String expected = SetSellerPriorityCommand.class.getCanonicalName()
                 + "{targetIndex=" + targetIndex
-                + ", priority=" + DEFAULT_PRIORITY + "}";
+                + ", priority=" + DEFAULT_PRIORITY
+                + ", warnings=[]"
+                + "}";
         assertEquals(expected, setSellerPriorityCommand.toString());
     }
 }

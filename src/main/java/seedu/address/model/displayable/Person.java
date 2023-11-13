@@ -41,9 +41,8 @@ public abstract class Person implements Displayable {
     /**
      * Overloaded constructor for Person with an optional field for priority.
      * NOTE: This method is meant for temporal usage; Person is to be refactored to have only 1 constructor
-     * which includes priority as an argument, with all test cases being refactored to match this change, qfter
+     * which includes priority as an argument, with all test cases being refactored to match this change, after
      * the SetPriorityCommand has been implemented.
-     * TODO: To implement a Person constructor with optional fields,
      * we can instead modify the AddBuyerCommandParser / AddSellerCommandParser to check if argMultimap contains
      * the respective prefixes or not, with only PrefixName being compulsory. Else, if argMultimap does not
      * contain the prefix for non-compulsory fields (ie phone, email etc.), simply construct Person with the
@@ -101,6 +100,7 @@ public abstract class Person implements Displayable {
                 && otherPerson.getName().equals(getName());
     }
 
+    @Override
     public boolean isSameDisplayable(Displayable displayable) {
         return ((displayable instanceof Person) && isSamePerson((Person) displayable));
     }
@@ -131,5 +131,12 @@ public abstract class Person implements Displayable {
                 .add("address", address)
                 .add("tags", tags)
                 .add("priority", priority);
+    }
+    @Override
+    public boolean isSimilarDisplayable(Displayable displayable) {
+        if (displayable == this) {
+            return true;
+        }
+        return getName().isSameNameFuzzyMatch(displayable.getName());
     }
 }

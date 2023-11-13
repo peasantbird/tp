@@ -19,6 +19,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.displayable.buyer.Buyer;
 import seedu.address.model.displayable.seller.Seller;
+import seedu.address.testutil.EditBuyerDescriptorBuilder;
+import seedu.address.testutil.EditSellerDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -33,8 +35,12 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_HOUSE_INFO_AMY = "Amy's lovely house";
+    public static final String VALID_HOUSE_INFO_BOB = "Bob's lovely house";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_PRIORITY_AMY = "high";
+    public static final String VALID_PRIORITY_BOB = "low";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -55,6 +61,34 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final EditBuyerCommand.EditBuyerDescriptor DESC_AMY;
+    public static final EditBuyerCommand.EditBuyerDescriptor DESC_BOB;
+
+    static {
+        DESC_AMY = new EditBuyerDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withHouseInfo(VALID_HOUSE_INFO_AMY)
+                .withTags(VALID_TAG_FRIEND).withPriority(VALID_PRIORITY_AMY).build();
+        DESC_BOB = new EditBuyerDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withHouseInfo(VALID_HOUSE_INFO_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withPriority(VALID_PRIORITY_BOB).build();
+    }
+
+    public static final EditSellerCommand.EditSellerDescriptor DESC_SAMY;
+    public static final EditSellerCommand.EditSellerDescriptor DESC_SBOB;
+
+    static {
+        DESC_SAMY = new EditSellerDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+                .withSellingAddress(VALID_ADDRESS_AMY).withHouseInfo(VALID_HOUSE_INFO_AMY)
+                .withTags(VALID_TAG_FRIEND).withPriority(VALID_PRIORITY_AMY).build();
+        DESC_SBOB = new EditSellerDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+                .withSellingAddress(VALID_ADDRESS_BOB).withHouseInfo(VALID_HOUSE_INFO_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withPriority(VALID_PRIORITY_BOB).build();
+    }
 
     /**
      * Executes the given {@code command}, confirms that <br>

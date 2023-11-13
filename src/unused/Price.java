@@ -1,7 +1,12 @@
+//@@author ruiyangzh-unused
+//This class was meant to be representative of a house's price in the final application. Not enough time was available
+//to implement the automatching buyers-with-houses feature, so we decided to cut this class and
+//focus on core features instead.
 package seedu.address.model.displayable;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.commons.util.AppUtil;
 
 /**
  * Represents a House's price in the address book.
@@ -22,7 +27,7 @@ public class Price {
      */
     public Price(String price) {
         requireNonNull(price);
-        checkArgument(isValidPrice(price), MESSAGE_CONSTRAINTS);
+        AppUtil.validateArgument(isValidPrice(price), MESSAGE_CONSTRAINTS);
         value = price;
     }
 

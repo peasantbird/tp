@@ -46,11 +46,13 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-
+        CommandWarnings warnings = new CommandWarnings();
         CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+        Command command = addressBookParser.parseCommand(commandText, warnings);
         commandResult = command.execute(model);
-
+        if (warnings.containsWarnings()) {
+            logger.warning(warnings.getWarningMessage());
+        }
         try {
             storage.saveAddressBook(model.getAddressBook());
         } catch (AccessDeniedException e) {

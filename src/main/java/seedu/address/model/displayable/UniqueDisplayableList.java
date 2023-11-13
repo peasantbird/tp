@@ -29,11 +29,18 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent displayable as the given argument.
+     * Returns true if the list contains an equivalent displayable to the given argument.
      */
-    public boolean contains(T toCheck) {
+    public boolean contains(Displayable toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameDisplayable);
+    }
+    /**
+     * Returns true if the list contains a similar displayable to the given argument.
+     */
+    public boolean containsSimilar(T toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSimilarDisplayable);
     }
 
     /**
@@ -43,7 +50,6 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
     public void add(T toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            //TODO change this when we add a more general exception.
             throw new DuplicateException();
         }
         internalList.add(toAdd);
@@ -59,7 +65,6 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            //TODO replace this exception
             throw new DisplayableNotFoundException();
         }
 
@@ -77,12 +82,10 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
     public void remove(T toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            //TODO replace exception
             throw new DisplayableNotFoundException();
         }
     }
 
-    // TODO: Ascertain whether this is necessary, if not, remove this method and its JUnit tests
     public void setDisplayables(UniqueDisplayableList<T> replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
@@ -95,7 +98,6 @@ public class UniqueDisplayableList<T extends Displayable> implements Iterable<T>
     public void setDisplayables(List<? extends T> displayables) {
         requireAllNonNull(displayables);
         if (!displayablesAreUnique(displayables)) {
-            //TODO change exception
             throw new DuplicateException();
         }
 

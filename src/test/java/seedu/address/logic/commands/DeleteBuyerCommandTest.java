@@ -38,6 +38,7 @@ public class DeleteBuyerCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteBuyer(buyerToDelete);
+        expectedModel.commitAddressBook();
 
         assertCommandSuccess(deleteBuyerCommand, model, expectedMessage, expectedModel);
     }
@@ -62,6 +63,7 @@ public class DeleteBuyerCommandTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteBuyer(buyerToDelete);
+        expectedModel.commitAddressBook();
         showNoPerson(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);

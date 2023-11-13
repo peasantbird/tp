@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalSellers.SALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -71,7 +72,6 @@ public class AddSellerCommandTest {
 
         // different types -> returns false
         assertFalse(addAliceCommand.equals(1));
-
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
 
@@ -146,10 +146,27 @@ public class AddSellerCommandTest {
         }
 
         @Override
+        public boolean hasSimilarBuyer(Buyer buyer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasSeller(Seller seller) {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public boolean buyerHasSameSellerName(Buyer buyer) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasSimilarSeller(Seller seller) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean sellerHasSameBuyerName(Seller seller) {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public void deleteBuyer(Buyer target) {
             throw new AssertionError("This method should not be called.");
@@ -186,6 +203,39 @@ public class AddSellerCommandTest {
 
         @Override
         public void updateFilteredSellerList(Predicate<? super Seller> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitAddressBook() {}
+
+        @Override
+        public void undoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredSortedBuyerList(Comparator<Buyer> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredSortedSellerList(Comparator<Seller> comparator) {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -225,7 +275,15 @@ public class AddSellerCommandTest {
             requireNonNull(seller);
             sellersAdded.add(seller);
         }
-
+        @Override
+        public boolean hasSimilarSeller(Seller seller) {
+            requireNonNull(seller);
+            return sellersAdded.stream().anyMatch(seller::isSimilarDisplayable);
+        }
+        @Override
+        public boolean sellerHasSameBuyerName(Seller seller) {
+            return false;
+        }
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();

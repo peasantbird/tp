@@ -51,7 +51,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the displayable list with {@code sellerss}.
+     * Replaces the contents of the displayable list with {@code sellers}.
      * {@code sellers} must not contain duplicate sellers.
      */
     public void setSellers(List<Seller> sellers) {
@@ -77,13 +77,42 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(buyer);
         return buyers.contains(buyer);
     }
-
+    /**
+     * Returns true if a buyer with a similar identity as {@code buyer} exists in the address book's buyer list.
+     */
+    public boolean hasSimilarBuyer(Buyer buyer) {
+        requireNonNull(buyer);
+        return buyers.containsSimilar(buyer);
+    }
     /**
      * Returns true if a seller with the same identity as {@code seller} exists in the address book's seller list.
      */
     public boolean hasSeller(Seller seller) {
         requireNonNull(seller);
         return sellers.contains(seller);
+    }
+    /**
+     * Returns true if a seller with a similar identity as {@code seller} exists in the address book's seller list.
+     */
+    public boolean hasSimilarSeller(Seller seller) {
+        requireNonNull(seller);
+        return sellers.containsSimilar(seller);
+    }
+
+    /**
+     * Returns true if a buyer has the same name as a seller in the address book's seller list.
+     */
+    public boolean buyerHasSameSellerName(Buyer buyer) {
+        requireNonNull(buyer);
+        return sellers.contains(buyer);
+    }
+
+    /**
+     * Returns true if a seller has the same name as buyer in the address book's buyer list.
+     */
+    public boolean sellerHasSameBuyerName(Seller seller) {
+        requireNonNull(seller);
+        return buyers.contains(seller);
     }
 
     /**

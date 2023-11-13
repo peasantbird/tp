@@ -1,10 +1,10 @@
 {
   "buyers" : [ {
-    "name" : "Invalid B!(*)@!u!@)(yer",
-    "phone" : "94351253",
+    "name" : "alice",
+    "phone" : "invalid number, no digits",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "buyerInfo" : "Loves views",
+    "info" : "Loves views",
     "tags" : [ "friends" ],
     "priority": "nil"
   } ],

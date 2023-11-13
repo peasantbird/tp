@@ -17,7 +17,7 @@ import seedu.address.model.displayable.buyer.Buyer;
  */
 public class DeleteBuyerCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete-b";
+    public static final String COMMAND_WORD = "bdelete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the buyer identified by the index number used in the displayed buyer list.\n"
@@ -43,6 +43,7 @@ public class DeleteBuyerCommand extends Command {
 
         Buyer buyerToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteBuyer(buyerToDelete);
+        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DELETE_BUYER_SUCCESS, Messages.format(buyerToDelete)));
     }
 

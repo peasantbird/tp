@@ -1,3 +1,5 @@
+//@@author ruiyangzh-unused
+//This was meant to test the house class.
 package seedu.address.model.displayable.house;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,7 +12,7 @@ import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.displayable.Address;
-import seedu.address.model.displayable.Info;
+import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Price;
 
@@ -20,25 +22,25 @@ public class HouseTest {
             new House(new Name("Residential College 4"),
                     new Price("1 million dollars"),
                     new Address("NUS"),
-                    new Info("Suite room"),
+                    new HouseInfo("Suite room"),
                     new HashSet<>());
     private final House dummyHouseDifferentObject =
             new House(new Name("Residential College 4"),
                     new Price("1 million dollars"),
                     new Address("NUS"),
-                    new Info("Suite room"),
+                    new HouseInfo("Suite room"),
                     new HashSet<>());
     private final House differentHouse =
             new House(new Name("Residential College 4"),
             new Price("1 million dollars"),
             new Address("Kent Ridge"),
-            new Info("Suite room"),
+            new HouseInfo("Suite room"),
             new HashSet<>());
     private final House dummyHouseDifferentName =
             new House(new Name("RC4"),
                     new Price("1 million dollars"),
                     new Address("NUS"),
-                    new Info("Suite room"),
+                    new HouseInfo("Suite room"),
                     new HashSet<>());
 
     @Test
@@ -67,7 +69,7 @@ public class HouseTest {
                 + "{name=" + dummyHouse.getName()
                 + ", price=" + dummyHouse.getPrice()
                 + ", address=" + dummyHouse.getAddress()
-                + ", info=" + dummyHouse.getInfo()
+                + ", info=" + dummyHouse.getHouseInfo()
                 + ", tags=" + dummyHouse.getTags()
                 + "}";
         assertEquals(expected, dummyHouse.toString());
