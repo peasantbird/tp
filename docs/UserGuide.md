@@ -43,20 +43,21 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
     * [Appendix B: Fields](#appendix-b-fields)<br>
     * [Appendix C: Similar names](#appendix-c-similar-names)<br>
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Quick Start
 
 1. Ensure you have Java `11` or above installed in your computer.
 
-1. Download the latest `rtpm.jar` [here](https://github.com/AY2324S1-CS2103T-F11-3/tp/releases/tag/v1.3(trial)).
+2. Download the latest `rtpm.jar` [here](https://github.com/AY2324S1-CS2103T-F11-3/tp/releases/tag/v1.3(trial)).
 
-1. Copy the file to the folder you want to use as the _home folder_ for RTPM.
+3. Copy the file to the folder you want to use as the _home folder_ for RTPM.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar rtpm.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar rtpm.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   <img src="images/Ui.png" alt="Ui" style="width:500px"/>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
     * `buyer n/John Doe p/91234567 e/johndoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium` : Adds a buyer named John Doe to the RTPM.
@@ -67,11 +68,14 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 
     * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
+
+Here are some things regarding RTPM's features to take note of before using them.
 
 <box type="info" seamless>
 
@@ -96,8 +100,10 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+</box>
+<div style="page-break-after: always;"></div>
 
-
+<box type="info" seamless>
 **General notes about features:**<br>
 
 * RTPM does not require all fields to be filled in when creating buyers or sellers. Fields that have been omitted will be set to their default values.
@@ -106,12 +112,12 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 * RTPM data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 * RTPM data are saved automatically as a JSON file `[JAR file location]/data/rtpm.json`. Advanced users are welcome to update data directly by editing that data file.
 * Note that RTPM does checks for duplicate and similar entries. For more info, go [here.](#appendix-c-similar-names)
-
-**If your changes to the data file are in an invalid format, RTPM will discard all data and start with an empty data file at the next run.
-Hence, it is recommended to take a backup of the file before editing it.**
+* **If you manually make changes to the saved data file such that the JSON format is invalid, RTPM will discard all data and start with an empty data file at the next run.
+Hence, manually modifying the saved data file is not recommended.**
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Adding a buyer: `buyer`
 
@@ -154,6 +160,7 @@ Precise outputs when the command fails due to invalid parameters:
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Adding a seller : `seller`
 
@@ -194,6 +201,7 @@ Precise outputs when the command fails due to invalid parameters:
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Editing a buyer: `bedit`
 
@@ -234,6 +242,7 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Editing a seller: `sedit`
 
@@ -274,6 +283,8 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 
 ### Deleting a buyer: `bdelete`
 
@@ -297,13 +308,6 @@ Parameters: INDEX (must be a positive integer)<br>
 Example: bdelete 1
 
 >The buyer index provided is higher than the last number in the list!
-
-<div style='text-align: right;'>
-
-[Back to top](#rtpm-user-guide)
-
-</div>
-
 --------------------------------------------------------------------------------------------------------------------
 
 ### Deleting a seller: `sdelete`
@@ -337,6 +341,8 @@ Example: sdelete 1
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 
 ### Clearing all entries : `clear`
 
@@ -347,12 +353,6 @@ Format: `clear`
 Precise outputs when the command succeeds:
 
 >Address book has been cleared!
-
-<div style='text-align: right;'>
-
-[Back to top](#rtpm-user-guide)
-
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -395,6 +395,8 @@ Parameters: INDEX PRIORITY
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 
 ### Setting a seller's priority: `sprio`
 
@@ -435,6 +437,8 @@ Parameters: INDEX PRIORITY
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 
 ### Listing all buyers and sellers: `list`
 
@@ -445,12 +449,6 @@ Format: `list`
 Precise outputs when the command succeeds:
 
 >Listed all buyers and sellers!
-
-<div style='text-align: right;'>
-
-[Back to top](#rtpm-user-guide)
-
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -486,6 +484,7 @@ Precise outputs when the command succeeds:
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Displaying a buyer from buyer list: `blist`
 
@@ -500,12 +499,6 @@ Precise outputs when the command succeeds:
 
 >Got it. Here's the information of this buyer:<br>
 Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
-
-<div style='text-align: right;'>
-
-[Back to top](#rtpm-user-guide)
-
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -531,7 +524,7 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling A
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
-
+<div style="page-break-after: always;"></div>
 
 ### Sorting buyers: `bsort`
 
@@ -585,6 +578,7 @@ the prefix to sort by in this order: **1. Name**, **2. Home address**, **3. Hous
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ### Sorting sellers: `ssort`
 
@@ -638,6 +632,8 @@ Example: ssort prio/d
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 
 ### Undoing previous action: `undo`
 
@@ -662,12 +658,6 @@ Precise outputs when the command succeeds:
 Precise outputs when the command fails:
 
 >No commands to undo!
-
-<div style='text-align: right;'>
-
-[Back to top](#rtpm-user-guide)
-
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -703,6 +693,8 @@ Precise outputs when the command fails:
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
@@ -736,6 +728,13 @@ Upon exit, the latest data is saved to your computer at data/addressbook.json.
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RTPM home folder.
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Known issues
+
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. Adding multiple contacts with excessively long names (>5000 characters) may cause RTPM to lag significantly. It is recommended to use nicknames or initials if necessary.
+
 
 <div style='text-align: right;'>
 
@@ -744,12 +743,8 @@ Upon exit, the latest data is saved to your computer at data/addressbook.json.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
-## Known issues
-
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. Adding multiple contacts with excessively long names (>5000 characters) may cause RTPM to lag significantly. It is recommended to use nicknames or initials if necessary.
---------------------------------------------------------------------------------------------------------------------
 ## Command summary
 
 Action     | Format, Examples
@@ -765,6 +760,17 @@ Action     | Format, Examples
 **Set Seller Priority** | `sprio INDEX PRIORITY`<br> e.g. sprio 3 high
 **List All** | `list`
 **Filter**   | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g. filter John Doe
+
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
+
+<div style="page-break-after: always;"></div>
+
+Action     | Format, Examples
+-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **List Buyer**   | `blist INDEX` <br> e.g. blist 1
 **List Seller**   | `slist INDEX`<br> e.g. slist 1
 **Sort Buyers** | `bsort [PREFIX/DIRECTION]`<br> e.g. bsort n/d
@@ -781,6 +787,7 @@ Action     | Format, Examples
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Appendix A: Warnings
 
@@ -815,6 +822,9 @@ Please ignore if this is expected.
 
 </div>
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## Appendix B: Fields
 Here, we provide the exact checks that RTPM does for each field, and the warning given if the field is inappropriate.
 
@@ -833,6 +843,9 @@ Here, we provide the exact checks that RTPM does for each field, and the warning
 [Back to top](#rtpm-user-guide)
 
 </div>
+
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Appendix C: Similar names
 RTPM does checks to ensure users do not accidentally enter the same person twice, preventing cases where you have duplicate entries.
@@ -856,6 +869,7 @@ An example when similar names are detected:
 An example when the same name is detected:
 ```This seller already exists in the address book```
 (This is not allowed, hence the command does not execute.)
+
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)

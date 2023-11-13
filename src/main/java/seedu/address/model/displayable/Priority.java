@@ -12,7 +12,7 @@ public class Priority {
 
     public static final String MESSAGE_RECOMMENDATIONS = "Inputs should be 'high', 'medium', 'low' or 'nil'. However,"
             + "if at least the first letter is valid, we will read correctly.";
-    //todo this message is a bit clunky
+
     public static final String MESSAGE_CONSTRAINTS =
             "Priority inputs must start with, at the minimum, h for high, m for medium, l for low, or n for nil. "
                    + "This is not case sensitive. A blank input also means nil.";
