@@ -332,10 +332,6 @@ sorting.
 
 The same logic can be used for sorting sellers instead of buyers, by using `ssort` instead of `bsort`.
 
-#### Design considerations:
-
-**Aspect:**
-
 ### Undo & redo feature
 
 #### Implementation
