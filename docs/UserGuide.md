@@ -6,7 +6,9 @@
 
 # RTPM User Guide
 
-RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage contacts, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI), so you can get your contact management tasks done faster than traditional GUI apps.
+RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage contacts, optimized for use via a 
+Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI), so you can get your 
+contact management tasks done faster than traditional GUI apps!
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -25,8 +27,8 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
       * [Deleting a seller: `sdelete`](#deleting-a-seller-sdelete)<br>
       * [Clearing all entries: `clear`](#clearing-all-entries-clear)<br>
     * Setting a client's priority<br>
-      * [Setting a buyer's priority: `bprio`](#setting-a-buyers-priority-bprio)<br>
-      * [Setting a seller's priority: `sprio`](#setting-a-sellers-priority-sprio)<br>
+      * [Setting a buyer's priority: `bprio`](#setting-a-buyer-s-priority-bprio)<br>
+      * [Setting a seller's priority: `sprio`](#setting-a-seller-s-priority-sprio)<br>
     * Viewing the clients<br>
       * [Listing all buyers and sellers: `list`](#listing-all-buyers-and-sellers-list)<br>
       * [Filtering buyers and sellers: `filter`](#filtering-buyers-and-sellers-filter)<br>
@@ -59,7 +61,8 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 3. Copy the file to the folder you want to use as the _home folder_ for RTPM.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar rtpm.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. If you are starting the app for the first time,
+ there will be some sample data loaded.<br>
 <div style="text-align:center;">
    <img src="images/Ui.png" alt="Ui" style="width:500px"/>
 </div>
@@ -68,7 +71,7 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `buyer n/John Doe p/91234567 e/johndoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium` : Adds a buyer named John Doe to the RTPM.
+    * `buyer n/John Doe` : Adds a buyer named John Doe to the RTPM.
 
     * `list` : Lists all buyers and sellers.
 
@@ -78,11 +81,10 @@ RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage co
 
 6. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
-
 <div style="page-break-after: always;"></div>
 
 
+<br>
 
 ## Features
 
@@ -121,17 +123,27 @@ Here are some things regarding RTPM's features to take note of before using them
 **General notes about features:**<br>
 
 * RTPM does not require all fields to be filled in when creating buyers or sellers. Fields that have been omitted will be set to their default values.
+
 * RTPM accepts unconventional entries for data values to an extent. However, the warning system informs the user of any valid but possibly unintended inputs. For more information, refer to [Appendix A: Warnings](#appendix-a-warnings)
+
 * The priority system allows for the designation of levels of importance to each buyer and seller, which will be displayed as a tag in RTPM. When this priority is set to `nil`, there will be no tag.
+
 * RTPM data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
 * RTPM data are saved automatically as a JSON file `[JAR file location]/data/rtpm.json`.
+
 * Note that RTPM checks for duplicate and similar entries. Refer to [Appendix C: Similar Names](#appendix-c-similar-names) for more info.
+
 * **If you manually make changes to the saved data file such that the JSON format is invalid, RTPM will discard all data and start with an empty data file at the next run.
   Hence, manually modifying the saved data file is not recommended.**
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
+
+
 <div style="page-break-after: always;"></div>
+
+<br>
 
 ### Adding a buyer: `buyer`
 
@@ -139,7 +151,7 @@ Adds a buyer with their information to the list.
 
 <box type="info" seamless>
 
-Note that this command throws warnings. For more info on fields, head [here.](#appendix-a-fields) For more info on warnings, head [here.](#appendix-a-warnings)
+Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
 
 </box>
 
@@ -166,8 +178,6 @@ Precise outputs when the command fails due to invalid parameters:
 
 >Emails must contain at least one '@'.
 
---------------------------------------------------------------------------------------------------------------------
-
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -177,6 +187,7 @@ Precise outputs when the command fails due to invalid parameters:
 <div style="page-break-after: always;"></div>
 
 
+<br>
 
 ### Adding a seller : `seller`
 
@@ -184,7 +195,7 @@ Adds a seller with their information to the list.
 
 <box type="info" seamless>
 
-Note that this command throws warnings. For more info on fields, head [here.](#appendix-a-fields) For more info on warnings, head [here.](#appendix-a-warnings)
+Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
 
 </box>
 
@@ -210,7 +221,6 @@ Precise outputs when the command fails due to invalid parameters:
 
 >Emails must contain at least one '@'.
 
---------------------------------------------------------------------------------------------------------------------
 
 <div style='text-align: right;'>
 
@@ -221,6 +231,7 @@ Precise outputs when the command fails due to invalid parameters:
 <div style="page-break-after: always;"></div>
 
 
+<br>
 
 ### Editing a buyer: `bedit`
 
@@ -228,7 +239,7 @@ Edits the information of a buyer based on their index number in the buyers' list
 
 <box type="info" seamless>
 
-Note that this command throws warnings. For more info on fields, head [here.](#appendix-a-fields) For more info on warnings, head [here.](#appendix-a-warnings)
+Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
 
 </box>
 
@@ -254,8 +265,6 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 >The buyer index provided is higher than the last number in the list!
 
---------------------------------------------------------------------------------------------------------------------
-
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -265,6 +274,7 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 <div style="page-break-after: always;"></div>
 
 
+<br>
 
 ### Editing a seller: `sedit`
 
@@ -272,7 +282,7 @@ Edits the information of a seller based on their index number in the sellers' li
 
 <box type="info" seamless>
 
-Note that this command throws warnings. For more info on fields, head [here.](#appendix-a-fields) For more info on warnings, head [here.](#appendix-a-warnings)
+Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
 
 </box>
 
@@ -298,7 +308,6 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 >The seller index provided is higher than the last number in the list!
 
---------------------------------------------------------------------------------------------------------------------
 
 <div style='text-align: right;'>
 
@@ -309,6 +318,8 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 <div style="page-break-after: always;"></div>
 
 
+
+<br>
 
 ### Deleting a buyer: `bdelete`
 
@@ -334,8 +345,6 @@ Example: bdelete 1
 >The buyer index provided is higher than the last number in the list!
 
 
---------------------------------------------------------------------------------------------------------------------
-
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -345,6 +354,7 @@ Example: bdelete 1
 <div style="page-break-after: always;"></div>
 
 
+<br>
 
 ### Deleting a seller: `sdelete`
 
@@ -372,16 +382,6 @@ Example: sdelete 1
 
 --------------------------------------------------------------------------------------------------------------------
 
-<div style='text-align: right;'>
-
-[Back to top](#rtpm-user-guide)
-
-</div>
-
-<div style="page-break-after: always;"></div>
-
-
-
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
@@ -392,7 +392,17 @@ Precise outputs when the command succeeds:
 
 >Address book has been cleared!
 
---------------------------------------------------------------------------------------------------------------------
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
+
+<div style="page-break-after: always;"></div>
+
+
+
+<br>
 
 ### Setting a buyer's priority: `bprio`
 
@@ -412,9 +422,9 @@ Example: `bprio 3 high`
 
 <box type="info">
 
-Note: 
-* `PRIORITY` only considers the first letter of the input being `h`, `m`, `l`, or `n` to determine the corresponding priority level. For example, `bprio 3 hlow` sets the priority of buyer 3 to high.
-* Any additional inputs given after `PRIORITY` will be ignored. For example, `bprio 3 high low` still sets the priority of buyer 3 to high. 
+**Note:**
+* `PRIORITY` only considers the first letter of the input (`h` for high, `m` for medium, `l` for low, or `n` for nil). For example, `bprio 3 hlow` sets the priority of buyer 3 to high.
+* Any extra inputs given after `PRIORITY` will be ignored. For example, `bprio 3 high low` is equivalent to `bprio 3 high`.
 
 </box>
 
@@ -432,7 +442,6 @@ Parameters: INDEX PRIORITY
 
 >The buyer index provided is higher than the last number in the list!
 
---------------------------------------------------------------------------------------------------------------------
 
 <div style='text-align: right;'>
 
@@ -443,6 +452,8 @@ Parameters: INDEX PRIORITY
 <div style="page-break-after: always;"></div>
 
 
+
+<br>
 
 ### Setting a seller's priority: `sprio`
 
@@ -456,15 +467,15 @@ Sets the priority level of a seller based on their index number in the seller's 
 
 Format: `sprio INDEX PRIORITY`
 * `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyer's list
-* `PRIORITY`: See [here.](#appendix-a-fields)
+* `PRIORITY`: See [here.](#appendix-b-fields)
 
 Example: `sprio 3 high`
 
 <box type="info">
 
-Note:
-* `PRIORITY` only considers the first letter of the input being `h`, `m`, `l`, or `n` to determine the corresponding priority level. For example, `bprio 3 hlow` sets the priority of buyer 3 to high.
-* Any additional inputs given after `PRIORITY` will be ignored. For example, `bprio 3 high low` still sets the priority of buyer 3 to high.
+**Note:**
+* `PRIORITY` only considers the first letter of the input (`h` for high, `m` for medium, `l` for low, or `n` for nil). For example, `bprio 3 hlow` sets the priority of buyer 3 to high.
+* Any extra inputs given after `PRIORITY` will be ignored. For example, `bprio 3 high low` is equivalent to `bprio 3 high`.
 
 </box>
 
@@ -482,8 +493,6 @@ Parameters: INDEX PRIORITY
 
 >The seller index provided is higher than the last number in the list!
 
---------------------------------------------------------------------------------------------------------------------
-
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -494,9 +503,11 @@ Parameters: INDEX PRIORITY
 
 
 
+<br>
+
 ### Listing all buyers and sellers: `list`
 
-Lists all buyers and sellers that the user has added. 
+Lists all buyers and sellers that the user has added. Clears filters and reloads the data file to check for changes.
 
 Format: `list`
 
@@ -531,8 +542,6 @@ Precise outputs when the command succeeds:
 
 >1 buyer(s) and 0 seller(s) listed!
 
---------------------------------------------------------------------------------------------------------------------
-
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -542,6 +551,7 @@ Precise outputs when the command succeeds:
 <div style="page-break-after: always;"></div>
 
 
+<br>
 
 ### Displaying a buyer from buyer list: `blist`
 
@@ -557,7 +567,6 @@ Precise outputs when the command succeeds:
 >Got it. Here's the information of this buyer:<br>
 Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
 
-<br>
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -575,8 +584,6 @@ Precise outputs when the command succeeds:
 
 >Got it. Here's the information of this seller:<br>
 Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
-
---------------------------------------------------------------------------------------------------------------------
 
 <div style='text-align: right;'>
 
@@ -625,14 +632,12 @@ Example: bsort prio/d
 * The sort command will ignore any extraneous inputs and invalid prefixes after the `bsort` keyword and before the next 
 valid prefix (`n`, `ah`, `i` or `prio`).
   * For example, `bsort qwerty z/asdf prio/d` will execute `bsort prio/d`.
-  * However, any extraneous inputs or invalid prefixes after a valid prefix will cause an error.
+  * Any extraneous inputs or invalid prefixes after a valid prefix will cause an error.
 * When two or more valid prefixes are provided, `bsort` will sort by only one of the provided prefixes, which is chosen
   based on this order:<br> **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
   * For example, `bsort prio/d n/d` will execute `bsort n/d`.
 
 </box>
-
---------------------------------------------------------------------------------------------------------------------
 
 <div style='text-align: right;'>
 
@@ -685,7 +690,6 @@ Example: ssort prio/d
 
 </box>
 
---------------------------------------------------------------------------------------------------------------------
 
 <div style='text-align: right;'>
 
@@ -695,6 +699,8 @@ Example: ssort prio/d
 
 <div style="page-break-after: always;"></div>
 
+
+<br>
 
 ### Undoing previous action: `undo`
 
@@ -746,7 +752,6 @@ Precise outputs when the command fails:
 
 >No commands to redo!
 
---------------------------------------------------------------------------------------------------------------------
 
 <div style='text-align: right;'>
 
@@ -757,6 +762,7 @@ Precise outputs when the command fails:
 <div style="page-break-after: always;"></div>
 
 
+<br>
 
 ### Viewing help: `help`
 
@@ -785,6 +791,14 @@ Upon exit, the latest data is saved to your computer at data/addressbook.json.
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RTPM home folder.
 
+**Q**: My entries are missing! Did they get deleted somehow?<br>
+**A**: One possible fix is to try calling the `list` command. If you manually edit the data file, or you filtered the list,
+the entries may not appear in the application until you refresh the list.
+
+**Q**: I made a mistake! How do I fix it?<br>
+**A**: You can make use of our handy [undo](#undoing-previous-action-undo) and [redo](#redoing-previous-action-redo)
+commands to fix any errors made.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -794,7 +808,6 @@ Upon exit, the latest data is saved to your computer at data/addressbook.json.
 3. Long fields can cause the details of a client to not be displayed fully. A workaround is to use the 
 ```slist```/```blist``` commands to display the details of the client in the result box.
 
---------------------------------------------------------------------------------------------------------------------
 
 <div style='text-align: right;'>
 
@@ -808,31 +821,30 @@ Upon exit, the latest data is saved to your computer at data/addressbook.json.
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Buyer**    | `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_INFO] [prio/PRIORITY] [t/TAG]`<br> e.g. buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium prio/high
-**Add Seller**    | `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [prio/PRIORITY] [t/TAG]​`<br> e.g. seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/high
-**Edit Buyer** | `bedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]`<br> e.g. bedit 3 e/example@email.com ah/Residential Street
-**Edit Seller** | `sedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]`<br> e.g. sedit 3 e/example@email.com as/Selling Street
-**Delete Buyer** | `bdelete INDEX`<br> e.g. bdelete 2
-**Delete Seller** | `sdelete INDEX`<br> e.g. sdelete 2
-**Clear**  | `clear`
-**Set Buyer Priority** | `bprio INDEX PRIORITY`<br> e.g. bprio 3 high
-**Set Seller Priority** | `sprio INDEX PRIORITY`<br> e.g. sprio 3 high
-**List All** | `list`
-**Filter**   | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g. filter John Doe
-**List Buyer**   | `blist INDEX` <br> e.g. blist 1 
-**List Seller**   | `slist INDEX`<br> e.g. slist 1
-**Sort Buyers** | `bsort [PREFIX/DIRECTION]`<br> e.g. bsort n/d
-**Sort Sellers** | `ssort [PREFIX/DIRECTION]`<br> e.g. ssort prio/a
-**Undo**   | `undo`
-**Redo**  | `redo`
-**Exit**   | `exit`
-**Help**   | `help`
+| Action                  | Format, Examples                                                                                                                                                                                                                                                                   |
+|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Buyer**           | `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_INFO] [prio/PRIORITY] [t/TAG]`<br> e.g. buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium prio/high                                                  |
+| **Add Seller**          | `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [prio/PRIORITY] [t/TAG]​`<br> e.g. seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/high |
+| **Edit Buyer**          | `bedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]`<br> e.g. bedit 3 e/example@email.com ah/Residential Street                                                                                                                                                                          |
+| **Edit Seller**         | `sedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]`<br> e.g. sedit 3 e/example@email.com as/Selling Street                                                                                                                                                                              |
+| **Delete Buyer**        | `bdelete INDEX`<br> e.g. bdelete 2                                                                                                                                                                                                                                                 |
+| **Delete Seller**       | `sdelete INDEX`<br> e.g. sdelete 2                                                                                                                                                                                                                                                 |
+| **Clear**               | `clear`                                                                                                                                                                                                                                                                            |
+| **Set Buyer Priority**  | `bprio INDEX PRIORITY`<br> e.g. bprio 3 high                                                                                                                                                                                                                                       |
+| **Set Seller Priority** | `sprio INDEX PRIORITY`<br> e.g. sprio 3 high                                                                                                                                                                                                                                       |
+| **List All**            | `list`                                                                                                                                                                                                                                                                             |
+| **Filter**              | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g. filter John Doe                                                                                                                                                                                                                          |
+| **List Buyer**          | `blist INDEX` <br> e.g. blist 1                                                                                                                                                                                                                                                    |
+| **List Seller**         | `slist INDEX`<br> e.g. slist 1                                                                                                                                                                                                                                                     |
+| **Sort Buyers**         | `bsort [PREFIX/DIRECTION]`<br> e.g. bsort n/d                                                                                                                                                                                                                                      |
+| **Sort Sellers**        | `ssort [PREFIX/DIRECTION]`<br> e.g. ssort prio/a                                                                                                                                                                                                                                   |
+| **Undo**                | `undo`                                                                                                                                                                                                                                                                             |
+| **Redo**                | `redo`                                                                                                                                                                                                                                                                             |
+| **Exit**                | `exit`                                                                                                                                                                                                                                                                             |
+| **Help**                | `help`                                                                                                                                                                                                                                                                             |
 
 <br>
 
---------------------------------------------------------------------------------------------------------------------
 
 <div style='text-align: right;'>
 
@@ -846,8 +858,8 @@ Action     | Format, Examples
 
 ## Appendix A: Warnings
 
-RTPM allows you to flexibly input most fields of data, for example, you can insert chinese characters as names or
-slashes to abbreviate "son of" as "s/o".
+RTPM allows you to flexibly input most fields of data, for example, you can insert chinese characters as names, or
+use slashes to abbreviate "son of" as "s/o".
 However, we still have some things in mind for each field, to reduce faulty data.
 
 Hence, the warning system allows our app to inform you of any valid but possibly unintended inputs.
@@ -857,7 +869,6 @@ The warning system is also used to inform the user if, when you are adding new b
 whether there are two similar buyers or two similar sellers, 
 or a buyer that shares the same name as a seller. See [Appendix C](#appendix-c-similar-names) for more details.
 
-There are some limitations to the warning system
 ```
 Warning!; [Phone numbers should only contain numbers, and it should be at 
 least 3 digits long. Area codes are allowed, signified by a '+' and up to 
@@ -880,7 +891,6 @@ The domain name must:
 Please ignore if this is expected.
 ```
 
---------------------------------------------------------------------------------------------------------------------
 
 <div style='text-align: right;'>
 
@@ -901,6 +911,16 @@ Here, we provide the exact checks that RTPM does for each field, and the warning
 | **Email**        | At least one `@` character               | See warning message.                                                                              | `Emails should be of the format local-part@domain and adhere to the following constraints: 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. 2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: - end with a domain label at least 2 characters long - have each domain label start and end with alphanumeric characters - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.` |
 | **Address**      | Must not be blank                        | Nil                                                                                               | Nil                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | **Info**         | Must not be blank                        | Nil                                                                                               | Nil                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
+<div style="page-break-after: always;"></div>
+
+| Field            | Valid                                    | Appropriate                                                                                       | Exact warning given                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+|------------------|------------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Priority**     | Starts with one of the letters `h,l,m,n` | Matches the first part of one of the words `high, low, medium, nil`.                              | `Inputs should be 'high', 'medium', 'low' or 'nil'. However, if at least the first letter is valid, we will read correctly.`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | **Tags**         | Must not be blank                        | Alphanumeric characters only                                                                      | `Tags names should be alphanumeric`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 
@@ -928,7 +948,7 @@ An example when similar names are detected:
 
 An example when the same name is detected:
 ```This seller already exists in the address book```
-(This is not allowed, hence the command does not execute.)
+(This is not allowed, hence the command will not execute.)
 
 <div style='text-align: right;'>
 

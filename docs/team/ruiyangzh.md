@@ -40,7 +40,7 @@ Given below are my contributions to this project.
     * Credits: https://rosettacode.org/wiki/Levenshtein_distance#Java for implementation of Levenshtein distance.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false&tabOpen=true&tabType=authorship&tabAuthor=ruiyangzh&tabRepo=AY2324S1-CS2103T-F11-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false&authorshipFileTypes=docs~functional-code~test-code~other&authorshipIsBinaryFileTypeChecked=false&authorshipIsIgnoredFilesChecked=false)
-
+<br /><br /><br />
 * **Project management**:
   * Team lead for Week 10 (for v1.3)
      * Created, assigned and tagged issues for the milestone 
@@ -77,4 +77,4 @@ Given below are my contributions to this project.
     * PRs reviewed (with non-trivial review comments): [\#200](https://github.com/AY2324S1-CS2103T-F11-3/tp/pull/200), [\#131](https://github.com/AY2324S1-CS2103T-F11-3/tp/pull/131), [\#119](https://github.com/AY2324S1-CS2103T-F11-3/tp/pull/119)
     * Contributed to forum discussions (examples: [1](https://github.com/nus-cs2103-AY2324S1/forum/issues/350), [2](https://github.com/nus-cs2103-AY2324S1/forum/issues/102), [3](https://github.com/nus-cs2103-AY2324S1/forum/issues/317))
     * Reported bugs and suggestions for other teams in the class (examples: [1](https://github.com/ruiyangzh/ped/issues/2), [2](https://github.com/ruiyangzh/ped/issues/9), [3](https://github.com/ruiyangzh/ped/issues/5))
-
+<br />

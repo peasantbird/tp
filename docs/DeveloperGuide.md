@@ -35,6 +35,8 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 Given below is a quick overview of main components and how they interact with each other.
 
+<div style="page-break-after: always;"></div>
+
 **Main components of the architecture**
 
 **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
@@ -61,11 +63,16 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
+
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -84,6 +91,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Displayable` objects residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -91,6 +100,8 @@ The `UI` component,
 Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+
+<div style="page-break-after: always;"></div>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("sdelete 1")` API call as an example.
 
@@ -107,6 +118,9 @@ How the `Logic` component works:
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteSellerCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a seller).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+<div style="page-break-after: always;"></div>
+
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -126,6 +140,8 @@ not use warnings (because they either execute successfully or fail; there is no 
 
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...)
 inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+<div style="page-break-after: always;"></div>
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -149,6 +165,7 @@ the UI can be bound to this list so that the UI automatically updates when the d
 
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -166,6 +183,8 @@ The `Storage` component,
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Implementation**
 
@@ -196,6 +215,8 @@ The following sequence diagram shows how the edit operation works:
 
 </box>
 
+<div style="page-break-after: always;"></div>
+
 #### Design considerations:
 
 **Aspect: How edit executes:**
@@ -211,6 +232,7 @@ The following sequence diagram shows how the edit operation works:
     * Cons: Optionals are not intended to be used as inputs to methods, as they introduce additional 
   work to be done in the method to handle the different inputs.
 
+<div style="page-break-after: always;"></div>
 
 ### Priority feature
 
@@ -248,6 +270,8 @@ to parse and obtain a `SetBuyerPriorityCommand`, before executing it. The comman
 update the address book's buyer list with the newly assigned buyer priority, which is reflected on the UI too. 
 Finally, `LogicManager` calls `StorageManager` to update the JSON file.
 
+<div style="page-break-after: always;"></div>
+
 The following sequence diagram shows how the undo operation works:
 <puml src="diagrams/SetBuyerPrioritySequenceDiagram.puml" alt="SetBuyerPrioritySequenceDiagram" />
 
@@ -263,6 +287,7 @@ runs a similar flow as illustrated in the sequence diagram above.
 
 The same logic can be used for assigning priorities to sellers instead of buyers, by using `sprio` instead 
 of `bprio`.
+
 
 #### Design considerations:
 
@@ -281,6 +306,7 @@ of `bprio`.
     * Cons: Address book only adds correctly formatted fields, and may discard the remaining arguments which are
     invalid without the user knowing, so more robust exception handling is required when parsing the user input 
     which may be tedious to implement.
+    
 
 ### Sort feature
 
@@ -307,6 +333,8 @@ handled by the `BuyerComparator` and `SellerComparator` classes, which come with
 the `bsort/ssort` keyword, an instance of `BuyerComparator`/`SellerComparator` with the corresponding implementation of
 `compare` method will be constructed and passed into the `SortedList` through the sort command. 
 
+<div style="page-break-after: always;"></div>
+
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the 
@@ -331,6 +359,8 @@ illustrated in the sequence diagram above, except passing a null `BuyerComparato
 sorting.
 
 The same logic can be used for sorting sellers instead of buyers, by using `ssort` instead of `bsort`.
+
+<div style="page-break-after: always;"></div>
 
 ### Undo & redo feature
 
@@ -375,7 +405,7 @@ Step 4. The user now decides that adding the buyer was a mistake, and decides to
 than attempting to perform the undo.
 
 </box>
-
+<div style="page-break-after: always;"></div>
 The following sequence diagram shows how the undo operation works:
 
 <puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
@@ -397,7 +427,7 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 <puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
+<div style="page-break-after: always;"></div>
 Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `buyer n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 <puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
@@ -419,6 +449,8 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `bdelete`, just save the buyer being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
+<div style="page-break-after: always;"></div>
+    
 ### Relaxed parameter matching
 
 #### Background
@@ -428,11 +460,18 @@ the provided string did not fit the regex. Although useful, this would often be 
 frustration. Furthermore, this exception, as it halts execution, only informs you of the first field that fails 
 to pass, so if you had multiple errors you would have to resolve and re-execute each time.
 #### Implementation
-In 1.3, we implemented a group of static methods for each parameter, generally named isAppropriate(*Field*), which has a
-looser regex. The result of this boolean check, if it fails, then passes a warning string to the
-```CommandWarnings``` class, which collects and stores them in a set. At the end of the execute() method, if the
-command encountered any warnings, then they are output into the returned CommandResult.
+In 1.3, we implemented a group of static methods for each parameter, per convention
+named isAppropriate(*Field*), which has a looser regex. The result of this boolean check, 
+if it fails in ```ParserUtil```, then passes a warning string to the```CommandWarnings``` instance, which collects 
+and stores them in an internal Set<String>. This CommandWarnings is passed through parsers and their subsequent 
+commands (Only parsable commands need this, since non-parsable commands are unambiguous and do not need to warn
+the user).
+
+At the end of the execute() method, if the
+command encountered any warnings, then they are output through the ```getWarningMessage()``` method
+into the returned CommandResult.
 This is then passed through LogicManager into MainWindow for display to the user.
+LogicManager will also log any such warnings using its logger.
 
 <puml src="diagrams/isAppropriateNameSequenceDiagram.puml" alt="isAppropriateNameSequenceDiagram" />
 <box type="info" seamless>
@@ -441,6 +480,8 @@ This is then passed through LogicManager into MainWindow for display to the user
 limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 
@@ -466,6 +507,8 @@ as the CommandResult.
      significant for high-usage cases in the future such as company-wide integration.)
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -475,6 +518,8 @@ as the CommandResult.
 * [DevOps guide](DevOps.md)
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Requirements**
 
@@ -523,6 +568,8 @@ Priority level is based on current iteration
 | `*`      | power user                                         | modify the syntax of (at least some) commands                               | enter them faster                                                                      |
 | `*`      | lazy user                                          | be able to automatically match appropriate houses to prospective buyers     | avoid doing it manually                                                                |
 
+<div style="page-break-after: always;"></div>
+
 ### Use cases
 
 (For all use cases below, the **System** is our app `RTPM (RealtorTrackerPlusMax)` and the **Actor** is the `user`,
@@ -567,6 +614,8 @@ Extensions:
 * 3a. Failure to update savefile.
   * 3a1. System indicates failure to update.
   Use case restarts from step 1.
+
+<div style="page-break-after: always;"></div>
 
 **Use case: UC3 - View buyers**
 System: RTPM
@@ -624,9 +673,8 @@ Extensions:
 1. User enters misspelled command.
 2. System displays invalid command error and refers user to help page.
 
-*{More to be added}*
 
-
+<div style="page-break-after: always;"></div>
 
 
 ### Non-Functional Requirements
@@ -664,37 +712,41 @@ Additional NFRs
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Effort**
 
 We consider that as of the current release (v1.4), substantial effort has been put in by our team to rework the original
 AB3 project into a product that is useful for realtors and contains all the features required, including sorting, flexible
 command typing, reordering and undoing/redoing commands.
+
 ### Difficulties and challenges faced
-We had some difficulties doing ??? idk guys help me out here
-
-The first difficulty we encountered was in modifying the UI to fit our requirements. As developers newly introduced to the
-brownfield AB-3 project, we had to spend quite a fair bit of time familiarising ourselves with the project architecture, and
-the initial process of integrating some basic new commands and tests (such as the one given in the AB-3 tutorial) was already 
-rather tedious, let alone adding our own features to the project and changes to the UI. For example, when trying to separate 
-the initial `Person`s object into `Buyer`s and `Seller`s, the app wasn't able to launch due to having a broken test codebase, 
-which required us to refactor at least 20 files across different directories in the project in order for operations to resume. 
-After much refactoring and tinkling with the JavaFX GUI, we were finally more familiar and comfortable with making changes to 
-the AB-3 project, and were able to begin system testing of our app in preparation for our very first release of RTPM, in 
-the v1.2 release.
-
-
+The first difficulty we encountered was in modifying the UI to fit our requirements. As developers newly introduced 
+to the brownfield AB-3 project, we had to spend quite a fair bit of time familiarising ourselves with 
+the project architecture, and the initial process of integrating some basic new commands 
+and tests (such as the one given in the AB-3 tutorial) was already rather tedious, let alone adding our own features to 
+the project and changes to the UI. For example, when trying to separate the initial `Person`s object into `Buyer`s and 
+`Seller`s, the app wasn't able to launch due to having a broken test codebase, which required us to refactor at least
+20 files across different directories in the project in order for operations to resume. 
+After much refactoring and tinkling with the JavaFX GUI, we were finally more familiar
+and comfortable making changes to the AB-3 project, and were able to begin system testing of our app in 
+preparation for our very first release of RTPM, in the v1.2 release.
 
 ### Achievements
 One of the things that we believe show the effort that we put into the project was the restructuring in the back-end to
 allow Model to hold, and UI to display, multiple lists of different types. In AB3, the application only needed to deal
-with one type of object, while in our case, we wanted to add 3 (Houses, buyers and sellers, although we only ended up
+with one type of object, while in our case, we wanted to add 3 (Houses, Buyers and Sellers, although we only ended up
 adding the latter 2). Hence, we decided to abstract out the responsibility for displaying the object to the object itself
 (so we would not need a class to hold and display every type we wanted to add. 
 
 Displayable is an interface that allows the UniqueDisplayableList to abstractify the actual displaying and maintaining
-of uniqueness to the contained class itself. Thus we can reduce the number of repetitive classes required. 
+of uniqueness to the contained class itself. Thus, we can reduce the number of repetitive classes required to contain 
+others.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -741,6 +793,8 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `buyer n/Tom p/phone e/email`
       Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
+
 2. Adding a seller contact
 
     1. Prerequisites: Clear the lists with the `clear` command to prevent conflicts from prior testing.
@@ -781,7 +835,9 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
     8. Test case: `sedit`, `sedit 1`, `sedit p/12345`<br>
        Expected: Similar to previous.
-   
+
+<div style="page-break-after: always;"></div>
+
 ### Deleting a contact
 
 1. Deleting a buyer contact while all persons are being shown
@@ -810,6 +866,8 @@ testers are expected to do more *exploratory* testing.
 
    4. Other incorrect delete commands to try: `sdelete`, `sdelete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
 
 ### Setting a contact's priority
 
@@ -853,6 +911,8 @@ testers are expected to do more *exploratory* testing.
     9. Test case: `sprio`, `sprio high`, `sprio 1`<br>
        Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
+
 ### Filtering the lists
 
 1. Prerequisites: Clear the lists with the `clear` command and add buyers named "John", "John Doe", "JohnDoe", and "Doe" with the `buyer` command.
@@ -881,23 +941,21 @@ testers are expected to do more *exploratory* testing.
 
 ### Sorting contacts
 
-1. Sorting buyer contacts
+1. Sorting buyer contacts<br>
    1. Prerequisites: At least one but less than ten thousand contacts present in the buyer list.
    2. Test case: `bsort prio/d`<br>
       Expected: Buyer list is sorted by priority in descending order, with the highest priority at the top of the list.
-   3. Test case: `bsort invalidprefix/d`, `bsort prio/invalidorder`<br>
+   3. Test case: `bsort prio/`, `bsort prio/invalidorder`<br>
       Expected: The buyer list is not updated. Error details shown in the status message.
-   4. Test case: `bsort`, `bsort prio/`, `bsort d`<br>
-      Expected: Similar to previous.
 
-2. Sorting seller contacts
+<div style="page-break-after: always;"></div>
+
+2. Sorting seller contacts<br>
     1. Prerequisites: At least one but less than ten thousand contacts present in the seller list.
     2. Test case: `ssort prio/d`<br>
        Expected: Seller list is sorted by priority in descending order, with the highest priority at the top of the list.
-    3. Test case: `ssort invalidprefix/d`, `ssort prio/invalidorder`<br>
+    3. Test case: `ssort prio/`, `ssort prio/invalidorder`<br>
        Expected: The seller list is not updated. Error details shown in the status message.
-    4. Test case: `ssort`, `ssort prio/`, `ssort d`<br>
-       Expected: Similar to previous.
 
 ### Saving data
 
@@ -920,6 +978,8 @@ testers are expected to do more *exploratory* testing.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Planned Enhancements**
 
 Given below are the enhancements that will be implemented in a future version.
@@ -941,7 +1001,9 @@ arguments of other fields and warn the user.
 4. Currently, the user is not warned if addresses, names, or house info entries contain only numbers and special 
 symbols. We plan to expand warnings to include warnings for addresses, names and house info entries containing 
 only non-alphabetical characters.
-  
+
+<div style="page-break-after: always;"></div>
+
 5. Currently, for `bprio` and `sprio`,
    * if the user inputs extra arguments, such as `bprio 1 high low`, the app 
    accepts the input and sets the first buyer's priority level to `high` instead of warning the user about extra 
@@ -962,17 +1024,19 @@ only non-alphabetical characters.
        any of the letters inside the square brackets, so `n`, `nl`, and `nll` are all appropriate inputs.
      * `$` demarcates the end of the matching 
      
-     Initially, the regex above was meant to allow for user typos, such as `hgih` or `meduim`, but in hindsight, 
+   Initially, the regex above was meant to allow for user typos, such as `hgih` or `meduim`, but in hindsight, 
      this regex is unnecessary as it doesn't value add much to the user experience, 
      and only made it harder to test for invalid priority inputs. 
    <br> As such, we plan to 
      change the validation regex to only accept `h`, `m`, `l`, or `nil` as inputs
      for priority in the future.
   
-6. Currently, attempting to add multiple contacts with long names may cause the app to lag considerably. 
-We plan to optimise the similarity checks for names so that doing so results in less delay.
 
-7. As of v1.4, we have received reports that a warning is thrown even when there are no names that users considered similar.
+
+<div style="page-break-after: always;"></div>
+
+6. As of v1.4, we have received reports that a warning is thrown even when there are no names that users considered similar.
+
 After testing, we determined that users in fact had two names that were very short, and this caused a discrepancy between commonly expected behavior and actual implementation.
 We defined distance between similar names as either one name contains the other entirely, 
 or the Levenshtein distance between the two names is 2 or less
@@ -981,7 +1045,7 @@ An unintended effect was that, for example, if you had short names (e.g "d", "hi
 the names would match despite normal users probably not defining these two names as similar. 
 Possible future enhancements would be to make it percentage-based, so that short names are not producing warnings unnecessarily.
 
-8. Currently, we have sellers only having one selling address and one house info. This is not fully representative of all
+7. Currently, we have sellers only having one selling address and one house info. This is not fully representative of all
 real-life conditions, since a seller can own and sell multiple houses. Likewise, a buyer could be
 theoretically searching for multiple houses (e.g. a rental firm). However we have decided in this early version, 
 and in view of our target audience (student/junior realtors) to have a one-to-one correspondence to simplify the 
@@ -990,3 +1054,12 @@ have a many-to-one relation to buyers and sellers. (In fact, the class is alread
 in the repository as an unused .java file; we did not manage to integrate it in time for v1.3 release.)
 A workaround for such cases in v1.4 is to add the info about both houses into
 the address field and info field (since we do not limit the user from doing this.)
+
+8. Our undo/redo commands do not currently undo/redo UI-based commands, this could be enhanced in later versions.
+
+9. Our filter command currently only matches entire sections of a name. A possible enhancement is to allow filter to 
+search for partial matches, or have an additional command parameter to enable this; e.g. match `hi` with `Ibrahim`.
+
+10. Our filter command also can only search for names as of v1.4. Another enhancement is to allow users to search for the
+specific field they want to, by indicating it in the command parameters. One possible format is `filter p/202` if you
+wanted to filter by phone number, for example.
