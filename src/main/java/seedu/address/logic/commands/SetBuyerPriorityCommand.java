@@ -36,6 +36,7 @@ public class SetBuyerPriorityCommand extends Command {
 
     /**
      * Constructs a SetBuyerPriorityCommand to set the priority level of a specified buyer.
+     *
      * @param targetIndex the index of the buyer to set the priority of.
      * @param priority the priority that the buyer is to be set to.
      */
@@ -45,7 +46,9 @@ public class SetBuyerPriorityCommand extends Command {
         this.commandWarnings = new CommandWarnings();
     }
     /**
-     * Constructs a SetBuyerPriorityCommand to set the priority level of a specified buyer.
+     * Constructs a SetBuyerPriorityCommand to set the priority level of a specified buyer with
+     * pre-existing warnings.
+     *
      * @param targetIndex the index of the buyer to set the priority of.
      * @param priority the priority that the buyer is to be set to.
      * @param commandWarnings A container for warnings that may occur.
