@@ -1006,27 +1006,42 @@ testers are expected to do more *exploratory* testing.
 
 Given below are the enhancements that will be implemented in a future version.
 
-1. Currently, the UI text is cut off if the entries are too long. While this should not usually happen since the user 
+#### 1. Better handling of long inputs
+
+* Currently, the UI text is cut off if the entries are too long. While this should not usually happen since the user 
 can decide what to enter (nicknames, abbreviations, acronyms, etc.), we plan to accommodate overly long names, 
 phone numbers, addresses, emails and house info entries within the UI.
 As a current workaround, users can call the `blist`/`slist` commands to display the text representation of the entry in
 the results box.
 
-2. Extremely long inputs can cause the program to hang or crash. This is a minor issue, since users are unlikely to
+* Extremely long inputs can cause the program to hang or crash. This is a minor issue, since users are unlikely to
 enter such long fields into the app. A possible enhancement is to prevent overly long entries by blocking the command
 execution.
 
-3. Currently, if the user makes a spelling or spacing mistake, the intended prefix of another field is regarded as 
+#### 2. Better command warnings
+
+* Currently, if the user makes a spelling or spacing mistake, the intended prefix of another field is regarded as 
 part of the argument for the previous field. We plan to check for misspelled prefixes and prefixes provided as 
 arguments of other fields and warn the user.
 
-4. Currently, the user is not warned if addresses, names, or house info entries contain only numbers and special 
+* Currently, the user is not warned if addresses, names, or house info entries contain only numbers and special 
 symbols. We plan to expand warnings to include warnings for addresses, names and house info entries containing 
 only non-alphabetical characters.
 
+* As of v1.4, we have received reports that a warning is thrown even when there are no names that users considered similar. 
+After testing, we determined that users in fact had two names that were very short, and this caused a discrepancy between commonly expected behavior and actual implementation.
+We defined distance between similar names as either one name contains the other entirely,
+or the Levenshtein distance between the two names is 2 or less
+(It takes 2 or fewer substitutions/additions/removals to turn one of the names into the other.)
+An unintended effect was that, for example, if you had short names (e.g "d", "hi", in the original case for us),
+the names would match despite normal users probably not defining these two names as similar.
+Possible future enhancements would be to make it percentage-based, so that short names are not producing warnings unnecessarily.
+
 <div style="page-break-after: always;"></div>
 
-5. Currently, for `bprio` and `sprio`,
+#### 3. Improvements to set priority command
+
+* Currently, for `bprio` and `sprio`,
    * if the user inputs extra arguments, such as `bprio 1 high low`, the app 
    accepts the input and sets the first buyer's priority level to `high` instead of warning the user about extra 
    arguments which would be ignored. As such, we plan to warn the user if any extra arguments are supplied for the 
@@ -1057,17 +1072,9 @@ only non-alphabetical characters.
 
 <div style="page-break-after: always;"></div>
 
-6. As of v1.4, we have received reports that a warning is thrown even when there are no names that users considered similar.
+#### 4. Better fields for buyers and sellers
 
-After testing, we determined that users in fact had two names that were very short, and this caused a discrepancy between commonly expected behavior and actual implementation.
-We defined distance between similar names as either one name contains the other entirely, 
-or the Levenshtein distance between the two names is 2 or less
-(It takes 2 or fewer substitutions/additions/removals to turn one of the names into the other.)
-An unintended effect was that, for example, if you had short names (e.g "d", "hi", in the original case for us), 
-the names would match despite normal users probably not defining these two names as similar. 
-Possible future enhancements would be to make it percentage-based, so that short names are not producing warnings unnecessarily.
-
-7. Currently, we have sellers only having one selling address and one house info. This is not fully representative of all
+* Currently, we have sellers only having one selling address and one house info. This is not fully representative of all
 real-life conditions, since a seller can own and sell multiple houses. Likewise, a buyer could be
 theoretically searching for multiple houses (e.g. a rental firm). However we have decided in this early version, 
 and in view of our target audience (student/junior realtors) to have a one-to-one correspondence to simplify the 
@@ -1077,11 +1084,21 @@ in the repository as an unused .java file; we did not manage to integrate it in 
 A workaround for such cases in v1.4 is to add the info about both houses into
 the address field and info field (since we do not limit the user from doing this.)
 
-8. Our undo/redo commands do not currently undo/redo UI-based commands, this could be enhanced in later versions.
+#### 5. Undo/redo commands affect UI-based commands
+* Our undo/redo commands do not currently undo/redo UI-based commands, this could be enhanced in later versions. 
 
-9. Our filter command currently only matches entire sections of a name. A possible enhancement is to allow filter to 
+#### 6. Improvements to filter command
+* Our filter command currently only matches entire sections of a name. A possible enhancement is to allow filter to 
 search for partial matches, or have an additional command parameter to enable this; e.g. match `hi` with `Ibrahim`.
 
-10. Our filter command also can only search for names as of v1.4. Another enhancement is to allow users to search for the
+* Our filter command also can only search for names as of v1.4. Another enhancement is to allow users to search for the
 specific field they want to, by indicating it in the command parameters. One possible format is `filter p/202` if you
 wanted to filter by phone number, for example.
+
+#### 7. Better error handling for sort command
+* Our sort command currently allows extraneous inputs and invalid prefixes after the `sort` keyword and before the next
+valid prefix (`n`, `ah`, `i` or `prio`). Instead of allowing these inputs, the sort command can be changed to not allow
+these inputs and show an error message to the user indicating these invalid parameters and prefixes. Moreover, `sort`
+currently allows the user to input more than one valid prefix, in which case it'll take the prefix based on the order:
+**1. Name**, **2. Home address**, **3. House info**, **4. Priority**. The sort command can be changed to allow only a
+single prefix, decreasing ambiguity on which prefix it is sorting by.
