@@ -164,4 +164,17 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredSellerList().size());
     }
 
+    //@@author peasantbird-reused
+    //Reused from Address Book (Level4) with minor modifications
+    /**
+     * Deletes the first buyer in {@code model}'s filtered list from {@code model}'s address book.
+     *
+     * @param model The model to delete the buyer from.
+     */
+    public static void deleteFirstBuyer(Model model) {
+        Buyer firstBuyer = model.getFilteredBuyerList().get(0);
+        model.deleteBuyer(firstBuyer);
+        model.commitAddressBook();
+    }
+    //@@author
 }
