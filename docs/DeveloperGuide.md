@@ -428,11 +428,18 @@ the provided string did not fit the regex. Although useful, this would often be 
 frustration. Furthermore, this exception, as it halts execution, only informs you of the first field that fails 
 to pass, so if you had multiple errors you would have to resolve and re-execute each time.
 #### Implementation
-In 1.3, we implemented a group of static methods for each parameter, generally named isAppropriate(*Field*), which has a
-looser regex. The result of this boolean check, if it fails, then passes a warning string to the
-```CommandWarnings``` class, which collects and stores them in a set. At the end of the execute() method, if the
-command encountered any warnings, then they are output into the returned CommandResult.
+In 1.3, we implemented a group of static methods for each parameter, per convention
+named isAppropriate(*Field*), which has a looser regex. The result of this boolean check, 
+if it fails in ```ParserUtil```, then passes a warning string to the```CommandWarnings``` instance, which collects 
+and stores them in an internal Set<String>. This CommandWarnings is passed through parsers and their subsequent 
+commands (Only parsable commands need this, since non-parsable commands are unambiguous and do not need to warn
+the user).
+
+At the end of the execute() method, if the
+command encountered any warnings, then they are output through the ```getWarningMessage()``` method
+into the returned CommandResult.
 This is then passed through LogicManager into MainWindow for display to the user.
+LogicManager will also log any such warnings using its logger.
 
 <puml src="diagrams/isAppropriateNameSequenceDiagram.puml" alt="isAppropriateNameSequenceDiagram" />
 <box type="info" seamless>
@@ -669,30 +676,29 @@ Additional NFRs
 We consider that as of the current release (v1.4), substantial effort has been put in by our team to rework the original
 AB3 project into a product that is useful for realtors and contains all the features required, including sorting, flexible
 command typing, reordering and undoing/redoing commands.
+
 ### Difficulties and challenges faced
-We had some difficulties doing ??? idk guys help me out here
-
-The first difficulty we encountered was in modifying the UI to fit our requirements. As developers newly introduced to the
-brownfield AB-3 project, we had to spend quite a fair bit of time familiarising ourselves with the project architecture, and
-the initial process of integrating some basic new commands and tests (such as the one given in the AB-3 tutorial) was already 
-rather tedious, let alone adding our own features to the project and changes to the UI. For example, when trying to separate 
-the initial `Person`s object into `Buyer`s and `Seller`s, the app wasn't able to launch due to having a broken test codebase, 
-which required us to refactor at least 20 files across different directories in the project in order for operations to resume. 
-After much refactoring and tinkling with the JavaFX GUI, we were finally more familiar and comfortable with making changes to 
-the AB-3 project, and were able to begin system testing of our app in preparation for our very first release of RTPM, in 
-the v1.2 release.
-
-
+The first difficulty we encountered was in modifying the UI to fit our requirements. As developers newly introduced 
+to the brownfield AB-3 project, we had to spend quite a fair bit of time familiarising ourselves with 
+the project architecture, and the initial process of integrating some basic new commands 
+and tests (such as the one given in the AB-3 tutorial) was already rather tedious, let alone adding our own features to 
+the project and changes to the UI. For example, when trying to separate the initial `Person`s object into `Buyer`s and 
+`Seller`s, the app wasn't able to launch due to having a broken test codebase, which required us to refactor at least
+20 files across different directories in the project in order for operations to resume. 
+After much refactoring and tinkling with the JavaFX GUI, we were finally more familiar
+and comfortable making changes to the AB-3 project, and were able to begin system testing of our app in 
+preparation for our very first release of RTPM, in the v1.2 release.
 
 ### Achievements
 One of the things that we believe show the effort that we put into the project was the restructuring in the back-end to
 allow Model to hold, and UI to display, multiple lists of different types. In AB3, the application only needed to deal
-with one type of object, while in our case, we wanted to add 3 (Houses, buyers and sellers, although we only ended up
+with one type of object, while in our case, we wanted to add 3 (Houses, Buyers and Sellers, although we only ended up
 adding the latter 2). Hence, we decided to abstract out the responsibility for displaying the object to the object itself
 (so we would not need a class to hold and display every type we wanted to add. 
 
 Displayable is an interface that allows the UniqueDisplayableList to abstractify the actual displaying and maintaining
-of uniqueness to the contained class itself. Thus we can reduce the number of repetitive classes required. 
+of uniqueness to the contained class itself. Thus, we can reduce the number of repetitive classes required to contain 
+others.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -962,17 +968,15 @@ only non-alphabetical characters.
        any of the letters inside the square brackets, so `n`, `nl`, and `nll` are all appropriate inputs.
      * `$` demarcates the end of the matching 
      
-     Initially, the regex above was meant to allow for user typos, such as `hgih` or `meduim`, but in hindsight, 
+   Initially, the regex above was meant to allow for user typos, such as `hgih` or `meduim`, but in hindsight, 
      this regex is unnecessary as it doesn't value add much to the user experience, 
      and only made it harder to test for invalid priority inputs. 
    <br> As such, we plan to 
      change the validation regex to only accept `h`, `m`, `l`, or `nil` as inputs
      for priority in the future.
   
-6. Currently, attempting to add multiple contacts with long names may cause the app to lag considerably. 
-We plan to optimise the similarity checks for names so that doing so results in less delay.
 
-7. As of v1.4, we have received reports that a warning is thrown even when there are no names that users considered similar.
+6. As of v1.4, we have received reports that a warning is thrown even when there are no names that users considered similar.
 After testing, we determined that users in fact had two names that were very short, and this caused a discrepancy between commonly expected behavior and actual implementation.
 We defined distance between similar names as either one name contains the other entirely, 
 or the Levenshtein distance between the two names is 2 or less
@@ -981,7 +985,7 @@ An unintended effect was that, for example, if you had short names (e.g "d", "hi
 the names would match despite normal users probably not defining these two names as similar. 
 Possible future enhancements would be to make it percentage-based, so that short names are not producing warnings unnecessarily.
 
-8. Currently, we have sellers only having one selling address and one house info. This is not fully representative of all
+7. Currently, we have sellers only having one selling address and one house info. This is not fully representative of all
 real-life conditions, since a seller can own and sell multiple houses. Likewise, a buyer could be
 theoretically searching for multiple houses (e.g. a rental firm). However we have decided in this early version, 
 and in view of our target audience (student/junior realtors) to have a one-to-one correspondence to simplify the 
@@ -990,3 +994,12 @@ have a many-to-one relation to buyers and sellers. (In fact, the class is alread
 in the repository as an unused .java file; we did not manage to integrate it in time for v1.3 release.)
 A workaround for such cases in v1.4 is to add the info about both houses into
 the address field and info field (since we do not limit the user from doing this.)
+
+8. Our undo/redo commands do not currently undo/redo UI-based commands, this could be enhanced in later versions.
+
+9. Our filter command currently only matches entire sections of a name. A possible enhancement is to allow filter to 
+search for partial matches, or have an additional command parameter to enable this; e.g. match `hi` with `Ibrahim`.
+
+10. Our filter command also can only search for names as of v1.4. Another enhancement is to allow users to search for the
+specific field they want to, by indicating it in the command parameters. One possible format is `filter p/202` if you
+wanted to filter by phone number, for example.
