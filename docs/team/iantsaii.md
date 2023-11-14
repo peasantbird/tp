@@ -25,7 +25,7 @@ Given below are my contributions to the project.
 
 
 * **Project management**:
-  * Managed 1.2b iteration
+  * Managed 1.2 iteration
 * **Enhancements to existing features**:
   * Added tests for various commands
   * Wrote Test Utils to help build sellers and buyer for testing.
