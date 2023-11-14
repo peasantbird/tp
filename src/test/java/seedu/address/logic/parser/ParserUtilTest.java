@@ -23,8 +23,8 @@ import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
 import seedu.address.model.displayable.Priority;
+import seedu.address.model.displayable.SortOrder;
 import seedu.address.model.tag.Tag;
-
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "  ";
@@ -34,6 +34,7 @@ public class ParserUtilTest {
     private static final String INVALID_TAG = "  ";
     private static final String INVALID_INFO = "  ";
     private static final String INVALID_PRIORITY = "fijsgfkl";
+    private static final String INVALID_SORT_ORDER = "b";
     private static final String UNRECOMMENDED_NAME = "R@chel";
     private static final String UNRECOMMENDED_PHONE = "(HP) 2934383, (OFF) 2930211";
     private static final String UNRECOMMENDED_EMAIL = "ffdoklf@f";
@@ -47,6 +48,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_PRIORITY = "high";
+    private static final String VALID_SORT_ORDER = "a";
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
@@ -57,7 +59,7 @@ public class ParserUtilTest {
     @Test
     public void parseIndex_outOfRangeInput_throwsParseException() {
         assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
-            -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
+                -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
@@ -288,25 +290,52 @@ public class ParserUtilTest {
         assertWarns((CommandWarnings commandWarnings) -> ParserUtil.parseName(commandWarnings, UNRECOMMENDED_NAME),
                 Name.MESSAGE_RECOMMENDATIONS);
     }
+
     @Test
     public void parseUnrecommendedPhone_flagsWarning() {
         assertWarns((CommandWarnings commandWarnings) -> ParserUtil.parsePhone(commandWarnings, UNRECOMMENDED_PHONE),
                 Phone.MESSAGE_RECOMMENDATIONS);
     }
+
     @Test
     public void parseUnrecommendedEmail_flagsWarning() {
         assertWarns((CommandWarnings commandWarnings) -> ParserUtil.parseEmail(commandWarnings, UNRECOMMENDED_EMAIL),
                 Email.MESSAGE_RECOMMENDATIONS);
     }
+
     @Test
     public void parseUnrecommendedTag_flagsWarning() {
         assertWarns((CommandWarnings commandWarnings) -> ParserUtil.parseTag(commandWarnings, UNRECOMMENDED_TAG),
                 Tag.MESSAGE_RECOMMENDATIONS);
     }
+
     @Test
     public void parseUnrecommendedPriority_flagsWarning() {
         assertWarns((CommandWarnings commandWarnings) ->
                         ParserUtil.parsePriority(commandWarnings, UNRECOMMENDED_PRIORITY),
                 Priority.MESSAGE_RECOMMENDATIONS);
+    }
+
+    @Test
+    public void parseSortOrder_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseSortOrder(new CommandWarnings(), null));
+    }
+
+    @Test
+    public void parseSortOrder_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseSortOrder(new CommandWarnings(), INVALID_SORT_ORDER));
+    }
+
+    @Test
+    public void parseSortOrder_validValueWithoutWhitespace_returnsSortOrder() throws Exception {
+        SortOrder expectedSortOrder = new SortOrder(VALID_SORT_ORDER);
+        assertEquals(expectedSortOrder, ParserUtil.parseSortOrder(new CommandWarnings(), VALID_SORT_ORDER));
+    }
+
+    @Test
+    public void parseSortOrder_validValueWithWhitespace_returnsSortOrder() throws Exception {
+        String sortOrderWithWhitespace = WHITESPACE + VALID_SORT_ORDER + WHITESPACE;
+        SortOrder expectedSortOrder = new SortOrder(VALID_SORT_ORDER);
+        assertEquals(expectedSortOrder, ParserUtil.parseSortOrder(new CommandWarnings(), sortOrderWithWhitespace));
     }
 }

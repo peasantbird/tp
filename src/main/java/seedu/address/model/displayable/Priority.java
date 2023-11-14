@@ -56,7 +56,7 @@ public class Priority {
     }
 
     /**
-     * Returns a PrioLvl based on the user input
+     * Returns a PrioLvl based on the user input.
      */
     public static PrioLvl getPrioLvl(String priority) {
         requireNonNull(priority);
