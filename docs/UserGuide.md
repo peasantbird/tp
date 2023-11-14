@@ -507,7 +507,7 @@ Parameters: INDEX PRIORITY
 
 ### Listing all buyers and sellers: `list`
 
-Lists all buyers and sellers that the user has added. Clears filters and rechecks the 
+Lists all buyers and sellers that the user has added. Clears filters and reloads the data file to check for changes.
 
 Format: `list`
 
