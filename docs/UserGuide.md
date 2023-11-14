@@ -61,7 +61,8 @@ contact management tasks done faster than traditional GUI apps!
 3. Copy the file to the folder you want to use as the _home folder_ for RTPM.
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar rtpm.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. If you are starting the app for the first time,
+ there will be some sample data loaded.<br>
 <div style="text-align:center;">
    <img src="images/Ui.png" alt="Ui" style="width:500px"/>
 </div>
@@ -70,7 +71,7 @@ contact management tasks done faster than traditional GUI apps!
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * `buyer n/John Doe p/91234567 e/johndoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium` : Adds a buyer named John Doe to the RTPM.
+    * `buyer n/John Doe` : Adds a buyer named John Doe to the RTPM.
 
     * `list` : Lists all buyers and sellers.
 
@@ -506,7 +507,7 @@ Parameters: INDEX PRIORITY
 
 ### Listing all buyers and sellers: `list`
 
-Lists all buyers and sellers that the user has added. 
+Lists all buyers and sellers that the user has added. Clears filters and reloads the data file to check for changes.
 
 Format: `list`
 
@@ -790,6 +791,14 @@ Upon exit, the latest data is saved to your computer at data/addressbook.json.
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RTPM home folder.
 
+**Q**: My entries are missing! Did they get deleted somehow?<br>
+**A**: One possible fix is to try calling the `list` command. If you manually edit the data file, or you filtered the list,
+the entries may not appear in the application until you refresh the list.
+
+**Q**: I made a mistake! How do I fix it?<br>
+**A**: You can make use of our handy [undo](#undoing-previous-action-undo) and [redo](#redoing-previous-action-redo)
+commands to fix any errors made.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -812,27 +821,27 @@ Upon exit, the latest data is saved to your computer at data/addressbook.json.
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add Buyer**    | `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_INFO] [prio/PRIORITY] [t/TAG]`<br> e.g. buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium prio/high
-**Add Seller**    | `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [prio/PRIORITY] [t/TAG]​`<br> e.g. seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/high
-**Edit Buyer** | `bedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]`<br> e.g. bedit 3 e/example@email.com ah/Residential Street
-**Edit Seller** | `sedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]`<br> e.g. sedit 3 e/example@email.com as/Selling Street
-**Delete Buyer** | `bdelete INDEX`<br> e.g. bdelete 2
-**Delete Seller** | `sdelete INDEX`<br> e.g. sdelete 2
-**Clear**  | `clear`
-**Set Buyer Priority** | `bprio INDEX PRIORITY`<br> e.g. bprio 3 high
-**Set Seller Priority** | `sprio INDEX PRIORITY`<br> e.g. sprio 3 high
-**List All** | `list`
-**Filter**   | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g. filter John Doe
-**List Buyer**   | `blist INDEX` <br> e.g. blist 1 
-**List Seller**   | `slist INDEX`<br> e.g. slist 1
-**Sort Buyers** | `bsort [PREFIX/DIRECTION]`<br> e.g. bsort n/d
-**Sort Sellers** | `ssort [PREFIX/DIRECTION]`<br> e.g. ssort prio/a
-**Undo**   | `undo`
-**Redo**  | `redo`
-**Exit**   | `exit`
-**Help**   | `help`
+| Action                  | Format, Examples                                                                                                                                                                                                                                                                   |
+|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Buyer**           | `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/BUY_HOUSE_INFO] [prio/PRIORITY] [t/TAG]`<br> e.g. buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium prio/high                                                  |
+| **Add Seller**          | `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_ADDRESS] [i/SELLING_HOUSE_INFO] [prio/PRIORITY] [t/TAG]​`<br> e.g. seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/high |
+| **Edit Buyer**          | `bedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]`<br> e.g. bedit 3 e/example@email.com ah/Residential Street                                                                                                                                                                          |
+| **Edit Seller**         | `sedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]`<br> e.g. sedit 3 e/example@email.com as/Selling Street                                                                                                                                                                              |
+| **Delete Buyer**        | `bdelete INDEX`<br> e.g. bdelete 2                                                                                                                                                                                                                                                 |
+| **Delete Seller**       | `sdelete INDEX`<br> e.g. sdelete 2                                                                                                                                                                                                                                                 |
+| **Clear**               | `clear`                                                                                                                                                                                                                                                                            |
+| **Set Buyer Priority**  | `bprio INDEX PRIORITY`<br> e.g. bprio 3 high                                                                                                                                                                                                                                       |
+| **Set Seller Priority** | `sprio INDEX PRIORITY`<br> e.g. sprio 3 high                                                                                                                                                                                                                                       |
+| **List All**            | `list`                                                                                                                                                                                                                                                                             |
+| **Filter**              | `filter KEYWORD [MORE_KEYWORDS]`<br> e.g. filter John Doe                                                                                                                                                                                                                          |
+| **List Buyer**          | `blist INDEX` <br> e.g. blist 1                                                                                                                                                                                                                                                    |
+| **List Seller**         | `slist INDEX`<br> e.g. slist 1                                                                                                                                                                                                                                                     |
+| **Sort Buyers**         | `bsort [PREFIX/DIRECTION]`<br> e.g. bsort n/d                                                                                                                                                                                                                                      |
+| **Sort Sellers**        | `ssort [PREFIX/DIRECTION]`<br> e.g. ssort prio/a                                                                                                                                                                                                                                   |
+| **Undo**                | `undo`                                                                                                                                                                                                                                                                             |
+| **Redo**                | `redo`                                                                                                                                                                                                                                                                             |
+| **Exit**                | `exit`                                                                                                                                                                                                                                                                             |
+| **Help**                | `help`                                                                                                                                                                                                                                                                             |
 
 <br>
 
@@ -849,8 +858,8 @@ Action     | Format, Examples
 
 ## Appendix A: Warnings
 
-RTPM allows you to flexibly input most fields of data, for example, you can insert chinese characters as names or
-slashes to abbreviate "son of" as "s/o".
+RTPM allows you to flexibly input most fields of data, for example, you can insert chinese characters as names, or
+use slashes to abbreviate "son of" as "s/o".
 However, we still have some things in mind for each field, to reduce faulty data.
 
 Hence, the warning system allows our app to inform you of any valid but possibly unintended inputs.
@@ -860,7 +869,6 @@ The warning system is also used to inform the user if, when you are adding new b
 whether there are two similar buyers or two similar sellers, 
 or a buyer that shares the same name as a seller. See [Appendix C](#appendix-c-similar-names) for more details.
 
-There are some limitations to the warning system
 ```
 Warning!; [Phone numbers should only contain numbers, and it should be at 
 least 3 digits long. Area codes are allowed, signified by a '+' and up to 
@@ -940,7 +948,7 @@ An example when similar names are detected:
 
 An example when the same name is detected:
 ```This seller already exists in the address book```
-(This is not allowed, hence the command does not execute.)
+(This is not allowed, hence the command will not execute.)
 
 <div style='text-align: right;'>
 
