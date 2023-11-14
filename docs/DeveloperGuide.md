@@ -9,13 +9,15 @@
 <!-- * Table of Contents -->
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
+
 
 ## **Acknowledgements**
 1. The undo & redo feature and its DG implementation details were reused from 
 [Address Book (Level4)](https://github.com/se-edu/addressbook-level4) with minor modifications.
 2. Our app uses this snippet to implement Levenshtein distance, which allows us to detect similar but not matching names.
 https://rosettacode.org/wiki/Levenshtein_distance#Java
+3. The overall format of the DG and project architecture was taken from 
+[Address Book (Level3)](https://se-education.org/addressbook-level3/DeveloperGuide.html) with modifications.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -157,6 +159,8 @@ the UI can be bound to this list so that the UI automatically updates when the d
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 <box type="info" seamless>
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
@@ -289,6 +293,7 @@ The same logic can be used for assigning priorities to sellers instead of buyers
 of `bprio`.
 
 
+
 #### Design considerations:
 
 **Aspect: How the optional priority field is implemented**
@@ -306,7 +311,9 @@ of `bprio`.
     * Cons: Address book only adds correctly formatted fields, and may discard the remaining arguments which are
     invalid without the user knowing, so more robust exception handling is required when parsing the user input 
     which may be tedious to implement.
-    
+
+
+<div style="page-break-after: always;"></div>
 
 ### Sort feature
 
@@ -507,8 +514,6 @@ as the CommandResult.
      significant for high-usage cases in the future such as company-wide integration.)
 --------------------------------------------------------------------------------------------------------------------
 
-<div style="page-break-after: always;"></div>
-
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -576,7 +581,9 @@ Priority level is based on current iteration
 unless specified otherwise)
 
 **Use case: UC1 - Add homeowner and house info**
+
 System: RTPM
+
 Actor: User
 
 **MSS**
@@ -597,10 +604,17 @@ Extensions:
     Use case restarts from step 1.
 
 
+<br>
+
 **Use case: UC2 - Add homebuyer and preferences**
+
 System: RTPM
+
 Actor: User
+
+
 **MSS**
+
 1. User enters command to add homebuyer and preferences.
 2. System adds the entry to the list.
 3. System saves file.
@@ -618,9 +632,13 @@ Extensions:
 <div style="page-break-after: always;"></div>
 
 **Use case: UC3 - View buyers**
+
 System: RTPM
+
 Actor: User
+
 **MSS**
+
 1. User enters the list-b command.
 2. System displays list of buyers.
 
@@ -631,7 +649,14 @@ Extensions:
   * 1a1. System indicates to user that command is invalid, prompting the user for a new input.
   Use case restarts from step 1.
 
+
+<br> 
+
 **Use case: UC4 - View sellers**
+
+System: RTPM
+
+Actor: User
 
 **MSS**
 
@@ -640,17 +665,22 @@ Extensions:
 
     Use case ends.
 
-**Extensions**
+Extensions
 
 * 1a. User makes a typo leading to an invalid command.
   * 1a1. System indicates to user that command is invalid, prompting the user for a new input.<br>
     Use case resumes at step 1.
 
-<br>
+<div style="page-break-after: always;"></div>
 
 **Use case: UC5 - Delete a buyer/seller**
 
+System: RTPM
+
+Actor: User
+
 **MSS**
+
 1. User enters command to delete a buyer or a seller.
 2. System deletes item.
 3. System updates savefile.
@@ -658,7 +688,7 @@ Extensions:
 
     Use case ends.
 
-**Extensions**
+Extensions
 
 * 3a. Failure to update savefile.
   * 3a1. System indicates failure to update.
@@ -668,6 +698,10 @@ Extensions:
 <br>
 
 **Use case: UC6 - Enter an invalid command**
+
+System: RTPM
+
+Actor: User
 
 **MSS:**
 1. User enters misspelled command.
