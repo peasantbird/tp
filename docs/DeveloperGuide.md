@@ -937,10 +937,8 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: At least one but less than ten thousand contacts present in the buyer list.
    2. Test case: `bsort prio/d`<br>
       Expected: Buyer list is sorted by priority in descending order, with the highest priority at the top of the list.
-   3. Test case: `bsort invalidprefix/d`, `bsort prio/invalidorder`<br>
+   3. Test case: `bsort prio/`, `bsort prio/invalidorder`<br>
       Expected: The buyer list is not updated. Error details shown in the status message.
-   4. Test case: `bsort`, `bsort prio/`, `bsort d`<br>
-      Expected: Similar to previous.
 
 <div style="page-break-after: always;"></div>
 
@@ -948,10 +946,8 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: At least one but less than ten thousand contacts present in the seller list.
     2. Test case: `ssort prio/d`<br>
        Expected: Seller list is sorted by priority in descending order, with the highest priority at the top of the list.
-    3. Test case: `ssort invalidprefix/d`, `ssort prio/invalidorder`<br>
+    3. Test case: `ssort prio/`, `ssort prio/invalidorder`<br>
        Expected: The seller list is not updated. Error details shown in the status message.
-    4. Test case: `ssort`, `ssort prio/`, `ssort d`<br>
-       Expected: Similar to previous.
 
 ### Saving data
 
