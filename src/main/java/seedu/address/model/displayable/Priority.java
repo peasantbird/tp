@@ -14,11 +14,11 @@ public class Priority {
             + "if at least the first letter is valid, we will read correctly.";
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Priority inputs must start with, at the minimum, h for high, m for medium, l for low, or n for nil. "
-                   + "This is not case sensitive. A blank input also means nil.";
+            "Priority inputs must at least start with h for high, m for medium, l for low, or n for nil. "
+                   + "This is not case sensitive. ";
     // Inputs are either 'high', 'medium', or 'low', with some allowance for typos after the first letter, and
     // are case-insensitive
-    public static final String VALIDATION_REGEX = "(?i)[hmln\\s].*";
+    public static final String VALIDATION_REGEX = "(?i)^\\s*[hmln](.*)$";
     public static final String AFFIRMATION_REGEX = "(?i)(h[igh]{0,3}|m[edium]{0,5}|l[ow]{0,2}|n[il]{0,2})$";
     public static final String DEFAULT_PRIO_LVL = "NIL";
     public final PrioLvl value;
