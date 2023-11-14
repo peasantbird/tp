@@ -1,6 +1,6 @@
 ---
-layout: page
-title: Andy Toh's Project Portfolio Page
+  layout: default.md
+  title: "Andy Toh's Project Portfolio Page"
 ---
 
 ### Project: RealtorTrackerPlusMax
