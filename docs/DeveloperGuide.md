@@ -939,6 +939,8 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `slist`, `slist 0`, `slist 99999`<br>
        Expected: No updates occur. Error details shown in the status message.
 
+<div style="page-break-after: always;"></div>
+
 ### Sorting contacts
 
 1. Sorting buyer contacts<br>
@@ -959,8 +961,6 @@ testers are expected to do more *exploratory* testing.
       Expected: Buyer list is sorted by name in ascending order. `bsort` chooses one of the provided prefixes based on
       this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
 
-<div style="page-break-after: always;"></div>
-
 2. Sorting seller contacts<br>
    1. Prerequisites: At least one but less than ten thousand contacts present in the seller list.
    2. Test case: `ssort prio/d`<br>
@@ -978,6 +978,8 @@ testers are expected to do more *exploratory* testing.
    8. Test case: `ssort prio/d n/a`
       Expected: Seller list is sorted by name in ascending order. `ssort` chooses one of the provided prefixes based on
       this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
