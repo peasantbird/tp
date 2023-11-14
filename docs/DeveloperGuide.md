@@ -945,17 +945,39 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: At least one but less than ten thousand contacts present in the buyer list.
    2. Test case: `bsort prio/d`<br>
       Expected: Buyer list is sorted by priority in descending order, with the highest priority at the top of the list.
-   3. Test case: `bsort prio/`, `bsort prio/invalidorder`<br>
-      Expected: The buyer list is not updated. Error details shown in the status message.
+   3. Test case: `bsort qwerty`, `bsort invalidprefix/invalidorder`<br>
+      Expected: The `bsort` command will ignore the invalid parameters and prefixes, and do a default sort.
+   4. Test case: `bsort qwerty n/a`, `bsort invalidprefix/invalidorder n/a`<br>
+      Expected: The `bsort` command will ignore the invalid parameters and prefixes, and sort by name ascending.
+   5. Test case: `bsort n/a qwerty`, `bsort n/a invalidprefix/invalidorder`<br>
+      Expected: The buyer list is not updated. Error details shown in the general status message.
+   6. Test case: `bsort n/invalidorder`<br>
+      Expected: The buyer list is not updated. Error details shown in the general status message.
+   7. Test case: `bsort prio/d prio/a`
+      Expected: The buyer list is not updated. Error details shown in the status message indicating duplicate prefixes.
+   8. Test case: `bsort prio/d n/a`
+      Expected: Buyer list is sorted by name in ascending order. `bsort` chooses one of the provided prefixes based on
+      this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
 
 <div style="page-break-after: always;"></div>
 
 2. Sorting seller contacts<br>
-    1. Prerequisites: At least one but less than ten thousand contacts present in the seller list.
-    2. Test case: `ssort prio/d`<br>
-       Expected: Seller list is sorted by priority in descending order, with the highest priority at the top of the list.
-    3. Test case: `ssort prio/`, `ssort prio/invalidorder`<br>
-       Expected: The seller list is not updated. Error details shown in the status message.
+   1. Prerequisites: At least one but less than ten thousand contacts present in the seller list.
+   2. Test case: `ssort prio/d`<br>
+      Expected: Seller list is sorted by priority in descending order, with the highest priority at the top of the list.
+   3. Test case: `ssort qwerty`, `ssort invalidprefix/invalidorder`<br>
+      Expected: The `ssort` command will ignore the invalid parameters and prefixes, and do a default sort.
+   4. Test case: `ssort qwerty n/a`, `ssort invalidprefix/invalidorder n/a`<br>
+      Expected: The `ssort` command will ignore the invalid parameters and prefixes, and sort by name ascending.
+   5. Test case: `ssort n/a qwerty`, `ssort n/a invalidprefix/invalidorder`<br>
+      Expected: The seller list is not updated. Error details shown in the general status message.
+   6. Test case: `ssort n/invalidorder`<br>
+      Expected: The seller list is not updated. Error details shown in the general status message.
+   7. Test case: `ssort prio/d prio/a`
+      Expected: The seller list is not updated. Error details shown in the status message indicating duplicate prefixes.
+   8. Test case: `ssort prio/d n/a`
+      Expected: Seller list is sorted by name in ascending order. `ssort` chooses one of the provided prefixes based on
+      this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
 
 ### Saving data
 
