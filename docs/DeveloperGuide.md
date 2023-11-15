@@ -9,11 +9,15 @@
 <!-- * Table of Contents -->
 <page-nav-print />
 
---------------------------------------------------------------------------------------------------------------------
+
 
 ## **Acknowledgements**
-Our app uses this snippet to implement Levenshtein distance, which allows us to detect similar but not matching names.
+1. The undo & redo feature and its DG implementation details were reused from 
+[Address Book (Level4)](https://github.com/se-edu/addressbook-level4) with minor modifications.
+2. Our app uses this snippet to implement Levenshtein distance, which allows us to detect similar but not matching names.
 https://rosettacode.org/wiki/Levenshtein_distance#Java
+3. The overall format of the DG and project architecture was taken from 
+[Address Book (Level3)](https://se-education.org/addressbook-level3/DeveloperGuide.html) with modifications.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -32,6 +36,8 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
+
+<div style="page-break-after: always;"></div>
 
 **Main components of the architecture**
 
@@ -59,11 +65,16 @@ Each of the four main components (also shown in the diagram above),
 * defines its *API* in an `interface` with the same name as the Component.
 * implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
+<div style="page-break-after: always;"></div>
+
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
+
+
+<div style="page-break-after: always;"></div>
 
 ### UI component
 
@@ -82,6 +93,8 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Displayable` objects residing in the `Model`.
 
+<div style="page-break-after: always;"></div>
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
@@ -89,6 +102,8 @@ The `UI` component,
 Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
+
+<div style="page-break-after: always;"></div>
 
 The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("sdelete 1")` API call as an example.
 
@@ -105,6 +120,9 @@ How the `Logic` component works:
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteSellerCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a seller).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+<div style="page-break-after: always;"></div>
+
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -125,11 +143,12 @@ not use warnings (because they either execute successfully or fail; there is no 
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...)
 inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
-
 
 The `Model` component,
 
@@ -140,6 +159,8 @@ the UI can be bound to this list so that the UI automatically updates when the d
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
+<div style="page-break-after: always;"></div>
+
 <box type="info" seamless>
 
 **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
@@ -148,6 +169,7 @@ the UI can be bound to this list so that the UI automatically updates when the d
 
 </box>
 
+<div style="page-break-after: always;"></div>
 
 ### Storage component
 
@@ -166,115 +188,20 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
-
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how the undo operation works:
-
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 ### Edit feature
 
 #### Implementation
 
-The  edit mechanism is facilitated by the `find` command. 
-
-Using the `find` command, we can find the seller or buyer to edit.
-
 Given below is an example usage scenario and how the edit mechanism behaves at each step.
 
 Step 1. The user types in the `bedit` or `sedit` keyword, followed by the index of the buyer or seller that they want
-to edit. Following that, they type `/field`, where `field` is a name of the field that they want to edit.
-
-The edit command will call the `find` command to find the corresponding buyer or seller, then it will copy that person,
-edit the field that the user wants to edit, delete that buyer or seller, then add the edited buyer or seller back
-into the list.
+to edit. Following that, they type one or more of `/PREFIX`, where `PREFIX` is a field that they want to edit. 
 
 <box type="info" seamless>
 
@@ -284,30 +211,32 @@ into the list.
 
 The following sequence diagram shows how the edit operation works:
 
-<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
+<puml src="diagrams/EditBuyerSequenceDiagram.puml" alt="EditBuyerSequenceDiagram" />
 
 <box type="info" seamless>
 
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+**Note:** The lifeline for `EditBuyerCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 
 **Aspect: How edit executes:**
 
-* **Alternative 1 (current choice):** Deletes the old buyer or seller and adds the edited one.
-    * Pros: Easy to implement.
-    * Cons: May not preserve buyer and seller order
+* **Alternative 1 (current choice):** Creates an EditBuyerDescriptor or an EditSellerDescriptor to abstract away 
+* all the Optional functionality
+    * Pros: Assigns concern of dealing with optional fields to the Descriptor class, making the code within
+  the `edit` commands easier to read and debug.
+    * Cons: Requires creation of additional Descriptor class, which makes it harder to trace through the code
 
-* **Alternative 2:** Deletes the old buyer or seller, then copies and deletes all the buyers or sellers
-after that buyer or seller, then adds the new edited buyer or seller, and then adds back all the copied
-buyers and sellers.
-    * Pros: Preserves order
-    * Cons: Difficult to implement
+* **Alternative 2:** `edit` command parsers pass Optionals directly to the Buyer Command
+    * Pros: Avoid creation of a new class that might introduce bugs
+    * Cons: Optionals are not intended to be used as inputs to methods, as they introduce additional 
+  work to be done in the method to handle the different inputs.
 
-_{more aspects and alternatives to be added}_
-
+<div style="page-break-after: always;"></div>
 
 ### Priority feature
 
@@ -345,6 +274,8 @@ to parse and obtain a `SetBuyerPriorityCommand`, before executing it. The comman
 update the address book's buyer list with the newly assigned buyer priority, which is reflected on the UI too. 
 Finally, `LogicManager` calls `StorageManager` to update the JSON file.
 
+<div style="page-break-after: always;"></div>
+
 The following sequence diagram shows how the undo operation works:
 <puml src="diagrams/SetBuyerPrioritySequenceDiagram.puml" alt="SetBuyerPrioritySequenceDiagram" />
 
@@ -360,6 +291,8 @@ runs a similar flow as illustrated in the sequence diagram above.
 
 The same logic can be used for assigning priorities to sellers instead of buyers, by using `sprio` instead 
 of `bprio`.
+
+
 
 #### Design considerations:
 
@@ -379,23 +312,154 @@ of `bprio`.
     invalid without the user knowing, so more robust exception handling is required when parsing the user input 
     which may be tedious to implement.
 
+
+<div style="page-break-after: always;"></div>
+
 ### Sort feature
 
 #### Implementation
 
-The proposed sort mechanism is facilitated by the `sort` command.
+The sort mechanism is facilitated by `SortedList` in `ModelManager`. A `SortedList` wraps an `ObservableList` and sorts 
+its content. In `ModelManager`, we have `SortedList<Buyer>` and `SortedList<Seller>` which wrap around 
+`FilteredList<Buyer>` and `FilteredList<Seller>`, allowing the user to filter the buyer and seller lists as well as 
+sort them at the same time. Additionally, `ModelManager` implements the following operations:
 
-Using the `sort` command, we can sort the buyers and sellers lists respectively by name, priority, and other criteria.
+* `ModelManager#updateFilteredSortedBuyerList(Comparator<Buyer> comparator)` - Sets the buyer `SortedList` with a 
+comparator that denotes the order of this list.
+* `ModelManager#updateFilteredSortedSellerList(Comparator<Seller> comparator)` - Sets the seller `SortedList` with a
+comparator that denotes the order of this list.
+
+These operations are exposed in the `Model` interface as 
+`Model#updateFilteredSortedBuyerList(Comparator<Buyer> comparator)` and 
+`Model#updateFilteredSortedSellerList(Comparator<Seller> comparator)`, which are executed by `SortBuyerCommand` and 
+`SortSellerCommand` respectively to sort the buyer and seller lists.
+
+The `comparator` passed into the methods above defines the way buyers and sellers are sorted. This sorting logic is 
+handled by the `BuyerComparator` and `SellerComparator` classes, which come with predefined implementations for the 
+`compare` method of `Comparator<T>`. Based on the prefix and sort order (ascending/descending) that is passed after
+the `bsort/ssort` keyword, an instance of `BuyerComparator`/`SellerComparator` with the corresponding implementation of
+`compare` method will be constructed and passed into the `SortedList` through the sort command. 
+
+<div style="page-break-after: always;"></div>
 
 Given below is an example usage scenario and how the sort mechanism behaves at each step.
 
-Step 1. The user types in the `bsort` or `ssort` keyword, followed by `name`, `priority`, or another `criteria`.
-to sort by. 
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the 
+initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
-The sort command will sort by changing the ObservableList<T> to a SortedList<T>, with the comparator based on the
-certain criteria.
+Step 2. The user executes `buyer n/Amy`, `buyer n/Bob` and `buyer n/Carla` to add three new buyers.
 
+Step 3. The user executes `bsort n/d` to sort the buyer list by name in descending order. Inputting `bsort n/d` calls 
+`LogicManager`, which gets `AddressBookParser` to create an instance of `SortBuyerCommandParser`. If there is a valid
+prefix, `SortBuyerCommandParser` parses its `SortOrder`, and creates a `SortBuyerCommand` with a `BuyerComparator` for
+the prefix and sort order. If there is no valid prefixes, the `SortBuyerCommand` will have a null `BuyerComparator`. 
+The `bsort` command is then executed, updating the `SortedList` in this case by passing the `BuyerComparator`
+instance that sorts by name descending. These changes are reflected in the UI, showing a list of buyers that is sorted 
+by name in descending order. Finally, `LogicManager` calls `StorageManager` to update the JSON file.
+
+The following sequence diagram shows how the sort operation works:
+
+<puml src="diagrams/SortBuyerSequenceDiagram.puml" alt="SortBuyerSequenceDiagram" />
+
+Step 4. To sort the buyer list by its default order, the user can execute `bsort`, which runs a similar flow as 
+illustrated in the sequence diagram above, except passing a null `BuyerComparator` into the `SortedList` for a default 
+sorting.
+
+The same logic can be used for sorting sellers instead of buyers, by using `ssort` instead of `bsort`.
+
+<div style="page-break-after: always;"></div>
+
+### Undo & redo feature
+
+#### Implementation
+
+The undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
+* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
+* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+
+These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+
+Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+
+<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
+
+Step 2. The user executes `bdelete 5` command to delete the 5th buyer in the address book. The `bdelete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `bdelete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+
+<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
+
+Step 3. The user executes `buyer n/David …​` to add a new buyer. The `buyer` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+
+<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
+
+<box type="info" seamless>
+
+**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+
+</box>
+
+Step 4. The user now decides that adding the buyer was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+
+<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
+
+
+<box type="info" seamless>
+
+**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+than attempting to perform the undo.
+
+</box>
+<div style="page-break-after: always;"></div>
+The following sequence diagram shows how the undo operation works:
+
+<puml src="diagrams/UndoSequenceDiagram.puml" alt="UndoSequenceDiagram" />
+
+<box type="info" seamless>
+
+**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</box>
+
+The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+
+<box type="info" seamless>
+
+**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+
+</box>
+
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+
+<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
+<div style="page-break-after: always;"></div>
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `buyer n/David …​` command. This is the behavior that most modern desktop applications follow.
+
+<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
+
+#### Design considerations:
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire address book.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+    * Pros: Will use less memory (e.g. for `bdelete`, just save the buyer being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
+
+<div style="page-break-after: always;"></div>
+    
 ### Relaxed parameter matching
+
 #### Background
 In previous versions of the app and in the original brownfield project AB3, fields such as ```Name``` or ```Email```
 had a validation method on instantiation, which would throw an ```IllegalArgumentException``` when 
@@ -403,11 +467,18 @@ the provided string did not fit the regex. Although useful, this would often be 
 frustration. Furthermore, this exception, as it halts execution, only informs you of the first field that fails 
 to pass, so if you had multiple errors you would have to resolve and re-execute each time.
 #### Implementation
-In 1.3, we implemented a group of static methods for each parameter, generally named isAppropriate(*Field*), which has a
-looser regex. The result of this boolean check, if it fails, then passes a warning string to the
-```CommandWarnings``` class, which collects and stores them in a set. At the end of the execute() method, if the
-command encountered any warnings, then they are output into the returned CommandResult.
+In 1.3, we implemented a group of static methods for each parameter, per convention
+named isAppropriate(*Field*), which has a looser regex. The result of this boolean check, 
+if it fails in ```ParserUtil```, then passes a warning string to the```CommandWarnings``` instance, which collects 
+and stores them in an internal Set<String>. This CommandWarnings is passed through parsers and their subsequent 
+commands (Only parsable commands need this, since non-parsable commands are unambiguous and do not need to warn
+the user).
+
+At the end of the execute() method, if the
+command encountered any warnings, then they are output through the ```getWarningMessage()``` method
+into the returned CommandResult.
 This is then passed through LogicManager into MainWindow for display to the user.
+LogicManager will also log any such warnings using its logger.
 
 <puml src="diagrams/isAppropriateNameSequenceDiagram.puml" alt="isAppropriateNameSequenceDiagram" />
 <box type="info" seamless>
@@ -416,6 +487,8 @@ This is then passed through LogicManager into MainWindow for display to the user
 limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </box>
+
+<div style="page-break-after: always;"></div>
 
 #### Design considerations:
 
@@ -451,13 +524,15 @@ as the CommandResult.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Requirements**
 
 ### Product scope
 
 **Target user profile**:
 
-This product is for student/junior realtors who have many clients and houses to keep track of. 
+This product is for student/junior realtors who have many clients to keep track of. 
 They are relatively tech-savvy and prefer the keyboard over the mouse, 
 prefer concise commands as opposed to full sentences, 
 and would like to customise the software to suit their preferences.
@@ -465,7 +540,9 @@ and would like to customise the software to suit their preferences.
 
 **Value proposition**:
 
-Our free and open-source app helps realtors to keep track of their clients’ preferences and house viewings in one place. Unlike apps like Google Sheets, our app is more optimized for large databases. In addition, we help auto-match appropriate houses to a client with matching budget, needs and location.
+Our free and open-source app helps realtors to keep track of their clients’ preferences and 
+details in one place. Unlike generic apps such as Google Sheets, our app is optimised 
+for typical realtor workloads and databases.
 
 
 ### User stories
@@ -496,13 +573,17 @@ Priority level is based on current iteration
 | `*`      | power user                                         | modify the syntax of (at least some) commands                               | enter them faster                                                                      |
 | `*`      | lazy user                                          | be able to automatically match appropriate houses to prospective buyers     | avoid doing it manually                                                                |
 
+<div style="page-break-after: always;"></div>
+
 ### Use cases
 
 (For all use cases below, the **System** is our app `RTPM (RealtorTrackerPlusMax)` and the **Actor** is the `user`,
 unless specified otherwise)
 
-**Use case: UC1 - Add homeowner and house**
+**Use case: UC1 - Add homeowner and house info**
+
 System: RTPM
+
 Actor: User
 
 **MSS**
@@ -523,10 +604,17 @@ Extensions:
     Use case restarts from step 1.
 
 
+<br>
+
 **Use case: UC2 - Add homebuyer and preferences**
+
 System: RTPM
+
 Actor: User
+
+
 **MSS**
+
 1. User enters command to add homebuyer and preferences.
 2. System adds the entry to the list.
 3. System saves file.
@@ -541,10 +629,16 @@ Extensions:
   * 3a1. System indicates failure to update.
   Use case restarts from step 1.
 
+<div style="page-break-after: always;"></div>
+
 **Use case: UC3 - View buyers**
+
 System: RTPM
+
 Actor: User
+
 **MSS**
+
 1. User enters the list-b command.
 2. System displays list of buyers.
 
@@ -555,7 +649,14 @@ Extensions:
   * 1a1. System indicates to user that command is invalid, prompting the user for a new input.
   Use case restarts from step 1.
 
+
+<br> 
+
 **Use case: UC4 - View sellers**
+
+System: RTPM
+
+Actor: User
 
 **MSS**
 
@@ -564,17 +665,22 @@ Extensions:
 
     Use case ends.
 
-**Extensions**
+Extensions
 
 * 1a. User makes a typo leading to an invalid command.
   * 1a1. System indicates to user that command is invalid, prompting the user for a new input.<br>
     Use case resumes at step 1.
 
-<br>
+<div style="page-break-after: always;"></div>
 
 **Use case: UC5 - Delete a buyer/seller**
 
+System: RTPM
+
+Actor: User
+
 **MSS**
+
 1. User enters command to delete a buyer or a seller.
 2. System deletes item.
 3. System updates savefile.
@@ -582,7 +688,7 @@ Extensions:
 
     Use case ends.
 
-**Extensions**
+Extensions
 
 * 3a. Failure to update savefile.
   * 3a1. System indicates failure to update.
@@ -593,18 +699,21 @@ Extensions:
 
 **Use case: UC6 - Enter an invalid command**
 
+System: RTPM
+
+Actor: User
+
 **MSS:**
 1. User enters misspelled command.
 2. System displays invalid command error and refers user to help page.
 
-*{More to be added}*
 
-
+<div style="page-break-after: always;"></div>
 
 
 ### Non-Functional Requirements
 *NFRs taken from the given constraints found **[here](https://nus-cs2103-ay2324s1.github.io/website/schedule/week4/project.html)**:*
-
+The marking of NFRs as fulfilled/unfulfilled below is accurate for v1.4.
 -[x] The product should be optimized for keyboard users who can type fast and prefer typing over other means of input.
 -[x] The data should be stored locally in a human editable text file, instead of in a database.
 -[x] The software should primarily follow OOP.
@@ -637,6 +746,41 @@ Additional NFRs
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
+
+## **Appendix: Effort**
+
+We consider that as of the current release (v1.4), substantial effort has been put in by our team to rework the original
+AB3 project into a product that is useful for realtors and contains all the features required, including sorting, flexible
+command typing, reordering and undoing/redoing commands.
+
+### Difficulties and challenges faced
+The first difficulty we encountered was in modifying the UI to fit our requirements. As developers newly introduced 
+to the brownfield AB-3 project, we had to spend quite a fair bit of time familiarising ourselves with 
+the project architecture, and the initial process of integrating some basic new commands 
+and tests (such as the one given in the AB-3 tutorial) was already rather tedious, let alone adding our own features to 
+the project and changes to the UI. For example, when trying to separate the initial `Person`s object into `Buyer`s and 
+`Seller`s, the app wasn't able to launch due to having a broken test codebase, which required us to refactor at least
+20 files across different directories in the project in order for operations to resume. 
+After much refactoring and tinkling with the JavaFX GUI, we were finally more familiar
+and comfortable making changes to the AB-3 project, and were able to begin system testing of our app in 
+preparation for our very first release of RTPM, in the v1.2 release.
+
+### Achievements
+One of the things that we believe show the effort that we put into the project was the restructuring in the back-end to
+allow Model to hold, and UI to display, multiple lists of different types. In AB3, the application only needed to deal
+with one type of object, while in our case, we wanted to add 3 (Houses, Buyers and Sellers, although we only ended up
+adding the latter 2). Hence, we decided to abstract out the responsibility for displaying the object to the object itself
+(so we would not need a class to hold and display every type we wanted to add. 
+
+Displayable is an interface that allows the UniqueDisplayableList to abstractify the actual displaying and maintaining
+of uniqueness to the contained class itself. Thus, we can reduce the number of repetitive classes required to contain 
+others.
+
+--------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## **Appendix: Instructions for manual testing**
 
@@ -683,6 +827,8 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `buyer n/Tom p/phone e/email`
       Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
+
 2. Adding a seller contact
 
     1. Prerequisites: Clear the lists with the `clear` command to prevent conflicts from prior testing.
@@ -723,7 +869,9 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
     8. Test case: `sedit`, `sedit 1`, `sedit p/12345`<br>
        Expected: Similar to previous.
-   
+
+<div style="page-break-after: always;"></div>
+
 ### Deleting a contact
 
 1. Deleting a buyer contact while all persons are being shown
@@ -752,6 +900,8 @@ testers are expected to do more *exploratory* testing.
 
    4. Other incorrect delete commands to try: `sdelete`, `sdelete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+<div style="page-break-after: always;"></div>
 
 ### Setting a contact's priority
 
@@ -795,6 +945,8 @@ testers are expected to do more *exploratory* testing.
     9. Test case: `sprio`, `sprio high`, `sprio 1`<br>
        Expected: Similar to previous.
 
+<div style="page-break-after: always;"></div>
+
 ### Filtering the lists
 
 1. Prerequisites: Clear the lists with the `clear` command and add buyers named "John", "John Doe", "JohnDoe", and "Doe" with the `buyer` command.
@@ -821,25 +973,47 @@ testers are expected to do more *exploratory* testing.
     3. Test case: `slist`, `slist 0`, `slist 99999`<br>
        Expected: No updates occur. Error details shown in the status message.
 
+<div style="page-break-after: always;"></div>
+
 ### Sorting contacts
 
-1. Sorting buyer contacts
+1. Sorting buyer contacts<br>
    1. Prerequisites: At least one but less than ten thousand contacts present in the buyer list.
    2. Test case: `bsort prio/d`<br>
       Expected: Buyer list is sorted by priority in descending order, with the highest priority at the top of the list.
-   3. Test case: `bsort invalidprefix/d`, `bsort prio/invalidorder`<br>
-      Expected: The buyer list is not updated. Error details shown in the status message.
-   4. Test case: `bsort`, `bsort prio/`, `bsort d`<br>
-      Expected: Similar to previous.
+   3. Test case: `bsort qwerty`, `bsort invalidprefix/invalidorder`<br>
+      Expected: The `bsort` command will ignore the invalid parameters and prefixes, and do a default sort.
+   4. Test case: `bsort qwerty n/a`, `bsort invalidprefix/invalidorder n/a`<br>
+      Expected: The `bsort` command will ignore the invalid parameters and prefixes, and sort by name ascending.
+   5. Test case: `bsort n/a qwerty`, `bsort n/a invalidprefix/invalidorder`<br>
+      Expected: The buyer list is not updated. Error details shown in the general status message.
+   6. Test case: `bsort n/invalidorder`<br>
+      Expected: The buyer list is not updated. Error details shown in the general status message.
+   7. Test case: `bsort prio/d prio/a`
+      Expected: The buyer list is not updated. Error details shown in the status message indicating duplicate prefixes.
+   8. Test case: `bsort prio/d n/a`
+      Expected: Buyer list is sorted by name in ascending order. `bsort` chooses one of the provided prefixes based on
+      this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
 
-2. Sorting seller contacts
-    1. Prerequisites: At least one but less than ten thousand contacts present in the seller list.
-    2. Test case: `ssort prio/d`<br>
-       Expected: Seller list is sorted by priority in descending order, with the highest priority at the top of the list.
-    3. Test case: `ssort invalidprefix/d`, `ssort prio/invalidorder`<br>
-       Expected: The seller list is not updated. Error details shown in the status message.
-    4. Test case: `ssort`, `ssort prio/`, `ssort d`<br>
-       Expected: Similar to previous.
+2. Sorting seller contacts<br>
+   1. Prerequisites: At least one but less than ten thousand contacts present in the seller list.
+   2. Test case: `ssort prio/d`<br>
+      Expected: Seller list is sorted by priority in descending order, with the highest priority at the top of the list.
+   3. Test case: `ssort qwerty`, `ssort invalidprefix/invalidorder`<br>
+      Expected: The `ssort` command will ignore the invalid parameters and prefixes, and do a default sort.
+   4. Test case: `ssort qwerty n/a`, `ssort invalidprefix/invalidorder n/a`<br>
+      Expected: The `ssort` command will ignore the invalid parameters and prefixes, and sort by name ascending.
+   5. Test case: `ssort n/a qwerty`, `ssort n/a invalidprefix/invalidorder`<br>
+      Expected: The seller list is not updated. Error details shown in the general status message.
+   6. Test case: `ssort n/invalidorder`<br>
+      Expected: The seller list is not updated. Error details shown in the general status message.
+   7. Test case: `ssort prio/d prio/a`
+      Expected: The seller list is not updated. Error details shown in the status message indicating duplicate prefixes.
+   8. Test case: `ssort prio/d n/a`
+      Expected: Seller list is sorted by name in ascending order. `ssort` chooses one of the provided prefixes based on
+      this order: **1. Name**, **2. Home address**, **3. House info**, **4. Priority**.
+
+<div style="page-break-after: always;"></div>
 
 ### Saving data
 
@@ -862,29 +1036,48 @@ testers are expected to do more *exploratory* testing.
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## **Appendix: Planned Enhancements**
 
 Given below are the enhancements that will be implemented in a future version.
 
-1. Currently, the UI text is cut off if the entries are too long. While this should not usually happen since the user 
+#### 1. Better handling of long inputs
+
+* Currently, the UI text is cut off if the entries are too long. While this should not usually happen since the user 
 can decide what to enter (nicknames, abbreviations, acronyms, etc.), we plan to accommodate overly long names, 
 phone numbers, addresses, emails and house info entries within the UI.
 As a current workaround, users can call the `blist`/`slist` commands to display the text representation of the entry in
 the results box.
 
-2. Extremely long inputs can cause the program to hang or crash. This is a minor issue, since users are unlikely to
+* Extremely long inputs can cause the program to hang or crash. This is a minor issue, since users are unlikely to
 enter such long fields into the app. A possible enhancement is to prevent overly long entries by blocking the command
 execution.
 
-3. Currently, if the user makes a spelling or spacing mistake, the intended prefix of another field is regarded as 
+#### 2. Better command warnings
+
+* Currently, if the user makes a spelling or spacing mistake, the intended prefix of another field is regarded as 
 part of the argument for the previous field. We plan to check for misspelled prefixes and prefixes provided as 
 arguments of other fields and warn the user.
 
-4. Currently, the user is not warned if addresses, names, and house info entries contain only numbers and special 
+* Currently, the user is not warned if addresses, names, or house info entries contain only numbers and special 
 symbols. We plan to expand warnings to include warnings for addresses, names and house info entries containing 
 only non-alphabetical characters.
-  
-5. Currently, for `bprio` and `sprio`,
+
+* As of v1.4, we have received reports that a warning is thrown even when there are no names that users considered similar. 
+After testing, we determined that users in fact had two names that were very short, and this caused a discrepancy between commonly expected behavior and actual implementation.
+We defined distance between similar names as either one name contains the other entirely,
+or the Levenshtein distance between the two names is 2 or less
+(It takes 2 or fewer substitutions/additions/removals to turn one of the names into the other.)
+An unintended effect was that, for example, if you had short names (e.g "d", "hi", in the original case for us),
+the names would match despite normal users probably not defining these two names as similar.
+Possible future enhancements would be to make it percentage-based, so that short names are not producing warnings unnecessarily.
+
+<div style="page-break-after: always;"></div>
+
+#### 3. Improvements to set priority command
+
+* Currently, for `bprio` and `sprio`,
    * if the user inputs extra arguments, such as `bprio 1 high low`, the app 
    accepts the input and sets the first buyer's priority level to `high` instead of warning the user about extra 
    arguments which would be ignored. As such, we plan to warn the user if any extra arguments are supplied for the 
@@ -904,21 +1097,44 @@ only non-alphabetical characters.
        any of the letters inside the square brackets, so `n`, `nl`, and `nll` are all appropriate inputs.
      * `$` demarcates the end of the matching 
      
-     Initially, the regex above was meant to allow for user typos, such as `hgih` or `meduim`, but in hindsight, 
+   Initially, the regex above was meant to allow for user typos, such as `hgih` or `meduim`, but in hindsight, 
      this regex is unnecessary as it doesn't value add much to the user experience, 
      and only made it harder to test for invalid priority inputs. 
    <br> As such, we plan to 
      change the validation regex to only accept `h`, `m`, `l`, or `nil` as inputs
-     for priority in future.
+     for priority in the future.
   
-6. Currently, attempting to add multiple contacts with long names may cause the app to lag considerably. 
-We plan to optimise the similarity checks for names so that doing so results in less delay.
 
-7. As of v1.4, we have received reports that a warning is thrown even when there are no names that users considered similar.
-After testing, we determined that users in fact had two names that were very short, and this caused a discrepancy between commonly expected behavior and actual implementation.
-We defined distance between similar names as either one name contains the other entirely, 
-or the Levenshtein distance between the two names is 2 or less
-(It takes 2 or fewer substitutions/additions/removals to turn one of the names into the other.)
-An unintended effect was that, for example, if you had short names (e.g d, hi in the original case for us), 
-the names would match despite normal users probably not defining these two names as similar. 
-Possible future enhancements would be to make it percentage-based, so that short names are not producing warnings unnecessarily.
+
+<div style="page-break-after: always;"></div>
+
+#### 4. Better fields for buyers and sellers
+
+* Currently, we have sellers only having one selling address and one house info. This is not fully representative of all
+real-life conditions, since a seller can own and sell multiple houses. Likewise, a buyer could be
+theoretically searching for multiple houses (e.g. a rental firm). However we have decided in this early version, 
+and in view of our target audience (student/junior realtors) to have a one-to-one correspondence to simplify the 
+UI and refine other features. A future enhancement would be to use a House class that can
+have a many-to-one relation to buyers and sellers. (In fact, the class is already available and is 
+in the repository as an unused .java file; we did not manage to integrate it in time for v1.3 release.)
+A workaround for such cases in v1.4 is to add the info about both houses into
+the address field and info field (since we do not limit the user from doing this.)
+
+#### 5. Undo/redo commands affect UI-based commands
+* Our undo/redo commands do not currently undo/redo UI-based commands, this could be enhanced in later versions. 
+
+#### 6. Improvements to filter command
+* Our filter command currently only matches entire sections of a name. A possible enhancement is to allow filter to 
+search for partial matches, or have an additional command parameter to enable this; e.g. match `hi` with `Ibrahim`.
+
+* Our filter command also can only search for names as of v1.4. Another enhancement is to allow users to search for the
+specific field they want to, by indicating it in the command parameters. One possible format is `filter p/202` if you
+wanted to filter by phone number, for example.
+
+#### 7. Better error handling for sort command
+* Our sort command currently allows extraneous inputs and invalid prefixes after the `sort` keyword and before the next
+valid prefix (`n`, `ah`, `i` or `prio`). Instead of allowing these inputs, the sort command can be changed to not allow
+these inputs and show an error message to the user indicating these invalid parameters and prefixes. Moreover, `sort`
+currently allows the user to input more than one valid prefix, in which case it'll take the prefix based on the order:
+**1. Name**, **2. Home address**, **3. House info**, **4. Priority**. The sort command can be changed to allow only a
+single prefix, decreasing ambiguity on which prefix it is sorting by.

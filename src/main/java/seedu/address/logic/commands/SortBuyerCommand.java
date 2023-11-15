@@ -6,12 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_HOUSE_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 
-import java.util.Comparator;
-
-import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.displayable.buyer.Buyer;
+import seedu.address.model.displayable.buyer.BuyerComparator;
 
 /**
  * Represents a command that sorts the buyer list using a comparator.
@@ -21,7 +18,7 @@ public class SortBuyerCommand extends Command {
     public static final String COMMAND_WORD = "bsort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts the buyers in RTPM. "
-            + "Parameters: Choose one of "
+            + "Parameters: Choose zero or one of "
             + "[" + PREFIX_NAME + "] "
             + "[" + PREFIX_ADDRESS + "] "
             + "[" + PREFIX_HOUSE_INFO + "] "
@@ -32,20 +29,19 @@ public class SortBuyerCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Got it. I've sorted the buyer list!";
 
-    private final Comparator<Buyer> comparator;
+    private final BuyerComparator comparator;
 
     /**
      * Constructs a SortBuyerCommand based on the comparator to be used.
      * @param comparator the comparator which will be used to arrange the list.
      */
-    public SortBuyerCommand(Comparator<Buyer> comparator) {
+    public SortBuyerCommand(BuyerComparator comparator) {
         this.comparator = comparator;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        assert comparator != null;
         model.updateFilteredSortedBuyerList(comparator);
         return new CommandResult(MESSAGE_SUCCESS);
     }
@@ -62,13 +58,9 @@ public class SortBuyerCommand extends Command {
         }
 
         SortBuyerCommand otherSortBuyerCommand = (SortBuyerCommand) other;
+        if (this.comparator == null && otherSortBuyerCommand.comparator == null) {
+            return true;
+        }
         return comparator.equals(otherSortBuyerCommand.comparator);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("comparator", comparator)
-                .toString();
     }
 }

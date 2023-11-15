@@ -16,6 +16,7 @@ import seedu.address.model.displayable.HouseInfo;
 import seedu.address.model.displayable.Name;
 import seedu.address.model.displayable.Phone;
 import seedu.address.model.displayable.Priority;
+import seedu.address.model.displayable.SortOrder;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -174,5 +175,20 @@ public class ParserUtil {
             warn.addWarning(Priority.MESSAGE_RECOMMENDATIONS);
         }
         return new Priority(trimmedPriority);
+    }
+
+    /**
+     * Parses a {@code String sortOrder} into an {@code SortOrder}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code sortOrder} is invalid.
+     */
+    public static SortOrder parseSortOrder(CommandWarnings warn, String sortOrder) throws ParseException {
+        requireNonNull(sortOrder);
+        String trimmedSortOrder = sortOrder.trim();
+        if (!SortOrder.isValidSortOrder(trimmedSortOrder)) {
+            throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
+        }
+        return new SortOrder(trimmedSortOrder);
     }
 }

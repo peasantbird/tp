@@ -16,6 +16,7 @@ public class SetSellerPriorityCommandParser implements Parser<SetSellerPriorityC
     /**
      * Parses the given {@code String} of arguments in the context of the SetSellerPriorityCommand
      * and returns a SetSellerPriorityCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public SetSellerPriorityCommand parse(String args, CommandWarnings commandWarnings) throws ParseException {
