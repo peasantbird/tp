@@ -406,7 +406,10 @@ Precise outputs when the command succeeds:
 
 ### Setting a buyer's priority: `bprio`
 
-Sets the priority level of a buyer based on their index number in the buyer's list.
+Get your priorities straight. Focus on the tasks that matter the most, and maximise your productivity and time.
+
+The `bprio` command allows you set the priority level of a buyer based on their index number in the buyer's list, 
+so that you can seamlessly view and focus on clients which have a greater priority. 
 
 <box type="info" seamless>
 
