@@ -507,9 +507,9 @@ Parameters: INDEX PRIORITY
 
 ### Filtering buyers and sellers: `filter`
 
-Say goodbye to the struggles of scrolling through your entire list to find that one elusive contact.
+Say goodbye to the struggles of scrolling through your entire list to find that one elusive client.
 
-The `filter` allows you to find any contact by name easily, so you never have to waste time searching for a contact no matter how long your lists get.
+The `filter` allows you to find any client by name easily, so you never have to waste time searching for a client no matter how long your lists get.
 * This command only matches names
 * Your keywords can be given in any order
 * Only complete words will be matched
