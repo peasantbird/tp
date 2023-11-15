@@ -215,13 +215,13 @@ Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East
 
 Possible invalid inputs & their corresponding error messages:
 
-* Missing name:
+* If your command is not in the proper format:
 
 >Invalid command format!<br>
 buyer: Adds a buyer to the address book. Parameters: n/NAME [p/PHONE] [e/EMAIL] [ah/ADDRESS] [i/INFO] [prio/PRIORITY] [t/TAG]...<br> 
 Example: buyer n/John Doe p/98765432 e/johnd@example.com ah/311, Clementi Ave 2, #02-25 i/Central Area 5 Room Condominium prio/medium t/friends t/owesMoney
 
-* Invalid email:
+* If you use an invalid email:
 
 >Emails must contain at least one '@'.
 
@@ -265,12 +265,12 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling A
 <box type="wrong" seamless>
 Possible invalid inputs & their corresponding error messages:  
 
-* Missing name
+* If your command is not in the proper format:
 >Invalid command format!<br>
 seller: Adds a seller to the address book. Parameters: n/NAME p/PHONE e/EMAIL ah/ADDRESS as/SELLING_ADDRESS i/HOUSE_INFO [t/TAG]...<br>
 Example: seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/medium t/friends t/owesMoney
 
-* Invalid email
+* If you use an invalid email:
 >Emails must contain at least one '@'.
 
 </box>
@@ -320,17 +320,17 @@ Jane Doe; Phone: 91234567; Email: something@else.com; Address: 1 College Ave Eas
 <box type="wrong" seamless>
 Possible invalid inputs & their corresponding error messages:  
 
-* No index provided
+* If your command is not in the proper format:
 
 >Invalid command format!<br> 
 bedit: Edits the details of the buyer identified by the index number used in the displayed buyer list. Existing values will be overwritten by the input values.<br>
 Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/ADDRESS] [i/HOUSE_INFO] [t/TAG]...<br>
 [prio/PRIORITY] Example: bedit 1 p/91234567 e/johndoe@example.com
 
-* No fields provided
+* If you don't provide any fields to edit:
 >At least one field to edit must be provided!
 
-* Invalid index
+* If you provide an invalid index:
 >The buyer index provided is higher than the last number in the list!
 
 </box>
@@ -374,16 +374,16 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: Another Place; Selling Ad
 <box type="wrong" seamless>
 Possible invalid inputs & their corresponding error messages:
 
-* No index provided
+* If your command is not in the proper format:
 >Invalid command format!<br>
 sedit: Edits the details of the seller identified by the index number used in the displayed seller list. Existing values will be overwritten by the input values.<br>
 Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/ADDRESS] [as/SELLING_ADDRESS] [i/HOUSE_INFO] [t/TAG]...<br>
 [prio/PRIORITY] Example: sedit 1 p/91234567 e/johndoe@example.com
 
-* No fields provided
+* If you don't provide any fields:
 >At least one field to edit must be provided!
 
-* Invalid index
+* If you provide an invalid index:
 >The seller index provided is higher than the last number in the list!
 </box>
 
@@ -423,13 +423,13 @@ Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East
 <box type="wrong" seamless>
 Possible invalid inputs & their corresponding error messages:
 
-* No index provided 
+* If your command is not in the proper format: 
 >Invalid command format!<br>
 bdelete: Deletes the buyer identified by the index number used in the displayed buyer list.<br>
 Parameters: INDEX (must be a positive integer)<br>
 Example: bdelete 1
 
-* Invalid index
+* If you provide an invalid index:
 >The buyer index provided is higher than the last number in the list!
 
 </box>
@@ -467,13 +467,13 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling A
 <box type="wrong" seamless>
 Possible invalid inputs & their corresponding error messages:
 
-* Invalid command format
+* If your command is not in the proper format:
 >Invalid command format! <br>
 sdelete: Deletes the seller identified by the index number used in the displayed seller list.<br>
 Parameters: INDEX (must be a positive integer)<br>
 Example: sdelete 1
 
-* Invalid index
+* If you provide an invalid index
 >The seller index provided is higher than the last number in the list!
 
 </box>
@@ -548,12 +548,12 @@ Jane Doe; Phone: 91234567; Email: something@else.com; Address: 1 College Ave Eas
 <box type="wrong" seamless>
 Possible invalid inputs & their corresponding error messages:
 
-* No index provided
+* If your command is not in the proper format:
 >Invalid command format!<br>
 bprio: Sets a priority level for the buyer, identified by index in the displayed buyer list. INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', 'low', or 'nil'.<br>
 Parameters: INDEX PRIORITY
 
-* Invalid index
+* If you provide an invalid index:
 >The buyer index provided is higher than the last number in the list!
 
 </box>
@@ -607,12 +607,12 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: Another Place; Selling Ad
 <box type="wrong" seamless>
 Possible invalid inputs & their corresponding error messages:
 
-* No index provided
+* If your command is not in the proper format:
 >Invalid command format!<br>
 sprio: Sets a priority level for the seller, identified by index in the displayed seller list. INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', 'low', or 'nil'.<br>
 Parameters: INDEX PRIORITY
 
-* Invalid index
+* If you provide an invalid index
 >The seller index provided is higher than the last number in the list!
 
 </box>
