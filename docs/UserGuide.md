@@ -363,7 +363,7 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 ### Deleting a buyer: `bdelete`
 
 Congratulations on helping a buyer find their dream home! With the deal now complete, it's time to shift your focus
-onto securing the next deal and making the next buyer satisfied!
+onto securing the next deal and making the next buyer satisfied.
 
 The `bdelete` command allows you to delete a buyer based on their index number in the buyers’ list, so that you can keep
 your buyer list organised and de-cluttered by keeping only the relevant buyers and removing outdated entries.
@@ -400,9 +400,6 @@ Example: bdelete 1
 <br>
 
 ### Deleting a seller: `sdelete`
-
-Congratulations on matching a buyer to the ideal seller! With the property transaction now complete, it's time to
-focus on matching the remaining vacant houses to prospective buyers.
 
 Similar to `bdelete,` the `sdelete` deletes a seller based on their index number in the sellers’ list, so that you can keep
 your seller list organised and de-cluttered by keeping only the relevant sellers and removing outdated entries.
