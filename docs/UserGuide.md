@@ -58,7 +58,7 @@ to get rid of your cluttered spreadsheets, RTPM is for you!
 
 ## Quick Start
 
-1. Ensure you have Java `11` or above installed in your computer.
+1. Ensure you have Java `11` or above installed in your computer. For more info, check the [FAQ](#faq).
 
 2. Download the latest `rtpm.jar` [here](https://github.com/AY2324S1-CS2103T-F11-3/tp/releases/tag/v1.4).
 
@@ -113,12 +113,15 @@ Note that backslashes need to be repeated twice.
 
 Here are some things regarding RTPM's features to take note of before using them.
 
-<box type="info" seamless>
+<box type="definition" seamless>
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` represent the data to be supplied by the user.<br>
+* Words in `UPPER_CASE` represent the parameters, or data, to be supplied by the user.<br>
   e.g. in `buyer n/NAME`, `NAME` is a parameter which can be used as `buyer n/John Doe`.
+
+* Prefixes in the format `small_letters/` indicate to RTPM where your data is located. <br>
+  e.g. in `buyer n/NAME`, `n/` is a prefix which tells the app that `NAME` is representing a buyer's name.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -129,10 +132,10 @@ Here are some things regarding RTPM's features to take note of before using them
 * The order in which you input data is not fixed by RTPM.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* All commands and prefixes ignore case. Fields however, are case-sensitive. <br>
+* All commands and prefixes ignore case. parameters however, are case-sensitive. <br>
   e.g. if the command specifies `buyer n/NAME`, `BUYER N/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -141,7 +144,7 @@ Here are some things regarding RTPM's features to take note of before using them
 
 <div style="page-break-after: always;"></div>
 
-<box type="info" seamless>
+<box type="definition" seamless>
 
 **General notes about features:**<br>
 
@@ -170,7 +173,8 @@ Here are some things regarding RTPM's features to take note of before using them
 
 ### Adding a buyer: `buyer`
 
-Adds a buyer with their information to the list. 
+Adds a buyer with their information, helping you to remember their preferences and needs. 
+Optional fields mean you can key in important details when time is precious, and edit the entry later.
 
 <box type="warning" seamless>
 
@@ -988,6 +992,8 @@ An example when the same name is detected:
 </div>
 
 ## Appendix D: Definitions
+
+
 
 <div style='text-align: right;'>
 
