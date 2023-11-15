@@ -362,7 +362,11 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 ### Deleting a buyer: `bdelete`
 
-Deletes a buyer based on their index number in the buyers’ list.
+Congratulations on helping a buyer find their dream home! With the deal now complete, it's time to shift your focus
+onto securing the next deal and making the next buyer satisfied.
+
+The `bdelete` command allows you to delete a buyer based on their index number in the buyers’ list, so that you can keep
+your buyer list organised and de-cluttered by keeping only the relevant buyers and removing outdated entries.
 
 Format: `bdelete INDEX`
 * `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyers' list
@@ -397,7 +401,9 @@ Example: bdelete 1
 
 ### Deleting a seller: `sdelete`
 
-Deletes a seller based on their index number in the sellers’ list.
+Similar to `bdelete,` the `sdelete` deletes a seller based on their index number in the sellers’ list, so that you can keep
+your seller list organised and de-cluttered by keeping only the relevant sellers and removing outdated entries.
+
 
 Format: `sdelete INDEX`
 * `INDEX`: A positive integer (1, 2, 3, …), which must not exceed last index in the sellers’ list
@@ -445,7 +451,16 @@ Precise outputs when the command succeeds:
 
 ### Setting a buyer's priority: `bprio`
 
-Sets the priority level of a buyer based on their index number in the buyer's list.
+Get your priorities straight. Focus on the tasks that matter the most, and maximise your time and productivity
+by securing the most important deals, first and foremost.
+
+The `bprio` command allows you set the priority level of a buyer based on their index number in the buyer's list, 
+so that you can seamlessly differentiate buyers at a glance by their priority level. 
+The priority tags are colored intuitively for you to easily spot a buyer's priority level at first glance.
+After assigning priorities
+to your buyers, a simple `bsort prio/d` command would then sort your buyer list by priority level, with the 
+higher priority buyers appearing first at the top of the list, allowing you to get started with the right 
+client, right away.
 
 <box type="warning" seamless>
 
@@ -502,7 +517,9 @@ Note that this command throws warnings. For more info on warnings, head [here.](
 
 </box>
 
-Sets the priority level of a seller based on their index number in the seller's list.
+Similar to `bprio`, the `sprio` command allows you to set the priority level of a seller (instead of a buyer) 
+based on their index number in the seller's list, so that you can seamlessly differentiate sellers too at a glance 
+by their priority level. 
 
 Format: `sprio INDEX PRIORITY`
 * `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyer's list
