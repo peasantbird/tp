@@ -180,12 +180,19 @@ Here are some things regarding RTPM's features to take note of before using them
 
 ### Adding a buyer: `buyer`
 
-Adds a buyer with their information, helping you to remember their preferences and needs. 
-Optional fields mean you can key in important details when time is precious, and edit the entry later.
+
+You can add buyers with a few keystrokes, instead of having to use an excel sheet. 
+The `buyer` command allows you to add a buyer with just their name,
+so that you can quickly add them on the go.
+
+You can also include contact details of the buyer with the `[p/PHONE_NUMBER]` and `[e/EMAIL]` fields,
+and add more details about them with the `[t/TAG]` field.
 
 <box type="warning" seamless>
 
-Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
+Note that this command throws warnings. 
+For more info on fields, head [here.](#appendix-b-fields) 
+For more info on warnings, head [here.](#appendix-a-warnings)
 
 </box>
 
@@ -230,7 +237,9 @@ Precise outputs when the command fails due to invalid parameters:
 
 ### Adding a seller : `seller`
 
-Adds a seller with their information to the list. 
+Similar to [`buyer`](#adding-a-buyer-buyer),
+ the `seller` command allows you to add clients who have homes to sell. 
+Additionally, you can add information about the house that your client wants to sell with the `[i/HOUSE_INFO]` field. 
 
 <box type="warning" seamless>
 
@@ -274,7 +283,14 @@ Precise outputs when the command fails due to invalid parameters:
 
 ### Editing a buyer: `bedit`
 
-Edits the information of a buyer based on their index number in the buyers' list.
+Congratulations on adding buyers and sellers!
+Now, when you have time to review your client's information, 
+you can fill in additional information about buyers, or 
+edit their existing information.
+
+The `bedit` command allows you to edit any information about your buyer,
+so that you can capture the dynamic needs of your client. 
+To select the buyer you want to edit, just indicate their index number. 
 
 <box type="warning" seamless>
 
@@ -317,7 +333,8 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 ### Editing a seller: `sedit`
 
-Edits the information of a seller based on their index number in the sellers' list.
+Similar to [`bedit`](#editing-a-buyer-bedit),
+ the `sedit` command allows you to edit the information of a home seller.
 
 <box type="warning" seamless>
 
