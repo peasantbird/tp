@@ -597,7 +597,7 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling A
 
 ### Sorting buyers: `bsort`
 
-Put yourself in control of your priorities and contact management like never before.
+Elevate your contact list through organisation based on your priorities.
 
 The `bsort` command allows you to quickly organise your buyer contacts by various criteria, so that you can sieve out
 your most important contacts to maintain and the most valuable opportunities you have.
@@ -612,13 +612,12 @@ Format: `bsort [PREFIX/DIRECTION]`
 
 <box type="tip">
 
-Sorts the buyers' list either by a provided prefix and direction, or by the list's default order when no prefix and
-direction is provided.
+**Tip:** When no prefix and direction is provided, `bsort` sorts by the list's original order.
 
 </box>
 
 Examples: 
-* `bsort` to sort by default
+* `bsort` to sort by original order
 * `bsort n/d` to sort by name descending
 
 Precise outputs when the command succeeds:
@@ -660,7 +659,7 @@ valid prefix (`n`, `ah`, `i` or `prio`).
 
 ### Sorting sellers: `ssort`
 
-Put yourself in control of your priorities and contact management like never before.
+Elevate your contact list through organisation based on your priorities.
 
 The `ssort` command allows you to quickly organise your seller contacts by various criteria, so that you can sieve out
 your most important contacts to maintain and the most valuable opportunities you have.
@@ -675,8 +674,7 @@ Format: `ssort [PREFIX/DIRECTION]`
 
 <box type="tip">
 
-Sorts the sellers' list either by a provided prefix and direction, or by the list's default order when no prefix and
-direction is provided.
+**Tip:** When no prefix and direction is provided, `ssort` sorts by the list's original order.
 
 </box>
 
@@ -729,10 +727,7 @@ Format: `undo`
 
 <box type="tip">
 
-**Tip:** 
-
-Using `undo` multiple times will undo multiple actions in order.
-
+**Tip:** Using `undo` multiple times will undo multiple actions in order.
 
 </box>
 
@@ -755,10 +750,7 @@ Format : `redo`
 
 <box type="tip">
 
-**Tip:**
-
-Using `redo` multiple times will redo multiple actions in order.
-
+**Tip:** Using `redo` multiple times will redo multiple actions in order.
 
 </box>
 
@@ -802,7 +794,7 @@ Format: `exit`
 
 <box type="info">
 
-Upon exit, the latest data is saved to your computer at data/addressbook.json.
+**Note:** Upon exit, the latest data is saved to your computer at data/addressbook.json.
 
 </box>
 
