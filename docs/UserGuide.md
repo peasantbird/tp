@@ -30,8 +30,8 @@ contact management tasks done faster than traditional GUI apps!
       * [Setting a buyer's priority: `bprio`](#setting-a-buyer-s-priority-bprio)<br>
       * [Setting a seller's priority: `sprio`](#setting-a-seller-s-priority-sprio)<br>
     * Viewing the clients<br>
-      * [Listing all buyers and sellers: `list`](#listing-all-buyers-and-sellers-list)<br>
       * [Filtering buyers and sellers: `filter`](#filtering-buyers-and-sellers-filter)<br>
+      * [Listing all buyers and sellers: `list`](#listing-all-buyers-and-sellers-list)<br>
       * [Displaying a buyer from buyer list: `blist`](#displaying-a-buyer-from-buyer-list-blist)<br>
       * [Displaying a seller from seller list: `slist`](#displaying-a-seller-from-seller-list-slist)<br>
       * [Sorting buyers: `bsort`](#sorting-buyers-bsort)<br>
