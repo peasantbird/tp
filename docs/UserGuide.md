@@ -748,13 +748,13 @@ Expected outputs when the command succeeds:
 
 Expected outputs when the command fails:
 
-If your command is not in the proper format:
+* If your command is not in the proper format:
 
 >Invalid command format!<br>
 bsort: Sorts the buyers in RTPM. Parameters: Choose zero or one of [n/] [ah/] [i/] [prio/] a/d (for ASC/DESC)<br>
 Example: bsort prio/d
 
-If the same prefix is used more than once:
+* If the same prefix is used more than once:
 
 >Multiple values specified for the following single-valued field(s): ...
 
@@ -821,13 +821,13 @@ Expected outputs when the command succeeds:
 
 Expected outputs when the command fails:
 
-If your command is not in the proper format:
+* If your command is not in the proper format:
 
 >Invalid command format!<br>
 ssort: Sorts the sellers in RTPM. Parameters: Choose zero or one of [n/] [ah/] [i/] [prio/] a/d (for ASC/DESC)<br>
 Example: ssort prio/d 
 
-If the same prefix is used more than once:
+* If the same prefix is used more than once:
 
 >Multiple values specified for the following single-valued field(s): ...
 
