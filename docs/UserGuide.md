@@ -33,8 +33,8 @@ to get rid of your cluttered spreadsheets, RTPM is for you!
       * [Setting a buyer's priority: `bprio`](#setting-a-buyer-s-priority-bprio)<br>
       * [Setting a seller's priority: `sprio`](#setting-a-seller-s-priority-sprio)<br>
     * Viewing the clients<br>
-      * [Listing all buyers and sellers: `list`](#listing-all-buyers-and-sellers-list)<br>
       * [Filtering buyers and sellers: `filter`](#filtering-buyers-and-sellers-filter)<br>
+      * [Listing all buyers and sellers: `list`](#listing-all-buyers-and-sellers-list)<br>
       * [Displaying a buyer from buyer list: `blist`](#displaying-a-buyer-from-buyer-list-blist)<br>
       * [Displaying a seller from seller list: `slist`](#displaying-a-seller-from-seller-list-slist)<br>
       * [Sorting buyers: `bsort`](#sorting-buyers-bsort)<br>
@@ -561,21 +561,15 @@ Parameters: INDEX PRIORITY
 
 <br>
 
-### Listing all buyers and sellers: `list`
-
-Lists all buyers and sellers that the user has added. Clears filters and reloads the data file to check for changes.
-
-Format: `list`
-
-Precise outputs when the command succeeds:
-
->Listed all buyers and sellers!
-
---------------------------------------------------------------------------------------------------------------------
-
 ### Filtering buyers and sellers: `filter`
 
-Filters both lists so that they only display buyers and sellers whose names match any of the given keywords fully.
+Say goodbye to the struggles of scrolling through your entire list to find that one elusive client.
+
+The `filter` allows you to find any client by name easily, so you never have to waste time searching for a client no matter how long your lists get.
+* This command only matches names
+* Your keywords can be given in any order
+* Only complete words will be matched
+* Any match will result in the buyer or seller being displayed
 
 Format: `filter KEYWORD [MORE_KEYWORDS]…`
 
@@ -583,16 +577,19 @@ Format: `filter KEYWORD [MORE_KEYWORDS]…`
 
 Example: `filter John Doe`
 
-**Tip: `filter John Doe` will filter for**
-- [x] John
-- [x] John Do
-- [x] Jane Doe
-- [x] John Doe
-- [x] john doe
-- [x] JOHN DOE
-- [ ] Johnny
-- [ ] Jo
+<box type="tip">
 
+**Tip: `filter John Doe` will display**
+- [x] John (matches "John")
+- [x] john (matches "John", case-insensitive)
+- [x] John Do (matches "John")
+- [x] Jane Doe (matches "Doe")
+- [x] John Doe (matches both "John" and "Doe")
+- [ ] JohnDoe (matches neither "John" nor "Doe")
+- [ ] Johnny ("Johnny" does not match "John" fully)
+- [ ] Joh N (does not match "John")
+
+</box>
 
 Precise outputs when the command succeeds:
 
@@ -609,9 +606,21 @@ Precise outputs when the command succeeds:
 
 <br>
 
+### Listing all buyers and sellers: `list`
+
+The `list` command allows you to display the full updated lists, so that you can get back to work after using the `filter` command or editing the data file directly.
+
+Format: `list`
+
+Precise outputs when the command succeeds:
+
+>Listed all buyers and sellers!
+
+--------------------------------------------------------------------------------------------------------------------
+
 ### Displaying a buyer from buyer list: `blist`
 
-Displays the information of a buyer based on their index number in the buyers' list.
+The `blist` command allows you to display the information of any buyer as a status message, so that you can view it, or highlight and copy it for further use.
 
 Format: `blist INDEX`
 * `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyers' list
@@ -623,13 +632,15 @@ Precise outputs when the command succeeds:
 >Got it. Here's the information of this buyer:<br>
 Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
 
-<br>
+<div style='text-align: right;'>
 
---------------------------------------------------------------------------------------------------------------------
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 ### Displaying a seller from seller list: `slist`
 
-Displays the information of a seller based on their index number in the sellers' list.
+The `slist` command allows you to display the information of any seller as a status message, so that you can view it, or highlight and copy it for further use.
 
 Format: `slist INDEX`
 * `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the sellers' list
