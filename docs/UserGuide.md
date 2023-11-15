@@ -147,11 +147,18 @@ Here are some things regarding RTPM's features to take note of before using them
 
 ### Adding a buyer: `buyer`
 
-Adds a buyer with their information to the list. 
+Add buyers with ease with a few keystrokes. 
+The `buyer` command allows you to add a buyer with just their name,
+so that you can quickly add them on the go.
+
+You can also include contact details of the buyer with the `[p/PHONE_NUMBER]` and `[e/EMAIL]` fields,
+and add more details about them with the `[t/TAG]` field.
 
 <box type="info" seamless>
 
-Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
+Note that this command throws warnings. 
+For more info on fields, head [here.](#appendix-b-fields) 
+For more info on warnings, head [here.](#appendix-a-warnings)
 
 </box>
 
@@ -191,7 +198,8 @@ Precise outputs when the command fails due to invalid parameters:
 
 ### Adding a seller : `seller`
 
-Adds a seller with their information to the list. 
+Add sellers similar to how you would [add buyers](#adding-a-buyer-buyer) 
+Additionally, you can add information about the house that your client wants to sell with the `[i/HOUSE_INFO]` field. 
 
 <box type="info" seamless>
 
@@ -235,7 +243,11 @@ Precise outputs when the command fails due to invalid parameters:
 
 ### Editing a buyer: `bedit`
 
-Edits the information of a buyer based on their index number in the buyers' list.
+Change the priority and other details of your buyer with ease.
+
+The `bedit` command allows you to edit any information about your buyer,
+so that you can capture the dynamic needs of your client. 
+Select the buyer that you want to edit by their index number. 
 
 <box type="info" seamless>
 
@@ -278,7 +290,8 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 ### Editing a seller: `sedit`
 
-Edits the information of a seller based on their index number in the sellers' list.
+Similar to the [`bedit`](#editing-a-seller-sedit) command, the `sedit` command 
+allows you to edit the details of your clients who want to sell. 
 
 <box type="info" seamless>
 
