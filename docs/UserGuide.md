@@ -597,8 +597,10 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling A
 
 ### Sorting buyers: `bsort`
 
-Sorts the buyers' list either by a provided prefix and direction, or by the list's default order when no prefix and
-direction is provided.
+Put yourself in control of your priorities and contact management like never before.
+
+The `bsort` command allows you to quickly organise your buyer contacts by various criteria, so that you can sieve out
+your most important contacts to maintain and the most valuable opportunities you have.
 
 Format: `bsort [PREFIX/DIRECTION]`
 * `PREFIX`: Choose <u>one</u> of:
@@ -607,6 +609,13 @@ Format: `bsort [PREFIX/DIRECTION]`
   * `i` - sort by **house info**
   * `prio` - sort by **priority**
 * `DIRECTION`: "a" OR "d" for ascending or descending respectively
+
+<box type="tip">
+
+Sorts the buyers' list either by a provided prefix and direction, or by the list's default order when no prefix and
+direction is provided.
+
+</box>
 
 Examples: 
 * `bsort` to sort by default
@@ -651,8 +660,10 @@ valid prefix (`n`, `ah`, `i` or `prio`).
 
 ### Sorting sellers: `ssort`
 
-Sorts the sellers' list either by a provided prefix and direction, or by the list's default order when no prefix and 
-direction is provided.
+Put yourself in control of your priorities and contact management like never before.
+
+The `ssort` command allows you to quickly organise your seller contacts by various criteria, so that you can sieve out
+your most important contacts to maintain and the most valuable opportunities you have.
 
 Format: `ssort [PREFIX/DIRECTION]`
 * `PREFIX`: Choose <u>one</u> of:
@@ -661,6 +672,13 @@ Format: `ssort [PREFIX/DIRECTION]`
     * `i` - sort by **house info**
     * `prio` - sort by **priority**
 * `DIRECTION`: "a" OR "d" for ascending or descending respectively
+
+<box type="tip">
+
+Sorts the sellers' list either by a provided prefix and direction, or by the list's default order when no prefix and
+direction is provided.
+
+</box>
 
 Examples:
 * `ssort` to sort by default
@@ -704,8 +722,8 @@ Example: ssort prio/d
 
 ### Undoing previous action: `undo`
 
-Undoes the previous action. Only undoes actions that changes the contacts in RTPM, and does not undo actions that 
-changes the list view (i.e. `list`, `filter`, `sort`).
+Made a mistake? The `undo` command allows you to undo the previous action, easily correcting your mistakes and keeping
+your contact list on track.
 
 Format: `undo`
 
@@ -730,8 +748,8 @@ Precise outputs when the command fails:
 
 ### Redoing previous action: `redo`
 
-Restores the previously undone action. Only redoes actions that changes the contacts in RTPM, and does not redo actions
-that changes the list view (i.e. `list`, `filter`, `sort`).
+The `redo` command allows you to restore a previously undone action, making it easy to go back to any state and 
+continue working from there.
 
 Format : `redo`
 
@@ -766,7 +784,8 @@ Precise outputs when the command fails:
 
 ### Viewing help: `help`
 
-Shows a message explaining how to access the help page.
+Unsure of how to use our system or forgot the available commands? The `help` command allows you to access our user 
+guide, ensuring that you have all the information you need at your fingertips.
 
 Format: `help`
 
@@ -774,7 +793,10 @@ Format: `help`
 
 ### Exiting the program: `exit`
 
-Exits the program.
+Wrap up your contact management session and start making the deals happen.
+
+The `exit` command allows you to terminate the program gracefully and securely, safeguarding all data and changes
+you've made during the session.
 
 Format: `exit`
 
