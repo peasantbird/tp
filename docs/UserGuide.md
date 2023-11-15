@@ -9,9 +9,10 @@
 <br>
 
 <div style="text-align:center;">
-   <img src="images/Ui.png" alt="Ui" style="width:500px"/>
+   <img src="images/Ui.png" alt="Ui" style="width:500px; border:1px solid #000; box-shadow: 7px 7px 7px #878787;"/>
 </div>
 
+<br>
 <br>
 
 RealtorTrackerPlusMax (RTPM) is the hottest new computer app 
@@ -77,7 +78,7 @@ to get rid of your cluttered spreadsheets, RTPM is for you!
    A display similar to the below should appear in a few seconds. If you are starting the app for the first time,
  there will be some sample data loaded.<br>
 <div style="text-align:center;">
-   <img src="images/Ui.png" alt="Ui" style="width:450px"/>
+   <img src="images/startUi.png" alt="startUi" style="width:450px"/>
 </div>
 <br>
 
@@ -148,7 +149,7 @@ Here are some things regarding RTPM's features to take note of before using them
 
 <br>
 
-* All commands and prefixes ignore case. parameters however, are case-sensitive. <br>
+* All commands and prefixes ignore case. Parameters however, are case-sensitive. <br>
   e.g. if the command specifies `buyer n/NAME`, `BUYER N/NAME` is also acceptable.
 
 * Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -158,6 +159,9 @@ Here are some things regarding RTPM's features to take note of before using them
 </box>
 
 <br>
+
+
+
 
 <box type="definition" seamless>
 
@@ -250,7 +254,7 @@ Example: buyer n/John Doe p/98765432 e/johnd@example.com ah/311, Clementi Ave 2,
 
 <br>
 
-### Adding a seller : `seller`
+### Adding a seller: `seller`
 
 Similar to [`buyer`](#adding-a-buyer-buyer),
  the `seller` command allows you to add clients who have homes to sell. 
@@ -582,6 +586,8 @@ Parameters: INDEX PRIORITY
 </box>
 
 
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Setting a seller's priority: `sprio`
@@ -602,7 +608,19 @@ Format: `sprio INDEX PRIORITY`
 
 Example: `sprio 3 high`
 
+
+<div style='text-align: right;'>
+
+[Back to top](#contents)
+
+</div>
+
+<div style="page-break-after: always;"></div>
+
 <box type="info">
+
+
+<br>
 
 **Note:**
 * `PRIORITY` only considers the first letter of the input (`h` for high, `m` for medium, `l` for low, or `n` for nil). For example, `bprio 3 hlow` sets the priority of buyer 3 to high.
