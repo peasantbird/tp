@@ -406,10 +406,16 @@ Precise outputs when the command succeeds:
 
 ### Setting a buyer's priority: `bprio`
 
-Get your priorities straight. Focus on the tasks that matter the most, and maximise your productivity and time.
+Get your priorities straight. Focus on the tasks that matter the most, and maximise your time and productivity
+by securing the most important deals, first and foremost.
 
 The `bprio` command allows you set the priority level of a buyer based on their index number in the buyer's list, 
-so that you can seamlessly view and focus on clients which have a greater priority. 
+so that you can seamlessly differentiate buyers at a glance by their priority level. 
+The priority tags are colored intuitively for you to easily spot a buyer's priority level at first glance.
+After assigning priorities
+to your buyers, a simple `bsort prio/d` command would then sort your buyer list by priority level, with the 
+higher priority buyers appearing first at the top of the list, allowing you to get started with the right 
+client, right away.
 
 <box type="info" seamless>
 
@@ -466,7 +472,9 @@ Note that this command throws warnings. For more info on warnings, head [here.](
 
 </box>
 
-Sets the priority level of a seller based on their index number in the seller's list.
+Similar to `bprio`, the `sprio` command allows you to set the priority level of a seller (instead of a buyer) 
+based on their index number in the seller's list, so that you can also seamlessly differentiate sellers at a glance 
+by their priority level. 
 
 Format: `sprio INDEX PRIORITY`
 * `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyer's list
