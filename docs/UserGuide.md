@@ -805,7 +805,8 @@ Precise outputs when the command fails:
 
 ### Viewing help: `help`
 
-Shows a message explaining how to access the help page.
+Lost? This command shows a message explaining how to access the online version of the help page, 
+including this user guide, so that you can get back to work.
 
 Format: `help`
 
@@ -813,7 +814,7 @@ Format: `help`
 
 ### Exiting the program: `exit`
 
-Exits the program
+Done already? We hope you had a good experience! Closes RTPM.
 
 Format: `exit`
 
