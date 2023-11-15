@@ -290,7 +290,7 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 ### Editing a seller: `sedit`
 
-Edit seller information similar to how you would [`edit buyer information`](#editing-a-seller-sedit). command.
+Edit seller information similar to how you would [`edit buyer information`](#editing-a-buyer-bedit). command.
 
 <box type="info" seamless>
 
