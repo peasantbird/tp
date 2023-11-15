@@ -323,7 +323,11 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 ### Deleting a buyer: `bdelete`
 
-Deletes a buyer based on their index number in the buyers’ list.
+Congratulations on helping a buyer find their dream home! With the deal now complete, it's time to shift your focus
+onto securing the next deal and making the next buyer satisfied!
+
+The `bdelete` command allows you to delete a buyer based on their index number in the buyers’ list, so that you can keep
+your buyer list organised and de-cluttered by keeping only the relevant buyers and removing outdated entries.
 
 Format: `bdelete INDEX`
 * `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyers' list
@@ -358,7 +362,12 @@ Example: bdelete 1
 
 ### Deleting a seller: `sdelete`
 
-Deletes a seller based on their index number in the sellers’ list.
+Congratulations on matching a buyer to the ideal seller! With the property transaction now complete, it's time to
+focus on matching the remaining vacant houses to prospective buyers.
+
+Similar to `bdelete,` the `sdelete` deletes a seller based on their index number in the sellers’ list, so that you can keep
+your seller list organised and de-cluttered by keeping only the relevant sellers and removing outdated entries.
+
 
 Format: `sdelete INDEX`
 * `INDEX`: A positive integer (1, 2, 3, …), which must not exceed last index in the sellers’ list
@@ -473,7 +482,7 @@ Note that this command throws warnings. For more info on warnings, head [here.](
 </box>
 
 Similar to `bprio`, the `sprio` command allows you to set the priority level of a seller (instead of a buyer) 
-based on their index number in the seller's list, so that you can also seamlessly differentiate sellers at a glance 
+based on their index number in the seller's list, so that you can seamlessly differentiate sellers too at a glance 
 by their priority level. 
 
 Format: `sprio INDEX PRIORITY`
