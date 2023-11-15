@@ -6,15 +6,18 @@
 
 # RTPM User Guide
 
-RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage contacts, optimized for use via a 
-Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI), so you can get your 
-contact management tasks done faster than traditional GUI apps!
+RealtorTrackerPlusMax (RTPM) is the hottest new desktop/laptop application 
+for realtors. RTPM allows you to manage your clients, optimized for use via a 
+Command Line Interface (CLI) for easy and quick typing. Whether you are learning 
+how to get into the real estate industry or looking for a simple and free app
+to get rid of your cluttered spreadsheets, RTPM is for you!
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Contents
 
 * [Quick Start](#quick-start)
+* [Configuration](#configuration)
 * [Features](#features)<br>
     * Adding a client<br>
        * [Adding a buyer: `buyer`](#adding-a-buyer-buyer)<br>
@@ -48,6 +51,7 @@ contact management tasks done faster than traditional GUI apps!
     * [Appendix A: Warnings](#appendix-a-warnings)<br>
     * [Appendix B: Fields](#appendix-b-fields)<br>
     * [Appendix C: Similar names](#appendix-c-similar-names)<br>
+    * [Appendix D: Definitions](#appendix-d-definitions)<br>
 
 
 <div style="page-break-after: always;"></div>
@@ -56,12 +60,13 @@ contact management tasks done faster than traditional GUI apps!
 
 1. Ensure you have Java `11` or above installed in your computer.
 
-2. Download the latest `rtpm.jar` [here](https://github.com/AY2324S1-CS2103T-F11-3/tp/releases/tag/v1.3(trial)).
+2. Download the latest `rtpm.jar` [here](https://github.com/AY2324S1-CS2103T-F11-3/tp/releases/tag/v1.4).
 
-3. Copy the file to the folder you want to use as the _home folder_ for RTPM.
+3. Move the application to the folder you want to use as the _setup folder_ for RTPM. 
+(On startup, the application will generate a few files for configuration and storage.)
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar rtpm.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. If you are starting the app for the first time,
+4. You should be able to run the application by double-clicking. If this does not work for you, check the [FAQ](#faq).<br>
+   A display similar to the below should appear in a few seconds. If you are starting the app for the first time,
  there will be some sample data loaded.<br>
 <div style="text-align:center;">
    <img src="images/Ui.png" alt="Ui" style="width:500px"/>
@@ -86,6 +91,24 @@ contact management tasks done faster than traditional GUI apps!
 
 <br>
 
+## Configuration
+If you are looking to change the size of the application, resizing can simply be done by clicking and 
+dragging the borders in the direction you desire. 
+If you do this to the white header atop the app, you can also move the window around.
+Both size and position of the application are saved, so that 
+you don't need to spend time fiddling with the window.
+
+<box type="info" seamless>
+
+**For advanced users only:**
+
+You can change the location in which RTPM's data is stored by editing the preferences.json file using any text
+editing app of your choice, such as Notepad or Microsoft Word.
+Edit the filePath string to the directory that you wish to move it to, relative to the RTPM.jar location. 
+Note that backslashes need to be repeated twice.
+
+</box>
+
 ## Features
 
 Here are some things regarding RTPM's features to take note of before using them.
@@ -94,7 +117,7 @@ Here are some things regarding RTPM's features to take note of before using them
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` represent the data to be supplied by the user.<br>
   e.g. in `buyer n/NAME`, `NAME` is a parameter which can be used as `buyer n/John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -103,7 +126,7 @@ Here are some things regarding RTPM's features to take note of before using them
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
+* The order in which you input data is not fixed by RTPM.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * All commands and prefixes ignore case. Fields however, are case-sensitive. <br>
@@ -149,7 +172,7 @@ Here are some things regarding RTPM's features to take note of before using them
 
 Adds a buyer with their information to the list. 
 
-<box type="info" seamless>
+<box type="warning" seamless>
 
 Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
 
@@ -161,11 +184,16 @@ Format: `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/HOUSE_INFO
 Example:
 `buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium prio/high`
 
+<box type="success" seamless>
+
 Precise outputs when the command succeeds:
 
 >Got it. I've added a buyer contact:<br>
 Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: high; Tags:
 
+</box>
+
+<box type="danger" seamless>
 
 Precise outputs when the command fails due to missing name parameter:
 
@@ -173,11 +201,11 @@ Precise outputs when the command fails due to missing name parameter:
 buyer: Adds a buyer to the address book. Parameters: n/NAME [p/PHONE] [e/EMAIL] [ah/ADDRESS] [i/INFO] [prio/PRIORITY] [t/TAG]...<br> 
 Example: buyer n/John Doe p/98765432 e/johnd@example.com ah/311, Clementi Ave 2, #02-25 i/Central Area 5 Room Condominium prio/medium t/friends t/owesMoney
 
-
 Precise outputs when the command fails due to invalid parameters:
 
 >Emails must contain at least one '@'.
 
+</box>
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -193,7 +221,7 @@ Precise outputs when the command fails due to invalid parameters:
 
 Adds a seller with their information to the list. 
 
-<box type="info" seamless>
+<box type="warning" seamless>
 
 Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
 
@@ -237,7 +265,7 @@ Precise outputs when the command fails due to invalid parameters:
 
 Edits the information of a buyer based on their index number in the buyers' list.
 
-<box type="info" seamless>
+<box type="warning" seamless>
 
 Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
 
@@ -280,7 +308,7 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 Edits the information of a seller based on their index number in the sellers' list.
 
-<box type="info" seamless>
+<box type="warning" seamless>
 
 Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
 
@@ -408,7 +436,7 @@ Precise outputs when the command succeeds:
 
 Sets the priority level of a buyer based on their index number in the buyer's list.
 
-<box type="info" seamless>
+<box type="warning" seamless>
 
 Note that this command throws warnings. For more info on warnings, head [here.](#appendix-a-warnings)
 
@@ -457,7 +485,7 @@ Parameters: INDEX PRIORITY
 
 ### Setting a seller's priority: `sprio`
 
-<box type="info" seamless>
+<box type="warning" seamless>
 
 Note that this command throws warnings. For more info on warnings, head [here.](#appendix-a-warnings)
 
@@ -798,6 +826,8 @@ the entries may not appear in the application until you refresh the list.
 **Q**: I made a mistake! How do I fix it?<br>
 **A**: You can make use of our handy [undo](#undoing-previous-action-undo) and [redo](#redoing-previous-action-redo)
 commands to fix any errors made.
+**Q**: <br>
+**A**: Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar rtpm.jar` command to run the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -902,11 +932,12 @@ Please ignore if this is expected.
 
 
 ## Appendix B: Fields
-Here, we provide the exact checks that RTPM does for each field, and the warning given if the field is inappropriate.
+Here, we provide the exact checks that our application does for you,
+and the warning given if the field is inappropriate.
 
 | Field            | Valid                                    | Appropriate                                                                                       | Exact warning given                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 |------------------|------------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Name**         | Must not be blank                        | Alphanumeric characters only                                                                      | `Names should contain only alphanumeric characters and spaces`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Name**         | Must not be blank                        | Alphanumeric characters only                                                                      | `Names should contain only alphanumeric characters and spaces`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **Phone Number** | At least one numerical character         | Only numerical characters, and at least 3 digits long. Area codes allowed as provided in warning. | `Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.`                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | **Email**        | At least one `@` character               | See warning message.                                                                              | `Emails should be of the format local-part@domain and adhere to the following constraints: 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. 2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: - end with a domain label at least 2 characters long - have each domain label start and end with alphanumeric characters - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.` |
 | **Address**      | Must not be blank                        | Nil                                                                                               | Nil                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -949,6 +980,14 @@ An example when similar names are detected:
 An example when the same name is detected:
 ```This seller already exists in the address book```
 (This is not allowed, hence the command will not execute.)
+
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
+
+## Appendix D: Definitions
 
 <div style='text-align: right;'>
 
