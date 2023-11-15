@@ -814,7 +814,7 @@ Format: `help`
 
 ### Exiting the program: `exit`
 
-Done already? We hope you had a good experience! Closes RTPM.
+Done already? We hope you had a good experience! This command closes RTPM.
 
 Format: `exit`
 
@@ -1026,6 +1026,8 @@ Provided is a useful definition list of terms that were used in the guide and in
 
 - Area code: A prefix for phone numbers in the format +123, containing anywhere from 1 to 3 digits.
 - Alphanumeric: Consisting of only English-language letters and the digits from 0-9.
+- CLI: Command-Line Interface. A text-based means of interacting with applications. 
+In RTPM, you use this to interact with the internal logic.
 - Client: In RTPM, refers to either a buyer or a seller.
 - Hard disk: The storage component of your computer.
 - Computer: Desktops or laptops, but not mobile phones.
