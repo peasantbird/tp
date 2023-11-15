@@ -4,12 +4,15 @@
   pageNav: 3
 ---
 
-# RTPM User Guide
+# **RTPM User Guide**
+
+<br>
 
 <div style="text-align:center;">
    <img src="images/Ui.png" alt="Ui" style="width:500px"/>
 </div>
 
+<br>
 
 RealtorTrackerPlusMax (RTPM) is the hottest new computer app 
 for realtors. RTPM allows you to manage your clients, optimized for use via a 
@@ -17,7 +20,7 @@ Command Line Interface (CLI), aimed at maximising your speed in entering data.
 Whether you are learning how to get into the real estate industry, or looking for a simple and free app
 to get rid of your cluttered spreadsheets, RTPM is for you!
 
---------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Contents
 
@@ -74,8 +77,9 @@ to get rid of your cluttered spreadsheets, RTPM is for you!
    A display similar to the below should appear in a few seconds. If you are starting the app for the first time,
  there will be some sample data loaded.<br>
 <div style="text-align:center;">
-   <img src="images/Ui.png" alt="Ui" style="width:500px"/>
+   <img src="images/Ui.png" alt="Ui" style="width:450px"/>
 </div>
+<br>
 
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -114,6 +118,10 @@ Note that backslashes need to be repeated twice.
 
 </box>
 
+<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 Here are some things regarding RTPM's features to take note of before using them.
@@ -138,6 +146,8 @@ Here are some things regarding RTPM's features to take note of before using them
 * The order in which you input data is not fixed by RTPM.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+<br>
+
 * All commands and prefixes ignore case. parameters however, are case-sensitive. <br>
   e.g. if the command specifies `buyer n/NAME`, `BUYER N/NAME` is also acceptable.
 
@@ -147,8 +157,7 @@ Here are some things regarding RTPM's features to take note of before using them
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-
-<div style="page-break-after: always;"></div>
+<br>
 
 <box type="definition" seamless>
 
@@ -172,11 +181,10 @@ Here are some things regarding RTPM's features to take note of before using them
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 
 
 <div style="page-break-after: always;"></div>
@@ -233,7 +241,7 @@ Example: buyer n/John Doe p/98765432 e/johnd@example.com ah/311, Clementi Ave 2,
 </box>
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 
@@ -282,7 +290,7 @@ Example: seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor 
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 
@@ -342,7 +350,7 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 
@@ -394,7 +402,7 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 
@@ -441,7 +449,7 @@ Example: bdelete 1
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 
@@ -482,6 +490,7 @@ Example: sdelete 1
 >The seller index provided is higher than the last number in the list!
 
 </box>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Clearing all entries : `clear`
@@ -499,7 +508,7 @@ Expected output when the command succeeds:
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 
@@ -550,6 +559,15 @@ Jane Doe; Phone: 91234567; Email: something@<span></span>else.com; Address: 1 Co
 
 </box>
 
+<div style='text-align: right;'>
+
+[Back to top](#contents)
+
+</div>
+
+<div style="page-break-after: always;"></div>
+
+
 <box type="wrong" seamless>
 Possible invalid inputs & their corresponding error messages:
 
@@ -563,17 +581,8 @@ Parameters: INDEX PRIORITY
 
 </box>
 
-<div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
-
-</div>
-
-<div style="page-break-after: always;"></div>
-
-
-
-<br>
+--------------------------------------------------------------------------------------------------------------------
 
 ### Setting a seller's priority: `sprio`
 
@@ -624,7 +633,7 @@ Parameters: INDEX PRIORITY
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 
@@ -685,28 +694,19 @@ If you don't put any keywords to filter for:
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 
 <div style="page-break-after: always;"></div>
 
 
-<br>
 
 ### Listing all buyers and sellers: `list`
 
-The `list` command allows you to display the full updated lists, so that you can get back to work after using the `filter` command or editing the data file directly.
+The `list` command allows you to display all buyers and sellers, so that you can get back to work after using the `filter` command or editing the data file directly.
 
 Format: `list`
-
-<box type="success" seamless>
-
-Expected outputs when the command succeeds:
-
->Listed all buyers and sellers!
-
-</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -728,11 +728,8 @@ Jane Doe; Phone: 91234567; Email: janedoe@<span></span>gmail.com; Address: 1 Col
 
 </box>
 
-<div style='text-align: right;'>
+--------------------------------------------------------------------------------------------------------------------
 
-[Back to top](#rtpm-user-guide)
-
-</div>
 
 ### Displaying a seller from seller list: `slist`
 
@@ -754,7 +751,7 @@ Ryan; Phone: 91234567; Email: ryan@<span></span>gmail.com; Address: My Secret Ho
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 
@@ -795,6 +792,7 @@ Expected outputs when the command succeeds:
 
 </box>
 
+
 <box type="wrong" seamless>
 
 Expected outputs when the command fails:
@@ -811,6 +809,16 @@ Example: bsort prio/d
 
 </box>
 
+
+<div style='text-align: right;'>
+
+[Back to top](#contents)
+
+</div>
+
+<div style="page-break-after: always;"></div>
+
+
 <box type="info">
 
 **Note:**
@@ -825,14 +833,7 @@ valid prefix (`n`, `ah`, `i` or `prio`).
 
 </box>
 
-<div style='text-align: right;'>
-
-[Back to top](#rtpm-user-guide)
-
-</div>
-
-<div style="page-break-after: always;"></div>
-
+--------------------------------------------------------------------------------------------------------------------
 
 
 ### Sorting sellers: `ssort`
@@ -860,6 +861,18 @@ Examples:
 * `ssort` to sort by default
 * `ssort n/d` to sort by name descending
 
+
+
+
+<div style='text-align: right;'>
+
+[Back to top](#contents)
+
+</div>
+
+<div style="page-break-after: always;"></div>
+
+
 <box type="success" seamless>
 
 Expected outputs when the command succeeds:
@@ -867,6 +880,7 @@ Expected outputs when the command succeeds:
 >Got it. I've sorted the seller list!
 
 </box>
+
 
 <box type="wrong" seamless>
 
@@ -898,7 +912,7 @@ Example: ssort prio/d
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 
@@ -969,7 +983,7 @@ If there is no command to redo:
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 
@@ -1027,22 +1041,33 @@ and type in the `java -jar rtpm.jar`command to run the application.
 **Q**: How do I install Java 11? <br>
 **A**: Try installing from the official Oracle archive [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
 
+<div style='text-align: right;'>
+
+[Back to top](#contents)
+
+</div>
+
+<div style="page-break-after: always;"></div>
+
+
 **Q**: I still have issues! <br>
 **A**: Try contacting our developer team by creating an issue on our 
 [GitHub](https://github.com/AY2324S1-CS2103T-F11-3/tp/issues), and we will see how we can help.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
 
-1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
-2. Adding multiple contacts with excessively long names (>5000 characters) may cause RTPM to lag significantly. It is recommended to use nicknames or initials if necessary.
+1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.<br>
+2. Adding multiple contacts with excessively long names (>5000 characters) may cause RTPM to lag significantly. It is recommended to use nicknames or initials if necessary.<br>
 3. Long fields can cause the details of a client to not be displayed fully. A workaround is to use the 
-```slist```/```blist``` commands to display the details of the client in the result box.
+```slist```/```blist``` commands to display the details of the client in the result box. 
 
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 
@@ -1079,7 +1104,7 @@ and type in the `java -jar rtpm.jar`command to run the application.
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 
@@ -1132,7 +1157,7 @@ Please ignore if this is expected.
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 
@@ -1153,7 +1178,7 @@ and the warning given if the field is inappropriate.
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 <div style="page-break-after: always;"></div>
@@ -1195,9 +1220,12 @@ An example when the same name is detected:
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
+
+<div style="page-break-after: always;"></div>
+
 
 ## Appendix D: Definitions
 Provided is a useful definition list of terms that were used in the guide and in the application.
@@ -1221,7 +1249,7 @@ In RTPM, you use this to interact with the internal logic.
 
 <div style='text-align: right;'>
 
-[Back to top](#rtpm-user-guide)
+[Back to top](#contents)
 
 </div>
 
