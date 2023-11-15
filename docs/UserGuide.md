@@ -507,7 +507,8 @@ Parameters: INDEX PRIORITY
 
 ### Listing all buyers and sellers: `list`
 
-Lists all buyers and sellers that the user has added. Clears filters and reloads the data file to check for changes.
+Makes the lists display all buyers and sellers that you have added. 
+Also updates the lists in the app if you modify the data file directly.
 
 Format: `list`
 
@@ -519,7 +520,11 @@ Precise outputs when the command succeeds:
 
 ### Filtering buyers and sellers: `filter`
 
-Filters both lists so that they only display buyers and sellers whose names match any of the given keywords fully.
+Filters both lists so that they only display buyers and sellers matching your keywords. Use the `list` command to revert after filtering.
+* This command only matches names
+* Your keywords can be given in any order
+* Only complete words will be matched
+* Any match will result in the buyer or seller being displayed
 
 Format: `filter KEYWORD [MORE_KEYWORDS]…`
 
@@ -527,16 +532,19 @@ Format: `filter KEYWORD [MORE_KEYWORDS]…`
 
 Example: `filter John Doe`
 
-**Tip: `filter John Doe` will filter for**
-- [x] John
-- [x] John Do
-- [x] Jane Doe
-- [x] John Doe
-- [x] john doe
-- [x] JOHN DOE
-- [ ] Johnny
-- [ ] Jo
+<box type="tip">
 
+**Tip: `filter John Doe` will display**
+- [x] John (matches "John")
+- [x] john (matches "John", case-insensitive)
+- [x] John Do (matches "John")
+- [x] Jane Doe (matches "Doe")
+- [x] John Doe (matches both "John" and "Doe")
+- [ ] JohnDoe (matches neither "John" nor "Doe")
+- [ ] Johnny ("Johnny" does not match "John" fully)
+- [ ] Joh N (does not match "John")
+
+</box>
 
 Precise outputs when the command succeeds:
 
@@ -553,9 +561,10 @@ Precise outputs when the command succeeds:
 
 <br>
 
+
 ### Displaying a buyer from buyer list: `blist`
 
-Displays the information of a buyer based on their index number in the buyers' list.
+Displays the information of your selected buyer based on their index number in the buyers' list. You will be able to highlight and copy their information this way.
 
 Format: `blist INDEX`
 * `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the buyers' list
@@ -573,7 +582,7 @@ Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East
 
 ### Displaying a seller from seller list: `slist`
 
-Displays the information of a seller based on their index number in the sellers' list.
+Displays the information of your selected seller based on their index number in the sellers' list. You will be able to highlight and copy their information this way.
 
 Format: `slist INDEX`
 * `INDEX`: A positive integer (1, 2, 3, …) which must not exceed the last index in the sellers' list
