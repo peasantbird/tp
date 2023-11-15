@@ -147,7 +147,7 @@ Here are some things regarding RTPM's features to take note of before using them
 
 ### Adding a buyer: `buyer`
 
-Add buyers with ease with a few keystrokes. 
+You can add buyers with a few keystrokes, instead of having to use an excel sheet. 
 The `buyer` command allows you to add a buyer with just their name,
 so that you can quickly add them on the go.
 
@@ -198,7 +198,8 @@ Precise outputs when the command fails due to invalid parameters:
 
 ### Adding a seller : `seller`
 
-Add sellers similar to how you would [add buyers](#adding-a-buyer-buyer) 
+Similar to [`buyer`](#adding-a-buyer-buyer),
+ the `seller` command allows you to add clients who have homes to sell. 
 Additionally, you can add information about the house that your client wants to sell with the `[i/HOUSE_INFO]` field. 
 
 <box type="info" seamless>
@@ -243,11 +244,14 @@ Precise outputs when the command fails due to invalid parameters:
 
 ### Editing a buyer: `bedit`
 
-Edit the priority and other information of your buyer with ease.
+Congratulations on adding buyers and sellers!
+Now, when you have time to review your client's information, 
+you can fill in additional information about buyers, or 
+edit their existing information.
 
 The `bedit` command allows you to edit any information about your buyer,
 so that you can capture the dynamic needs of your client. 
-Select the buyer to edit by their index number. 
+To select the buyer you want to edit, just indicate their index number. 
 
 <box type="info" seamless>
 
@@ -290,7 +294,8 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 ### Editing a seller: `sedit`
 
-Edit seller information similar to how you would [`edit buyer information`](#editing-a-buyer-bedit). command.
+Similar to [`bedit`](#editing-a-buyer-bedit),
+ the `sedit` command allows you to edit the information of a home seller.
 
 <box type="info" seamless>
 
