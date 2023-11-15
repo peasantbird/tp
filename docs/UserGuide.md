@@ -845,6 +845,9 @@ commands to fix any errors made.
 Open a command terminal,use the `cd` command to change into the folder you put the application file in,
 and type in the `java -jar rtpm.jar`command to run the application.
 
+**Q**: How do I install Java 11? <br>
+**A**: Try installing from the official Oracle archive [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
+
 **Q**: I still have issues! <br>
 **A**: Try contacting our developer team by creating an issue on our 
 [GitHub](https://github.com/AY2324S1-CS2103T-F11-3/tp/issues), and we will see how we can help.
