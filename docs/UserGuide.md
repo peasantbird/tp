@@ -138,6 +138,14 @@ Here are some things regarding RTPM's features to take note of before using them
 * The order in which you input data is not fixed by RTPM.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
+</box>
+
+<div style="page-break-after: always;"></div>
+<br><br><br><br>
+<box type="definition" seamless>
+
+**Notes about the command format (Continued):**<br>
+
 * All commands and prefixes ignore case. parameters however, are case-sensitive. <br>
   e.g. if the command specifies `buyer n/NAME`, `BUYER N/NAME` is also acceptable.
 
@@ -145,10 +153,9 @@ Here are some things regarding RTPM's features to take note of before using them
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+
 </box>
 
-
-<div style="page-break-after: always;"></div>
 
 <box type="definition" seamless>
 
