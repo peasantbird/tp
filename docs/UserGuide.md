@@ -204,22 +204,24 @@ Example:
 
 <box type="success" seamless>
 
-Precise outputs when the command succeeds:
+Expected output when the command succeeds:
 
 >Got it. I've added a buyer contact:<br>
 Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: high; Tags:
 
 </box>
 
-<box type="danger" seamless>
+<box type="wrong" seamless>
 
-Precise outputs when the command fails due to missing name parameter:
+Possible invalid inputs & their corresponding error messages:
+
+* Missing name:
 
 >Invalid command format!<br>
 buyer: Adds a buyer to the address book. Parameters: n/NAME [p/PHONE] [e/EMAIL] [ah/ADDRESS] [i/INFO] [prio/PRIORITY] [t/TAG]...<br> 
 Example: buyer n/John Doe p/98765432 e/johnd@example.com ah/311, Clementi Ave 2, #02-25 i/Central Area 5 Room Condominium prio/medium t/friends t/owesMoney
 
-Precise outputs when the command fails due to invalid parameters:
+* Invalid email:
 
 >Emails must contain at least one '@'.
 
@@ -252,23 +254,26 @@ Format: `seller n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [as/SELLING_
 
 Example: `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/high`
 
-Precise outputs when the command succeeds:
+<box type="success" seamless>
+Expected output when the command succeeds:
 
 >Got it. I've added a seller contact:<br>
 Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: high; Tags:
 
+</box>
 
-Precise outputs when the command fails due to missing parameters:
+<box type="wrong" seamless>
+Possible invalid inputs & their corresponding error messages:  
 
+* Missing name
 >Invalid command format!<br>
 seller: Adds a seller to the address book. Parameters: n/NAME p/PHONE e/EMAIL ah/ADDRESS as/SELLING_ADDRESS i/HOUSE_INFO [t/TAG]...<br>
 Example: seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor Sarhad, Singapore 119164 i/4 Room Flat in Sarhad Ville prio/medium t/friends t/owesMoney
 
-
-Precise outputs when the command fails due to invalid parameters:
-
+* Invalid email
 >Emails must contain at least one '@'.
 
+</box>
 
 <div style='text-align: right;'>
 
@@ -304,21 +309,31 @@ Format: `bedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]…`
 
 Example: `bedit 3 e/example@email.com ah/Residential Street`
 
-Precise outputs when the command succeeds:
+<box type="success" seamless>
+Expected output when the command succeeds:
 
 >Got it. I've edited a buyer contact:<br>
 Jane Doe; Phone: 91234567; Email: something@else.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
 
-Precise outputs when the command fails:
+</box>
+
+<box type="wrong" seamless>
+Possible invalid inputs & their corresponding error messages:  
+
+* No index provided
 
 >Invalid command format!<br> 
 bedit: Edits the details of the buyer identified by the index number used in the displayed buyer list. Existing values will be overwritten by the input values.<br>
 Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/ADDRESS] [i/HOUSE_INFO] [t/TAG]...<br>
 [prio/PRIORITY] Example: bedit 1 p/91234567 e/johndoe@example.com
 
+* No fields provided
 >At least one field to edit must be provided!
 
+* Invalid index
 >The buyer index provided is higher than the last number in the list!
+
+</box>
 
 <div style='text-align: right;'>
 
@@ -348,22 +363,29 @@ Format: `sedit INDEX PREFIX/VALUE [MORE_PREFIX/VALUE]…`
 
 Example: `sedit 3 e/example@email.com ah/Residential Street`
 
-Precise outputs when the command succeeds:
+<box type="success" seamless>
+Expected output when the command succeeds:
 
 >Got it. I've edited a seller contact:<br>
 Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: Another Place; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
 
-Precise outputs when the command fails:
+</box>
 
+<box type="wrong" seamless>
+Possible invalid inputs & their corresponding error messages:
+
+* No index provided
 >Invalid command format!<br>
 sedit: Edits the details of the seller identified by the index number used in the displayed seller list. Existing values will be overwritten by the input values.<br>
 Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/ADDRESS] [as/SELLING_ADDRESS] [i/HOUSE_INFO] [t/TAG]...<br>
 [prio/PRIORITY] Example: sedit 1 p/91234567 e/johndoe@example.com
 
+* No fields provided
 >At least one field to edit must be provided!
 
+* Invalid index
 >The seller index provided is higher than the last number in the list!
-
+</box>
 
 <div style='text-align: right;'>
 
@@ -390,20 +412,27 @@ Format: `bdelete INDEX`
 
 Example: `bdelete 3`
 
-Precise outputs when the command succeeds:
+<box type="success" seamless>
+Expected output when the command succeeds:
 
 >Got it. I’ve deleted a buyer contact:<br>
 Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
 
-Precise outputs when the command fails:
+</box>
 
+<box type="wrong" seamless>
+Possible invalid inputs & their corresponding error messages:
+
+* No index provided 
 >Invalid command format!<br>
 bdelete: Deletes the buyer identified by the index number used in the displayed buyer list.<br>
 Parameters: INDEX (must be a positive integer)<br>
 Example: bdelete 1
 
+* Invalid index
 >The buyer index provided is higher than the last number in the list!
 
+</box>
 
 <div style='text-align: right;'>
 
@@ -427,21 +456,27 @@ Format: `sdelete INDEX`
 
 Example: `sdelete 3`
 
-Precise outputs when the command succeeds:
+<box type="success" seamless>
+Expected output when the command succeeds:
 
 >Got it. I’ve deleted a seller contact:<br>
 Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
 
-Precise outputs when the command fails:
+</box>
 
+<box type="wrong" seamless>
+Possible invalid inputs & their corresponding error messages:
+
+* Invalid command format
 >Invalid command format! <br>
 sdelete: Deletes the seller identified by the index number used in the displayed seller list.<br>
 Parameters: INDEX (must be a positive integer)<br>
 Example: sdelete 1
 
-
+* Invalid index
 >The seller index provided is higher than the last number in the list!
 
+</box>
 --------------------------------------------------------------------------------------------------------------------
 
 ### Clearing all entries : `clear`
@@ -450,9 +485,12 @@ Clears all entries from the address book.
 
 Format: `clear`
 
-Precise outputs when the command succeeds:
+<box type="success" seamless>
+Expected output when the command succeeds:
 
 >Address book has been cleared!
+
+</box>
 
 <div style='text-align: right;'>
 
@@ -499,20 +537,26 @@ Example: `bprio 3 high`
 
 </box>
 
-Precise outputs when the command succeeds:
+<box type="success" seamless>
+Expected output when the command succeeds:
 
 >The buyer's priority level has been set:<br>
 Jane Doe; Phone: 91234567; Email: something@else.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: high; Tags:
 
-Precise outputs when the command fails:
+</box>
 
+<box type="wrong" seamless>
+Possible invalid inputs & their corresponding error messages:
+
+* No index provided
 >Invalid command format!<br>
 bprio: Sets a priority level for the buyer, identified by index in the displayed buyer list. INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', 'low', or 'nil'.<br>
 Parameters: INDEX PRIORITY
 
-
+* Invalid index
 >The buyer index provided is higher than the last number in the list!
 
+</box>
 
 <div style='text-align: right;'>
 
@@ -552,19 +596,26 @@ Example: `sprio 3 high`
 
 </box>
 
-Precise outputs when the command succeeds:
+<box type="success" seamless>
+Expected output when the command succeeds:
 
 >The seller's priority level has been set:<br>
 Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: Another Place; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: high; Tags:
 
-Precise outputs when the command fails:
+</box>
 
+<box type="wrong" seamless>
+Possible invalid inputs & their corresponding error messages:
+
+* No index provided
 >Invalid command format!<br>
 sprio: Sets a priority level for the seller, identified by index in the displayed seller list. INDEX must be a positive integer, while PRIORITY can be either 'high', 'medium', 'low', or 'nil'.<br>
 Parameters: INDEX PRIORITY
 
-
+* Invalid index
 >The seller index provided is higher than the last number in the list!
+
+</box>
 
 <div style='text-align: right;'>
 
