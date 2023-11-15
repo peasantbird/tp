@@ -16,8 +16,8 @@ to get rid of your cluttered spreadsheets, RTPM is for you!
 
 ## Contents
 
-* [Quick Start](#quick-start)
-* [Configuration](#configuration)
+* [Quick Start](#quick-start)<br>
+* [Configuration](#configuration)<br>
 * [Features](#features)<br>
     * Adding a client<br>
        * [Adding a buyer: `buyer`](#adding-a-buyer-buyer)<br>
@@ -44,7 +44,7 @@ to get rid of your cluttered spreadsheets, RTPM is for you!
       * [Redoing previous action: `redo`](#redoing-previous-action-redo)<br>
       * [Viewing help: `help`](#viewing-help-help)<br>
       * [Exiting the program: `exit`](#exiting-the-program-exit)<br>
-* [FAQ](#faq)
+* [FAQ](#faq)<br>
 * [Known Issues](#known-issues)<br>
 * [Command Summary](#command-summary)<br>
 * Appendices
@@ -122,6 +122,7 @@ Here are some things regarding RTPM's features to take note of before using them
 
 * Prefixes in the format `small_letters/` indicate to RTPM where your data is located. <br>
   e.g. in `buyer n/NAME`, `n/` is a prefix which tells the app that `NAME` is representing a buyer's name.
+  You must include a space before the prefix.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -148,7 +149,7 @@ Here are some things regarding RTPM's features to take note of before using them
 
 **General notes about features:**<br>
 
-* RTPM does not require all fields to be filled in when creating buyers or sellers. Fields that have been omitted will be set to their default values.
+* RTPM does not require all fields to be filled in when creating buyers or sellers. Fields that have been omitted will be set to RTPM's preset default values.
 
 * RTPM accepts unconventional entries for data values to an extent. However, the warning system informs the user of any valid but possibly unintended inputs. For more information, refer to [Appendix A: Warnings](#appendix-a-warnings)
 
@@ -163,6 +164,12 @@ Here are some things regarding RTPM's features to take note of before using them
 * **If you manually make changes to the saved data file such that the JSON format is invalid, RTPM will discard all data and start with an empty data file at the next run.
   Hence, manually modifying the saved data file is not recommended.**
 </box>
+
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -806,19 +813,21 @@ Format: `help`
 
 ### Exiting the program: `exit`
 
-Exits the program.
+Exits the program
 
 Format: `exit`
 
 <box type="info">
 
-Upon exit, the latest data is saved to your computer at data/addressbook.json.
+Upon exit, the latest data is saved again to your computer, by default at data/rtpm.json.
 
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
+
+A list of frequently asked questions to resolve common issues you may have.
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RTPM home folder.
@@ -828,11 +837,17 @@ Upon exit, the latest data is saved to your computer at data/addressbook.json.
 the entries may not appear in the application until you refresh the list.
 
 **Q**: I made a mistake! How do I fix it?<br>
-**A**: You can make use of our handy [undo](#undoing-previous-action-undo) and [redo](#redoing-previous-action-redo)
+**A**: You can make use of the handy [undo](#undoing-previous-action-undo) and [redo](#redoing-previous-action-redo)
 commands to fix any errors made.
-**Q**: <br>
-**A**: Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar rtpm.jar` command to run the application.
 
+**Q**: I can't double-click on the application to run it! <br>
+**A**: First, check that you have Java 11 installed. If you do, and you still can't double-click, try this:
+Open a command terminal,use the `cd` command to change into the folder you put the application file in,
+and type in the `java -jar rtpm.jar`command to run the application.
+
+**Q**: I still have issues! <br>
+**A**: Try contacting our developer team by creating an issue on our 
+[GitHub](https://github.com/AY2324S1-CS2103T-F11-3/tp/issues), and we will see how we can help.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -892,16 +907,23 @@ commands to fix any errors made.
 
 ## Appendix A: Warnings
 
-RTPM allows you to flexibly input most fields of data, for example, you can insert chinese characters as names, or
+RTPM allows you to flexibly input most fields of data, so that the app doesn't unnecessarily restrict you.
+For example, you can insert chinese characters as names, or
 use slashes to abbreviate "son of" as "s/o".
-However, we still have some things in mind for each field, to reduce faulty data.
 
-Hence, the warning system allows our app to inform you of any valid but possibly unintended inputs.
-The warning system is able to alert the user of multiple errors at once. For a non-exhaustive list, see below.
+Hence, the warning system aims to inform you of any valid but possibly unintended inputs.
+The warning system is able to alert you of multiple errors at once, allowing you to 
+correct all mistakes together instead of one-by-one.
 
-The warning system is also used to inform the user if, when you are adding new buyers/sellers, 
-whether there are two similar buyers or two similar sellers, 
-or a buyer that shares the same name as a seller. See [Appendix C](#appendix-c-similar-names) for more details.
+The warning system is also used to notify you when
+there are two similar buyers or sellers, 
+or when a buyer shares the same name as a seller. This reduces the chance that you will 
+accidentally make two entries for the same person, cluttering your data.
+See [Appendix C](#appendix-c-similar-names) for more details.
+
+<box type="definition">
+
+Here is a non-exhaustive list of some warning messages.
 
 ```
 Warning!; [Phone numbers should only contain numbers, and it should be at 
@@ -924,7 +946,7 @@ The domain name must:
       only by hyphens, if any.]
 Please ignore if this is expected.
 ```
-
+</box>
 
 <div style='text-align: right;'>
 
@@ -969,11 +991,15 @@ This is also true if you try to edit two people to have the same name.
 There may be some ambiguity when names are similar but not exactly the same; in this case,
 the app will warn the user in case this was unintentional,
 but will not prevent the command from executing. 
-This appendix aims to explain how exactly similar names are determined.
+
+<box type="definition">
+This section aims to explain how exactly similar names are determined.
 
 RTPM's definition of 'similar' is as follows: Either one of the names is contained 
-in the other, or the names require 2 or fewer edits (deletions, insertions, transpositions)
-to make them the same. (for more details search for the definition of Levenshtein distance).
+in the other, or the names require 2 or fewer edits (deletions, insertions, substitutions)
+to make them the same. (for more details look for the definition of Levenshtein distance 
+<a href="https://en.wikipedia.org/wiki/Levenshtein_distance" class="badge bg-primary">here</a>.
+</box>
 
 An example when the same name is detected across buyers and sellers: 
 ```This seller potentially also exists in the buyer list: If so, please verify that their contact information is the same```
@@ -992,7 +1018,21 @@ An example when the same name is detected:
 </div>
 
 ## Appendix D: Definitions
+Provided is a useful definition list of terms that were used in the guide and in the application.
 
+- Area code: A prefix for phone numbers in the format +123, containing anywhere from 1 to 3 digits.
+- Alphanumeric: Consisting of only English-language letters and the digits from 0-9.
+- Client: In RTPM, refers to either a buyer or a seller.
+- Hard disk: The storage component of your computer.
+- Computer: Desktops or laptops, but not mobile phones.
+- Index: Any positive (above 0) integer.
+- Integer: A number without a fractional part.
+- JSON: A storage format that RTPM uses to store its data. See [here](https://en.wikipedia.org/wiki/JSON) for more info.
+- Numerical: Consisting only digits from 0-9.
+- Parameters: Specific details, instructions and information about the command you are executing.
+- Priority: The importance of a specific client, as determined by you.
+- RTPM: The acronym for this app, RealtorTrackerPlusMax.
+- Special characters: All non-alphanumeric characters.
 
 
 <div style='text-align: right;'>
