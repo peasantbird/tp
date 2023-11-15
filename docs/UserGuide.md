@@ -243,11 +243,11 @@ Precise outputs when the command fails due to invalid parameters:
 
 ### Editing a buyer: `bedit`
 
-Change the priority and other details of your buyer with ease.
+Edit the priority and other information of your buyer with ease.
 
 The `bedit` command allows you to edit any information about your buyer,
 so that you can capture the dynamic needs of your client. 
-Select the buyer that you want to edit by their index number. 
+Select the buyer to edit by their index number. 
 
 <box type="info" seamless>
 
@@ -290,8 +290,7 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 ### Editing a seller: `sedit`
 
-Similar to the [`bedit`](#editing-a-seller-sedit) command, the `sedit` command 
-allows you to edit the details of your clients who want to sell. 
+Edit seller information similar to how you would [`edit buyer information`](#editing-a-seller-sedit). command.
 
 <box type="info" seamless>
 
