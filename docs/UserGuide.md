@@ -6,15 +6,18 @@
 
 # RTPM User Guide
 
-RealtorTrackerPlusMax (RTPM) is a desktop app for realtors who want to manage contacts, optimized for use via a 
-Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI), so you can get your 
-contact management tasks done faster than traditional GUI apps!
+RealtorTrackerPlusMax (RTPM) is the hottest new desktop/laptop application 
+for realtors. RTPM allows you to manage your clients, optimized for use via a 
+Command Line Interface (CLI) for easy and quick typing. Whether you are learning 
+how to get into the real estate industry or looking for a simple and free app
+to get rid of your cluttered spreadsheets, RTPM is for you!
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Contents
 
-* [Quick Start](#quick-start)
+* [Quick Start](#quick-start)<br>
+* [Configuration](#configuration)<br>
 * [Features](#features)<br>
     * Adding a client<br>
        * [Adding a buyer: `buyer`](#adding-a-buyer-buyer)<br>
@@ -41,27 +44,29 @@ contact management tasks done faster than traditional GUI apps!
       * [Redoing previous action: `redo`](#redoing-previous-action-redo)<br>
       * [Viewing help: `help`](#viewing-help-help)<br>
       * [Exiting the program: `exit`](#exiting-the-program-exit)<br>
-* [FAQ](#faq)
+* [FAQ](#faq)<br>
 * [Known Issues](#known-issues)<br>
 * [Command Summary](#command-summary)<br>
 * Appendices
     * [Appendix A: Warnings](#appendix-a-warnings)<br>
     * [Appendix B: Fields](#appendix-b-fields)<br>
     * [Appendix C: Similar names](#appendix-c-similar-names)<br>
+    * [Appendix D: Definitions](#appendix-d-definitions)<br>
 
 
 <div style="page-break-after: always;"></div>
 
 ## Quick Start
 
-1. Ensure you have Java `11` or above installed in your computer.
+1. Ensure you have Java `11` or above installed in your computer. For more info, check the [FAQ](#faq).
 
-2. Download the latest `rtpm.jar` [here](https://github.com/AY2324S1-CS2103T-F11-3/tp/releases/tag/v1.3(trial)).
+2. Download the latest `rtpm.jar` [here](https://github.com/AY2324S1-CS2103T-F11-3/tp/releases/tag/v1.4).
 
-3. Copy the file to the folder you want to use as the _home folder_ for RTPM.
+3. Move the application to the folder you want to use as the _setup folder_ for RTPM. 
+(On startup, the application will generate a few files for configuration and storage.)
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar rtpm.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. If you are starting the app for the first time,
+4. You should be able to run the application by double-clicking. If this does not work for you, check the [FAQ](#faq).<br>
+   A display similar to the below should appear in a few seconds. If you are starting the app for the first time,
  there will be some sample data loaded.<br>
 <div style="text-align:center;">
    <img src="images/Ui.png" alt="Ui" style="width:500px"/>
@@ -86,16 +91,38 @@ contact management tasks done faster than traditional GUI apps!
 
 <br>
 
+## Configuration
+If you are looking to change the size of the application, resizing can simply be done by clicking and 
+dragging the borders in the direction you desire. 
+If you do this to the white header atop the app, you can also move the window around.
+Both size and position of the application are saved, so that 
+you don't need to spend time fiddling with the window.
+
+<box type="info" seamless>
+
+**For advanced users only:**
+
+You can change the location in which RTPM's data is stored by editing the preferences.json file using any text
+editing app of your choice, such as Notepad or Microsoft Word.
+Edit the filePath string to the directory that you wish to move it to, relative to the RTPM.jar location. 
+Note that backslashes need to be repeated twice.
+
+</box>
+
 ## Features
 
 Here are some things regarding RTPM's features to take note of before using them.
 
-<box type="info" seamless>
+<box type="definition" seamless>
 
 **Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` represent the parameters, or data, to be supplied by the user.<br>
   e.g. in `buyer n/NAME`, `NAME` is a parameter which can be used as `buyer n/John Doe`.
+
+* Prefixes in the format `small_letters/` indicate to RTPM where your data is located. <br>
+  e.g. in `buyer n/NAME`, `n/` is a prefix which tells the app that `NAME` is representing a buyer's name.
+  You must include a space before the prefix.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -103,13 +130,13 @@ Here are some things regarding RTPM's features to take note of before using them
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
+* The order in which you input data is not fixed by RTPM.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* All commands and prefixes ignore case. Fields however, are case-sensitive. <br>
+* All commands and prefixes ignore case. parameters however, are case-sensitive. <br>
   e.g. if the command specifies `buyer n/NAME`, `BUYER N/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
@@ -118,11 +145,11 @@ Here are some things regarding RTPM's features to take note of before using them
 
 <div style="page-break-after: always;"></div>
 
-<box type="info" seamless>
+<box type="definition" seamless>
 
 **General notes about features:**<br>
 
-* RTPM does not require all fields to be filled in when creating buyers or sellers. Fields that have been omitted will be set to their default values.
+* RTPM does not require all fields to be filled in when creating buyers or sellers. Fields that have been omitted will be set to RTPM's preset default values.
 
 * RTPM accepts unconventional entries for data values to an extent. However, the warning system informs the user of any valid but possibly unintended inputs. For more information, refer to [Appendix A: Warnings](#appendix-a-warnings)
 
@@ -138,6 +165,12 @@ Here are some things regarding RTPM's features to take note of before using them
   Hence, manually modifying the saved data file is not recommended.**
 </box>
 
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 
@@ -147,9 +180,10 @@ Here are some things regarding RTPM's features to take note of before using them
 
 ### Adding a buyer: `buyer`
 
-Adds a buyer with their information to the list. 
+Adds a buyer with their information, helping you to remember their preferences and needs. 
+Optional fields mean you can key in important details when time is precious, and edit the entry later.
 
-<box type="info" seamless>
+<box type="warning" seamless>
 
 Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
 
@@ -161,11 +195,16 @@ Format: `buyer n/NAME [p/PHONE_NUMBER] [e/EMAIL] [ah/HOME_ADDRESS] [i/HOUSE_INFO
 Example:
 `buyer n/Jane Doe p/91234567 e/janedoe@gmail.com ah/1 College Ave East i/Central Area 5 Room Condominium prio/high`
 
+<box type="success" seamless>
+
 Precise outputs when the command succeeds:
 
 >Got it. I've added a buyer contact:<br>
 Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: high; Tags:
 
+</box>
+
+<box type="danger" seamless>
 
 Precise outputs when the command fails due to missing name parameter:
 
@@ -173,11 +212,11 @@ Precise outputs when the command fails due to missing name parameter:
 buyer: Adds a buyer to the address book. Parameters: n/NAME [p/PHONE] [e/EMAIL] [ah/ADDRESS] [i/INFO] [prio/PRIORITY] [t/TAG]...<br> 
 Example: buyer n/John Doe p/98765432 e/johnd@example.com ah/311, Clementi Ave 2, #02-25 i/Central Area 5 Room Condominium prio/medium t/friends t/owesMoney
 
-
 Precise outputs when the command fails due to invalid parameters:
 
 >Emails must contain at least one '@'.
 
+</box>
 <div style='text-align: right;'>
 
 [Back to top](#rtpm-user-guide)
@@ -193,7 +232,7 @@ Precise outputs when the command fails due to invalid parameters:
 
 Adds a seller with their information to the list. 
 
-<box type="info" seamless>
+<box type="warning" seamless>
 
 Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
 
@@ -237,7 +276,7 @@ Precise outputs when the command fails due to invalid parameters:
 
 Edits the information of a buyer based on their index number in the buyers' list.
 
-<box type="info" seamless>
+<box type="warning" seamless>
 
 Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
 
@@ -280,7 +319,7 @@ Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [ah/
 
 Edits the information of a seller based on their index number in the sellers' list.
 
-<box type="info" seamless>
+<box type="warning" seamless>
 
 Note that this command throws warnings. For more info on fields, head [here.](#appendix-b-fields) For more info on warnings, head [here.](#appendix-a-warnings)
 
@@ -426,7 +465,7 @@ to your buyers, a simple `bsort prio/d` command would then sort your buyer list 
 higher priority buyers appearing first at the top of the list, allowing you to get started with the right 
 client, right away.
 
-<box type="info" seamless>
+<box type="warning" seamless>
 
 Note that this command throws warnings. For more info on warnings, head [here.](#appendix-a-warnings)
 
@@ -475,7 +514,7 @@ Parameters: INDEX PRIORITY
 
 ### Setting a seller's priority: `sprio`
 
-<box type="info" seamless>
+<box type="warning" seamless>
 
 Note that this command throws warnings. For more info on warnings, head [here.](#appendix-a-warnings)
 
@@ -617,8 +656,10 @@ Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling A
 
 ### Sorting buyers: `bsort`
 
-Sorts the buyers' list either by a provided prefix and direction, or by the list's default order when no prefix and
-direction is provided.
+Elevate your contact list through organisation based on your priorities.
+
+The `bsort` command allows you to quickly organise your buyer contacts by various criteria, so that you can sieve out
+your most important contacts to maintain and the most valuable opportunities you have.
 
 Format: `bsort [PREFIX/DIRECTION]`
 * `PREFIX`: Choose <u>one</u> of:
@@ -628,8 +669,14 @@ Format: `bsort [PREFIX/DIRECTION]`
   * `prio` - sort by **priority**
 * `DIRECTION`: "a" OR "d" for ascending or descending respectively
 
+<box type="tip">
+
+**Tip:** When no prefix and direction is provided, `bsort` sorts by the list's original order.
+
+</box>
+
 Examples: 
-* `bsort` to sort by default
+* `bsort` to sort by original order
 * `bsort n/d` to sort by name descending
 
 Precise outputs when the command succeeds:
@@ -671,8 +718,10 @@ valid prefix (`n`, `ah`, `i` or `prio`).
 
 ### Sorting sellers: `ssort`
 
-Sorts the sellers' list either by a provided prefix and direction, or by the list's default order when no prefix and 
-direction is provided.
+Elevate your contact list through organisation based on your priorities.
+
+The `ssort` command allows you to quickly organise your seller contacts by various criteria, so that you can sieve out
+your most important contacts to maintain and the most valuable opportunities you have.
 
 Format: `ssort [PREFIX/DIRECTION]`
 * `PREFIX`: Choose <u>one</u> of:
@@ -681,6 +730,12 @@ Format: `ssort [PREFIX/DIRECTION]`
     * `i` - sort by **house info**
     * `prio` - sort by **priority**
 * `DIRECTION`: "a" OR "d" for ascending or descending respectively
+
+<box type="tip">
+
+**Tip:** When no prefix and direction is provided, `ssort` sorts by the list's original order.
+
+</box>
 
 Examples:
 * `ssort` to sort by default
@@ -724,17 +779,14 @@ Example: ssort prio/d
 
 ### Undoing previous action: `undo`
 
-Undoes the previous action. Only undoes actions that changes the contacts in RTPM, and does not undo actions that 
-changes the list view (i.e. `list`, `filter`, `sort`).
+Made a mistake? The `undo` command allows you to undo the previous action, easily correcting your mistakes and keeping
+your contact list on track.
 
 Format: `undo`
 
 <box type="tip">
 
-**Tip:** 
-
-Using `undo` multiple times will undo multiple actions in order.
-
+**Tip:** Using `undo` multiple times will undo multiple actions in order.
 
 </box>
 
@@ -750,17 +802,14 @@ Precise outputs when the command fails:
 
 ### Redoing previous action: `redo`
 
-Restores the previously undone action. Only redoes actions that changes the contacts in RTPM, and does not redo actions
-that changes the list view (i.e. `list`, `filter`, `sort`).
+The `redo` command allows you to restore a previously undone action, making it easy to go back to any state and 
+continue working from there.
 
 Format : `redo`
 
 <box type="tip">
 
-**Tip:**
-
-Using `redo` multiple times will redo multiple actions in order.
-
+**Tip:** Using `redo` multiple times will redo multiple actions in order.
 
 </box>
 
@@ -786,7 +835,8 @@ Precise outputs when the command fails:
 
 ### Viewing help: `help`
 
-Shows a message explaining how to access the help page.
+Unsure of how to use our system or forgot the available commands? The `help` command allows you to access our user 
+guide, ensuring that you have all the information you need at your fingertips.
 
 Format: `help`
 
@@ -794,19 +844,24 @@ Format: `help`
 
 ### Exiting the program: `exit`
 
-Exits the program.
+Wrap up your contact management session and start making the deals happen.
+
+The `exit` command allows you to terminate the program gracefully and securely, safeguarding all data and changes
+you've made during the session.
 
 Format: `exit`
 
 <box type="info">
 
-Upon exit, the latest data is saved to your computer at data/addressbook.json.
+**Note:** Upon exit, the latest data is saved to your computer at data/rtpm.json.
 
 </box>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
+
+A list of frequently asked questions to resolve common issues you may have.
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RTPM home folder.
@@ -816,9 +871,20 @@ Upon exit, the latest data is saved to your computer at data/addressbook.json.
 the entries may not appear in the application until you refresh the list.
 
 **Q**: I made a mistake! How do I fix it?<br>
-**A**: You can make use of our handy [undo](#undoing-previous-action-undo) and [redo](#redoing-previous-action-redo)
+**A**: You can make use of the handy [undo](#undoing-previous-action-undo) and [redo](#redoing-previous-action-redo)
 commands to fix any errors made.
 
+**Q**: I can't double-click on the application to run it! <br>
+**A**: First, check that you have Java 11 installed. If you do, and you still can't double-click, try this:
+Open a command terminal,use the `cd` command to change into the folder you put the application file in,
+and type in the `java -jar rtpm.jar`command to run the application.
+
+**Q**: How do I install Java 11? <br>
+**A**: Try installing from the official Oracle archive [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
+
+**Q**: I still have issues! <br>
+**A**: Try contacting our developer team by creating an issue on our 
+[GitHub](https://github.com/AY2324S1-CS2103T-F11-3/tp/issues), and we will see how we can help.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -878,16 +944,23 @@ commands to fix any errors made.
 
 ## Appendix A: Warnings
 
-RTPM allows you to flexibly input most fields of data, for example, you can insert chinese characters as names, or
+RTPM allows you to flexibly input most fields of data, so that the app doesn't unnecessarily restrict you.
+For example, you can insert chinese characters as names, or
 use slashes to abbreviate "son of" as "s/o".
-However, we still have some things in mind for each field, to reduce faulty data.
 
-Hence, the warning system allows our app to inform you of any valid but possibly unintended inputs.
-The warning system is able to alert the user of multiple errors at once. For a non-exhaustive list, see below.
+Hence, the warning system aims to inform you of any valid but possibly unintended inputs.
+The warning system is able to alert you of multiple errors at once, allowing you to 
+correct all mistakes together instead of one-by-one.
 
-The warning system is also used to inform the user if, when you are adding new buyers/sellers, 
-whether there are two similar buyers or two similar sellers, 
-or a buyer that shares the same name as a seller. See [Appendix C](#appendix-c-similar-names) for more details.
+The warning system is also used to notify you when
+there are two similar buyers or sellers, 
+or when a buyer shares the same name as a seller. This reduces the chance that you will 
+accidentally make two entries for the same person, cluttering your data.
+See [Appendix C](#appendix-c-similar-names) for more details.
+
+<box type="definition">
+
+Here is a non-exhaustive list of some warning messages.
 
 ```
 Warning!; [Phone numbers should only contain numbers, and it should be at 
@@ -910,7 +983,7 @@ The domain name must:
       only by hyphens, if any.]
 Please ignore if this is expected.
 ```
-
+</box>
 
 <div style='text-align: right;'>
 
@@ -922,11 +995,12 @@ Please ignore if this is expected.
 
 
 ## Appendix B: Fields
-Here, we provide the exact checks that RTPM does for each field, and the warning given if the field is inappropriate.
+Here, we provide the exact checks that our application does for you,
+and the warning given if the field is inappropriate.
 
 | Field            | Valid                                    | Appropriate                                                                                       | Exact warning given                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 |------------------|------------------------------------------|---------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Name**         | Must not be blank                        | Alphanumeric characters only                                                                      | `Names should contain only alphanumeric characters and spaces`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Name**         | Must not be blank                        | Alphanumeric characters only                                                                      | `Names should contain only alphanumeric characters and spaces`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **Phone Number** | At least one numerical character         | Only numerical characters, and at least 3 digits long. Area codes allowed as provided in warning. | `Phone numbers should only contain numbers, and it should be at least 3 digits long. Area codes are allowed, signified by a '+' and up to 3 numbers, followed by a space separating this from the main number.`                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | **Email**        | At least one `@` character               | See warning message.                                                                              | `Emails should be of the format local-part@domain and adhere to the following constraints: 1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters. 2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods. The domain name must: - end with a domain label at least 2 characters long - have each domain label start and end with alphanumeric characters - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.` |
 | **Address**      | Must not be blank                        | Nil                                                                                               | Nil                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -954,11 +1028,15 @@ This is also true if you try to edit two people to have the same name.
 There may be some ambiguity when names are similar but not exactly the same; in this case,
 the app will warn the user in case this was unintentional,
 but will not prevent the command from executing. 
-This appendix aims to explain how exactly similar names are determined.
+
+<box type="definition">
+This section aims to explain how exactly similar names are determined.
 
 RTPM's definition of 'similar' is as follows: Either one of the names is contained 
-in the other, or the names require 2 or fewer edits (deletions, insertions, transpositions)
-to make them the same. (for more details search for the definition of Levenshtein distance).
+in the other, or the names require 2 or fewer edits (deletions, insertions, substitutions)
+to make them the same. (for more details look for the definition of Levenshtein distance 
+<a href="https://en.wikipedia.org/wiki/Levenshtein_distance" class="badge bg-primary">here</a>.
+</box>
 
 An example when the same name is detected across buyers and sellers: 
 ```This seller potentially also exists in the buyer list: If so, please verify that their contact information is the same```
@@ -969,6 +1047,32 @@ An example when similar names are detected:
 An example when the same name is detected:
 ```This seller already exists in the address book```
 (This is not allowed, hence the command will not execute.)
+
+<div style='text-align: right;'>
+
+[Back to top](#rtpm-user-guide)
+
+</div>
+
+## Appendix D: Definitions
+Provided is a useful definition list of terms that were used in the guide and in the application.
+
+- Area code: A prefix for phone numbers in the format +123, containing anywhere from 1 to 3 digits.
+- Alphanumeric: Consisting of only English-language letters and the digits from 0-9.
+- CLI: Command-Line Interface. A text-based means of interacting with applications. 
+In RTPM, you use this to interact with the internal logic.
+- Client: In RTPM, refers to either a buyer or a seller.
+- Hard disk: The storage component of your computer.
+- Computer: Desktops or laptops, but not mobile phones.
+- Index: Any positive (above 0) integer.
+- Integer: A number without a fractional part.
+- JSON: A storage format that RTPM uses to store its data. See [here](https://en.wikipedia.org/wiki/JSON) for more info.
+- Numerical: Consisting only digits from 0-9.
+- Parameters: Specific details, instructions and information about the command you are executing.
+- Priority: The importance of a specific client, as determined by you.
+- RTPM: The acronym for this app, RealtorTrackerPlusMax.
+- Special characters: All non-alphanumeric characters.
+
 
 <div style='text-align: right;'>
 
