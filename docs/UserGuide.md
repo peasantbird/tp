@@ -6,10 +6,15 @@
 
 # RTPM User Guide
 
-RealtorTrackerPlusMax (RTPM) is the hottest new desktop/laptop application 
+<div style="text-align:center;">
+   <img src="images/Ui.png" alt="Ui" style="width:500px"/>
+</div>
+
+
+RealtorTrackerPlusMax (RTPM) is the hottest new computer app 
 for realtors. RTPM allows you to manage your clients, optimized for use via a 
-Command Line Interface (CLI) for easy and quick typing. Whether you are learning 
-how to get into the real estate industry or looking for a simple and free app
+Command Line Interface (CLI), aimed at maximising your speed in entering data.
+Whether you are learning how to get into the real estate industry, or looking for a simple and free app
 to get rid of your cluttered spreadsheets, RTPM is for you!
 
 --------------------------------------------------------------------------------------------------------------------
@@ -207,7 +212,7 @@ Example:
 Precise outputs when the command succeeds:
 
 >Got it. I've added a buyer contact:<br>
-Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: high; Tags:
+Jane Doe; Phone: 91234567; Email: janedoe@<span></span>gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: high; Tags:
 
 </box>
 
@@ -255,7 +260,7 @@ Example: `seller n/Ryan p/91234567 e/ryan@gmail.com ah/My Secret Home as/47D Lor
 Precise outputs when the command succeeds:
 
 >Got it. I've added a seller contact:<br>
-Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: high; Tags:
+Ryan; Phone: 91234567; Email: ryan@<span></span>gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: high; Tags:
 
 
 Precise outputs when the command fails due to missing parameters:
@@ -307,7 +312,7 @@ Example: `bedit 3 e/example@email.com ah/Residential Street`
 Precise outputs when the command succeeds:
 
 >Got it. I've edited a buyer contact:<br>
-Jane Doe; Phone: 91234567; Email: something@else.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
+Jane Doe; Phone: 91234567; Email: something@<span></span>else.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
 
 Precise outputs when the command fails:
 
@@ -351,7 +356,7 @@ Example: `sedit 3 e/example@email.com ah/Residential Street`
 Precise outputs when the command succeeds:
 
 >Got it. I've edited a seller contact:<br>
-Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: Another Place; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
+Ryan; Phone: 91234567; Email: ryan@<span></span>gmail.com; Address: Another Place; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
 
 Precise outputs when the command fails:
 
@@ -393,7 +398,7 @@ Example: `bdelete 3`
 Precise outputs when the command succeeds:
 
 >Got it. I’ve deleted a buyer contact:<br>
-Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
+Jane Doe; Phone: 91234567; Email: janedoe@<span></span>gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
 
 Precise outputs when the command fails:
 
@@ -430,7 +435,7 @@ Example: `sdelete 3`
 Precise outputs when the command succeeds:
 
 >Got it. I’ve deleted a seller contact:<br>
-Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
+Ryan; Phone: 91234567; Email: ryan@<span></span>gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
 
 Precise outputs when the command fails:
 
@@ -502,7 +507,7 @@ Example: `bprio 3 high`
 Precise outputs when the command succeeds:
 
 >The buyer's priority level has been set:<br>
-Jane Doe; Phone: 91234567; Email: something@else.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: high; Tags:
+Jane Doe; Phone: 91234567; Email: something@<span></span>else.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: high; Tags:
 
 Precise outputs when the command fails:
 
@@ -555,7 +560,7 @@ Example: `sprio 3 high`
 Precise outputs when the command succeeds:
 
 >The seller's priority level has been set:<br>
-Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: Another Place; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: high; Tags:
+Ryan; Phone: 91234567; Email: ryan@<span></span>gmail.com; Address: Another Place; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: high; Tags:
 
 Precise outputs when the command fails:
 
@@ -608,9 +613,24 @@ Example: `filter John Doe`
 
 </box>
 
-Precise outputs when the command succeeds:
+Expected output when the command succeeds:
+
+<box type="success" seamless>
 
 >1 buyer(s) and 0 seller(s) listed!
+
+</box>
+
+<box type="wrong" seamless>
+
+If you don't put any keywords to filter for:
+
+>Invalid command format! 
+>filter: Filters all buyers and sellers whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
+>Parameters: KEYWORD [MORE_KEYWORDS]...
+>Example: filter alice bob charlie
+
+</box>
 
 <div style='text-align: right;'>
 
@@ -629,9 +649,13 @@ The `list` command allows you to display the full updated lists, so that you can
 
 Format: `list`
 
-Precise outputs when the command succeeds:
+<box type="success" seamless>
+
+Expected outputs when the command succeeds:
 
 >Listed all buyers and sellers!
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -644,10 +668,14 @@ Format: `blist INDEX`
 
 Example: `blist 3`
 
-Precise outputs when the command succeeds:
+<box type="success" seamless>
+
+Expected output when the command succeeds:
 
 >Got it. Here's the information of this buyer:<br>
-Jane Doe; Phone: 91234567; Email: janedoe@gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
+Jane Doe; Phone: 91234567; Email: janedoe@<span></span>gmail.com; Address: 1 College Ave East; House Info: Central Area 5 Room Condominium; Priority: nil; Tags:
+
+</box>
 
 <div style='text-align: right;'>
 
@@ -664,10 +692,14 @@ Format: `slist INDEX`
 
 Example: `slist 3`
 
-Precise outputs when the command succeeds:
+<box type="success" seamless>
+
+Expected outputs when the command succeeds:
 
 >Got it. Here's the information of this seller:<br>
-Ryan; Phone: 91234567; Email: ryan@gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
+Ryan; Phone: 91234567; Email: ryan@<span></span>gmail.com; Address: My Secret Home; Selling Address: 47D Lor Sarhad, Singapore 119164; House Info: 4 Room Flat in Sarhad Ville; Priority: nil; Tags:
+
+</box>
 
 <div style='text-align: right;'>
 
@@ -704,18 +736,29 @@ Examples:
 * `bsort` to sort by original order
 * `bsort n/d` to sort by name descending
 
-Precise outputs when the command succeeds:
+<box type="success" seamless>
+
+Expected outputs when the command succeeds:
 
 >Got it. I've sorted the buyer list!
 
+</box>
 
-Precise outputs when the command fails:
-1. For general errors:
+<box type="wrong" seamless>
+
+Expected outputs when the command fails:
+
+If your command is not in the proper format:
+
 >Invalid command format!<br>
 bsort: Sorts the buyers in RTPM. Parameters: Choose zero or one of [n/] [ah/] [i/] [prio/] a/d (for ASC/DESC)<br>
 Example: bsort prio/d
-2. When the same prefix is used more than once:
+
+If the same prefix is used more than once:
+
 >Multiple values specified for the following single-valued field(s): ...
+
+</box>
 
 <box type="info">
 
@@ -766,18 +809,29 @@ Examples:
 * `ssort` to sort by default
 * `ssort n/d` to sort by name descending
 
-Precise outputs when the command succeeds:
+<box type="success" seamless>
+
+Expected outputs when the command succeeds:
 
 >Got it. I've sorted the seller list!
 
+</box>
 
-Precise outputs when the command fails:
-1. For general errors:
+<box type="wrong" seamless>
+
+Expected outputs when the command fails:
+
+If your command is not in the proper format:
+
 >Invalid command format!<br>
 ssort: Sorts the sellers in RTPM. Parameters: Choose zero or one of [n/] [ah/] [i/] [prio/] a/d (for ASC/DESC)<br>
-Example: ssort prio/d
-2. When the same prefix is used more than once:
+Example: ssort prio/d 
+
+If the same prefix is used more than once:
+
 >Multiple values specified for the following single-valued field(s): ...
+
+</box>
 
 <box type="info">
 
@@ -815,13 +869,21 @@ Format: `undo`
 
 </box>
 
-Precise outputs when the command succeeds:
+<box type="success" seamless>
+
+Expected output when the command succeeds:
 
 >Last command was undone.
 
-Precise outputs when the command fails:
+</box>
+
+<box type="wrong" seamless>
+
+If there is no command to undo:
 
 >No commands to undo!
+
+</box>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -838,14 +900,21 @@ Format : `redo`
 
 </box>
 
-Precise outputs when the command succeeds:
+<box type="success" seamless>
+
+Expected output when the command succeeds:
 
 >The next command was redone.
 
-Precise outputs when the command fails:
+</box>
+
+<box type="wrong" seamless>
+
+If there is no command to redo:
 
 >No commands to redo!
 
+</box>
 
 <div style='text-align: right;'>
 
